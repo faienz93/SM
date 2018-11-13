@@ -6,6 +6,9 @@
  * ===========================================================================
  */
 
+ .navbar {
+  background-color: #000 !important;
+ }
 .navbar-nav {
   flex-direction: row !important;
 }
@@ -13,4 +16,11 @@
 .nav-link {
   padding-right: .5rem !important;
   padding-left: .5rem !important;
+  color: #ffffff !important;
+}
+
+#buttonSidebar {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  
 }

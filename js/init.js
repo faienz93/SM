@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.button-left').click(function(){
+    $('#buttonSidebar').click(function(){
         $('.sidebar').toggleClass('fliph');
     });
       
