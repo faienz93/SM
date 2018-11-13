@@ -1,0 +1,16 @@
+/**
+ * ===========================================================================
+ * File: Navbar.css 
+ * Author: Antonio Faienza
+ * This file define style of navbar
+ * ===========================================================================
+ */
+
+.navbar-nav {
+  flex-direction: row !important;
+}
+
+.nav-link {
+  padding-right: .5rem !important;
+  padding-left: .5rem !important;
+}
