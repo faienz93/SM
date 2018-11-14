@@ -6,11 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="lib/OpenLayers/ol.css"
+        type="text/css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 
-    <!-- Hamberger library  -->
-    <!-- REF: https://jonsuh.com/hamburgers/ -->
+    <!-- Hamberger library REF: https://jonsuh.com/hamburgers/ -->
     <link href="css/hamburger/hamburgers.css" rel="stylesheet">
 
     <!-- Custom Sidebar -->
@@ -20,7 +23,7 @@
     <link rel="stylesheet" href="css/navbar.css">
 
     <!-- Main Style -->
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mainMap.css">
 
     <title>Mobile System</title>
     <meta name="description" content="In this view you can see the map ">
@@ -56,7 +59,6 @@
     <!-- ------------------- Sidebar bootstrap ------------------ -->
     <!-- -------------------------------------------------------- -->
     <div id="mySidenav" class="sidenav">
-        <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
         <!-- <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active"> <i class="fa fa-th-large"></i>
             <span class="nav-label"> Dashboards </span> <span class="fa fa-chevron-left pull-right"></span> </a> -->
         <a href="#">Dashboards</a>
@@ -64,18 +66,28 @@
         <a href="#">Clients</a>
         <a href="#">Contact</a>
     </div>
+    <!-- -------------------------------------------------------- -->
+    <!-- ------------------- Main div ------------------ -->
+    <!-- -------------------------------------------------------- -->
     <div id="main">
-        <h2>Sidenav Push Example</h2>
-        <p>Click on the element below to open the side navigation menu, and push this content to the right. Notice that
-            we add a black see-through background-color to body when the sidenav is opened.</p>
-        
+        <div id="map" class="map"></div>
     </div>
+
+
+    <!-- -------------------------------------------------------- -->
+    <!-- ------------------- LOAD SCRIPTS ------------------ -->
+    <!-- -------------------------------------------------------- -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="lib/popper.min.js" crossorigin="anonymous"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="js/init.js" crossorigin="anonymous"></script>
+
+    <!-- OpenLayer JS -->
+    <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="lib/OpenLayers/ol.js"></script>
 </body>
 
 </html>
