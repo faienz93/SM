@@ -1,3 +1,14 @@
+/**
+ * ===========================================================================
+ * File: Navbar.css 
+ * Author: Antonio Faienza
+ * This file define style of Sidebar
+ * REF: https://bootsnipp.com/snippets/j6xpq
+ *      https://bootsnipp.com/snippets/nr13y
+ *      https://www.w3schools.com/howto/howto_js_sidenav.asp
+ * ===========================================================================
+ */
+
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 html {
 
@@ -12,7 +23,7 @@ html, body {
 	width: 100%;
 	height: 100%
 }
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+article, details, figcaption, figure, footer, header, menu, nav, section, summary {
 	display: block;
 }
 audio, canvas, progress, video {
@@ -64,8 +75,6 @@ h1,h2,h3,h4,h5,h6,p,ul,ol{ margin:0px; padding:0px;}
 .sidebar ul li .sub-menu li a:hover{ background-color:#222; padding-left:20px; transition: all 0.5s  ease-in-out}
 .sub-menu{ border-left:5px solid #dedede;}
 	.sidebar li a .nav-label,.sidebar li a .nav-label+span{ transition: all 0.5s  ease-in-out}
-	
-
 	.sidebar.fliph li a .nav-label,.sidebar.fliph li a .nav-label+span{ display:none;transition: all 0.5s  ease-in-out}
 	.sidebar.fliph {
     width: 42px;transition: all 0.5s  ease-in-out;
@@ -81,4 +90,7 @@ h1,h2,h3,h4,h5,h6,p,ul,ol{ margin:0px; padding:0px;}
     width: 150px;
     z-index: 100;
 }
-	
+    
+ .sidebar  {
+    height: 100% !important;
+}
