@@ -1,0 +1,12 @@
+/**
+ * ===========================================================================
+ * File: Navbar.css 
+ * Author: Antonio Faienza
+ * This file contains the style of main part of page
+ * ===========================================================================
+ */
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
