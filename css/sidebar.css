@@ -9,7 +9,7 @@
  * ===========================================================================
  */
 
-/* @import "./font-awesome.min.css"; */
+@import "./font-awesome.min.css";
 body {
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
@@ -20,12 +20,12 @@ body {
     width: 0;
     position: fixed;
     z-index: 1;
-    top: 56px;
+    top: 76px;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 70px;
 }
 
 .sidenav a {

@@ -1,21 +1,23 @@
-$(document).ready(function(){
 
-    $('#buttonSidebar').click(function(){
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+/**
+ * ===========================================================================
+ * File: Init.js 
+ * Author: Antonio Faienza
+ * This file load all necessary for the correct executions of Javascript/Jquery
+ * functions
+ * ===========================================================================
+ */$(document).ready(function () {
+    $('#hambergerButton').click(function () {
+        $(this).toggleClass('is-active');
+        var checkClass = $("#hambergerButton").hasClass('is-active');
+        if (checkClass) {
+            $("#mySidenav").css("width", "250px");
+            $("#main").css("marginLeft", "250px");
+            $("body").css("backgroundColor","rgba(0,0,0,0.4)");
+        } else {
+            $("#mySidenav").css("width", "0");
+            $("#main").css("marginLeft", "0");
+            $("body").css("backgroundColor","white");
+        }
     });
-
-    // function openNav() {
-    //     document.getElementById("mySidenav").style.width = "250px";
-    //     document.getElementById("main").style.marginLeft = "250px";
-    //     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    // }
-    
-    // function closeNav() {
-    //     document.getElementById("mySidenav").style.width = "0";
-    //     document.getElementById("main").style.marginLeft= "0";
-    //     document.body.style.backgroundColor = "white";
-    // }
-      
- });
+});

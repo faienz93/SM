@@ -9,6 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 
+    <!-- Hamberger library  -->
+    <!-- REF: https://jonsuh.com/hamburgers/ -->
+    <link href="css/hamburger/hamburgers.css" rel="stylesheet">
+
     <!-- Custom Sidebar -->
     <link rel="stylesheet" href="css/sidebar.css">
 
@@ -21,15 +25,15 @@
 </head>
 
 <body>
-
-
     <!-- ----------------------- -->
     <!-- --- NavBar bootstrap--- -->
     <!-- ----------------------- -->
     <nav class="navbar navbar-dark bg-dark">
-        <button id="buttonSidebar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <!-- I use the library Hamburger for handle the sidebar -->
+        <button id="hambergerButton" class="hamburger hamburger--collapse" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
         </button>
         <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
         <ul class="nav navbar-nav ml-auto">
@@ -50,16 +54,19 @@
     <!-- -------------------------------------------------------- -->
     <div id="mySidenav" class="sidenav">
         <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-        <a href="#">About</a>
+        <!-- <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active"> <i class="fa fa-th-large"></i>
+            <span class="nav-label"> Dashboards </span> <span class="fa fa-chevron-left pull-right"></span> </a> -->
+        <a href="#">Dashboards</a>
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
-      </div>
-      <div id="main">
+    </div>
+    <div id="main">
         <h2>Sidenav Push Example</h2>
-        <p>Click on the element below to open the side navigation menu, and push this content to the right. Notice that we add a black see-through background-color to body when the sidenav is opened.</p>
+        <p>Click on the element below to open the side navigation menu, and push this content to the right. Notice that
+            we add a black see-through background-color to body when the sidenav is opened.</p>
         <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->
-      </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
