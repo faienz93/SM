@@ -1,0 +1,24 @@
+{
+  "name": "sm",
+  "version": "1.0.0",
+  "description": "Project of the Internet of Mobile System course",
+  "main": "index.js",
+  "dependencies": {
+    "generator-webapp": "^3.0.1",
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoniofaienza93/SM.git"
+  },
+  "author": "Antonio Faienza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antoniofaienza93/SM/issues"
+  },
+  "homepage": "https://github.com/antoniofaienza93/SM#readme"
+}
