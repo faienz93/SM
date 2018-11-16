@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- OpenLayers CSS -->
-    <link rel="stylesheet" href="lib/OpenLayers/ol.css"
-        type="text/css">
+    <link rel="stylesheet" href="lib/OpenLayers/ol.css" type="text/css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
@@ -58,15 +57,40 @@
     <!-- ------------------- Sidebar bootstrap ------------------ -->
     <!-- -------------------------------------------------------- -->
     <div id="mySidenav" class="sidenav">
-        <!-- <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active"> <i class="fa fa-th-large"></i>
-            <span class="nav-label"> Dashboards </span> <span class="fa fa-chevron-left pull-right"></span> </a> -->
-            <a href="#"><img src="/img/bing.svg" class="svg icon"> Bing Maps <img class ="svg arrowRight" src="/img/right.svg"></a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->
-            <a href="#">Filters</a> <!-- https://openlayers.org/en/latest/examples/image-filter.html -->
-            <a href="#">Bing Maps</a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->
-            <a href="#">Canvas</a><!-- https://openlayers.org/en/latest/examples/canvas-tiles.html -->
-            <a href="#">OSM</a><!-- https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
-            <a href="#">Stamen</a> <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
+        <!-- BING MAP -->
+        <button class="dropdown-btn">
+                <img  style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
+                <span style="vertical-align:middle">Bing Maps</span>
+                <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+        </button>
+        <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
+        <div class="dropdown-container">
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial with labels</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (static)</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (dynamic)</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a>
+        </div>
+        <!-- OPEN STREET MAP -->
+        <button class="dropdown-btn">
+                <img  style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
+                <span style="vertical-align:middle">OSM</span>
+                <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+        </button>
+        <div class="dropdown-container">
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 1</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 2</a>
+            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 3</a>
+        </div>
+        <a href="#"></a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->
+        <a href="#">Filters</a> <!-- https://openlayers.org/en/latest/examples/image-filter.html -->
+        <a href="#">Bing Maps</a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->
+        <a href="#">Canvas</a><!-- https://openlayers.org/en/latest/examples/canvas-tiles.html -->
+        <a href="#">OSM</a><!-- https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
+        <a href="#">Stamen</a> <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
         
+
     </div>
     <!-- -------------------------------------------------------- -->
     <!-- ------------------- Main div ------------------ -->
@@ -85,6 +109,7 @@
     <script src="lib/popper.min.js" crossorigin="anonymous"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="js/init.js" crossorigin="anonymous"></script>
+    <script src="js/sidebar.js" crossorigin="anonymous"></script>
     <script src="js/map.js" crossorigin="anonymous"></script>
     <script src="js/imgSvg.js" crossorigin="anonymous"></script>
 
