@@ -37,6 +37,7 @@ body {
 
 .sidenav a:hover {
     color: #f1f1f1;
+    
 }
 
 .sidenav .closebtn {
@@ -50,4 +51,19 @@ body {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+
+/* Style of Icon SVG  */
+.arrowRight, .icon{
+    width: 24px !important;
+    height: 24px !important;
+}
+
+svg path {
+    fill:#818181;
+}
+
+svg:hover path {
+    fill: #f1f1f1;
 }

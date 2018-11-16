@@ -1,5 +1,13 @@
 
 
+/**
+ * ===========================================================================
+ * File: Map.js 
+ * Author: Antonio Faienza
+ * This file contains the settings of map
+ * ===========================================================================
+ */
+
 
 function map(){
     var map = new ol.Map({
