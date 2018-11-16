@@ -1,4 +1,4 @@
-# SM
+# Mobile Systems 
 ## Master Degree in Computer Science <br> University of Bologna - Alma Mater Studiorum <br> A.A. 2018/2019
 Antonio Faienza | 
 ------------ | 
