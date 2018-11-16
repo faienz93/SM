@@ -64,16 +64,16 @@
                 <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
-        <div class="dropdown-container">
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial with labels</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (static)</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (dynamic)</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a>
+        <div class="dropdown-container" id="layer-select-bing-maps">
+            <a href="#" value="Aerial" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial</a>
+            <a href="#" value="AerialWithLabels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial with labels</a>
+            <a href="#" value="Road" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (static)</a>
+            <a href="#" value="RoadOnDemand" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (dynamic)</a>
+            <!-- <a href="#" value="collinsBart" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a> -->
+            <a href="#" value="ordnanceSurvey" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a>
         </div>
         <!-- OPEN STREET MAP -->
-        <button class="dropdown-btn">
+        <!-- <button class="dropdown-btn">
                 <img  style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
                 <span style="vertical-align:middle">OSM</span>
                 <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
@@ -82,7 +82,7 @@
             <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 1</a>
             <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 2</a>
             <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 3</a>
-        </div>
+        </div> -->
         <a href="#"></a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->
         <a href="#">Filters</a> <!-- https://openlayers.org/en/latest/examples/image-filter.html -->
         <a href="#">Bing Maps</a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->

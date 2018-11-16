@@ -18,7 +18,7 @@ body {
 .sidenav {
     height: 100%;
     width: 250px; /* TODO METTERLO A 0*/
-    position: fixed;
+    position: absolute;
     z-index: 1;
     top: 76px;
     left: 0;
