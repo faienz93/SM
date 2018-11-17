@@ -58,6 +58,7 @@ function map(){
 
 
 
+  // STAMEN MAP: https://openlayers.org/en/latest/examples/stamen.html
      var map = new ol.Map({
         target: 'map',
         layers: [
