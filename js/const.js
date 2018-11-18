@@ -12,3 +12,6 @@
   * Global Map
   */
  var map;
+
+
+
