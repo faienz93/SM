@@ -14,6 +14,7 @@ function map() {
   var osm = defaultOSM();
   var bing = bingMaps();
   var stamen = stamenMap();
+  var kernels = filterKernel();
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
@@ -35,18 +36,36 @@ function map() {
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
-    if (layerSelected === "stamen") {      
-      map.setLayerGroup(stamen);
-    }
-    else if (layerSelected === "osm") {     
-      map.setLayerGroup(osm);
-    } else {      
-      map.setLayerGroup(bing);     
-      var layers = map.getLayers().array_;
-      for (var i = 0; i < layers.length; ++i) {
-        layers[i].setVisible(bingStyles[i] === layerSelected);
+    console.log(layerSelected);
+
+    
+    var selectedKernel = normalize(kernels[layerSelected]);
+    map.render();
+     console.log(map.getLayers().array_);
+    /**
+       * Apply a filter on "postcompose" events.
+       */
+      for (var i = 0; i < map.getLayers().array_.length; ++i) {
+        map.getLayers().array_[i].on('postcompose', function (event) {
+          console.log("fjsakjfskodfjksd");
+        convolve(event.context, selectedKernel);
+      });
       }
-    }
+      
+   
+
+  //   if (layerSelected === "stamen") {
+  //     map.setLayerGroup(stamen);
+  //   }
+  //   else if (layerSelected === "osm") {
+  //     map.setLayerGroup(osm);
+  //   } else {
+  //     map.setLayerGroup(bing);
+  //     var layers = map.getLayers().array_;
+  //     for (var i = 0; i < layers.length; ++i) {
+  //       layers[i].setVisible(bingStyles[i] === layerSelected);
+  //     }
+  //   }
   });
 
 }
@@ -57,8 +76,8 @@ function map() {
  * Based on tutorial: https://openlayers.org/en/latest/examples/bing-maps.html
  * I Define a layer of Bing. For doing this i Set a KEY from http://www.bingmapsportal.com/ 
  */
-function bingMaps() { 
-  
+function bingMaps() {
+
   var layers = [];
   var i;
   for (i = 0; i < bingStyles.length; ++i) {
@@ -96,7 +115,7 @@ function stamenMap() {
     layers: [
       new ol.layer.Tile({
         source: new ol.source.Stamen({
-          layer: 'watercolor'
+          layer: 'watercolor' // toner terrain toner-lite watercolor
         })
       }),
       new ol.layer.Tile({
@@ -128,3 +147,7 @@ function defaultOSM() {
 
   return layersOSM;
 }
+
+
+
+

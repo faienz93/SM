@@ -106,6 +106,7 @@
        * Update the kernel and re-render on change.
        */
       select.onchange = function() {
+        console.log(select);
         selectedKernel = normalize(kernels[select.value]);
         map.render();
       };
