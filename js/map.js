@@ -37,8 +37,25 @@ function map() {
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
     console.log(layerSelected);
+    if (layerSelected === "stamen") {
+      map.setLayerGroup(stamen);
+    }
+    else if (layerSelected === "osm") {
+      map.setLayerGroup(osm);
+    } else {
+      map.setLayerGroup(bing);
+      var layers = map.getLayers().array_;
+      for (var i = 0; i < layers.length; ++i) {
+        layers[i].setVisible(bingStyles[i] === layerSelected);
+      }
+    }
+  });
 
-    
+
+  // define a filter
+  $('.selected-filter').on("click", function () {
+    var filterSelected = $(this).attr("value");
+    console.log(filterSelected);
     var selectedKernel = normalize(kernels[layerSelected]);
     map.render();
      console.log(map.getLayers().array_);
@@ -51,22 +68,9 @@ function map() {
         convolve(event.context, selectedKernel);
       });
       }
-      
    
-
-  //   if (layerSelected === "stamen") {
-  //     map.setLayerGroup(stamen);
-  //   }
-  //   else if (layerSelected === "osm") {
-  //     map.setLayerGroup(osm);
-  //   } else {
-  //     map.setLayerGroup(bing);
-  //     var layers = map.getLayers().array_;
-  //     for (var i = 0; i < layers.length; ++i) {
-  //       layers[i].setVisible(bingStyles[i] === layerSelected);
-  //     }
-  //   }
   });
+  
 
 }
 
