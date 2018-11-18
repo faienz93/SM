@@ -78,23 +78,29 @@
             <!-- <a href="#" value="collinsBart" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a> -->
             <!-- <a href="#" value="ordnanceSurvey" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a> -->
         </div>
-        <!-- OPEN STREET MAP -->
-        <!-- <button class="dropdown-btn">
-                <img  style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
-                <span style="vertical-align:middle">OSM</span>
-                <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
-        </button>
-        <div class="dropdown-container">
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 1</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 2</a>
-            <a href="#"><img src="/img/right-arrow.svg" class="svg arrow-left">Link 3</a>
-        </div> -->
-        <a href="#"></a><!-- http://openlayers.org/en/latest/examples/bing-maps.html?q= -->
+        
         <!-- <a href="#">Filters</a> https://openlayers.org/en/latest/examples/image-filter.html -->
         <!-- <a href="#">Canvas</a>https://openlayers.org/en/latest/examples/canvas-tiles.html -->
         <!-- <a href="#">OSM</a>https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
         <a href="#" value="stamen" class="selected-layer">Stamen</a> <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
-        
+         <!-- FILTER -->
+         <button class="dropdown-btn">
+            <img style="vertical-align:middle" src="/img/filter-tool-black-shape.svg" class="svg icon">
+            <span style="vertical-align:middle">Filter</span>
+            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+        </button>
+        <div class="dropdown-container" id="filter">
+            <a href="#" value="none" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
+            <a href="#" value="sharpen" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
+            <a href="#" value="sharpenless" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpen
+                less</a>
+            <a href="#" value="blur" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Blur</a>
+            <a href="#" value="shadow" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Shadow</a>
+            <a href="#" value="edge" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>
+            <a href="#" value="emboss" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
+            <a href="#" value="edgeDetect" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge
+                Detect</a>
+        </div>
         
 
     </div>

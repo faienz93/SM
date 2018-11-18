@@ -8,66 +8,163 @@
     <script src="lib/OpenLayers/ol.js"></script>
   </head>
   <body>
-     <div id="map" class="map"></div>
-     <select id="layer-select">
-       <option value="Aerial">Aerial</option>
-       <option value="AerialWithLabels" selected>Aerial with labels</option>
-       <option value="Road">Road (static)</option>
-       <option value="RoadOnDemand">Road (dynamic)</option>
-       <option value="collinsBart">Collins Bart</option>
-       <option value="ordnanceSurvey">Ordnance Survey</option>
-     </select>
+    <div id="map" class="map"></div>
+    <select id="kernel" name="kernel">
+      <option>none</option>
+      <option selected>sharpen</option>
+      <option value="sharpenless">sharpen less</option>
+      <option>blur</option>
+      <option>shadow</option>
+      <option>emboss</option>
+      <option value="edge">edge detect</option>
+    </select>
     <script>
       // import Map from 'ol/Map.js';
       // import View from 'ol/View.js';
       // import TileLayer from 'ol/layer/Tile.js';
+      // import {fromLonLat} from 'ol/proj.js';
       // import BingMaps from 'ol/source/BingMaps.js';
 
+      var key = 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc';
 
-      var styles = [
-        'Road',
-        'RoadOnDemand',
-        'Aerial',
-        'AerialWithLabels',
-        'collinsBart',
-        'ordnanceSurvey'
-      ];
-      var layers = [];
-      var i, ii;
-      for (i = 0, ii = styles.length; i < ii; ++i) {
-        layers.push(new ol.layer.Tile({
-          visible: false,
-          preload: Infinity,
-          source: new ol.source.BingMaps({
-            key: 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc',//'Your Bing Maps Key from http://www.bingmapsportal.com/ here',
-            imagerySet: styles[i]
-            // use maxZoom 19 to see stretched tiles instead of the BingMaps
-            // "no photos at this zoom level" tiles
-            // maxZoom: 19
-          })
-        }));
-      }
+      var imagery = new ol.layer.Tile({
+        // source: new ol.source.BingMaps({key: key, imagerySet: 'Aerial'})
+        source: new ol.source.OSM() // Tiled Layer
+      });
+
       var map = new ol.Map({
-        layers: layers,
-        // Improve user experience by loading tiles while dragging/zooming. Will make
-        // zooming choppy on mobile or slow devices.
-        loadTilesWhileInteracting: true,
+        layers: [imagery],
         target: 'map',
         view: new ol.View({
-          center: [-6655.5402445057125, 6709968.258934638],
-          zoom: 13
+          center: ol.proj.fromLonLat([-120, 50]),
+          zoom: 6
         })
       });
 
-      var select = document.getElementById('layer-select');
-      function onChange() {
-        var style = select.value;
-        for (var i = 0, ii = layers.length; i < ii; ++i) {
-          layers[i].setVisible(styles[i] === style);
+      var kernels = {
+        none: [
+          0, 0, 0,
+          0, 1, 0,
+          0, 0, 0
+        ],
+        sharpen: [
+          0, -1, 0,
+          -1, 5, -1,
+          0, -1, 0
+        ],
+        sharpenless: [
+          0, -1, 0,
+          -1, 10, -1,
+          0, -1, 0
+        ],
+        blur: [
+          1, 1, 1,
+          1, 1, 1,
+          1, 1, 1
+        ],
+        shadow: [
+          1, 2, 1,
+          0, 1, 0,
+          -1, -2, -1
+        ],
+        emboss: [
+          -2, 1, 0,
+          -1, 1, 1,
+          0, 1, 2
+        ],
+        edge: [
+          0, 1, 0,
+          1, -4, 1,
+          0, 1, 0
+        ]
+      };
+
+      function normalize(kernel) {
+        var len = kernel.length;
+        var normal = new Array(len);
+        var i, sum = 0;
+        for (i = 0; i < len; ++i) {
+          sum += kernel[i];
         }
+        if (sum <= 0) {
+          normal.normalized = false;
+          sum = 1;
+        } else {
+          normal.normalized = true;
+        }
+        for (i = 0; i < len; ++i) {
+          normal[i] = kernel[i] / sum;
+        }
+        return normal;
       }
-      select.addEventListener('change', onChange);
-      onChange();
+
+      var select = document.getElementById('kernel');
+      var selectedKernel = normalize(kernels[select.value]);
+
+
+      /**
+       * Update the kernel and re-render on change.
+       */
+      select.onchange = function() {
+        selectedKernel = normalize(kernels[select.value]);
+        map.render();
+      };
+
+
+      /**
+       * Apply a filter on "postcompose" events.
+       */
+      imagery.on('postcompose', function(event) {
+        convolve(event.context, selectedKernel);
+      });
+
+
+      /**
+       * Apply a convolution kernel to canvas.  This works for any size kernel, but
+       * performance starts degrading above 3 x 3.
+       * @param {CanvasRenderingContext2D} context Canvas 2d context.
+       * @param {Array<number>} kernel Kernel.
+       */
+      function convolve(context, kernel) {
+        var canvas = context.canvas;
+        var width = canvas.width;
+        var height = canvas.height;
+
+        var size = Math.sqrt(kernel.length);
+        var half = Math.floor(size / 2);
+
+        var inputData = context.getImageData(0, 0, width, height).data;
+
+        var output = context.createImageData(width, height);
+        var outputData = output.data;
+
+        for (var pixelY = 0; pixelY < height; ++pixelY) {
+          var pixelsAbove = pixelY * width;
+          for (var pixelX = 0; pixelX < width; ++pixelX) {
+            var r = 0, g = 0, b = 0, a = 0;
+            for (var kernelY = 0; kernelY < size; ++kernelY) {
+              for (var kernelX = 0; kernelX < size; ++kernelX) {
+                var weight = kernel[kernelY * size + kernelX];
+                var neighborY = Math.min(
+                  height - 1, Math.max(0, pixelY + kernelY - half));
+                var neighborX = Math.min(
+                  width - 1, Math.max(0, pixelX + kernelX - half));
+                var inputIndex = (neighborY * width + neighborX) * 4;
+                r += inputData[inputIndex] * weight;
+                g += inputData[inputIndex + 1] * weight;
+                b += inputData[inputIndex + 2] * weight;
+                a += inputData[inputIndex + 3] * weight;
+              }
+            }
+            var outputIndex = (pixelsAbove + pixelX) * 4;
+            outputData[outputIndex] = r;
+            outputData[outputIndex + 1] = g;
+            outputData[outputIndex + 2] = b;
+            outputData[outputIndex + 3] = kernel.normalized ? a : 255;
+          }
+        }
+        context.putImageData(output, 0, 0);
+      }
     </script>
   </body>
 </html>
