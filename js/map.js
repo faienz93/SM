@@ -9,8 +9,8 @@
  */
 
 
-function map(){
- 
+function map() {
+
   // var styles = [
   //   'Road',
   //   'RoadOnDemand',
@@ -54,44 +54,77 @@ function map(){
   //   }
   // });
 
- 
+
+
+
 
 
 
   // STAMEN MAP: https://openlayers.org/en/latest/examples/stamen.html
-     var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.Stamen({
-              layer: 'watercolor'
-            })
-          }),
-          new ol.layer.Tile({
-            source: new ol.source.Stamen({
-              layer: 'terrain-labels'
-            })
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
-          zoom: 13
-        })
-      });
+  //  var map = new ol.Map({
+  //     target: 'map',
+  //     layers: [
+  //       new ol.layer.Tile({
+  //         source: new ol.source.Stamen({
+  //           layer: 'watercolor'
+  //         })
+  //       }),
+  //       new ol.layer.Tile({
+  //         source: new ol.source.Stamen({
+  //           layer: 'terrain-labels'
+  //         })
+  //       })
+  //     ],
+  //     view: new ol.View({
+  //       center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
+  //       zoom: 13
+  //     })
+  //   });
 
+
+  // layers: [
+  //   new ol.layer.Group({
+  //     layers: [
+  //       new ol.layer.Tile({
+  //         source: new ol.source.OSM() // Tiled Layer
+  //       })
+  //     ]
+  //   })
+  // ],
   // =======================================================================
-    // var map = new ol.Map({
-    //     target: 'map',
-    //     layers: [
-    //       new ol.layer.Tile({
-    //         source: new ol.source.OSM() // Tiled Layer
-    //       })
-    //     ],
-    //     view: new ol.View({
-    //       center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
-    //       zoom: 13
-    //     })
-    //   });
+   map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM() // Tiled Layer
+      })
+    ],
+    loadTilesWhileAnimating: true, // is used for old smartphone during the animations
+    view: new ol.View({
+      center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
+      zoom: 13
+    })
+  });
+
+  // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
+  $('.selected-layer').on("click", function () {
+    var layerSelected = $(this).attr("value");
+  
+
+    if(layerSelected==="stamen"){
+      var stamen = stamenMap();
+      map.setLayerGroup(stamen);
+    }
+    if(layerSelected==="osm"){
+      var osm = defaultOSM();
+      map.setLayerGroup(osm);
+    }
+
+    
+   
+
+  });
+
 }
 
 
@@ -100,6 +133,52 @@ function map(){
  * Based on tutorial: https://openlayers.org/en/latest/examples/bing-maps.html
  * I Define a layer of Bing. For doing this i Set a KEY from http://www.bingmapsportal.com/ 
  */
-function bingMaps(){
+function bingMaps() {
 
+}
+
+/**
+ * This function return a stamen layer
+ * REF: https://openlayers.org/en/latest/examples/stamen.html?q=OSM
+ * 
+ * @method stamenMap
+ */
+function stamenMap() {
+
+  var stamenLayers = new ol.layer.Group({
+    title: 'Stamen',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'watercolor'
+        })
+      }),
+      new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'terrain-labels'
+        })
+      })
+    ]
+  });
+  // console.log(stamenLayers.values_.title);
+  return stamenLayers;
+}
+
+/**
+ * This function return a default OSM
+ * 
+ * @method defaultOSM
+ */
+function defaultOSM() {
+
+  var layersOSM = new ol.layer.Group({
+    title: 'OSM',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM() // Tiled Layer
+      })
+    ]
+  });
+
+  return layersOSM;
 }
