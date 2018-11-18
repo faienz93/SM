@@ -11,15 +11,6 @@
 
 function map() {
 
-  var styles = [
-    'Road',
-    'RoadOnDemand',
-    'Aerial',
-    'AerialWithLabels',
-    'collinsBart',
-    'ordnanceSurvey'
-  ];
-
   var osm = defaultOSM();
   var bing = bingMaps();
   var stamen = stamenMap();
@@ -53,7 +44,7 @@ function map() {
       map.setLayerGroup(bing);     
       var layers = map.getLayers().array_;
       for (var i = 0; i < layers.length; ++i) {
-        layers[i].setVisible(styles[i] === layerSelected);
+        layers[i].setVisible(bingStyles[i] === layerSelected);
       }
     }
   });
@@ -67,23 +58,16 @@ function map() {
  * I Define a layer of Bing. For doing this i Set a KEY from http://www.bingmapsportal.com/ 
  */
 function bingMaps() { 
-  var styles = [
-    'Road',
-    'RoadOnDemand',
-    'Aerial',
-    'AerialWithLabels',
-    'collinsBart',
-    'ordnanceSurvey'
-  ];
+  
   var layers = [];
   var i;
-  for (i = 0; i < styles.length; ++i) {
+  for (i = 0; i < bingStyles.length; ++i) {
     layers.push(new ol.layer.Tile({
       visible: false,
       preload: Infinity,
       source: new ol.source.BingMaps({
-        key: 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc',//'Your Bing Maps Key from http://www.bingmapsportal.com/ here',
-        imagerySet: styles[i]
+        key: KEY_BING, //'Your Bing Maps Key from http://www.bingmapsportal.com/ here',
+        imagerySet: bingStyles[i]
         // use maxZoom 19 to see stretched tiles instead of the BingMaps
         // "no photos at this zoom level" tiles
         // maxZoom: 19

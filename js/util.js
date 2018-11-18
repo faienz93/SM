@@ -1,18 +1,20 @@
 /**
  * ===========================================================================
- * File: Init.js 
+ * File: Util.js 
  * Author: Antonio Faienza
- * Based on this anwser: https://stackoverflow.com/a/11978996/4700162 it find 
- * an image that has a SVG tag and then inside the appropiate css it is colored
- * the image
+ * This file is create for handle all features that can be util for whole 
+ * project
  * ===========================================================================
  */
 
 
 
-/*
-* Replace all SVG images with inline SVG
-*/
+
+/**
+ * Based on this anwser: https://stackoverflow.com/a/11978996/4700162 it find 
+ * an image that has a SVG tag and then inside the appropiate css it is colored
+ * the image
+ */
 jQuery('img.svg').each(function () {
     var $img = jQuery(this);
     var imgID = $img.attr('id');
