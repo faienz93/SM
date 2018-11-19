@@ -14,29 +14,38 @@ function map() {
   var osm = defaultOSM();
   var bing = bingMaps();
   var stamen = stamenMap();
-  var kernels = filterKernel();
+
+
+
+
+
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
     target: 'map',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM() // Tiled Layer
-      })
-    ],
+    layers: new ol.layer.Group({
+      title: 'OSM',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM() // Tiled Layer
+        })
+      ]
+    }),
     // Improve user experience by loading tiles while animating. Will make
     // animations stutter on mobile or slow devices.
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
     view: new ol.View({
       center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
-      zoom: 13
+      zoom: 12
     })
   });
+
+  // console.log(map.getLayers());
+  // define filter
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
-    console.log(layerSelected);
     if (layerSelected === "stamen") {
       map.setLayerGroup(stamen);
     }
@@ -49,28 +58,25 @@ function map() {
         layers[i].setVisible(bingStyles[i] === layerSelected);
       }
     }
+
+
   });
+
 
 
   // define a filter
   $('.selected-filter').on("click", function () {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
-    var selectedKernel = normalize(kernels[layerSelected]);
+    // return filters matrix
+    // var kernels = filterKernel();
+
     map.render();
-     console.log(map.getLayers().array_);
-    /**
-       * Apply a filter on "postcompose" events.
-       */
-      for (var i = 0; i < map.getLayers().array_.length; ++i) {
-        map.getLayers().array_[i].on('postcompose', function (event) {
-          console.log("fjsakjfskodfjksd");
-        convolve(event.context, selectedKernel);
-      });
-      }
-   
-  });
+    // console.log(map.getLayers());
+    applyFilter(filterSelected);
   
+  });
+
 
 }
 
@@ -130,6 +136,7 @@ function stamenMap() {
     ]
   });
   // console.log(stamenLayers.values_.title);
+  // console.log(map.getLayers().array_[0].getVisible()); 
   return stamenLayers;
 }
 
@@ -152,6 +159,30 @@ function defaultOSM() {
   return layersOSM;
 }
 
+/**
+ * This function allows to apply a filter based on a matrix and methods defined
+ * inside filtersMap.js It is called the first time at the begin of 
+ * map (with default value) and then for every change it reload a new Filter.
+ * REF: REF: https://openlayers.org/en/latest/examples/image-filter.html
+ * 
+ * @method applyFilter
+ */
+function applyFilter(filter = "none") {
 
+  var selectedKernel = normalize(kernels[filter]);
 
+  var layers = map.getLayers().array_;
+  for (var i = 0; i < layers.length; i++) {
+    // this check is util for the Group that contains more Layers i.e Bing or Stamen
+    if (layers[i].getVisible()) {
+      layers[i].on('postcompose', function (event) {
+        // console.log(selectedKernel);
+        convolve(event.context, selectedKernel);
+      });
+    }
+  }
+  // console.log(map.getLayers().array_[0])
+
+  return filter;
+}
 
