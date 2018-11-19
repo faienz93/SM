@@ -15,11 +15,6 @@ function map() {
   var bing = bingMaps();
   var stamen = stamenMap();
 
-
-
-
-
-
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
     target: 'map',
@@ -63,20 +58,28 @@ function map() {
   });
 
 
+  var selectedKernel = normalize(kernels["none"]);
 
   // define a filter
-  $('.selected-filter').on("click", function () {
+  $('.selected-filter').click(function () {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
     // return filters matrix
     // var kernels = filterKernel();
-
+    selectedKernel = normalize(kernels[filterSelected]);
     map.render();
-    // console.log(map.getLayers());
-    applyFilter(filterSelected);
-  
   });
 
+  // applyFilter(selectedKernel);
+  var layers = map.getLayers().array_;
+  for (var i = 0; i < layers.length; i++) {
+    // this check is util for the Group that contains more Layers i.e Bing or Stamen
+    if (layers[i].getVisible()) {
+      layers[i].on('postcompose', function (event) {
+        convolve(event.context, selectedKernel);
+      });
+    }
+  }
 
 }
 
@@ -167,22 +170,15 @@ function defaultOSM() {
  * 
  * @method applyFilter
  */
-function applyFilter(filter = "none") {
-
-  var selectedKernel = normalize(kernels[filter]);
-
+function applyFilter(selectedKernel) {
   var layers = map.getLayers().array_;
   for (var i = 0; i < layers.length; i++) {
     // this check is util for the Group that contains more Layers i.e Bing or Stamen
     if (layers[i].getVisible()) {
       layers[i].on('postcompose', function (event) {
-        // console.log(selectedKernel);
         convolve(event.context, selectedKernel);
       });
     }
   }
-  // console.log(map.getLayers().array_[0])
-
-  return filter;
 }
 
