@@ -14,6 +14,7 @@ function map() {
   var osm = defaultOSM();
   var bing = bingMaps();
   var stamen = stamenMap();
+  var here = hereMap();
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
@@ -35,26 +36,44 @@ function map() {
     })
   });
 
-  // console.log(map.getLayers());
-  // define filter
+
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
-    if (layerSelected === "stamen") {
-      map.setLayerGroup(stamen);
-    }
-    else if (layerSelected === "osm") {
-      map.setLayerGroup(osm);
-    } else {
+    var parentId = $(this).parent().attr('id');
+    // console.log(stamen.values_.title + " " + parentId);
+    if (stamen.values_.title == parentId) {
+      map.setLayerGroup(stamen);      
+      var layers = map.getLayers().array_;
+      for (var i = 0; i < layers.length; ++i) {      
+          layers[i].setVisible(stamenStyles[i] === layerSelected);      
+      }
+    } else if (bing.values_.title == parentId) {
       map.setLayerGroup(bing);
       var layers = map.getLayers().array_;
       for (var i = 0; i < layers.length; ++i) {
         layers[i].setVisible(bingStyles[i] === layerSelected);
       }
+    } else if(here.values_.title == parentId){
+        map.setLayerGroup(here);
+        var layers = map.getLayers().array_;
+        for (var i = 0; i < layers.length; ++i) {
+          layers[i].setVisible(hereStyles[i].scheme === layerSelected);
+        }      
     }
-
-
+    // if (layerSelected === "stamen") {
+    //   map.setLayerGroup(stamen);
+    // }
+    // else if (layerSelected === "osm") {
+    //   map.setLayerGroup(osm);
+    // } else {
+    //   map.setLayerGroup(bing);
+    //   var layers = map.getLayers().array_;
+    //   for (var i = 0; i < layers.length; ++i) {
+    //     layers[i].setVisible(bingStyles[i] === layerSelected);
+    //   }
+    // }
   });
 
 
@@ -83,14 +102,30 @@ function map() {
 
 }
 
+/**
+ * This function return a default OSM
+ * 
+ * @method defaultOSM
+ */
+function defaultOSM() {
 
+  var layersOSM = new ol.layer.Group({
+    title: 'OSM',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM() // Tiled Layer
+      })
+    ]
+  });
+
+  return layersOSM;
+}
 
 /**
  * Based on tutorial: https://openlayers.org/en/latest/examples/bing-maps.html
  * I Define a layer of Bing. For doing this i Set a KEY from http://www.bingmapsportal.com/ 
  */
 function bingMaps() {
-
   var layers = [];
   var i;
   for (i = 0; i < bingStyles.length; ++i) {
@@ -116,50 +151,63 @@ function bingMaps() {
 }
 
 /**
+ * Based on tutorial: https://openlayers.org/en/latest/examples/bing-maps.html
+ * I Define a layer of Here WeGo Map. For doing this i Set appId and appCode from https://developer.here.com/
+ */
+function hereMap(){
+
+  var urlTpl = 'https://{1-4}.{base}.maps.cit.api.here.com' +
+  '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
+  '?app_id={app_id}&app_code={app_code}';
+  var layers = [];
+      for (var i = 0; i < hereStyles.length; ++i) {
+        var layerDesc = hereStyles[i];
+        layers.push(new ol.layer.Tile({
+          visible: false,
+          preload: Infinity,
+          source: new ol.source.XYZ({
+            url: createUrl(urlTpl, layerDesc),
+            attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+              '<a href="http://developer.here.com">HERE</a>'
+          })
+        }));
+      }
+
+      var hereLayers = new ol.layer.Group({
+        title: "Here",
+        layers: layers
+      });
+
+      return hereLayers
+}
+
+/**
  * This function return a stamen layer
  * REF: https://openlayers.org/en/latest/examples/stamen.html?q=OSM
  * 
  * @method stamenMap
  */
 function stamenMap() {
+  var layers = [];
+  var i;
+  for (i = 0; i < stamenStyles.length; ++i) {    
+      layers.push(new ol.layer.Tile({
+        visible: false,
+        preload: Infinity,
+        source: new ol.source.Stamen({
+          layer: stamenStyles[i]
+        })
+      }));
+  }
 
   var stamenLayers = new ol.layer.Group({
-    title: 'Stamen',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.Stamen({
-          layer: 'watercolor' // toner terrain toner-lite watercolor
-        })
-      }),
-      new ol.layer.Tile({
-        source: new ol.source.Stamen({
-          layer: 'terrain-labels'
-        })
-      })
-    ]
+    title: "Stamen",
+    layers: layers
   });
+
   // console.log(stamenLayers.values_.title);
   // console.log(map.getLayers().array_[0].getVisible()); 
   return stamenLayers;
-}
-
-/**
- * This function return a default OSM
- * 
- * @method defaultOSM
- */
-function defaultOSM() {
-
-  var layersOSM = new ol.layer.Group({
-    title: 'OSM',
-    layers: [
-      new ol.layer.Tile({
-        source: new ol.source.OSM() // Tiled Layer
-      })
-    ]
-  });
-
-  return layersOSM;
 }
 
 /**

@@ -43,7 +43,7 @@
         <form class="form-inline my-2 ml-auto">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+        </form>
         <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
@@ -61,30 +61,69 @@
     <!-- -------------------------------------------------------- -->
     <!-- ------------------- Sidebar bootstrap ------------------ -->
     <!-- -------------------------------------------------------- -->
-    <div id="mySidenav" class="sidenav">
-        <a href="#" value="osm" class="selected-layer">Default OSM</a>
-        <!-- BING MAP -->
-        <button class="dropdown-btn">
-                <img  style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
-                <span style="vertical-align:middle">Bing Maps</span>
-                <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
-        </button>
-        <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
-        <div class="dropdown-container" id="layer-select-bing-maps">
-            <a href="#" value="Aerial" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial</a>
-            <a href="#" value="AerialWithLabels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial with labels</a>
-            <a href="#" value="Road" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (static)</a>
-            <a href="#" value="RoadOnDemand" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Road (dynamic)</a>
-            <!-- <a href="#" value="collinsBart" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a> -->
-            <!-- <a href="#" value="ordnanceSurvey" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a> -->
-        </div>
-        
+
+       <!-- https://openlayers.org/en/latest/examples/here-maps.html -->
         <!-- <a href="#">Filters</a> https://openlayers.org/en/latest/examples/image-filter.html -->
         <!-- <a href="#">Canvas</a>https://openlayers.org/en/latest/examples/canvas-tiles.html -->
         <!-- <a href="#">OSM</a>https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
-        <a href="#" value="stamen" class="selected-layer"><img  style="vertical-align:middle" src="/img/stamen.svg" class="svg icon">Stamen</a> <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
-         <!-- FILTER -->
-         <button class="dropdown-btn">
+
+    <div id="mySidenav" class="sidenav">
+        <a href="#" value="osm" class="selected-layer">Default OSM</a>
+
+        <!-- HERE WeGO MAPS -->
+        <button class="dropdown-btn">
+            <img style="vertical-align:middle" src="/img/here.svg" class="svg icon">
+            <span style="vertical-align:middle">Here</span>
+            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+        </button>
+        <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
+        <div class="dropdown-container" id="Here">
+            <a href="#" value="normal.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal Day</a>
+            <a href="#" value="normal.day.transit" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal Day Transit</a>
+            <a href="#" value="pedestrian.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Pedestrian Day</a>
+            <a href="#" value="terrain.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain Day</a>
+            <a href="#" value="satellite.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Satellite Day</a>
+            <a href="#" value="hybrid.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Hybrid Day</a>
+        </div>
+
+        <!-- BING MAP -->
+        <button class="dropdown-btn">
+            <img style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
+            <span style="vertical-align:middle">Bing Maps</span>
+            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+        </button>
+        <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
+        <div class="dropdown-container" id="Bing">
+            <a href="#" value="Aerial" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial</a>
+            <a href="#" value="AerialWithLabels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial
+                with labels</a>
+            <a href="#" value="Road" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Road
+                (static)</a>
+            <a href="#" value="RoadOnDemand" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Road
+                (dynamic)</a>
+            <!-- <a href="#" value="collinsBart" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a> -->
+            <!-- <a href="#" value="ordnanceSurvey" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a> -->
+        </div>
+
+     
+
+        <!-- STAMEN -->
+        <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
+        <button class="dropdown-btn">
+            <img style="vertical-align:middle" src="/img/stamen.svg" class="svg icon">
+            <span style="vertical-align:middle">Stamen</span>
+            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+        </button>
+        <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
+        <div class="dropdown-container" id="Stamen">
+            <a href="#" value="watercolor" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor</a>
+            <a href="#" value="terrain-labels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor Label</a>
+            <a href="#" value="toner" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Toner</a>
+            <a href="#" value="toner-lite" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Toner Lite</a>
+            <a href="#" value="terrain" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain</a>
+        </div>
+        <!-- FILTER -->
+        <button class="dropdown-btn">
             <img style="vertical-align:middle" src="/img/filter-tool-black-shape.svg" class="svg icon">
             <span style="vertical-align:middle">Filter</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
@@ -96,9 +135,9 @@
             <a href="#" value="blur" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Blur</a>
             <a href="#" value="shadow" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Shadow</a>
             <a href="#" value="emboss" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
-            <a href="#" value="edge" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>            
+            <a href="#" value="edge" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>
         </div>
-        
+
 
     </div>
     <!-- -------------------------------------------------------- -->
@@ -123,7 +162,7 @@
     <script src="js/init.js" crossorigin="anonymous"></script>
     <script src="js/sidebar.js" crossorigin="anonymous"></script>
     <script src="js/map.js" crossorigin="anonymous"></script>
-   
+
 
     <!-- OpenLayer JS -->
     <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->

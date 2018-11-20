@@ -43,3 +43,18 @@ jQuery('img.svg').each(function () {
     }, 'xml');
 
 });
+
+
+/**
+ * This function allows to create an URL that is used from Here WeGo Maps
+ * 
+ * @method createUrl
+ */
+function createUrl(tpl, layerDesc) {
+    return tpl
+      .replace('{base}', layerDesc.base)
+      .replace('{type}', layerDesc.type)
+      .replace('{scheme}', layerDesc.scheme)
+      .replace('{app_id}', layerDesc.app_id)
+      .replace('{app_code}', layerDesc.app_code);
+  }
