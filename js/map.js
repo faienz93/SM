@@ -74,7 +74,7 @@ function map() {
   });
 
 
-  var selectedKernel = normalize(kernels["sharpen"]);
+  var selectedKernel = normalize(kernels["none"]);
 
   // define a filter
   $('.selected-filter').on("click",function () {
@@ -142,9 +142,6 @@ function map() {
 
 }
 
-function ciao(d){
-  console.log(d);
-}
 
 /**
  * This function return a default OSM
@@ -174,7 +171,6 @@ function defaultOSM() {
  * @method bingMaps
  */
 function bingMaps() {
-
   var layers = [];
   var i;
   for (i = 0; i < bingStyles.length; ++i) {
@@ -198,8 +194,6 @@ function bingMaps() {
 
   // return bingLayers;
   groupsMap.push(bingLayers);
-
-
 }
 
 /**
