@@ -11,52 +11,6 @@
 
 
 /**
-* Return an array of filter kernel
-*/
-function filterKernel() {
-  var kernels = {
-    none: [
-      0, 0, 0,
-      0, 1, 0,
-      0, 0, 0
-    ],
-    sharpen: [
-      0, -1, 0,
-      -1, 5, -1,
-      0, -1, 0
-    ],
-    sharpenless: [
-      0, -1, 0,
-      -1, 10, -1,
-      0, -1, 0
-    ],
-    blur: [
-      1, 1, 1,
-      1, 1, 1,
-      1, 1, 1
-    ],
-    shadow: [
-      1, 2, 1,
-      0, 1, 0,
-      -1, -2, -1
-    ],
-    emboss: [
-      -2, 1, 0,
-      -1, 1, 1,
-      0, 1, 2
-    ],
-    edge: [
-      0, 1, 0,
-      1, -4, 1,
-      0, 1, 0
-    ]
-  };
-
-  return kernels;
-}
-
-
-/**
  * Normalization of vector
  * 
  * @method normalize

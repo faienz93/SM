@@ -73,7 +73,7 @@ function map() {
     }
   });
 
-  $('.selected-debug').on("click",function () {
+  $('.selected-debug').on("click", function () {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
 
@@ -84,43 +84,38 @@ function map() {
     var cacca = map.getLayerGroup(currentGroup);
     console.log(cacca);
 
-    
-    
+
+
   });
 
   var selectedKernel = normalize(kernels["none"]);
 
   // define a filter
-  $('.selected-filter').on("click",function () {
+  $('.selected-filter').on("click", function () {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
-    // return filters matrix
-    // var kernels = filterKernel();
     selectedKernel = normalize(kernels[filterSelected]);
     map.render();
-  
-    // applyFilter(map.getLayers().array_,selectedKernel);
   });
 
 
-  console.log(groupsMap);
-  // TODO delete
-  // console.log(groupsMap[0].values_.layers.array_);
-  for(var i = 0; i < groupsMap.length; i++){ 
+
+  for (var i = 0; i < groupsMap.length; i++) {
     var layers = groupsMap[i].values_.layers.array_;
-    // var layers = groupsMap.getLayers().array_;
+      
+    //  This function allows to apply a filter based on a matrix and methods defined
+    //  inside filtersMap.js It is called the first time at the begin of 
+    //  map (with default value) and then for every change it reload a new Filter.
+    //  In this case it is "instantiate" for the first time for every layers even if 
+    //  it has not visible
+    //  REF: https://openlayers.org/en/latest/examples/image-filter.html
+       
     for (var j = 0; j < layers.length; j++) {
-        layers[j].on('postcompose', function (event) {
-          convolve(event.context, selectedKernel);
-        });
+      layers[j].on('postcompose', function (event) {
+        convolve(event.context, selectedKernel);
+      });
     }
   }
-
-  // for(var i = 0; i < groupsMap.length; i++){ 
-  //   applyFilter(groupsMap[i].values_.layers.array_,selectedKernel);
-  // }
-  
-
 
 }
 
@@ -260,7 +255,7 @@ function getGroup(n) {
 }
 
 
-function debugLayer(osmSource){
+function debugLayer(osmSource) {
   var debug = new ol.layer.Tile({
     source: new ol.source.TileDebug({
       projection: 'EPSG:3857',
@@ -280,11 +275,10 @@ function debugLayer(osmSource){
  * 
  * @method applyFilter
  */
-function applyFilter(layers, selectedKernel) {
-  for (var i = 0; i < layers.length; i++) {
-    layers[i].on('postcompose', function (event) {
-      convolve(event.context, selectedKernel);
-    });
-  }
-}
+// function applyFilter(layer, selectedKernel) {  
+//     layer.on('postcompose', function (event) {
+//       convolve(event.context, selectedKernel);
+//     });
+
+// }
 
