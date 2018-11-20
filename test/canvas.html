@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas Tiles - TEST</title>
+    <link rel="stylesheet" href="../lib/OpenLayers/ol.css" type="text/css">
+        <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+        <script src="../js/const.js"></script>
+        <script src="../lib/OpenLayers/ol.js"></script>
+
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+    //   import Map from 'ol/Map.js';
+    //   import View from 'ol/View.js';
+    //   import TileLayer from 'ol/layer/Tile.js';
+    //   import {fromLonLat} from 'ol/proj.js';
+    //   import {OSM, TileDebug} from 'ol/source.js';
+
+
+    //   var osmSource = new ol.source.OSM();
+    var osmSource =  new ol.source.Stamen({layer: "watercolor"});
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: osmSource
+          }),
+          new ol.layer.Tile({
+            source: new ol.source.TileDebug({
+              projection: 'EPSG:3857',
+              tileGrid: osmSource.getTileGrid()
+            })
+          })
+        ],
+        target: 'map',
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-0.1275, 51.507222]),
+          zoom: 10
+        })
+      });
+    </script>
+  </body>
+</html>
