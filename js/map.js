@@ -18,15 +18,17 @@ function map() {
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
+
     target: 'map',
-    layers: new ol.layer.Group({
-      title: 'OSM',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM() // Tiled Layer
-        })
-      ]
-    }),
+    // layers: new ol.layer.Group({
+    //   title: 'OSM',
+    //   layers: [
+    //     new ol.layer.Tile({
+    //       source: new ol.source.OSM() // Tiled Layer
+    //     })
+    //   ]
+    // }),
+
     // Improve user experience by loading tiles while animating. Will make
     // animations stutter on mobile or slow devices.
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
@@ -36,18 +38,30 @@ function map() {
     })
   });
 
-
+  map.setLayerGroup(osm);
+  var layers = map.getLayers().array_;
+  for (var i = 0; i < layers.length; ++i) {
+    layers[i].setVisible("OSM");
+  }
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
     var parentId = $(this).parent().attr('id');
+
     // console.log(stamen.values_.title + " " + parentId);
-    if (stamen.values_.title == parentId) {
-      map.setLayerGroup(stamen);      
+    if (osm.values_.title == parentId) {
+      map.setLayerGroup(osm);
       var layers = map.getLayers().array_;
-      for (var i = 0; i < layers.length; ++i) {      
-          layers[i].setVisible(stamenStyles[i] === layerSelected);      
+      for (var i = 0; i < layers.length; ++i) {
+        layers[i].setVisible(layerSelected); // it contains only one layer but 
+      }
+    }
+    else if (stamen.values_.title == parentId) {
+      map.setLayerGroup(stamen);
+      var layers = map.getLayers().array_;
+      for (var i = 0; i < layers.length; ++i) {
+        layers[i].setVisible(stamenStyles[i] === layerSelected);
       }
     } else if (bing.values_.title == parentId) {
       map.setLayerGroup(bing);
@@ -55,29 +69,18 @@ function map() {
       for (var i = 0; i < layers.length; ++i) {
         layers[i].setVisible(bingStyles[i] === layerSelected);
       }
-    } else if(here.values_.title == parentId){
-        map.setLayerGroup(here);
-        var layers = map.getLayers().array_;
-        for (var i = 0; i < layers.length; ++i) {
-          layers[i].setVisible(hereStyles[i].scheme === layerSelected);
-        }      
+    } else if (here.values_.title == parentId) {
+      map.setLayerGroup(here);
+      var layers = map.getLayers().array_;
+      for (var i = 0; i < layers.length; ++i) {
+        layers[i].setVisible(hereStyles[i].scheme === layerSelected);
+      }
     }
-    // if (layerSelected === "stamen") {
-    //   map.setLayerGroup(stamen);
-    // }
-    // else if (layerSelected === "osm") {
-    //   map.setLayerGroup(osm);
-    // } else {
-    //   map.setLayerGroup(bing);
-    //   var layers = map.getLayers().array_;
-    //   for (var i = 0; i < layers.length; ++i) {
-    //     layers[i].setVisible(bingStyles[i] === layerSelected);
-    //   }
-    // }
+    
   });
 
 
-  var selectedKernel = normalize(kernels["none"]);
+  // var selectedKernel = normalize(kernels["none"]);
 
   // define a filter
   $('.selected-filter').click(function () {
@@ -90,15 +93,15 @@ function map() {
   });
 
   // applyFilter(selectedKernel);
-  var layers = map.getLayers().array_;
-  for (var i = 0; i < layers.length; i++) {
-    // this check is util for the Group that contains more Layers i.e Bing or Stamen
-    if (layers[i].getVisible()) {
-      layers[i].on('postcompose', function (event) {
-        convolve(event.context, selectedKernel);
-      });
-    }
-  }
+  // var layers = map.getLayers().array_;
+  // for (var i = 0; i < layers.length; i++) {
+  //   // this check is util for the Group that contains more Layers i.e Bing or Stamen
+  //   if (layers[i].getVisible()) {
+  //     layers[i].on('postcompose', function (event) {
+  //       convolve(event.context, selectedKernel);
+  //     });
+  //   }
+  // }
 
 }
 
@@ -108,11 +111,12 @@ function map() {
  * @method defaultOSM
  */
 function defaultOSM() {
-
   var layersOSM = new ol.layer.Group({
     title: 'OSM',
     layers: [
       new ol.layer.Tile({
+        visible: false,
+        preload: Infinity,
         source: new ol.source.OSM() // Tiled Layer
       })
     ]
@@ -151,34 +155,34 @@ function bingMaps() {
 }
 
 /**
- * Based on tutorial: https://openlayers.org/en/latest/examples/bing-maps.html
+ * Based on tutorial: https://openlayers.org/en/latest/examples/here-maps.html 
  * I Define a layer of Here WeGo Map. For doing this i Set appId and appCode from https://developer.here.com/
  */
-function hereMap(){
+function hereMap() {
 
   var urlTpl = 'https://{1-4}.{base}.maps.cit.api.here.com' +
-  '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
-  '?app_id={app_id}&app_code={app_code}';
+    '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
+    '?app_id={app_id}&app_code={app_code}';
   var layers = [];
-      for (var i = 0; i < hereStyles.length; ++i) {
-        var layerDesc = hereStyles[i];
-        layers.push(new ol.layer.Tile({
-          visible: false,
-          preload: Infinity,
-          source: new ol.source.XYZ({
-            url: createUrl(urlTpl, layerDesc),
-            attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
-              '<a href="http://developer.here.com">HERE</a>'
-          })
-        }));
-      }
+  for (var i = 0; i < hereStyles.length; ++i) {
+    var layerDesc = hereStyles[i];
+    layers.push(new ol.layer.Tile({
+      visible: false,
+      preload: Infinity,
+      source: new ol.source.XYZ({
+        url: createUrl(urlTpl, layerDesc),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+          '<a href="http://developer.here.com">HERE</a>'
+      })
+    }));
+  }
 
-      var hereLayers = new ol.layer.Group({
-        title: "Here",
-        layers: layers
-      });
+  var hereLayers = new ol.layer.Group({
+    title: "Here",
+    layers: layers
+  });
 
-      return hereLayers
+  return hereLayers
 }
 
 /**
@@ -190,14 +194,14 @@ function hereMap(){
 function stamenMap() {
   var layers = [];
   var i;
-  for (i = 0; i < stamenStyles.length; ++i) {    
-      layers.push(new ol.layer.Tile({
-        visible: false,
-        preload: Infinity,
-        source: new ol.source.Stamen({
-          layer: stamenStyles[i]
-        })
-      }));
+  for (i = 0; i < stamenStyles.length; ++i) {
+    layers.push(new ol.layer.Tile({
+      visible: false,
+      preload: Infinity,
+      source: new ol.source.Stamen({
+        layer: stamenStyles[i]
+      })
+    }));
   }
 
   var stamenLayers = new ol.layer.Group({
