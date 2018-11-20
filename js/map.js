@@ -73,6 +73,20 @@ function map() {
     }
   });
 
+  $('.selected-debug').on("click",function () {
+    var filterSelected = $(this).attr("value");
+    console.log(filterSelected);
+
+    var prova = map.getLayers().array_[0].values_;
+    console.log(prova)
+    var deb = debugLayer(prova);
+    var currentGroup = getGroup("Stamen")
+    var cacca = map.getLayerGroup(currentGroup);
+    console.log(cacca);
+
+    
+    
+  });
 
   var selectedKernel = normalize(kernels["none"]);
 
@@ -92,46 +106,14 @@ function map() {
   console.log(groupsMap);
   // TODO delete
   // console.log(groupsMap[0].values_.layers.array_);
-  // for(var i = 0; i < groupsMap.length; i++){ 
-  //   var layers = groupsMap[i].values_.layers.array_;
-  //   // var layers = groupsMap.getLayers().array_;
-  //   for (var i = 0; i < layers.length; i++) {
-  //       layers[i].on('postcompose', function (event) {
-  //         convolve(event.context, selectedKernel);
-  //       });
-  //   }
-  // }
-
-  var layers = groupsMap[0].values_.layers.array_;
-  // var layers = groupsMap.getLayers().array_;
-  for (var i = 0; i < layers.length; i++) {
-    layers[i].on('postcompose', function (event) {
-      convolve(event.context, selectedKernel);
-    });
-  }
-
-  var layers = groupsMap[1].values_.layers.array_;
-  // var layers = groupsMap.getLayers().array_;
-  for (var i = 0; i < layers.length; i++) {
-    layers[i].on('postcompose', function (event) {
-      convolve(event.context, selectedKernel);
-    });
-  }
-
-  var layers = groupsMap[2].values_.layers.array_;
-  // var layers = groupsMap.getLayers().array_;
-  for (var i = 0; i < layers.length; i++) {
-    layers[i].on('postcompose', function (event) {
-      convolve(event.context, selectedKernel);
-    });
-  }
-
-  var layers = groupsMap[3].values_.layers.array_;
-  // var layers = groupsMap.getLayers().array_;
-  for (var i = 0; i < layers.length; i++) {
-    layers[i].on('postcompose', function (event) {
-      convolve(event.context, selectedKernel);
-    });
+  for(var i = 0; i < groupsMap.length; i++){ 
+    var layers = groupsMap[i].values_.layers.array_;
+    // var layers = groupsMap.getLayers().array_;
+    for (var j = 0; j < layers.length; j++) {
+        layers[j].on('postcompose', function (event) {
+          convolve(event.context, selectedKernel);
+        });
+    }
   }
 
   // for(var i = 0; i < groupsMap.length; i++){ 
@@ -278,7 +260,15 @@ function getGroup(n) {
 }
 
 
-
+function debugLayer(osmSource){
+  var debug = new ol.layer.Tile({
+    source: new ol.source.TileDebug({
+      projection: 'EPSG:3857',
+      tileGrid: osmSource.getTileGrid()
+    })
+  })
+  return debug;
+}
 
 
 
