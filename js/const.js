@@ -8,15 +8,20 @@
  * ===========================================================================
  */
 
- /**
-  * Global Map
-  */
- var map;
+/**
+ * Global Map
+ */
+var map;
 
- /**
-  * Key for use Bing Map
-  * Your Bing Maps Key from http://www.bingmapsportal.com/ here
-  */
+/**
+ * Array that contains all layers
+ */
+var groupsMap = [];
+
+/**
+ * Key for use Bing Map
+ * Your Bing Maps Key from http://www.bingmapsportal.com/ here
+ */
 var KEY_BING = 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc';
 
 /**
@@ -26,7 +31,7 @@ var KEY_BING = 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc
 var appId = '3LeDvRPCXiNLMRHsJWKS';
 var appCode = 'w5aqGLGSlSUouTQ1p7Fjug';
 
-  /**
+/**
  * Define an Bing Style Array
  */
 var bingStyles = [
@@ -98,41 +103,41 @@ var hereStyles = [
 ];
 
 
-  var kernels = {
-    none: [
-      0, 0, 0,
-      0, 1, 0,
-      0, 0, 0
-    ],
-    sharpen: [
-      0, -1, 0,
-      -1, 5, -1,
-      0, -1, 0
-    ],
-    sharpenless: [
-      0, -1, 0,
-      -1, 10, -1,
-      0, -1, 0
-    ],
-    blur: [
-      1, 1, 1,
-      1, 1, 1,
-      1, 1, 1
-    ],
-    shadow: [
-      1, 2, 1,
-      0, 1, 0,
-      -1, -2, -1
-    ],
-    emboss: [
-      -2, 1, 0,
-      -1, 1, 1,
-      0, 1, 2
-    ],
-    edge: [
-      0, 1, 0,
-      1, -4, 1,
-      0, 1, 0
-    ]
-  };
+var kernels = {
+  none: [
+    0, 0, 0,
+    0, 1, 0,
+    0, 0, 0
+  ],
+  sharpen: [
+    0, -1, 0,
+    -1, 5, -1,
+    0, -1, 0
+  ],
+  sharpenless: [
+    0, -1, 0,
+    -1, 10, -1,
+    0, -1, 0
+  ],
+  blur: [
+    1, 1, 1,
+    1, 1, 1,
+    1, 1, 1
+  ],
+  shadow: [
+    1, 2, 1,
+    0, 1, 0,
+    -1, -2, -1
+  ],
+  emboss: [
+    -2, 1, 0,
+    -1, 1, 1,
+    0, 1, 2
+  ],
+  edge: [
+    0, 1, 0,
+    1, -4, 1,
+    0, 1, 0
+  ]
+};
 

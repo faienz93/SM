@@ -11,15 +11,16 @@
 
 function map() {
 
-  var osm = defaultOSM();
-  var bing = bingMaps();
-  var stamen = stamenMap();
-  var here = hereMap();
+  defaultOSM();
+  bingMaps();
+  stamenMap();
+  hereMap();
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
 
     target: 'map',
+
     // layers: new ol.layer.Group({
     //   title: 'OSM',
     //   layers: [
@@ -38,71 +39,111 @@ function map() {
     })
   });
 
+  // we define here the layer 
+  // to maintain the same approach of access to the layers
+  var osm = getGroup("OSM");
   map.setLayerGroup(osm);
+
+
   var layers = map.getLayers().array_;
   for (var i = 0; i < layers.length; ++i) {
     layers[i].setVisible("OSM");
   }
 
+
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
-    var parentId = $(this).parent().attr('id');
+    var groupIdHtml = $(this).parent().attr('id');
 
-    // console.log(stamen.values_.title + " " + parentId);
-    if (osm.values_.title == parentId) {
-      map.setLayerGroup(osm);
-      var layers = map.getLayers().array_;
-      for (var i = 0; i < layers.length; ++i) {
-        layers[i].setVisible(layerSelected); // it contains only one layer but 
-      }
-    }
-    else if (stamen.values_.title == parentId) {
-      map.setLayerGroup(stamen);
-      var layers = map.getLayers().array_;
-      for (var i = 0; i < layers.length; ++i) {
-        layers[i].setVisible(stamenStyles[i] === layerSelected);
-      }
-    } else if (bing.values_.title == parentId) {
-      map.setLayerGroup(bing);
-      var layers = map.getLayers().array_;
-      for (var i = 0; i < layers.length; ++i) {
+
+    var groupSelected = getGroup(groupIdHtml);
+    map.setLayerGroup(groupSelected);
+    var layers = map.getLayers().array_;
+    for (var i = 0; i < layers.length; ++i) {
+      if (groupSelected.values_.title === "Bing") {
         layers[i].setVisible(bingStyles[i] === layerSelected);
-      }
-    } else if (here.values_.title == parentId) {
-      map.setLayerGroup(here);
-      var layers = map.getLayers().array_;
-      for (var i = 0; i < layers.length; ++i) {
+      } else if (groupSelected.values_.title === "Here") {
         layers[i].setVisible(hereStyles[i].scheme === layerSelected);
+      } else if (groupSelected.values_.title === "Stamen") {
+        layers[i].setVisible(stamenStyles[i] === layerSelected);
+      } else {
+        layers[i].setVisible("OSM");
       }
     }
-    
   });
 
 
-  // var selectedKernel = normalize(kernels["none"]);
+  var selectedKernel = normalize(kernels["sharpen"]);
 
   // define a filter
-  $('.selected-filter').click(function () {
+  $('.selected-filter').on("click",function () {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
     // return filters matrix
     // var kernels = filterKernel();
     selectedKernel = normalize(kernels[filterSelected]);
     map.render();
+  
+    // applyFilter(map.getLayers().array_,selectedKernel);
   });
 
-  // applyFilter(selectedKernel);
-  // var layers = map.getLayers().array_;
-  // for (var i = 0; i < layers.length; i++) {
-  //   // this check is util for the Group that contains more Layers i.e Bing or Stamen
-  //   if (layers[i].getVisible()) {
-  //     layers[i].on('postcompose', function (event) {
-  //       convolve(event.context, selectedKernel);
-  //     });
+
+  console.log(groupsMap);
+  // TODO delete
+  // console.log(groupsMap[0].values_.layers.array_);
+  // for(var i = 0; i < groupsMap.length; i++){ 
+  //   var layers = groupsMap[i].values_.layers.array_;
+  //   // var layers = groupsMap.getLayers().array_;
+  //   for (var i = 0; i < layers.length; i++) {
+  //       layers[i].on('postcompose', function (event) {
+  //         convolve(event.context, selectedKernel);
+  //       });
   //   }
   // }
 
+  var layers = groupsMap[0].values_.layers.array_;
+  // var layers = groupsMap.getLayers().array_;
+  for (var i = 0; i < layers.length; i++) {
+    layers[i].on('postcompose', function (event) {
+      convolve(event.context, selectedKernel);
+    });
+  }
+
+  var layers = groupsMap[1].values_.layers.array_;
+  // var layers = groupsMap.getLayers().array_;
+  for (var i = 0; i < layers.length; i++) {
+    layers[i].on('postcompose', function (event) {
+      convolve(event.context, selectedKernel);
+    });
+  }
+
+  var layers = groupsMap[2].values_.layers.array_;
+  // var layers = groupsMap.getLayers().array_;
+  for (var i = 0; i < layers.length; i++) {
+    layers[i].on('postcompose', function (event) {
+      convolve(event.context, selectedKernel);
+    });
+  }
+
+  var layers = groupsMap[3].values_.layers.array_;
+  // var layers = groupsMap.getLayers().array_;
+  for (var i = 0; i < layers.length; i++) {
+    layers[i].on('postcompose', function (event) {
+      convolve(event.context, selectedKernel);
+    });
+  }
+
+  // for(var i = 0; i < groupsMap.length; i++){ 
+  //   applyFilter(groupsMap[i].values_.layers.array_,selectedKernel);
+  // }
+  
+
+
+}
+
+function ciao(d){
+  console.log(d);
 }
 
 /**
@@ -122,14 +163,18 @@ function defaultOSM() {
     ]
   });
 
-  return layersOSM;
+  // return layersOSM;
+  groupsMap.push(layersOSM);
 }
 
 /**
  * Based on tutorial: https://openlayers.org/en/latest/examples/bing-maps.html
  * I Define a layer of Bing. For doing this i Set a KEY from http://www.bingmapsportal.com/ 
+ * 
+ * @method bingMaps
  */
 function bingMaps() {
+
   var layers = [];
   var i;
   for (i = 0; i < bingStyles.length; ++i) {
@@ -151,12 +196,17 @@ function bingMaps() {
     layers: layers
   });
 
-  return bingLayers;
+  // return bingLayers;
+  groupsMap.push(bingLayers);
+
+
 }
 
 /**
  * Based on tutorial: https://openlayers.org/en/latest/examples/here-maps.html 
  * I Define a layer of Here WeGo Map. For doing this i Set appId and appCode from https://developer.here.com/
+ * 
+ * @method hereMap
  */
 function hereMap() {
 
@@ -172,7 +222,8 @@ function hereMap() {
       source: new ol.source.XYZ({
         url: createUrl(urlTpl, layerDesc),
         attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
-          '<a href="http://developer.here.com">HERE</a>'
+          '<a href="http://developer.here.com">HERE</a>',
+        crossOrigin: 'anonymous' // https://gis.stackexchange.com/questions/199540/avoiding-cors-error-with-openlayers-3
       })
     }));
   }
@@ -182,7 +233,9 @@ function hereMap() {
     layers: layers
   });
 
-  return hereLayers
+  // return hereLayers
+  groupsMap.push(hereLayers);
+
 }
 
 /**
@@ -192,6 +245,8 @@ function hereMap() {
  * @method stamenMap
  */
 function stamenMap() {
+
+
   var layers = [];
   var i;
   for (i = 0; i < stamenStyles.length; ++i) {
@@ -211,26 +266,41 @@ function stamenMap() {
 
   // console.log(stamenLayers.values_.title);
   // console.log(map.getLayers().array_[0].getVisible()); 
-  return stamenLayers;
+  // return stamenLayers;
+  groupsMap.push(stamenLayers);
+
 }
+
+
+/**
+ * Given an array of Group, this function return a specific group
+ * that has a specific Title
+ * 
+ * @method getGroup
+ * @param l {String} - name of group 
+ */
+function getGroup(n) {
+  return groupsMap.find(o => o.values_.title === n);
+}
+
+
+
+
+
 
 /**
  * This function allows to apply a filter based on a matrix and methods defined
  * inside filtersMap.js It is called the first time at the begin of 
  * map (with default value) and then for every change it reload a new Filter.
- * REF: REF: https://openlayers.org/en/latest/examples/image-filter.html
+ * REF: https://openlayers.org/en/latest/examples/image-filter.html
  * 
  * @method applyFilter
  */
-function applyFilter(selectedKernel) {
-  var layers = map.getLayers().array_;
+function applyFilter(layers, selectedKernel) {
   for (var i = 0; i < layers.length; i++) {
-    // this check is util for the Group that contains more Layers i.e Bing or Stamen
-    if (layers[i].getVisible()) {
-      layers[i].on('postcompose', function (event) {
-        convolve(event.context, selectedKernel);
-      });
-    }
+    layers[i].on('postcompose', function (event) {
+      convolve(event.context, selectedKernel);
+    });
   }
 }
 

@@ -41,6 +41,21 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
+/**
+ * For avoid a tipical error: "The canvas has been tainted by cross-origin data." 
+ * I set Header and make image "Anonymus". I use this for the map of the type "Here"
+ * 
+ * REF: https://enable-cors.org/server_expressjs.html
+ * REF: https://gis.stackexchange.com/questions/199540/avoiding-cors-error-with-openlayers-3
+ * 
+ * 
+ */
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 /**
  * Normalize a port into a number, string, or false.
