@@ -118,7 +118,7 @@ body {
 }
 
 svg path {
-    fill: #818181;
+    fill: #818181 !important;
 }
 
 /* svg:hover path {
