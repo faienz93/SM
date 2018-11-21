@@ -77,7 +77,7 @@ function map() {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
 
-    var prova = map.getLayers().array_[0].values_;
+    var prova = map.getLayers().array_[0].values_.source;
     console.log(prova)
     var deb = debugLayer(prova);
     var currentGroup = getGroup("Stamen")
@@ -88,9 +88,11 @@ function map() {
 
   });
 
+
+  // default value of filter
   var selectedKernel = normalize(kernels["none"]);
 
-  // define a filter
+  // render a new Filter
   $('.selected-filter').on("click", function () {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
@@ -100,6 +102,7 @@ function map() {
 
 
 
+  // Setting filter 
   for (var i = 0; i < groupsMap.length; i++) {
     var layers = groupsMap[i].values_.layers.array_;
       
@@ -266,19 +269,4 @@ function debugLayer(osmSource) {
 }
 
 
-
-/**
- * This function allows to apply a filter based on a matrix and methods defined
- * inside filtersMap.js It is called the first time at the begin of 
- * map (with default value) and then for every change it reload a new Filter.
- * REF: https://openlayers.org/en/latest/examples/image-filter.html
- * 
- * @method applyFilter
- */
-// function applyFilter(layer, selectedKernel) {  
-//     layer.on('postcompose', function (event) {
-//       convolve(event.context, selectedKernel);
-//     });
-
-// }
 
