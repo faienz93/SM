@@ -80,9 +80,10 @@ function map() {
     var prova = map.getLayers().array_[0].values_.source;
     console.log(prova)
     var deb = debugLayer(prova);
-    var currentGroup = getGroup("Stamen")
-    var cacca = map.getLayerGroup(currentGroup);
-    console.log(cacca);
+    // var currentGroup = getGroup("Stamen")
+    // var cacca = map.getLayerGroup(currentGroup);
+    // console.log(cacca);
+    map.getLayers().getArray().push(deb);
 
 
 
