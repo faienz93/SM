@@ -20,16 +20,7 @@ function map() {
   map = new ol.Map({
 
     target: 'map',
-
-    // layers: new ol.layer.Group({
-    //   title: 'OSM',
-    //   layers: [
-    //     new ol.layer.Tile({
-    //       source: new ol.source.OSM() // Tiled Layer
-    //     })
-    //   ]
-    // }),
-
+    // layers, // NOT DEFINED HERE
     // Improve user experience by loading tiles while animating. Will make
     // animations stutter on mobile or slow devices.
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
@@ -59,6 +50,7 @@ function map() {
 
     var groupSelected = getGroup(groupIdHtml);
     map.setLayerGroup(groupSelected);
+    // var layers = map.getLayers().getArray();
     var layers = map.getLayers().array_;
     for (var i = 0; i < layers.length; ++i) {
       if (groupSelected.values_.title === "Bing") {
@@ -74,16 +66,18 @@ function map() {
   });
 
   $('.selected-debug').on("click", function () {
-    var filterSelected = $(this).attr("value");
-    console.log(filterSelected);
+    
 
-    var prova = map.getLayers().array_[0].values_.source;
-    console.log(prova)
-    var deb = debugLayer(prova);
-    // var currentGroup = getGroup("Stamen")
-    // var cacca = map.getLayerGroup(currentGroup);
-    // console.log(cacca);
+
+
+    var currentLayers = map.getLayers().getArray();   
+    var currentLayer = getCurrentLayer(currentLayers);
+    console.log(currentLayer.getSource());
+
+
+    var deb = debugLayer(currentLayer.getSource());
     map.getLayers().getArray().push(deb);
+
 
 
 
@@ -100,7 +94,6 @@ function map() {
     selectedKernel = normalize(kernels[filterSelected]);
     map.render();
   });
-
 
 
   // Setting filter 
@@ -134,6 +127,7 @@ function defaultOSM() {
     title: 'OSM',
     layers: [
       new ol.layer.Tile({
+        title: "osm",
         visible: false,
         preload: Infinity,
         source: new ol.source.OSM() // Tiled Layer
@@ -156,6 +150,7 @@ function bingMaps() {
   var i;
   for (i = 0; i < bingStyles.length; ++i) {
     layers.push(new ol.layer.Tile({
+      title: bingStyles[i],
       visible: false,
       preload: Infinity,
       source: new ol.source.BingMaps({
@@ -192,6 +187,7 @@ function hereMap() {
   for (var i = 0; i < hereStyles.length; ++i) {
     var layerDesc = hereStyles[i];
     layers.push(new ol.layer.Tile({
+      title: hereStyles[i].scheme,
       visible: false,
       preload: Infinity,
       source: new ol.source.XYZ({
@@ -226,6 +222,7 @@ function stamenMap() {
   var i;
   for (i = 0; i < stamenStyles.length; ++i) {
     layers.push(new ol.layer.Tile({
+      title: stamenStyles[i],
       visible: false,
       preload: Infinity,
       source: new ol.source.Stamen({
@@ -252,18 +249,36 @@ function stamenMap() {
  * that has a specific Title
  * 
  * @method getGroup
- * @param l {String} - name of group 
+ * @param n {String} - name of group 
  */
 function getGroup(n) {
   return groupsMap.find(o => o.values_.title === n);
 }
 
 
-function debugLayer(osmSource) {
+/**
+ * Given an array of Layers, this function return a specific Layers
+ * that is VISIBLE
+ * 
+ * @method getCurrentLayer
+ * @param arrayLayers {Object} - contains all layer of specific group 
+ */
+function getCurrentLayer(arrayLayers) {    
+    return arrayLayers.find(o => o.state_.visible === true);   
+}
+
+
+/**
+ * Add a new Layer where add a tile to map for Debug
+ * 
+ * @method debugLayer
+ * @param currentSource {Object} - current Source of Current Layers
+ */
+function debugLayer(currentSource) {
   var debug = new ol.layer.Tile({
     source: new ol.source.TileDebug({
       projection: 'EPSG:3857',
-      tileGrid: osmSource.getTileGrid()
+      tileGrid: currentSource.getTileGrid()
     })
   })
   return debug;
