@@ -7,7 +7,7 @@
  */
 
 
-.navbar {
+ .navbar {
   background-color: #111 !important;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .nav-link {
-  font-size: 25px;
+  font-size: 20px;
   padding-right: .5rem !important;
   padding-left: .5rem !important;
   color: rgba(255, 255, 255, .5);

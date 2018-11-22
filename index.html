@@ -29,30 +29,62 @@
 </head>
 
 <body>
+    <!-- <button id="hambergerButton" class="hamburger hamburger--collapse" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button> 
+            REF https://stackoverflow.com/a/40193892/4700162
+        <ul class="nav navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <a class="nav-link">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Logout</a>
+                </li>
+            </ul>
+        
+        -->
     <!-- ----------------------- -->
     <!-- --- NavBar bootstrap--- -->
     <!-- ----------------------- -->
-    <nav class="navbar navbar-dark bg-dark">
-        <!-- I use the library Hamburger for handle the sidebar -->
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
         <button id="hambergerButton" class="hamburger hamburger--collapse" type="button">
             <span class="hamburger-box">
                 <span class="hamburger-inner"></span>
             </span>
         </button>
-        <!-- https://stackoverflow.com/questions/34048332/open-layers-3-search-functionality-to-find-a-map-location -->
-        <form class="form-inline my-2 ml-auto">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link">Sign Up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Logout</a>
-            </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- https://stackoverflow.com/a/34067547/4700162 -->
+            <form class="form-inline my-2 ml-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
+                <li class="nav-item">
+                    <a class="nav-link">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Logout</a>
+                </li>
+            </ul>
+
+        </div>
     </nav>
     <!-- ----------------------- -->
     <!-- --- /NavBar bootstrap--- -->
@@ -62,16 +94,16 @@
     <!-- ------------------- Sidebar bootstrap ------------------ -->
     <!-- -------------------------------------------------------- -->
 
-       
-        <!-- <a href="#">Filters</a> https://openlayers.org/en/latest/examples/image-filter.html -->
-        <!-- <a href="#">Canvas</a>https://openlayers.org/en/latest/examples/canvas-tiles.html -->
-        <!-- <a href="#">OSM</a>https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
+
+    <!-- <a href="#">Filters</a> https://openlayers.org/en/latest/examples/image-filter.html -->
+    <!-- <a href="#">Canvas</a>https://openlayers.org/en/latest/examples/canvas-tiles.html -->
+    <!-- <a href="#">OSM</a>https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
 
     <div id="mySidenav" class="sidenav">
-        
+
         <button class="default-button" id="OSM">
             <img style="vertical-align:middle" src="/img/osm.svg" class="svg icon">
-            <a href="#" value ="osm" style="vertical-align:middle" class="selected-layer">Default OSM</a>
+            <a href="#" value="osm" style="vertical-align:middle" class="selected-layer">Default OSM</a>
             <!-- <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg"> -->
         </button>
 
@@ -84,12 +116,18 @@
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
         <div class="dropdown-container" id="Here">
-            <a href="#" value="normal.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal Day</a>
-            <a href="#" value="normal.day.transit" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal Day Transit</a>
-            <a href="#" value="pedestrian.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Pedestrian Day</a>
-            <a href="#" value="terrain.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain Day</a>
-            <a href="#" value="satellite.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Satellite Day</a>
-            <a href="#" value="hybrid.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Hybrid Day</a>
+            <a href="#" value="normal.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal
+                Day</a>
+            <a href="#" value="normal.day.transit" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal
+                Day Transit</a>
+            <a href="#" value="pedestrian.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Pedestrian
+                Day</a>
+            <a href="#" value="terrain.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain
+                Day</a>
+            <a href="#" value="satellite.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Satellite
+                Day</a>
+            <a href="#" value="hybrid.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Hybrid
+                Day</a>
         </div>
 
         <!-- BING MAP -->
@@ -111,7 +149,7 @@
             <!-- <a href="#" value="ordnanceSurvey" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a> -->
         </div>
 
-     
+
 
         <!-- STAMEN -->
         <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
@@ -123,15 +161,17 @@
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
         <div class="dropdown-container" id="Stamen">
             <a href="#" value="watercolor" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor</a>
-            <a href="#" value="terrain-labels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor Label</a>
+            <a href="#" value="terrain-labels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor
+                Label</a>
             <a href="#" value="toner" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Toner</a>
-            <a href="#" value="toner-lite" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Toner Lite</a>
+            <a href="#" value="toner-lite" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Toner
+                Lite</a>
             <a href="#" value="terrain" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain</a>
         </div>
         <!-- DEBUG -->
         <button class="default-button" id="Debug">
             <img style="vertical-align:middle" src="/img/debug.svg" class="svg icon">
-            <a href="#" value ="debug" style="vertical-align:middle" class="selected-debug">Debug</a>
+            <a href="#" value="debug" style="vertical-align:middle" class="selected-debug">Debug</a>
         </button>
         <!-- FILTER -->
         <button class="dropdown-btn">
