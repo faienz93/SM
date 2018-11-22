@@ -48,6 +48,7 @@ function map() {
     var layerSelected = $(this).attr("value");
     var groupIdHtml = $(this).parent().attr('id');
 
+  
 
     var groupSelected = getGroup(groupIdHtml);
     map.setLayerGroup(groupSelected);
@@ -70,7 +71,6 @@ function map() {
   $('.selected-debug').on("click", function () {
     var currentLayers = map.getLayers().getArray();   
     var currentLayer = getCurrentLayer(currentLayers);
-    console.log(currentLayer.getSource());
 
 
     var deb = debugLayer(currentLayer.getSource());
