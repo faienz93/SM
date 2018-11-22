@@ -20,13 +20,14 @@ function map() {
   map = new ol.Map({
 
     target: 'map',
+    renderer: 'webgl',
     // layers, // NOT DEFINED HERE
     // Improve user experience by loading tiles while animating. Will make
     // animations stutter on mobile or slow devices.
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
     view: new ol.View({
       center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
-      zoom: 12
+      zoom: 10
     })
   });
 
@@ -52,11 +53,12 @@ function map() {
     map.setLayerGroup(groupSelected);
     // var layers = map.getLayers().getArray();
     var layers = map.getLayers().array_;
+    console.log(layers.length);
     for (var i = 0; i < layers.length; ++i) {
       if (groupSelected.values_.title === "Bing") {
         layers[i].setVisible(bingStyles[i] === layerSelected);
-      } else if (groupSelected.values_.title === "Here") {
-        layers[i].setVisible(hereStyles[i].scheme === layerSelected);
+      } else if (groupSelected.values_.title === "Here") {       
+          layers[i].setVisible(hereStyles[i].scheme === layerSelected);        
       } else if (groupSelected.values_.title === "Stamen") {
         layers[i].setVisible(stamenStyles[i] === layerSelected);
       } else {
@@ -66,10 +68,6 @@ function map() {
   });
 
   $('.selected-debug').on("click", function () {
-    
-
-
-
     var currentLayers = map.getLayers().getArray();   
     var currentLayer = getCurrentLayer(currentLayers);
     console.log(currentLayer.getSource());
