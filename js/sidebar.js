@@ -47,21 +47,26 @@ function sidebar() {
                 // Else return to the previsulty style
                 $(this).prev().css("background","none");
                 $(this).prev().css("color","#818181");
-
             }
-
-            // var a = $(this).children('a');
-            // console.log(a);
           });
        
     });
 
-    var a = $(".dropdown-container").children('a').is(":focus");
-    console.log(a);
-    /* .dropdown-container > a:focus, .default-button > a:focus {
-    background-color: #ffff;
-    color: #000000;
-} */
+
+    // When i click on a element then you can color the item 
+    // and clear the last item
+    var lastClicked;
+    var a = $('.customSameStyle').find("a");
+    a.click(function(){
+        if(lastClicked!=undefined){
+            lastClicked.css("background","none");
+            lastClicked.css("color","#818181");
+        }
+        $(this).css("background","#ffff");
+        $(this).css("color","#000000");
+        lastClicked =  $(this);
+    })
+    
 
     // JAVSCRIPT - TODO DELETE
     // var dropdown = document.getElementsByClassName("dropdown-btn");

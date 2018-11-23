@@ -75,16 +75,8 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Emboss</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Edge</a>
-                        
-                    </div>
-                    <!-- <a href="#" value="none" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
-            <a href="#" value="sharpen" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
-            <a href="#" value="sharpenless" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpenless</a>
-            <a href="#" value="blur" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Blur</a>
-            <a href="#" value="shadow" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Shadow</a>
-            <a href="#" value="emboss" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
-            <a href="#" value="edge" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a> -->
+                        <a class="dropdown-item" href="#">Edge</a>                        
+                    </div>                   
                 </li>
                 <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
                 <li class="nav-item">
@@ -108,9 +100,8 @@
     <!-- <a href="#">OSM</a>https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
 
     <div id="mySidenav" class="sidenav">
-
         <!-- OSM -->
-        <button class="default-button" id="OSM">
+        <button class="default-button customSameStyle" id="OSM">
             <img style="vertical-align:middle" src="/img/osm.svg" class="svg icon">
             <a href="#" value="osm" style="vertical-align:middle" class="selected-layer">Default OSM</a>
             <!-- <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg"> -->
@@ -118,13 +109,13 @@
 
         <!-- HERE WeGO MAPS -->
         <!-- https://openlayers.org/en/latest/examples/here-maps.html -->
-        <button class="dropdown-btn" id="dropdown-here">
+        <button class="dropdown-btn customSameStyle" id="dropdown-here">
             <img style="vertical-align:middle" src="/img/here.svg" class="svg icon">
             <span style="vertical-align:middle">Here</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
-        <div class="dropdown-container" id="Here">
+        <div class="dropdown-container customSameStyle" id="Here">
             <a href="#" value="normal.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal
                 Day</a>
             <a href="#" value="normal.day.transit" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Normal
@@ -140,13 +131,13 @@
         </div>
 
         <!-- BING MAP -->
-        <button class="dropdown-btn" id="dropdown-bing">
+        <button class="dropdown-btn customSameStyle" id="dropdown-bing">
             <img style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
             <span style="vertical-align:middle">Bing Maps</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
-        <div class="dropdown-container" id="Bing">
+        <div class="dropdown-container customSameStyle" id="Bing">
             <a href="#" value="Aerial" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial</a>
             <a href="#" value="AerialWithLabels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Aerial
                 with labels</a>
@@ -162,13 +153,13 @@
 
         <!-- STAMEN -->
         <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
-        <button class="dropdown-btn" id="dropdown-stamen">
+        <button class="dropdown-btn customSameStyle" id="dropdown-stamen">
             <img style="vertical-align:middle" src="/img/stamen.svg" class="svg icon">
             <span style="vertical-align:middle">Stamen</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
-        <div class="dropdown-container" id="Stamen">
+        <div class="dropdown-container customSameStyle" id="Stamen">
             <a href="#" value="watercolor" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor</a>
             <a href="#" value="terrain-labels" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Watercolor
                 Label</a>
@@ -178,17 +169,17 @@
             <a href="#" value="terrain" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain</a>
         </div>
         <!-- DEBUG -->
-        <button class="default-button" id="debug">
+        <button class="default-button customSameStyle" id="debug">
             <img style="vertical-align:middle" src="/img/debug.svg" class="svg icon">
             <a href="#" value="debug" style="vertical-align:middle" class="selected-debug">Debug</a>
         </button>
         <!-- FILTER -->
-        <button class="dropdown-btn" id="dropdown-filter">
+        <button class="dropdown-btn customSameStyle" id="dropdown-filter">
             <img style="vertical-align:middle" src="/img/filter-tool-black-shape.svg" class="svg icon">
             <span style="vertical-align:middle">Filter</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
         </button>
-        <div class="dropdown-container" id="filter">
+        <div class="dropdown-container customSameStyle" id="filter">
             <a href="#" value="none" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
             <a href="#" value="sharpen" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
             <a href="#" value="sharpenless" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpenless</a>
