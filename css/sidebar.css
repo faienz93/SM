@@ -69,12 +69,22 @@ body {
     padding-left: 25px;
 }
 
-.dropdown-container > a:focus, .default-button > a:focus {
+/* .dropdown-container > a:focus, .default-button > a:focus {
     background-color: #ffff;
     color: #000000;
+} */
+
+/*
+ * Define style of alert message
+ */
+.alert-fixed {
+    position:fixed; 
+    top: 0px; 
+    left: 0px; 
+    width: 100%;
+    z-index:9999; 
+    border-radius:0px
 }
-
-
 
 /* Optional: Style the caret down icon */
 .fa-caret-down {

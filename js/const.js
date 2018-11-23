@@ -13,6 +13,8 @@
  */
 var map;
 
+var initialCoordinatesMap = [11.327591, 44.498955];  // LONGITUDE - LATITUDE BOLOGNA
+
 /**
  * Array that contains all layers
  */

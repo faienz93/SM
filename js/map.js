@@ -18,7 +18,6 @@ function map() {
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
-
     target: 'map',
     renderer: 'webgl',
     // layers, // NOT DEFINED HERE
@@ -26,7 +25,7 @@ function map() {
     // animations stutter on mobile or slow devices.
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
     view: new ol.View({
-      center: ol.proj.fromLonLat([11.327591, 44.498955]), // Longitude and Latitude 
+      center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
       zoom: 10
     })
   });
@@ -35,6 +34,14 @@ function map() {
   // to maintain the same approach of access to the layers
   var osm = getGroup("OSM");
   map.setLayerGroup(osm);
+
+  // $(".default-button > a:focus").focus(function () {
+  //   $("div#mainTitle").css("border", "1px solid #ccc");
+  // });
+
+  // $("input#title").blur(function () {
+  //   $("div#mainTitle").css("border", "");
+  // });
 
 
   var layers = map.getLayers().array_;
@@ -48,7 +55,7 @@ function map() {
     var layerSelected = $(this).attr("value");
     var groupIdHtml = $(this).parent().attr('id');
 
-  
+
 
     var groupSelected = getGroup(groupIdHtml);
     map.setLayerGroup(groupSelected);
@@ -58,8 +65,8 @@ function map() {
     for (var i = 0; i < layers.length; ++i) {
       if (groupSelected.values_.title === "Bing") {
         layers[i].setVisible(bingStyles[i] === layerSelected);
-      } else if (groupSelected.values_.title === "Here") {       
-          layers[i].setVisible(hereStyles[i].scheme === layerSelected);        
+      } else if (groupSelected.values_.title === "Here") {
+        layers[i].setVisible(hereStyles[i].scheme === layerSelected);
       } else if (groupSelected.values_.title === "Stamen") {
         layers[i].setVisible(stamenStyles[i] === layerSelected);
       } else {
@@ -69,16 +76,10 @@ function map() {
   });
 
   $('.selected-debug').on("click", function () {
-    var currentLayers = map.getLayers().getArray();   
+    var currentLayers = map.getLayers().getArray();
     var currentLayer = getCurrentLayer(currentLayers);
-
-
     var deb = debugLayer(currentLayer.getSource());
     map.getLayers().getArray().push(deb);
-
-
-
-
   });
 
 
@@ -97,14 +98,14 @@ function map() {
   // Setting filter 
   for (var i = 0; i < groupsMap.length; i++) {
     var layers = groupsMap[i].values_.layers.array_;
-      
+
     //  This function allows to apply a filter based on a matrix and methods defined
     //  inside filtersMap.js It is called the first time at the begin of 
     //  map (with default value) and then for every change it reload a new Filter.
     //  In this case it is "instantiate" for the first time for every layers even if 
     //  it has not visible
     //  REF: https://openlayers.org/en/latest/examples/image-filter.html
-       
+
     for (var j = 0; j < layers.length; j++) {
       layers[j].on('postcompose', function (event) {
         convolve(event.context, selectedKernel);
@@ -261,8 +262,8 @@ function getGroup(n) {
  * @method getCurrentLayer
  * @param arrayLayers {Object} - contains all layer of specific group 
  */
-function getCurrentLayer(arrayLayers) {    
-    return arrayLayers.find(o => o.state_.visible === true);   
+function getCurrentLayer(arrayLayers) {
+  return arrayLayers.find(o => o.state_.visible === true);
 }
 
 
