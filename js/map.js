@@ -35,13 +35,7 @@ function map() {
   var osm = getGroup("OSM");
   map.setLayerGroup(osm);
 
-  // $(".default-button > a:focus").focus(function () {
-  //   $("div#mainTitle").css("border", "1px solid #ccc");
-  // });
 
-  // $("input#title").blur(function () {
-  //   $("div#mainTitle").css("border", "");
-  // });
 
 
   var layers = map.getLayers().array_;
@@ -80,6 +74,7 @@ function map() {
     var currentLayer = getCurrentLayer(currentLayers);
     var deb = debugLayer(currentLayer.getSource());
     map.getLayers().getArray().push(deb);
+    alertMessage("Zoom in, Zoom out to see the tiles", "info");
   });
 
 

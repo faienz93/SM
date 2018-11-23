@@ -14,5 +14,5 @@ $(document).ready(function () {
   sidebar();
 
   // Setting the map 
-  map();
+  // map(); TEMPORANEAMENTE COMMENTATO
 });

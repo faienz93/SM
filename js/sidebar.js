@@ -1,5 +1,3 @@
-
-
 /**
  * ===========================================================================
  * File: Sidebar.js 
@@ -33,14 +31,37 @@ function sidebar() {
     //Loop through all dropdown buttons to toggle between hiding and showing its dropdown content
     //This allows the user to have multiple dropdowns without any conflict 
     //REF: https://www.w3schools.com/howto/howto_js_dropdown_sidenav.asp    
-
     // JQUERY
     var dropdown = $(".dropdown-btn");
     dropdown.click(function (event) {
-        var container = $(this).next()
-        container.slideToggle();
+        var container = $(this).next();
+
+        // open and close the sibling of the current menù
+        container.slideToggle("slow", function() { 
+            var isVisible = container.is(":visible");
+            if(isVisible){
+                // if visible change layout
+                $(this).prev().css("background","#ffff");
+                $(this).prev().css("color","#000000");
+            }else {
+                // Else return to the previsulty style
+                $(this).prev().css("background","none");
+                $(this).prev().css("color","#818181");
+
+            }
+
+            // var a = $(this).children('a');
+            // console.log(a);
+          });
+       
     });
 
+    var a = $(".dropdown-container").children('a').is(":focus");
+    console.log(a);
+    /* .dropdown-container > a:focus, .default-button > a:focus {
+    background-color: #ffff;
+    color: #000000;
+} */
 
     // JAVSCRIPT - TODO DELETE
     // var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -59,15 +80,7 @@ function sidebar() {
     // }
 
 
-    dropdown.focus( function() {
-        $(this).css("background-color","#ffff");
-        $(this).css("color","#000000");
-    });
 
-    // DEBUG 
-    $("#debug").click(function(){
-        alertMessage("Zoom in, Zoom out to see the tiles", "info");
-    })
 
 
 
