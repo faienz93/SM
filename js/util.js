@@ -58,3 +58,37 @@ function createUrl(tpl, layerDesc) {
       .replace('{app_id}', layerDesc.app_id)
       .replace('{app_code}', layerDesc.app_code);
   }
+
+
+
+  /**
+ * This function create an Alert Bootsrap
+ * 
+ * @method alertMessage
+ * @param {*} message the message that appear
+ * @param {*} type there are different type of alert:
+ *                  @danger
+ *                  @warning
+ *                  @info
+ *                  and other: https://getbootstrap.com/docs/4.0/components/alerts/
+ */
+function alertMessage(message, type = "primary") {
+    var br = document.createElement("br");
+    var div = document.createElement("div");
+    div.setAttribute("class", "alert alert-" + type + " text-center alert-fixed");
+    div.setAttribute("role", "alert");
+    div.innerHTML = "<strong>" + message + "</strong>";
+
+    document.getElementById("main").appendChild(br);
+    document.getElementById("main").appendChild(div);
+
+    // Auto close alert
+    // REF:https://codepen.io/CSWApps/pen/XJoLmN
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 4000);
+
+    br.remove();
+}

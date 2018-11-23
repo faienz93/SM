@@ -5,6 +5,15 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Mobile System</title>
+    <meta name="description" content="In this view you can see the map ">
+    <meta name="author" content="Antonio Faienza">
+
+    <!-- Failed to load resource: the server responded with a status of 404 (NOT FOUND) favicon
+    REF: https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
+    <link rel="shortcut icon" href="#" />
+
     <!-- OpenLayers CSS -->
     <link rel="stylesheet" href="lib/OpenLayers/ol.css" type="text/css">
 
@@ -23,9 +32,7 @@
     <!-- Main Style -->
     <link rel="stylesheet" href="css/mainMap.css">
 
-    <title>Mobile System</title>
-    <meta name="description" content="In this view you can see the map ">
-    <meta name="author" content="Antonio Faienza">
+
 </head>
 
 <body>
@@ -90,14 +97,11 @@
 
         </div>
     </nav>
-    <!-- ----------------------- -->
-    <!-- --- /NavBar bootstrap--- -->
-    <!-- ----------------------- -->
+
 
     <!-- -------------------------------------------------------- -->
     <!-- ------------------- Sidebar bootstrap ------------------ -->
     <!-- -------------------------------------------------------- -->
-
 
     <!-- <a href="#">Filters</a> https://openlayers.org/en/latest/examples/image-filter.html -->
     <!-- <a href="#">Canvas</a>https://openlayers.org/en/latest/examples/canvas-tiles.html -->
@@ -105,6 +109,7 @@
 
     <div id="mySidenav" class="sidenav">
 
+        <!-- OSM -->
         <button class="default-button" id="OSM">
             <img style="vertical-align:middle" src="/img/osm.svg" class="svg icon">
             <a href="#" value="osm" style="vertical-align:middle" class="selected-layer">Default OSM</a>
@@ -113,7 +118,7 @@
 
         <!-- HERE WeGO MAPS -->
         <!-- https://openlayers.org/en/latest/examples/here-maps.html -->
-        <button class="dropdown-btn">
+        <button class="dropdown-btn" id="dropdown-here">
             <img style="vertical-align:middle" src="/img/here.svg" class="svg icon">
             <span style="vertical-align:middle">Here</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
@@ -135,7 +140,7 @@
         </div>
 
         <!-- BING MAP -->
-        <button class="dropdown-btn">
+        <button class="dropdown-btn" id="dropdown-bing">
             <img style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
             <span style="vertical-align:middle">Bing Maps</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
@@ -157,7 +162,7 @@
 
         <!-- STAMEN -->
         <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
-        <button class="dropdown-btn">
+        <button class="dropdown-btn" id="dropdown-stamen">
             <img style="vertical-align:middle" src="/img/stamen.svg" class="svg icon">
             <span style="vertical-align:middle">Stamen</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
@@ -173,12 +178,12 @@
             <a href="#" value="terrain" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain</a>
         </div>
         <!-- DEBUG -->
-        <button class="default-button" id="Debug">
+        <button class="default-button" id="debug">
             <img style="vertical-align:middle" src="/img/debug.svg" class="svg icon">
             <a href="#" value="debug" style="vertical-align:middle" class="selected-debug">Debug</a>
         </button>
         <!-- FILTER -->
-        <button class="dropdown-btn">
+        <button class="dropdown-btn" id="dropdown-filter">
             <img style="vertical-align:middle" src="/img/filter-tool-black-shape.svg" class="svg icon">
             <span style="vertical-align:middle">Filter</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
