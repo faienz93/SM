@@ -142,7 +142,7 @@ svg path {
 } */
 
 
-.customSameStyle:hover {
+.dropdown-btn:hover, .default-button:hover {
     background-color: #000000;
 }
 

@@ -29,5 +29,22 @@
   color: rgba(255,255,255,1) !important;  
 }
 
+/* .dropdown-menu show */
 
 
+.dropdown-menu {
+  background-color: #262626;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin: 0 auto;
+  align-items:center;
+}
+
+.dropdown-menu > a{
+  color: #818181;
+}
+.dropdown-menu > a:hover {
+  /* background: "none"; */
+  color: #f1f1f1 !important;
+  padding-left: 25px !important;
+}
