@@ -11,6 +11,11 @@
  */
 function sidebar() {
 
+   
+
+    
+
+
     // When click on the hamburger icon (Thanks the appropriate library) it open and close the 
     // sidebar
     $('#hambergerButton').click(function () {
@@ -28,6 +33,21 @@ function sidebar() {
     });
 
 
+    $('.sidenav a').css('color', '#818181');
+    $('.dropdown-btn').css('color', '#818181');
+    $('.default-button').css('color', '#818181');
+
+
+
+    // $(".dropdown-btn, .default-button").mouseover(function() {
+    //     $(this).css("background-color","#c9c9c9");
+    // }).mouseout(function() {
+    //     $(this).css("background-color","transparent");
+    // });
+   
+
+    $('.sidebar-divider').css('border-top', '1px solid #818181');
+
     //Loop through all dropdown buttons to toggle between hiding and showing its dropdown content
     //This allows the user to have multiple dropdowns without any conflict 
     //REF: https://www.w3schools.com/howto/howto_js_dropdown_sidenav.asp    
@@ -41,7 +61,7 @@ function sidebar() {
             var isVisible = container.is(":visible");
             if(isVisible){
                 // if visible change layout
-                $(this).prev().css("background","#ffff");
+                $(this).prev().css("background","#c9c9c9");
                 $(this).prev().css("color","#000000");
             }else {
                 // Else return to the previsulty style
@@ -62,7 +82,7 @@ function sidebar() {
             lastClicked.css("background","none");
             lastClicked.css("color","#818181");
         }
-        $(this).css("background","#ffff");
+        $(this).css("background","#c9c9c9");
         $(this).css("color","#000000");
         lastClicked =  $(this);
     })

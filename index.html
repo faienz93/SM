@@ -63,19 +63,19 @@
                         Filter
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">None</a>
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Sharpen</a>
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Sharpenless</a>
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpenless</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Blur</a>
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Blur</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Shadow</a>
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Shadow</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Emboss</a>
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Edge</a>                        
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>                        
                     </div>                   
                 </li>
                 <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
@@ -100,13 +100,20 @@
     <!-- <a href="#">OSM</a>https://openlayers.org/en/latest/examples/vector-osm.html?q=OSM -->
 
     <div id="mySidenav" class="sidenav">
+        <!-- ADD IMAGE TO SIDEBAR -->
+        <div class="header-sidebar">
+            <img src="/img/openlayersLogo.png">
+        </div>   
+
+        <div class="sidebar-divider"></div>
+
         <!-- OSM -->
         <button class="default-button customSameStyle" id="OSM">
             <img style="vertical-align:middle" src="/img/osm.svg" class="svg icon">
             <a href="#" value="osm" style="vertical-align:middle" class="selected-layer">Default OSM</a>
             <!-- <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg"> -->
         </button>
-
+        <div class="sidebar-divider"></div>
         <!-- HERE WeGO MAPS -->
         <!-- https://openlayers.org/en/latest/examples/here-maps.html -->
         <button class="dropdown-btn customSameStyle" id="dropdown-here">
@@ -130,6 +137,8 @@
                 Day</a>
         </div>
 
+        <div class="sidebar-divider"></div>
+        
         <!-- BING MAP -->
         <button class="dropdown-btn customSameStyle" id="dropdown-bing">
             <img style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
@@ -148,9 +157,7 @@
             <!-- <a href="#" value="collinsBart" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Collins Bart</a> -->
             <!-- <a href="#" value="ordnanceSurvey" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Ordnance Survey</a> -->
         </div>
-
-
-
+        <div class="sidebar-divider"></div>
         <!-- STAMEN -->
         <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
         <button class="dropdown-btn customSameStyle" id="dropdown-stamen">
@@ -168,13 +175,15 @@
                 Lite</a>
             <a href="#" value="terrain" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Terrain</a>
         </div>
+        <div class="sidebar-divider"></div>
         <!-- DEBUG -->
         <button class="default-button customSameStyle" id="debug">
             <img style="vertical-align:middle" src="/img/debug.svg" class="svg icon">
             <a href="#" value="debug" style="vertical-align:middle" class="selected-debug">Debug</a>
         </button>
+        <div class="sidebar-divider"></div>
         <!-- FILTER -->
-        <button class="dropdown-btn customSameStyle" id="dropdown-filter">
+        <!-- <button class="dropdown-btn customSameStyle" id="dropdown-filter">
             <img style="vertical-align:middle" src="/img/filter-tool-black-shape.svg" class="svg icon">
             <span style="vertical-align:middle">Filter</span>
             <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
@@ -187,7 +196,7 @@
             <a href="#" value="shadow" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Shadow</a>
             <a href="#" value="emboss" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
             <a href="#" value="edge" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>
-        </div>
+        </div> -->
 
 
     </div>

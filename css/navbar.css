@@ -29,13 +29,17 @@
   color: rgba(255,255,255,1) !important;  
 }
 
-/* .dropdown-menu show */
+/* remove focus after click */
+.hamburger:focus {
+  outline: none;
+}
 
 
 .dropdown-menu {
   background-color: #262626;
   padding-left: 8px;
   padding-right: 8px;
+  width: 200px;
   margin: 0 auto;
   align-items:center;
 }
@@ -44,7 +48,7 @@
   color: #818181;
 }
 .dropdown-menu > a:hover {
-  /* background: "none"; */
+  background-color: "none" !important;
   color: #f1f1f1 !important;
   padding-left: 25px !important;
 }
