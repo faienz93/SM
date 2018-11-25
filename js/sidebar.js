@@ -11,11 +11,6 @@
  */
 function sidebar() {
 
-   
-
-    
-
-
     // When click on the hamburger icon (Thanks the appropriate library) it open and close the 
     // sidebar
     $('#hambergerButton').click(function () {
@@ -39,11 +34,9 @@ function sidebar() {
 
 
 
-    // $(".dropdown-btn, .default-button").mouseover(function() {
-    //     $(this).css("background-color","#c9c9c9");
-    // }).mouseout(function() {
-    //     $(this).css("background-color","transparent");
-    // });
+    $(".dropdown-btn, .default-button").hover(function(e) { 
+        $(this).css("background",e.type === "mouseenter"?"#c9c9c9":"transparent") 
+    })
    
 
     $('.sidebar-divider').css('border-top', '1px solid #818181');
