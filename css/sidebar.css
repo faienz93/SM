@@ -12,6 +12,8 @@
 body {
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
+    /* height: 100%;
+    overflow: hidden; */
 }
 
 /* Fixed sidenav, full height */
@@ -25,6 +27,7 @@ body {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
+  
     /* padding-top: 70px; */
 }
 /* Remove focus after click */
@@ -66,6 +69,7 @@ body {
     display: none;
     background-color: #262626;
     padding-left: 8px;
+    padding-right: 8px;
     margin: 0 auto;
     align-items:center;
 }
@@ -135,7 +139,7 @@ svg path {
 .sidebar-divider {
     display: block;
     margin: auto;
-    height: 0px;
+    height: 5px;
     width: 90%;
     /* margin: .5rem 0; */
     overflow: hidden;
