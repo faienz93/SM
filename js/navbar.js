@@ -16,16 +16,11 @@ function navbar(){
         $(this).toggleClass('is-active');
         var checkClass = $("#hambergerButton").hasClass('is-active');
         if (checkClass) {
-            // $("#mySidenav").css("width", "250px");
-            // $("#main").css("marginLeft", "250px");
-            // $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
             $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
             $('#sidebar').toggleClass('active');
         
            
         } else {
-            // $("#mySidenav").css("width", "0");
-            // $("#main").css("marginLeft", "0");
             $("body").css("backgroundColor", "white");
             $('#sidebar').toggleClass('active');
           
@@ -33,16 +28,19 @@ function navbar(){
         }
     });
 
-
-
-    var lastClicked;
-    var a = $('.select-specific > li');  
-    lastClicked = a;
-    a.click(function(){
-        if(lastClicked!==undefined){
-            lastClicked.removeClass('active');     
+     
+    var lastClickedFilter;
+    var filter = $('.dropdown-menu').find('a');
+    lastClickedFilter = filter;
+    filter.click(function(){
+        if(lastClickedFilter != undefined){
+            lastClickedFilter.removeClass('active'); 
         }
-        $(this).addClass('active');        
-        lastClicked =  $(this);
-    })
+        $(this).addClass('active'); 
+        lastClickedFilter = $(this);
+    });
+
+
+
+    
 }
