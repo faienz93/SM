@@ -10,6 +10,9 @@
 
 $(document).ready(function () {
 
+  // Setting navbar
+  navbar();
+  
   // Setting the sidebar
   sidebar();
 

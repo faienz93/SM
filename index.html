@@ -54,13 +54,11 @@
             </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                        
-                        <!-- <span style="vertical-align:middle">Filter</span>
-                        <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg"> -->
+                     <!-- Filter -->
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <img src="/img/filter-tool-black-shape.svg" class="svg icon">
-                        Filter
+                        <img src="/img/filter-tool-black-shape.svg" class="svg icon-nav">
+                        <span>Filter</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
@@ -75,8 +73,8 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>                        
-                    </div>                   
+                        <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>
+                    </div>
                 </li>
                 <!-- REF https://stackoverflow.com/a/40193892/4700162 -->
                 <li class="nav-item">
@@ -103,23 +101,23 @@
         <!-- ADD IMAGE TO SIDEBAR -->
         <div class="header-sidebar">
             <img src="/img/openlayersLogo.png">
-        </div>   
+        </div>
 
         <div class="sidebar-divider"></div>
 
         <!-- OSM -->
         <button class="default-button customSameStyle" id="OSM">
-            <img style="vertical-align:middle" src="/img/osm.svg" class="svg icon">
-            <a href="#" value="osm" style="vertical-align:middle" class="selected-layer">Default OSM</a>
-            <!-- <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg"> -->
+            <img src="/img/osm.svg" class="svg icon">
+            <a href="#" value="osm" class="selected-layer">Default OSM</a>
+            <!-- <img   class="svg arrow-right" src="/img/sort-down.svg"> -->
         </button>
         <div class="sidebar-divider"></div>
         <!-- HERE WeGO MAPS -->
         <!-- https://openlayers.org/en/latest/examples/here-maps.html -->
         <button class="dropdown-btn customSameStyle" id="dropdown-here">
-            <img style="vertical-align:middle" src="/img/here.svg" class="svg icon">
-            <span style="vertical-align:middle">Here</span>
-            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+            <img src="/img/here.svg" class="svg icon">
+            <span>Here</span>
+            <img class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
         <div class="dropdown-container customSameStyle" id="Here">
@@ -136,14 +134,12 @@
             <a href="#" value="hybrid.day" class="selected-layer"><img src="/img/right-arrow.svg" class="svg arrow-left">Hybrid
                 Day</a>
         </div>
-
         <div class="sidebar-divider"></div>
-        
         <!-- BING MAP -->
         <button class="dropdown-btn customSameStyle" id="dropdown-bing">
-            <img style="vertical-align:middle" src="/img/bing.svg" class="svg icon">
-            <span style="vertical-align:middle">Bing Maps</span>
-            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+            <img src="/img/bing.svg" class="svg icon">
+            <span>Bing Maps</span>
+            <img class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
         <div class="dropdown-container customSameStyle" id="Bing">
@@ -161,9 +157,9 @@
         <!-- STAMEN -->
         <!-- https://openlayers.org/en/latest/examples/stamen.html?q=OSM -->
         <button class="dropdown-btn customSameStyle" id="dropdown-stamen">
-            <img style="vertical-align:middle" src="/img/stamen.svg" class="svg icon">
-            <span style="vertical-align:middle">Stamen</span>
-            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+            <img src="/img/stamen.svg" class="svg icon">
+            <span>Stamen</span>
+            <img class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <!-- https://stackoverflow.com/questions/26494493/multiple-dropdown-menus-slide-toggle -->
         <div class="dropdown-container customSameStyle" id="Stamen">
@@ -178,15 +174,15 @@
         <div class="sidebar-divider"></div>
         <!-- DEBUG -->
         <button class="default-button customSameStyle" id="debug">
-            <img style="vertical-align:middle" src="/img/debug.svg" class="svg icon">
-            <a href="#" value="debug" style="vertical-align:middle" class="selected-debug">Debug</a>
+            <img src="/img/debug.svg" class="svg icon">
+            <a href="#" value="debug" class="selected-debug">Debug</a>
         </button>
         <div class="sidebar-divider"></div>
         <!-- FILTER -->
         <!-- <button class="dropdown-btn customSameStyle" id="dropdown-filter">
-            <img style="vertical-align:middle" src="/img/filter-tool-black-shape.svg" class="svg icon">
-            <span style="vertical-align:middle">Filter</span>
-            <img style="vertical-align:middle" class="svg arrow-right" src="/img/sort-down.svg">
+            <img src="/img/filter-tool-black-shape.svg" class="svg icon">
+            <span>Filter</span>
+            <img class="svg arrow-right" src="/img/sort-down.svg">
         </button>
         <div class="dropdown-container customSameStyle" id="filter">
             <a href="#" value="none" class="selected-filter"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
@@ -220,6 +216,7 @@
     <script src="js/const.js" crossorigin="anonymous"></script>
     <script src="js/util.js" crossorigin="anonymous"></script>
     <script src="js/init.js" crossorigin="anonymous"></script>
+    <script src="js/navbar.js" crossorigin="anonymous"></script>
     <script src="js/sidebar.js" crossorigin="anonymous"></script>
     <script src="js/map.js" crossorigin="anonymous"></script>
 

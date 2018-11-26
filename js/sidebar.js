@@ -11,35 +11,7 @@
  */
 function sidebar() {
 
-    // When click on the hamburger icon (Thanks the appropriate library) it open and close the 
-    // sidebar
-    $('#hambergerButton').click(function () {
-        $(this).toggleClass('is-active');
-        var checkClass = $("#hambergerButton").hasClass('is-active');
-        if (checkClass) {
-            $("#mySidenav").css("width", "250px");
-            $("#main").css("marginLeft", "250px");
-            $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
-        } else {
-            $("#mySidenav").css("width", "0");
-            $("#main").css("marginLeft", "0");
-            $("body").css("backgroundColor", "white");
-        }
-    });
-
-
-    $('.sidenav a').css('color', '#818181');
-    $('.dropdown-btn').css('color', '#818181');
-    $('.default-button').css('color', '#818181');
-
-
-
-    $(".dropdown-btn, .default-button").hover(function(e) { 
-        $(this).css("background",e.type === "mouseenter"?"#c9c9c9":"transparent") 
-    })
    
-
-    $('.sidebar-divider').css('border-top', '1px solid #818181');
 
     //Loop through all dropdown buttons to toggle between hiding and showing its dropdown content
     //This allows the user to have multiple dropdowns without any conflict 
@@ -70,16 +42,22 @@ function sidebar() {
     // and clear the last item
     var lastClicked;
     var a = $('.customSameStyle').find("a");
+    // Set OSM as Default choice
+    a.first().css("background","#c9c9c9");
+    a.first().css("color","#000000");
+    lastClicked = a;
     a.click(function(){
         if(lastClicked!=undefined){
             lastClicked.css("background","none");
-            lastClicked.css("color","#818181");
+            lastClicked.css("color","#818181");           
         }
         $(this).css("background","#c9c9c9");
-        $(this).css("color","#000000");
+        $(this).css("color","#000000");        
         lastClicked =  $(this);
     })
     
+    
+
 
     // JAVSCRIPT - TODO DELETE
     // var dropdown = document.getElementsByClassName("dropdown-btn");

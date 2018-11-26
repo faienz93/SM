@@ -22,7 +22,7 @@ body {
     width: 250px; /* TODO METTERLO A 0*/
     position: absolute;
     z-index: 1;
-    top: 76px;
+    top: 72px;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -30,6 +30,7 @@ body {
   
     /* padding-top: 70px; */
 }
+
 /* Remove focus after click */
 .sidenav > *:focus {
     outline: none;
@@ -46,7 +47,7 @@ body {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 20px;
-    /* color: #818181; */
+    color: #818181;
     display: block;
     border: none;
     background: none;
@@ -56,12 +57,16 @@ body {
     outline: none;
 }
 
-/* Add an active class to the active dropdown button */
+.dropdown-btn > * {
+ 
+    display:inline-block;
+    vertical-align:middle;
+    line-height:40px;   
+}
 
-/* .active {
-    background-color: #000000;
-    color: white;
-} */
+
+
+
 
 /* Dropdown container (hidden by default). Optional: add a lighter background
    color and some left padding to change the design of the dropdown content */
@@ -77,6 +82,7 @@ body {
 .dropdown-container > a:hover {
     color: #f1f1f1;
     padding-left: 25px;
+
 }
 
 
@@ -98,14 +104,17 @@ body {
 
 
 /* Style of Icon SVG  */
-.arrow-right, .arrow-left {
+.arrow-right, .arrow-left { 
     width: 24px;
     height: 24px;
 }
 
 .arrow-right {
-    float: right;
-    padding-right: 8px;    
+    top: 50px !important;
+    display: inline-block;
+    /* vertical-align: middle; */
+    padding-right: 8px; 
+    float: right;   
 }
 
 .arrow-left {
@@ -117,8 +126,8 @@ body {
     float: left;
     padding-left: 8px; 
     padding-right: 8px; 
-    width: 42px;
-    height: 42px;
+    width: 45px;
+    height: 45px;
 }
 
 svg path {
@@ -131,19 +140,19 @@ svg path {
 } */
 
 
-/* .dropdown-btn:hover, .default-button:hover {
+.dropdown-btn:hover, .default-button:hover {
     background-color: #c9c9c9;
-} */
+}
 
 /* Divider from item of sidebar */
 .sidebar-divider {
     display: block;
     margin: auto;
-    height: 5px;
+    height: 2px;
     width: 90%;
     /* margin: .5rem 0; */
     overflow: hidden;
-    /* border-top: 1px solid #818181; */
+    border-top: 1px solid #818181;
 }
 
 @media screen and (max-height: 450px) {
