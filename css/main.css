@@ -6,12 +6,7 @@
  * ===========================================================================
  */
 
-/* #main {
-    transition: margin-left .5s;
-    padding: 16px;
-} */
 
-/* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
 
 body {
     font-family: "Lato", sans-serif;
@@ -43,6 +38,17 @@ a, a:hover, a:focus {
 
 i, span {
     display: inline-block;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    /* padding: 20px; */
+    min-height: 100vh;
+    transition: all 0.3s;
 }
 
 /* ---------------------------------------------------
