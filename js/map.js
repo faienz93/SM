@@ -49,12 +49,15 @@ function map() {
     var layerSelected = $(this).attr("value");
     var groupIdHtml = $(this).parent().attr('id');
 
+    console.log(layerSelected);
+    console.log(groupIdHtml);
 
 
-    var groupSelected = getGroup(groupIdHtml);
+    var groupSelected = getGroup(groupIdHtml); 
     map.setLayerGroup(groupSelected);
     // var layers = map.getLayers().getArray();
     var layers = map.getLayers().array_;
+    console.log(layers);
     console.log(layers.length);
     for (var i = 0; i < layers.length; ++i) {
       if (groupSelected.values_.title === "Bing") {
