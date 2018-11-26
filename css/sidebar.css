@@ -89,7 +89,7 @@ body {
 
 
 /* Optional: Style the caret down icon */
-.fa-caret-down {
+/* .fa-caret-down {
     float: right;
     padding-right: 8px;
 }
@@ -100,39 +100,26 @@ body {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
-}
+} */
 
 
 /* Style of Icon SVG  */
-.arrow-right, .arrow-left { 
+/* .arrow-right, .arrow-left { 
     width: 24px;
     height: 24px;
-}
+} */
 
-.arrow-right {
+/* .arrow-right {
     top: 50px !important;
     display: inline-block;
-    /* vertical-align: middle; */
+    vertical-align: middle;
     padding-right: 8px; 
     float: right;   
-}
+} */
 
-.arrow-left {
-    float: left;
-    padding-right: 8px;    
-}
 
-.icon {
-    float: left;
-    padding-left: 8px; 
-    padding-right: 8px; 
-    width: 45px;
-    height: 45px;
-}
 
-svg path {
-    fill: #818181 !important;
-}
+
 
 
 /* svg:hover path {

@@ -28,3 +28,31 @@
     z-index: 9999;
     border-radius: 0px
 }
+
+
+/* ---------------------------------------------------
+    STYLE ICON SVG
+----------------------------------------------------- */
+.icon {
+    display: inline-block;
+    font-size: inherit;
+    /* height: 1em; */
+    overflow: visible;
+    vertical-align: -.125em;
+    padding-left: 8px; 
+    padding-right: 8px; 
+    width: 45px;
+    height: 45px;
+}
+
+svg path {
+    fill: #818181 !important;
+}
+
+
+.arrow-left {
+    float: left;
+    width: 24px;
+    height: 24px;
+    padding-right: 8px;    
+}
