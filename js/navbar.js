@@ -36,11 +36,9 @@ function navbar(){
 
 
     var lastClicked;
-    var a = $('.select-specific > li');
-  
+    var a = $('.select-specific > li');  
     lastClicked = a;
     a.click(function(){
-        console.log(this.innerText)
         if(lastClicked!==undefined){
             lastClicked.removeClass('active');     
         }
