@@ -92,6 +92,13 @@ svg path {
     fill: #818181 !important;
 }
 
+.icon-nav {
+    /* float: left; */
+      padding-left: 8px; 
+      /* padding-right: 8px;  */
+      width: 35px;
+      height: 35px;
+  }
 
 .arrow-left {
     float: left;
