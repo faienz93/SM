@@ -79,8 +79,8 @@ function alertMessage(message, type = "primary") {
     div.setAttribute("role", "alert");
     div.innerHTML = "<strong>" + message + "</strong>";
 
-    document.getElementById("main").appendChild(br);
-    document.getElementById("main").appendChild(div);
+    document.getElementById("map").appendChild(br);
+    document.getElementById("map").appendChild(div);
 
     // Auto close alert
     // REF:https://codepen.io/CSWApps/pen/XJoLmN
