@@ -43,20 +43,28 @@ function sidebar() {
     var lastClicked;
     var a = $('.customSameStyle').find("a");
     // Set OSM as Default choice
-    a.first().css("background","#c9c9c9");
-    a.first().css("color","#000000");
+    // a.first().css("background","#c9c9c9");
+    // a.first().css("color","#000000");
     lastClicked = a;
     a.click(function(){
-        if(lastClicked!=undefined){
-            lastClicked.css("background","none");
-            lastClicked.css("color","#818181");           
+        if(lastClicked!=undefined){              
+            lastClicked.removeClass('active');        
         }
-        $(this).css("background","#c9c9c9");
-        $(this).css("color","#000000");        
+          
+        $(this).addClass('active');      
         lastClicked =  $(this);
     })
     
-    
+    var lastClickedFilter;
+    var filter = $('.dropdown-menu').find('a');
+    lastClickedFilter = filter;
+    filter.click(function(){
+        if(lastClickedFilter != undefined){
+            lastClickedFilter.removeClass('active'); 
+        }
+        $(this).addClass('active'); 
+        lastClickedFilter = $(this);
+    });
 
 
     // JAVSCRIPT - TODO DELETE
