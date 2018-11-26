@@ -6,10 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>Mobile System</title>
+    <meta name="description" content="In this view you can see the map ">
+    <meta name="author" content="Antonio Faienza">
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Failed to load resource: the server responded with a status of 404 (NOT FOUND) favicon
+    REF: https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
+    <link rel="shortcut icon" href="#" />
+
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="lib/OpenLayers/ol.css" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+
+      <!-- Hamberger library REF: https://jonsuh.com/hamburgers/ -->
+      <link href="css/hamburger/hamburgers.css" rel="stylesheet">
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -150,11 +163,16 @@
                 <!-- Page Content  -->
                 <div id="content">                              
                     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-                        <div class="container-fluid">        
-                            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <div class="container-fluid">  
+                                <button id="hambergerButton" class="hamburger hamburger--collapse" type="button">
+                                        <span class="hamburger-box">
+                                            <span class="hamburger-inner"></span>
+                                        </span>
+                                    </button>      
+                            <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
                                 <svg class="svg-inline--fa fa-align-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="align-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M288 44v40c0 8.837-7.163 16-16 16H16c-8.837 0-16-7.163-16-16V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16zM0 172v40c0 8.837 7.163 16 16 16h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16zm16 312h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm256-200H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16z"></path></svg>
                                 <span>Toggle Sidebar</span>
-                            </button>                             
+                            </button>                              -->
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <!-- https://stackoverflow.com/a/34067547/4700162 -->
                                 <form class="form-inline my-2 ml-auto">
@@ -162,6 +180,29 @@
                                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                                 </form>
                                 <ul class="nav navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                                <!-- Filter -->
+                                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                   aria-haspopup="true" aria-expanded="false">
+                                                   <!-- <img src="/img/filter-tool-black-shape.svg" class="svg icon-nav"> -->
+                                                   <span>Filter</span>
+                                               </a>
+                                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">None</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Sharpenless</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Blur</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Shadow</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Emboss</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" class="dropdown-item"><img src="/img/right-arrow.svg" class="svg arrow-left">Edge</a>
+                                               </div>
+                                           </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Sign Up</a>
                                     </li>
@@ -171,16 +212,30 @@
                                 </ul>
                             </div>
                         </div>
-                    </nav>
-        
-                    
+                    </nav>  
+                    <h2>Collapsible Sidebar Using Bootstrap 4</h2>                  
             </div>
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- -------------------------------------------------------- -->
+    <!-- ------------------- LOAD SCRIPTS ------------------ -->
+    <!-- -------------------------------------------------------- -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="lib/popper.min.js" crossorigin="anonymous"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="js/filtersMap.js" crossorigin="anonymous"></script>
+    <script src="js/const.js" crossorigin="anonymous"></script>
+    <script src="js/util.js" crossorigin="anonymous"></script>
+    <script src="js/init.js" crossorigin="anonymous"></script>
+    <script src="js/navbar.js" crossorigin="anonymous"></script>
+    <script src="js/sidebar.js" crossorigin="anonymous"></script>
+    <script src="js/map.js" crossorigin="anonymous"></script>
+
+
+    <!-- OpenLayer JS -->
+    <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="lib/OpenLayers/ol.js"></script>
     <script>
         $(document).ready(function () {
 
