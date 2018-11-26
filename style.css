@@ -1,6 +1,13 @@
-/*
-    DEMO STYLE
-*/
+/**
+ * ===========================================================================
+ * File: Navbar.css 
+ * Author: Antonio Faienza
+ * This file define style of Sidebar
+ * REF: https://www.w3schools.com/howto/howto_js_sidenav.asp
+ *      https://www.w3schools.com/howto/howto_js_dropdown_sidenav.asp
+ *      https://bootstrapious.com/p/bootstrap-sidebar
+ * ===========================================================================
+ */
 
 /* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
 
@@ -25,7 +32,7 @@ a, a:hover, a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: #fff;
+    background: #111 !important;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
@@ -116,6 +123,8 @@ i, span {
     transform: translateX(50%);
 }
 
+
+
 #sidebar .sidebar-header {
     /* padding: 20px; */
     background: #111;
@@ -141,11 +150,17 @@ i, span {
 }
 
 #sidebar ul li a {
-    /* padding: 10px; */
-    padding: 6px 8px 6px 16px;
+    padding: 10px;
+    /* padding: 6px 8px 6px 16px; */
     /* font-size: 1.1em; */
     font-size: 20px;
     display: block;
+}
+
+#sidebar ul li a > * {
+    display:inline-block;
+    vertical-align:middle;
+    /* line-height:40px;  */   
 }
 
 #sidebar ul li a:hover {
@@ -157,8 +172,28 @@ i, span {
     margin-right: 10px;
 }
 
+
+/**
+ * ICON
+ */
+.icon {
+    display: inline-block;
+    font-size: inherit;
+    /* height: 1em; */
+    overflow: visible;
+    vertical-align: -.125em;
+    padding-left: 8px; 
+    padding-right: 8px; 
+    width: 45px;
+    height: 45px;
+}
+
+svg path {
+    fill: #818181 !important;
+}
+
 #sidebar ul li.active>a, a[aria-expanded="true"] {
-    color: #fff;
+    color: #111;
     background: #c9c9c9;
 }
 

@@ -30,9 +30,9 @@ function navbar(){
     var lastClicked;
     var a = $('.dropdown-menu').find("a");
     // Set None as Default choice
-    a.first().css("background","#c9c9c9");
-    a.first().css("color","#000000");
-    lastClicked = a;
+    // a.first().css("background","#c9c9c9");
+    // a.first().css("color","#000000");
+    // lastClicked = a;
     a.click(function(){
         if(lastClicked!=undefined){
             lastClicked.css("background","none");
