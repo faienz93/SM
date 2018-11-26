@@ -19,13 +19,16 @@ function navbar(){
             // $("#mySidenav").css("width", "250px");
             // $("#main").css("marginLeft", "250px");
             // $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
+            $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
             $('#sidebar').toggleClass('active');
+        
            
         } else {
             // $("#mySidenav").css("width", "0");
             // $("#main").css("marginLeft", "0");
-            // $("body").css("backgroundColor", "white");
+            $("body").css("backgroundColor", "white");
             $('#sidebar').toggleClass('active');
+          
           
         }
     });
