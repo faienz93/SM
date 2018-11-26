@@ -35,19 +35,16 @@ function navbar(){
 
 
 
-    // var lastClicked;
-    // var a = $('.dropdown-menu').find("a");
-    // // Set None as Default choice
-    // // a.first().css("background","#c9c9c9");
-    // // a.first().css("color","#000000");
-    // // lastClicked = a;
-    // a.click(function(){
-    //     if(lastClicked!=undefined){
-    //         lastClicked.css("background","none");
-    //         lastClicked.css("color","#818181");           
-    //     }
-    //     $(this).css("background","#c9c9c9");
-    //     $(this).css("color","#000000");       
-    //     lastClicked =  $(this);
-    // })
+    var lastClicked;
+    var a = $('.select-specific > li');
+  
+    lastClicked = a;
+    a.click(function(){
+        console.log(this.innerText)
+        if(lastClicked!==undefined){
+            lastClicked.removeClass('active');     
+        }
+        $(this).addClass('active');        
+        lastClicked =  $(this);
+    })
 }
