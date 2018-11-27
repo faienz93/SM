@@ -17,6 +17,9 @@
     <!-- OpenLayers CSS -->
     <link rel="stylesheet" href="lib/OpenLayers/ol.css" type="text/css">
 
+    <!-- OpenLayer Geocoder CSS -->
+    <link rel="stylesheet" href="lib/ol-geocoder/ol-geocoder.min.css" type="text/css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
 
@@ -176,12 +179,7 @@
                                 <svg class="svg-inline--fa fa-align-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="align-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M288 44v40c0 8.837-7.163 16-16 16H16c-8.837 0-16-7.163-16-16V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16zM0 172v40c0 8.837 7.163 16 16 16h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16zm16 312h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm256-200H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16z"></path></svg>
                                 <span>Toggle Sidebar</span>
                             </button>                              -->
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <!-- https://stackoverflow.com/a/34067547/4700162 -->
-                                <form class="form-inline my-2 ml-auto">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                </form>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">                                
                                 <ul class="nav navbar-nav ml-auto">
                                         <li class="nav-item dropdown">
                                                 <!-- Filter -->
@@ -216,7 +214,11 @@
                             </div>
                         </div>
                     </nav>  
-                    <div id="map" class="map"></div>              
+                    <div id="map" class="map"></div>  
+                    <div id="popup" class="ol-popup">
+                        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                        <div id="popup-content"></div>
+                      </div>            
             </div>
     <!-- -------------------------------------------------------- -->
     <!-- ------------------- LOAD SCRIPTS ------------------ -->
@@ -239,6 +241,8 @@
     <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
     <script src="lib/OpenLayers/ol.js"></script>
+    <script src="lib/ol-geocoder/ol-geocoder.js"></script>
+
 </body>
 
 </html>
