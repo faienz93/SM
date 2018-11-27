@@ -49,16 +49,18 @@ function map() {
     var layerSelected = $(this).attr("value");
     var groupIdHtml = $(this).parent().attr('id');
 
-    console.log(layerSelected);
-    console.log(groupIdHtml);
-
-
+   
     var groupSelected = getGroup(groupIdHtml); 
     map.setLayerGroup(groupSelected);
-    // var layers = map.getLayers().getArray();
-    var layers = map.getLayers().array_;
-    console.log(layers);
-    console.log(layers.length);
+    var layers = map.getLayers().getArray();
+    var debugLayer = getCurrentLayerByTitle(layers,"Debug");
+
+    // disable debug if active a different view
+    if(debugLayer!=undefined){
+      var index = layers.indexOf(debugLayer);
+      layers.splice(index,1);
+    }
+
     for (var i = 0; i < layers.length; ++i) {
       if (groupSelected.values_.title === "Bing") {
         layers[i].setVisible(bingStyles[i] === layerSelected);
@@ -72,9 +74,10 @@ function map() {
     }
   });
 
+  // Define click debug
   $('.selected-debug').on("click", function () {
     var currentLayers = map.getLayers().getArray();
-    var currentLayer = getCurrentLayer(currentLayers);
+    var currentLayer = getCurrentLayerByVisible(currentLayers);
     var deb = debugLayer(currentLayer.getSource());
     map.getLayers().getArray().push(deb);
     alertMessage("Zoom in, Zoom out to see the tiles", "info");
@@ -257,13 +260,25 @@ function getGroup(n) {
  * Given an array of Layers, this function return a specific Layers
  * that is VISIBLE
  * 
- * @method getCurrentLayer
+ * @method getCurrentLayerByVisible
  * @param arrayLayers {Object} - contains all layer of specific group 
  */
-function getCurrentLayer(arrayLayers) {
+function getCurrentLayerByVisible(arrayLayers) {
   return arrayLayers.find(o => o.state_.visible === true);
 }
 
+
+/**
+ * Given an array of Layers, this function return a specific Layers
+ * based on Title
+ * 
+ * @method getCurrentLayerByVisible
+ * @param arrayLayers {Object} - contains all layer of specific group 
+ * @param t {String} - Title of layer to search 
+ */
+function getCurrentLayerByTitle(arrayLayers, t) {
+  return arrayLayers.find(o => o.values_.title === t);
+}
 
 /**
  * Add a new Layer where add a tile to map for Debug
@@ -273,6 +288,7 @@ function getCurrentLayer(arrayLayers) {
  */
 function debugLayer(currentSource) {
   var debug = new ol.layer.Tile({
+    title: "Debug",
     source: new ol.source.TileDebug({
       projection: 'EPSG:3857',
       tileGrid: currentSource.getTileGrid()
