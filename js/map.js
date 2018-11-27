@@ -19,6 +19,11 @@ function map() {
 
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
+    controls: ol.control.defaults().extend([
+      new ol.control.FullScreen({
+        source: 'fullscreen'
+      })
+    ]),
     target: 'map',
     renderer: 'webgl',
     // layers, // NOT DEFINED HERE
