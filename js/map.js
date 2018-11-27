@@ -300,12 +300,18 @@ function debugLayer(currentSource) {
 }
 
 
-
+/**
+ * Based on https://github.com/jonataswalker/ol-geocoder this method define 
+ * a Search/Geocoder that implement a Search functionality into an OpenLayer
+ * REF: https://stackoverflow.com/a/34067547/4700162
+ * 
+ * @method geocoder
+ */
 function geocoder() {
-
 
   var p = popup();
   map.addOverlay(p);
+
   //Instantiate with some options and add the Control
   var geocoder = new Geocoder('nominatim', {
     provider: 'osm',
@@ -333,26 +339,32 @@ function geocoder() {
 
     // application specific
     // app.addMarker(feature, coord); // TODO ADD MARKERS
-    var content = document.getElementById('popup-content');
-    content.innerHTML = '<p>You have selected here:</p>' + address.details.name;
+    var content = $('#popup-content');
+    content.html('<p>You have selected here:</p>' + address.details.name);
     p.setPosition(coord);
   });
 }
 
 
-// https://openlayers.org/en/latest/examples/popup.html
+
+/**
+ * This function allow to create a simple popup that can be 
+ * hooked to a map. 
+ * The popup is composed of a few basic elements: a container, a close button,
+ * and a place for the content.
+ * REF: https://openlayers.org/en/latest/examples/popup.html
+ * 
+ * @method popup
+ */
 function popup() {
-
   /**
-       * Elements that make up the popup.
-       */
-      var container = document.getElementById('popup');
-     
-      var closer = document.getElementById('popup-closer');
-
-           /**
-       * Create an overlay to anchor the popup to the map.
-       */
+   * Elements that make up the popup.
+   */
+  var container = $('#popup')[0];     
+  var closer = $('#popup-closer')[0];
+  /**
+   * Create an overlay to anchor the popup to the map.
+   */
   var popup = new ol.Overlay({
     element: container,
     autoPan: true,
@@ -361,17 +373,16 @@ function popup() {
     }
   });
 
-
   /**
-       * Add a click handler to hide the popup.
-       * @return {boolean} Don't follow the href.
-       */
-      closer.onclick = function() {
-        popup.setPosition(undefined);
-        closer.blur();
-        return false;
-      };
+   * Add a click handler to hide the popup.
+   * @return {boolean} Don't follow the href.
+   */
+  closer.onclick = function() {
+    popup.setPosition(undefined);
+    closer.blur();
+    return false;
+  };
 
 
-    return popup;
+  return popup;
 }
