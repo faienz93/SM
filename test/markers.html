@@ -1,0 +1,30 @@
+<html><body>
+    <div id="DivMappa"></div>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script>
+      
+      // Definisco la variabilie mappa come un oggetto OpenLayers.Map utilizzando il DivMappa, poi aggiungo il Layer OSM (Open Street Map)
+      var Mappa = new OpenLayers.Map("DivMappa");
+      Mappa.addLayer(new OpenLayers.Layer.OSM());
+      
+      // Creo l'oggetto contenente le coordinate (prima longitudine e poi latitudine)
+      var LonLat = new OpenLayers.LonLat( 12.492347,  41.890183 ) 
+            .transform(
+              new OpenLayers.Projection("EPSG:4326"), // Transformazione da WGS 1984..
+              Mappa.getProjectionObject() // .. a Spherical Mercator Projection
+            );
+            
+      // Imposto lo zoom
+      var zoom=16; 
+  
+      // Creo una variabile contenete il layer dei marker poi collego il layer dei markers alla mappa
+      var LayerMarkers = new OpenLayers.Layer.Markers( "Markers" );
+      Mappa.addLayer(LayerMarkers);
+      
+      // Aggiungo al layer dei marker un marker (utilizzando l'oggetto lonLat per le coordinate)
+      LayerMarkers.addMarker(new OpenLayers.Marker(LonLat)); 
+      
+      // Imposto le coordinate di lonLat come centro della mappa di partenza
+      Mappa.setCenter (LonLat, zoom); 
+    </script>
+  </body></html>
