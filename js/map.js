@@ -16,6 +16,7 @@ function map() {
   stamenMap();
   hereMap();
 
+
   // When inizialize the map it set with Default OSM
   map = new ol.Map({
     target: 'map',
@@ -43,22 +44,22 @@ function map() {
     layers[i].setVisible("OSM");
   }
 
+  geocoder();
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
     var layerSelected = $(this).attr("value");
     var groupIdHtml = $(this).parent().attr('id');
 
-   
-    var groupSelected = getGroup(groupIdHtml); 
+    var groupSelected = getGroup(groupIdHtml);
     map.setLayerGroup(groupSelected);
     var layers = map.getLayers().getArray();
-    var debugLayer = getCurrentLayerByTitle(layers,"Debug");
+    var debugLayer = getCurrentLayerByTitle(layers, "Debug");
 
     // disable debug if active a different view
-    if(debugLayer!=undefined){
+    if (debugLayer != undefined) {
       var index = layers.indexOf(debugLayer);
-      layers.splice(index,1);
+      layers.splice(index, 1);
     }
 
     for (var i = 0; i < layers.length; ++i) {
@@ -155,7 +156,8 @@ function bingMaps() {
       preload: Infinity,
       source: new ol.source.BingMaps({
         key: KEY_BING, //'Your Bing Maps Key from http://www.bingmapsportal.com/ here',
-        imagerySet: bingStyles[i]
+        imagerySet: bingStyles[i],
+        crossOrigin: 'anonymous'
         // use maxZoom 19 to see stretched tiles instead of the BingMaps
         // "no photos at this zoom level" tiles
         // maxZoom: 19
@@ -299,3 +301,77 @@ function debugLayer(currentSource) {
 
 
 
+function geocoder() {
+
+
+  var p = popup();
+  map.addOverlay(p);
+  //Instantiate with some options and add the Control
+  var geocoder = new Geocoder('nominatim', {
+    provider: 'osm',
+    lang: 'it-IT',
+    placeholder: 'Search for ...',
+    limit: 5,
+    // key: '....',
+    keepOpen: false,
+    debug: false,
+    autoComplete: true,
+    keepOpen: true
+  });
+  map.addControl(geocoder);
+
+
+  // I don't want/need Geocoder layer to be visible
+  geocoder.getLayer().setVisible(false);
+
+  //Listen when an address is chosen
+  geocoder.on('addresschosen', function (evt) {
+    var feature = evt.feature;
+    var coord = evt.coordinate;
+    var address = evt.address;
+    
+
+    // application specific
+    // app.addMarker(feature, coord); // TODO ADD MARKERS
+    var content = document.getElementById('popup-content');
+    content.innerHTML = '<p>You have selected here:</p>' + address.details.name;
+    p.setPosition(coord);
+  });
+}
+
+
+// https://openlayers.org/en/latest/examples/popup.html
+function popup() {
+
+  /**
+       * Elements that make up the popup.
+       */
+      var container = document.getElementById('popup');
+     
+      var closer = document.getElementById('popup-closer');
+
+           /**
+       * Create an overlay to anchor the popup to the map.
+       */
+  var popup = new ol.Overlay({
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+      duration: 250
+    }
+  });
+
+
+  /**
+       * Add a click handler to hide the popup.
+       * @return {boolean} Don't follow the href.
+       */
+      closer.onclick = function() {
+        popup.setPosition(undefined);
+        closer.blur();
+        return false;
+      };
+
+
+    return popup;
+}

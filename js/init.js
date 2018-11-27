@@ -17,5 +17,5 @@ $(document).ready(function () {
   sidebar();
 
   // Setting the map 
-  map(); // TEMPORANEAMENTE COMMENTATO
+  map(); 
 });
