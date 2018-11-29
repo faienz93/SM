@@ -5,6 +5,14 @@ Antonio Faienza |
 0000798822 | 
 antonio.faienza@studio.unibo.it | 
 
+## Requirements
+* [Node.js](https://nodejs.org/en/)
+* [Express.js](http://expressjs.com/)
+* [Bootstrap](https://getbootstrap.com/)
+* [OpenLayers](https://openlayers.org/download/)
+* [MongoDB](https://www.mongodb.com/download-center/community)
+    * Possible use of [MongoDB Compass](https://www.mongodb.com/download-center/compass)
+
 
 ## How to Install
 * Clone project 
@@ -17,9 +25,27 @@ antonio.faienza@studio.unibo.it |
 
 `npm install`
 
+* Create a custom file `.env` inside the root of the 
+project in this way: 
+```
+# Database Name
+DATABASE=mongodb://localhost:27017/DATABASE-NAME
+```
+* Run the Database
+`mongod` or `sudo mongod`
+
 ## How to Run
 
-`node app.js`
+* `npm run start`
+
+### Development Mode
+To start the server in development mode: 
+* `npm run dev`
+
+### Debug Mode
+To start the server in debug mode: 
+* `npm run debug`
+
 
 
 
