@@ -8,4 +8,17 @@
  * ===========================================================================
  */
 
- const mongose = require('mongose');
+ const mongoose = require('mongose');
+
+ const registrationSchema = new mongoose.Schema({
+     name: {
+         type: String,
+         trim: true
+     },
+     email: {
+         type: String,
+         trim: true
+     }
+ });
+
+ module.exports = mongoose.model('Registration', registrationSchema);
