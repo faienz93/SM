@@ -17,7 +17,8 @@
     "nodemon": "^1.18.7"
   },
   "scripts": {
-    "watch": "nodemon ./bin/www.js",
+    "start": "node ./bin/www.js",
+    "dev": "nodemon ./bin/www.js",
     "debug": "DEBUG=* node ./bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
