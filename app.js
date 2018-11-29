@@ -20,11 +20,13 @@ var login = require('./routes/login.js');
 
 // Define Morgan logger
 app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // define reading of stating file
 app.use(express.static(path.join(__dirname, '/')));
 
-// app.use('/', login);
+app.use('/', login);
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //     next(createError(404));

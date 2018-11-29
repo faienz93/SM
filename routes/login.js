@@ -15,9 +15,15 @@ var path    = require("path");
 //   });
 
 
-  app.get('/',function(req,res){
-    res.sendFile('../views/index.html');
-    //__dirname : It will resolve to your project folder.
+  // app.get('/',function(req,res){
+  //   res.sendFile('../views/index.html');
+  //   //__dirname : It will resolve to your project folder.
+  // });
+
+  app.post('/login', function(req, res) {
+    console.log(req.body);
+    // res.send('You sent the name "' + req.body.uname + '" ');
+    res.send('Name: ' + req.body.uname + " pass: " + req.body.psw + " mail " + req.body.mail + ".");
   });
 
 
