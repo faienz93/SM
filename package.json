@@ -16,6 +16,7 @@
   },
   "scripts": {
     "watch": "nodemon ./bin/www.js",
+    "debug": "DEBUG=* node ./bin/www.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
