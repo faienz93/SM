@@ -11,7 +11,7 @@ antonio.faienza@studio.unibo.it |
 * [Bootstrap](https://getbootstrap.com/)
 * [OpenLayers](https://openlayers.org/download/)
 * [MongoDB](https://www.mongodb.com/download-center/community)
-    * Possible use of [MongoDB Compass](https://www.mongodb.com/download-center/compass)
+* (Eventually install [MongoDB Compass](https://www.mongodb.com/download-center/compass))
 
 
 ## How to Install
