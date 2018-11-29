@@ -24,7 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // define reading of stating file
-app.use(express.static(path.join(__dirname, '/')));
+app.use('/views',express.static(path.join(__dirname, 'views')));
+// app.use(express.static(path.join(__dirname, '/')));
 
 app.use('/', login);
 // catch 404 and forward to error handler

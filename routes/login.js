@@ -14,6 +14,10 @@ const basic = auth.basic({
   file: path.join(__dirname, '../users.htpasswd'),
 });
 
+basic.on('success', (result, req) => {
+  console.log(`User authenticated: ${result.user}`);
+});
+
 // define reading of stating file
 // app.use(express.static(path.join(__dirname, '/')));
 
