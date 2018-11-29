@@ -35,7 +35,7 @@ DATABASE=mongodb://localhost:27017/DATABASE-NAME
 `mongod` or `sudo mongod`
 
 ## How to Run
-
+To start the server: 
 * `npm run start`
 
 ### Development Mode
