@@ -1,6 +1,25 @@
 
 
 /**
+ * DB Module dependencies.
+ */
+require('dotenv').config();
+const mongoose = require('mongoose');
+
+/**
+ * Database Configuration
+ */
+mongoose.connect(process.env.DATABASE, {  }); // useMongoClient: true <-- deprecated
+mongoose.Promise = global.Promise;
+mongoose.connection
+  .on('connected', () => {
+    console.log(`Mongoose connection open on ${process.env.DATABASE}`);
+  })
+  .on('error', (err) => {
+    console.log(`Connection error: ${err.message}`);
+  });
+
+/**
  * Module dependencies.
  */
 var app = require('../app');
@@ -10,7 +29,6 @@ var http = require('http');
 // Define constant PORT
 const PORT = normalizePort(process.env.PORT || '3000');
 app.set('port', PORT);
-
 
 /**
  * Create HTTP server.
