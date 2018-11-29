@@ -22,9 +22,9 @@ var login = require('./routes/login.js');
 app.use(logger('dev'));
 
 // define reading of stating file
-// app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, '/')));
 
-app.use('/ciao', login);
+// app.use('/', login);
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //     next(createError(404));
@@ -57,14 +57,4 @@ app.use(function(req, res, next) {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-  module.exports = app;
+module.exports = app;

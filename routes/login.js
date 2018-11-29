@@ -10,8 +10,14 @@ var path    = require("path");
 // app.use(express.static(path.join(__dirname, '/')));
 
 
-app.get('/', (req, res) => {
-    res.send('It works!');
+// app.get('/', (req, res) => {
+//     res.send('It works!');
+//   });
+
+
+  app.get('/',function(req,res){
+    res.sendFile('../views/index.html');
+    //__dirname : It will resolve to your project folder.
   });
 
 
