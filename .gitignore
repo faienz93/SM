@@ -1,1 +1,7 @@
+# this file contains anything that should not be committed
+
+# module
 node_modules
+
+# log
+*.log
