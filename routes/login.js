@@ -1,9 +1,13 @@
 // http://expressjs.com/it/starter/static-files.html
 // https://codeforgeek.com/2015/01/render-html-file-expressjs/
 
-var express = require("express");
+var express = require('express');
+const mongoose = require('mongoose');
 var app     = express();
-var path    = require("path");
+var path    = require('path');
+
+const router = express.Router();
+const Registration = mongoose.model('Registration');
 
 
 // define reading of stating file
@@ -22,8 +26,11 @@ var path    = require("path");
 
   app.post('/login', function(req, res) {
     console.log(req.body);
-    // res.send('You sent the name "' + req.body.uname + '" ');
-    res.send('Name: ' + req.body.uname + " pass: " + req.body.psw + " mail " + req.body.mail + ".");
+    const registration = new Registration(req.body);
+    registration.save()
+      .then(() => { res.send('Thank you for your registration!'); })
+      .catch(() => { res.send('Sorry! Something went wrong.'); });
+    // res.send('Name: ' + req.body.name +  " mail " + req.body.email + ".");
   });
 
 

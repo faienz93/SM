@@ -22,6 +22,7 @@ mongoose.connection
 /**
  * Module dependencies.
  */
+require('../models/registration');
 var app = require('../app');
 var debug = require('debug')('my-web:server');
 var http = require('http');
@@ -48,7 +49,7 @@ var server = http.createServer(app);
 
 server.listen(PORT, function(){
     console.log("=============================");
-    console.log('Listening on port ' + PORT);
+    console.log(`Express is running on port ${server.address().port}`); 
     console.log("=============================");
 });
 server.on('error', onError);

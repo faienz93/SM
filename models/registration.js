@@ -8,7 +8,7 @@
  * ===========================================================================
  */
 
- const mongoose = require('mongose');
+ const mongoose = require('mongoose');
 
  const registrationSchema = new mongoose.Schema({
      name: {
