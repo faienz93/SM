@@ -6,7 +6,7 @@
  * a module (http) - REF: https://stackoverflow.com/a/17697134/4700162
  * ===========================================================================
  */
-// var createError = require('http-errors');
+var createError = require('http-errors');
 var path = require('path');
 var express = require('express');
 var app = express();
@@ -24,17 +24,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // define reading of stating file
-// app.use('/views',express.static(path.join(__dirname, 'views')));
-app.use(express.static(path.join(__dirname, '/')));
+app.use('/',express.static(path.join(__dirname, 'views')));
+app.use('/example',express.static(path.join(__dirname, 'example')));
+app.use('/css',express.static(path.join(__dirname, 'css')));
+app.use('/lib',express.static(path.join(__dirname, 'lib')));
+app.use('/img',express.static(path.join(__dirname, 'img')));
+app.use('/js',express.static(path.join(__dirname, 'js')));
+// app.use(express.static(path.join(__dirname, '/')));
+
+
+
+
+
+// https://stackoverflow.com/a/44945104/4700162
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs');
 app.engine('html', require('ejs').renderFile);
 
 app.use('/', login);
+
+
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//     next(createError(404));
-//   });
+app.use(function(req, res, next) {
+    next(createError(404));
+  });
 
 // error handler
 app.use(function (err, req, res, next) {
