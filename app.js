@@ -12,69 +12,76 @@ var express = require('express');
 var app = express();
 var logger = require('morgan');
 var exphbs  = require("express-handlebars");
-
-
-
 var app = express();
 
+
+/**
+ * Routing
+ */
 var login = require('./routes/login.js');
 
 
 // Create `ExpressHandlebars` instance with a default layout.
 var hbs = exphbs.create({
-  extname: 'hbs',
-  defaultLayout: 'main',
-  layoutsDir: path.join(__dirname, '/views/layouts/'),
+  extname: 'hbs' // extension of the file
+
+   
+  /**
+   * If you want a unique file that handle the other file.hbs you can create a layout file 
+   * i.e 'main.hbs' inside a specific dir ie. 'layouts'
+   * In this case you need only define a tag inside other file i.e <h1> {{title}} </h1>
+   * 
+   * REF: https://www.npmjs.com/package/express-handlebars 
+   */
+  // defaultLayout: 'main',  --> name of the layout file name i.e main.hbs
+  // layoutsDir: path.join(__dirname, '/views/layouts/'), // dir where is contained the layout file
   
-  // Uses multiple partials dirs, templates in "shared/templates/" are shared
-  // with the client-side of the app (see below).
-  // partialsDir: [
-  //     'shared/templates/',
-  //     'views/partials/'
-  // ]
 });
 
 
 /**
- * Set html as view engine
- * REF: https://stackoverflow.com/a/44945104/4700162
+ * View Engine
  */
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine','ejs');
-// app.engine('html', require('ejs').renderFile);
-//=========================================================
 app.engine('hbs', hbs.engine);
 app.set('views',path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 
-// Define Morgan logger
+
+/**
+ * Define Morgan Logger
+ */
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// define reading of stating file
+
+/**
+ * Define middelware for static file
+ */
 app.use('/',express.static(path.join(__dirname, 'views')));
-// app.use('/layouts',express.static(path.join(__dirname, '../layouts')));
 app.use('/example',express.static(path.join(__dirname, 'example')));
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/lib',express.static(path.join(__dirname, 'lib')));
 app.use('/img',express.static(path.join(__dirname, 'img')));
 app.use('/js',express.static(path.join(__dirname, 'js')));
-// app.use(express.static(path.join(__dirname, '/')));
-
- 
+// app.use(express.static(path.join(__dirname, '/'))); 
 
 
 app.use('/', login);
 
 
-// catch 404 and forward to error handler
+/**
+ * catch 404 and forward to error handler
+ */
 app.use(function(req, res, next) {
     next(createError(404));
   });
 
-// error handler
+
+/**
+ * Error handler
+ */
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;

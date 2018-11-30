@@ -36,13 +36,17 @@ router.get('/redirect', function (req, res) {
   res.render(path.join(__dirname, '../views/map.html'));
 });
 
-router.post('/login', function (req, res) {
+router.post('/resultRegistration', function (req, res) {
   console.log(req.body);
   const registration = new Registration(req.body);
   registration.save()
-    .then(() => { res.send('Thank you for your registration!'); })
-    .catch(() => { res.send('Sorry! Something went wrong.'); });
-  // res.send('Name: ' + req.body.name +  " mail " + req.body.email + ".");
+    .then(() => { 
+        res.render('alert', {success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful'})
+     })
+    .catch(() => { 
+        res.render('alert', {success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.'})
+     });
+    
 });
 
 
@@ -56,9 +60,10 @@ router.get('/registrations', auth.connect(basic), (req, res) => {
 
 
 router.get('/', function (req, res, next) {
-    res.render('home', {title: "HELLO WORLD"});
+    res.render('login', {title: "HELLO WORLD"});
+
+    // if you have layout you can specify if you want to use him
     // res.render('home', {layout:false, title: "HELLO WORLD"});
-    // res.render('home');
 });
 
 

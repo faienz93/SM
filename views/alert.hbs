@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>{{title}}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,11 +11,18 @@
 <body>
 
 <div class="container">
-  <h2>Alerts</h2>
+  {{#if success}}
+  <h2>{{title}}</h2>
   <div class="alert alert-success">
-    <strong>Success!</strong> {{ message }}
+    <strong>Success!: </strong> {{ message }}
   </div>
-  <div class="alert alert-info">
+  {{else}}
+  <h2>{{title}}</h2>
+  <div class="alert alert-danger">
+    <strong>Error!: </strong> {{ message }}
+  </div>
+  {{/if}}
+  {{!-- <div class="alert alert-info">
     <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
   </div>
   <div class="alert alert-warning">
@@ -23,7 +30,7 @@
   </div>
   <div class="alert alert-danger">
     <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
-  </div>
+  </div> --}}
 </div>
 
 </body>
