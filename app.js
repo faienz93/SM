@@ -32,11 +32,11 @@ app.use('/img',express.static(path.join(__dirname, 'img')));
 app.use('/js',express.static(path.join(__dirname, 'js')));
 // app.use(express.static(path.join(__dirname, '/')));
 
-
-
-
-
-// https://stackoverflow.com/a/44945104/4700162
+ 
+/**
+ * Set html as view engine
+ * REF: https://stackoverflow.com/a/44945104/4700162
+ */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine','ejs');
 app.engine('html', require('ejs').renderFile);
