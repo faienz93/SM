@@ -22,15 +22,6 @@ basic.on('success', (result, req) => {
 // app.use(express.static(path.join(__dirname, '/')));
 
 
-// app.get('/', (req, res) => {
-//     res.send('It works!');
-//   });
-
-
-// app.get('/',function(req,res){
-//   res.sendFile('../views/index.html');
-//   //__dirname : It will resolve to your project folder.
-// });
 
 router.get('/redirect', function (req, res) {
 //   res.render(path.join(__dirname, '../views/map.html'));
@@ -51,7 +42,7 @@ router.post('/resultRegistration', function (req, res) {
 });
 
 
-router.get('/registrations', auth.connect(basic), (req, res) => {
+router.get('/allRegistration', auth.connect(basic), (req, res) => {
     Registration.find()
       .then((registrations) => {  res.send(registrations)
         })
@@ -62,6 +53,13 @@ router.get('/registrations', auth.connect(basic), (req, res) => {
 
 router.get('/', function (req, res, next) {
     res.render('login', {title: "HELLO WORLD"});
+
+    // if you have layout you can specify if you want to use him
+    // res.render('home', {layout:false, title: "HELLO WORLD"});
+});
+
+router.get('/registration', function (req, res, next) {
+    res.render('registration', {title: "HELLO WORLD"});
 
     // if you have layout you can specify if you want to use him
     // res.render('home', {layout:false, title: "HELLO WORLD"});

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Mobile System</title>
+    <link rel="shortcut icon" href="../img/openlayersLogo.png" type="image/png">
+    <meta name="description" content="In this view you can see the map ">
+    <meta name="author" content="Antonio Faienza">
+
+    <!-- Failed to load resource: the server responded with a status of 404 (NOT FOUND) favicon
+    REF: https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
+    <link rel="shortcut icon" href="#" />
+
+    <!-- OpenLayers CSS -->
+    <link rel="stylesheet" href="../lib/OpenLayers/ol.css" type="text/css">
+
+    <!-- OpenLayer Geocoder CSS -->
+    <link rel="stylesheet" href="../lib/ol-geocoder/ol-geocoder.min.css" type="text/css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <!-- Hamberger library REF: https://jonsuh.com/hamburgers/ -->
+    <link href="../css/hamburger/hamburgers.css" rel="stylesheet">
+
+    <!-- Custom Sidebar -->
+    <link rel="stylesheet" href="../css/sidebar.css">
+
+    <!-- Navbar Style  -->
+    <link rel="stylesheet" href="../css/navbar.css">
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="../css/main.css"> 
+
+    <!-- Font Awesome JS -->
+    <script defer src="../lib/fontawesome/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="../lib/fontawesome/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+ 
+</head>
+
+<body>
+        <div class="wrapper">
+                <!-- Sidebar  -->
+                <nav id="sidebar" class="active">
+                    <div class="sidebar-header">
+                        <img src="../img/openlayersLogo.png">
+                    </div>
+        
+                    <ul class="list-unstyled components">
+                        <div class="sidebar-divider"></div>  
+                        <div class="select-specific" id="OSM">                                             
+                            <li value="osm" class="active selected-layer">
+                                <a href="#">
+                                    <!-- <svg class="svg-inline--fa fa-image fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z"></path></svg><i class="fas fa-image"></i> -->
+                                    <!-- <img src="/img/stamen.svg" class="svg-inline--fa fa-image fa-w-16"> -->
+                                    <img src="../img/osm.svg" class="svg icon">
+                                    <span>OSM</span>
+                                </a>
+                            </li>
+                        </div> 
+                        <div class="sidebar-divider"></div>
+                        <li>
+                            <a href="#Here" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <!-- <svg class="svg-inline--fa fa-home fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="home" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M488 312.7V456c0 13.3-10.7 24-24 24H348c-6.6 0-12-5.4-12-12V356c0-6.6-5.4-12-12-12h-72c-6.6 0-12 5.4-12 12v112c0 6.6-5.4 12-12 12H112c-13.3 0-24-10.7-24-24V312.7c0-3.6 1.6-7 4.4-9.3l188-154.8c4.4-3.6 10.8-3.6 15.3 0l188 154.8c2.7 2.3 4.3 5.7 4.3 9.3zm83.6-60.9L488 182.9V44.4c0-6.6-5.4-12-12-12h-56c-6.6 0-12 5.4-12 12V117l-89.5-73.7c-17.7-14.6-43.3-14.6-61 0L4.4 251.8c-5.1 4.2-5.8 11.8-1.6 16.9l25.5 31c4.2 5.1 11.8 5.8 16.9 1.6l235.2-193.7c4.4-3.6 10.8-3.6 15.3 0l235.2 193.7c5.1 4.2 12.7 3.5 16.9-1.6l25.5-31c4.2-5.2 3.4-12.7-1.7-16.9z"></path></svg><i class="fas fa-home"></i> -->
+                                <img src="../img/here.svg" class="svg icon">
+                                Here
+                            </a>
+                            <ul class="collapse list-unstyled select-specific" id="Here">
+                                <li value="normal.day" class="selected-layer">
+                                    <a href="#">Normal Day</a>
+                                </li>
+                                <li value="normal.day.transit" class="selected-layer">
+                                    <a href="#">Normal Day Transit</a>
+                                </li>
+                                <li value="pedestrian.day" class="selected-layer">
+                                    <a href="#">Pedestrian Day</a>
+                                </li>
+                                <li value="terrain.day" class="selected-layer">
+                                    <a href="#">Terrain Day</a>
+                                </li>
+                                <li value="satellite.day" class="selected-layer">
+                                    <a href="#">Satellite Day</a>
+                                </li>
+                                <li value="hybrid.day" class="selected-layer">
+                                    <a href="#">Hybrid Day</a>
+                                </li>
+                            </ul>    
+                        </li>
+                        <div class="sidebar-divider"></div>
+                        <!-- BING MAP -->
+                        <li>                               
+                            <a href="#Bing" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <!-- <svg class="svg-inline--fa fa-copy fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg><i class="fas fa-copy"></i> -->
+                                <img src="../img/bing.svg" class="svg icon">
+                                Bing
+                            </a>
+                            <ul class="collapse list-unstyled select-specific" id="Bing">
+                                <li value="Aerial" class="selected-layer">
+                                    <a href="#">Aerial</a>
+                                </li>
+                                <li value="AerialWithLabels" class="selected-layer">
+                                    <a href="#">Aerial with labels</a>
+                                </li>
+                                <li value="Road" class="selected-layer">
+                                    <a href="#">Road (static)</a>
+                                </li>
+                                <li value="RoadOnDemand" class="selected-layer">
+                                    <a href="#">Road (dynamic)</a>
+                                </li>
+                                <!-- <li value="collinsBart" class="selected-layer">
+                                    <a href="#">Collins Bart</a> 
+                                </li> -->
+                                <!-- <li value="ordnanceSurvey" class="selected-layer">
+                                    <a href="#">Ordnance Survey</a>
+                                </li> -->
+                            </ul>
+                        </li>
+                        <div class="sidebar-divider"></div>
+                        <!-- STAMEN -->
+                        <li>
+                                <a href="#Stamen" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                        <!-- <svg class="svg-inline--fa fa-copy fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg><i class="fas fa-copy"></i> -->
+                                        <img src="../img/stamen.svg" class="svg icon">
+                                        Stamen
+                                    </a>
+                            <ul class="collapse list-unstyled select-specific" id="Stamen">                                    
+                                    <li value="watercolor" class="selected-layer"> 
+                                        <a href="#">Watercolor</a>
+                                    </li>
+                                    <li value="terrain-labels" class="selected-layer">
+                                        <a href="#">Watercolor Label</a>
+                                    </li>
+                                    <li value="toner" class="selected-layer">
+                                        <a href="#">Toner</a>
+                                    </li>
+                                    <li value="toner-lite" class="selected-layer">
+                                        <a href="#">Toner Lite</a>
+                                    </li>
+                                    <li value="terrain" class="selected-layer">
+                                        <a href="#">Terrain</a> 
+                                    </li>                                     
+                            </ul>
+                        </li> 
+                        <div class="sidebar-divider"></div>
+                            <div class="select-specific" id="debug"> 
+                                <li value="debug" class="selected-debug">
+                                    <a href="#">
+                                        <img src="../img/debug.svg" class="svg icon">       
+                                        Debug
+                                    </a>
+                                </li> 
+                            </div> 
+                        <div class="sidebar-divider"></div>                     
+                    </ul>
+        
+                    <ul class="list-unstyled CTAs">
+                        <!-- <li>
+                            <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                        </li>
+                        <li>
+                            <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                        </li> -->
+                    </ul>
+                </nav>
+        
+                <!-- Page Content  -->
+                <div id="content">                              
+                    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+                        <div class="container-fluid">  
+                                <button id="hambergerButton" class="hamburger hamburger--collapse" type="button">
+                                        <span class="hamburger-box">
+                                            <span class="hamburger-inner"></span>
+                                        </span>
+                                    </button>      
+                            <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                <svg class="svg-inline--fa fa-align-left fa-w-14" aria-hidden="true" data-prefix="fas" data-icon="align-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M288 44v40c0 8.837-7.163 16-16 16H16c-8.837 0-16-7.163-16-16V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16zM0 172v40c0 8.837 7.163 16 16 16h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16zm16 312h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm256-200H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16z"></path></svg>
+                                <span>Toggle Sidebar</span>
+                            </button>                              -->
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">                                
+                                <ul class="nav navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                                <!-- Filter -->
+                                               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                                   aria-haspopup="true" aria-expanded="false">
+                                                   <img src="../img/filter-tool-black-shape.svg" class="svg icon-nav">
+                                                   <span>Filter</span>
+                                               </a>
+                                               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                   <a href="#" value="none" class="dropdown-item selected-filter active"><img src="../img/right-arrow.svg" class="svg arrow-left">None</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" value="sharpen" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" value="sharpenless" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg" class="svg arrow-left">Sharpenless</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" value="blur" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg" class="svg arrow-left">Blur</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" value="shadow" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg" class="svg arrow-left">Shadow</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#"  value="emboss" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg" class="svg arrow-left">Emboss</a>
+                                                   <div class="dropdown-divider"></div>
+                                                   <a href="#" value="edge" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg" class="svg arrow-left">Edge</a>
+                                               </div>
+                                           </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>  
+                    <div id="fullscreen" class="fullscreen">
+                        <div id="map" class="map"></div>  
+                    </div>
+                    <div id="popup" class="ol-popup">
+                        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                        <div id="popup-content"></div>
+                      </div>            
+            </div>
+    <!-- -------------------------------------------------------- -->
+    <!-- ------------------- LOAD SCRIPTS ------------------ -->
+    <!-- -------------------------------------------------------- -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
+    <script src="../js/const.js" crossorigin="anonymous"></script>
+    <script src="../js/util.js" crossorigin="anonymous"></script>
+    <script src="../js/init.js" crossorigin="anonymous"></script>
+    <script src="../js/navbar.js" crossorigin="anonymous"></script>
+    <script src="../js/sidebar.js" crossorigin="anonymous"></script>
+    <script src="../js/map.js" crossorigin="anonymous"></script>
+
+
+    <!-- OpenLayer JS -->
+    <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="../lib/OpenLayers/ol.js"></script>
+    <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
+
+</body>
+
+</html>
