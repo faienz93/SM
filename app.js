@@ -11,12 +11,42 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var logger = require('morgan');
+var exphbs  = require("express-handlebars");
 
 
 
 var app = express();
 
 var login = require('./routes/login.js');
+
+
+// Create `ExpressHandlebars` instance with a default layout.
+var hbs = exphbs.create({
+  extname: 'hbs',
+  defaultLayout: 'main',
+  layoutsDir: path.join(__dirname, '/views/layouts/'),
+  
+  // Uses multiple partials dirs, templates in "shared/templates/" are shared
+  // with the client-side of the app (see below).
+  // partialsDir: [
+  //     'shared/templates/',
+  //     'views/partials/'
+  // ]
+});
+
+
+/**
+ * Set html as view engine
+ * REF: https://stackoverflow.com/a/44945104/4700162
+ */
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine','ejs');
+// app.engine('html', require('ejs').renderFile);
+//=========================================================
+app.engine('hbs', hbs.engine);
+app.set('views',path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
 
 // Define Morgan logger
 app.use(logger('dev'));
@@ -25,6 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // define reading of stating file
 app.use('/',express.static(path.join(__dirname, 'views')));
+// app.use('/layouts',express.static(path.join(__dirname, '../layouts')));
 app.use('/example',express.static(path.join(__dirname, 'example')));
 app.use('/css',express.static(path.join(__dirname, 'css')));
 app.use('/lib',express.static(path.join(__dirname, 'lib')));
@@ -33,13 +64,7 @@ app.use('/js',express.static(path.join(__dirname, 'js')));
 // app.use(express.static(path.join(__dirname, '/')));
 
  
-/**
- * Set html as view engine
- * REF: https://stackoverflow.com/a/44945104/4700162
- */
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine','ejs');
-app.engine('html', require('ejs').renderFile);
+
 
 app.use('/', login);
 

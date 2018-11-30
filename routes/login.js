@@ -55,7 +55,11 @@ router.get('/registrations', auth.connect(basic), (req, res) => {
 
 
 
-
+router.get('/', function (req, res, next) {
+    res.render('home', {title: "HELLO WORLD"});
+    // res.render('home', {layout:false, title: "HELLO WORLD"});
+    // res.render('home');
+});
 
 
 module.exports = router;
