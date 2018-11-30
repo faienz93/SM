@@ -33,7 +33,8 @@ basic.on('success', (result, req) => {
 // });
 
 router.get('/redirect', function (req, res) {
-  res.render(path.join(__dirname, '../views/map.html'));
+//   res.render(path.join(__dirname, '../views/map.html'));
+    res.render('map');
 });
 
 router.post('/resultRegistration', function (req, res) {
