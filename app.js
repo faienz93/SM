@@ -26,6 +26,9 @@ app.use(express.urlencoded({ extended: true }));
 // define reading of stating file
 // app.use('/views',express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, '/')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine','ejs');
+app.engine('html', require('ejs').renderFile);
 
 app.use('/', login);
 // catch 404 and forward to error handler

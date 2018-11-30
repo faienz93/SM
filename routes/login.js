@@ -32,6 +32,10 @@ basic.on('success', (result, req) => {
 //   //__dirname : It will resolve to your project folder.
 // });
 
+router.get('/redirect', function (req, res) {
+  res.render(path.join(__dirname, '../views/map.html'));
+});
+
 router.post('/login', function (req, res) {
   console.log(req.body);
   const registration = new Registration(req.body);
