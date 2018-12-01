@@ -1,12 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-    body, html {
+body, html {
     height: 100%;
     margin: 0;
-    overflow: hidden;
 }
 
 .background {
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     background: black;
@@ -14,51 +17,41 @@
     height: auto;
      -webkit-filter: grayscale(70%); /*Safari 6.0 - 9.0 */
     filter: grayscale(70%);
-    opacity: 0.9;
+    /* opacity: 0.9; */
     height: 100%;
     z-index: -1;
-    overflow: auto;    
+    overflow: auto;
+    
 
 }
 
 .container {
-    position: relative !important;
     z-index: 15;
 }
-        
-        .card {
-            box-shadow: 0 55px 55px 0 rgba(0,0,0,0.5) !important;
-            /* border: 1px solid #818181 !important; */
-            border-radius: 20px !important;
+
+.card {
+            border: 1px solid #28a745;
         }
         .card-login {
             margin-top: 130px;
             padding: 18px;
             max-width: 30rem;
-          
-            
         }
 
         .card-header {
             color: #fff;
-            background-color: #c9c9c9 !important; 
+            /*background: #ff0000;*/
             font-family: sans-serif;
             font-size: 20px;
             font-weight: 600 !important;
             margin-top: 10px;
-            /* border-bottom: 0; */
-            /* width: 50%; */
-            /* height: auto; */
-            border: 3px solid #343a40 !important;
-            border-radius: 90% !important;
-            /* z-index: 999; */
+            border-bottom: 0;
+            z-index: 999;
         }
-
-     
 
         .input-group-prepend span{
             width: 50px;
-            background-color: #818181; 
+            background-color: #c9c9c9;
             color: #fff;
             border:0 !important;
         }
@@ -121,6 +114,7 @@
         .fas {
             color: #818181;
         }
+
 </style>
 <script src="../lib/jquery-3.3.1.min.js"></script>
 <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -131,42 +125,47 @@
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> -->
 <script src="../lib/fontawesome/solid.js" crossorigin="anonymous"></script>
 <script src="../lib/fontawesome/fontawesome.js" crossorigin="anonymous"></script>
-
+</head>
 <body>
 
+<div class="bg">
     <img class="background" src="../img/background.jpg">
-
-
     <div class="container">
-        <div class="card card-login mx-auto text-center bg-light border-dark" >
-            
-            <div class="card-header mx-auto ">
-                <img src="../img/openlayersLogo.png" class="w-75" alt="Logo"> 
+            <div class="card card-login mx-auto text-center bg-dark">
+                    <span> <img src="../img/openlayersLogo.png" class="w-75" alt="Logo"> </span>
                 <br />
                 <span class="logo_title mt-5"> Login </span>
-            </div>
-            <div class="card-body">
-                <form>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        </div>
-                        <input type="text" name="email" class="form-control" placeholder="Username">
+                </div>
+                <div class="card-body">
+                        <form>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="text" name="email" class="form-control" placeholder="Username">
+                            </div>
+        
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" name="password" class="form-control" placeholder="Password">
+                            </div>
+        
+                            <div class="form-group">
+                                <input type="submit" name="btn" value="Login" class="btn btn-outline-danger float-right login_btn">
+                            </div>
+        
+                        </form>
                     </div>
 
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                        </div>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" name="btn" value="Login" class="btn btn-outline-danger float-right login_btn">
-                    </div>
-
-                </form>
-            </div>
-        </div>
+            
     </div>
+        
+   
+</div>
+
+
+
 </body>
+</html>
