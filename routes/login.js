@@ -56,18 +56,29 @@ router.get('/allRegistration', auth.connect(basic), (req, res) => {
 
 
 router.get('/', function (req, res, next) {
-    res.render('login', {title: "HELLO WORLD"});
+    res.render('login', {title: "SM - Login"});
 
     // if you have layout you can specify if you want to use him
     // res.render('home', {layout:false, title: "HELLO WORLD"});
 });
 
 router.get('/registration', function (req, res, next) {
-    res.render('registration');
+    res.render('registration',{title: "SM - Registration"});
 
     // if you have layout you can specify if you want to use him
     // res.render('home', {layout:false, title: "HELLO WORLD"});
 });
 
+
+var counter = 0;
+app.get('/counter', function(req, res) {
+    res.cookie('counter', ++counter);
+
+    if (!req.cookies.counter) {
+        res.send('This is your first visit!');
+    } else {
+        res.send('This is visit number '+ req.cookies.counter +'!');
+    }
+});
 
 module.exports = router;
