@@ -22,6 +22,10 @@ basic.on('success', (result, req) => {
 // app.use(express.static(path.join(__dirname, '/')));
 
 
+router.get('/addUser', function (req, res) {
+  //   res.render(path.join(__dirname, '../views/map.html'));
+      res.render('map');
+  });
 
 router.get('/redirect', function (req, res) {
 //   res.render(path.join(__dirname, '../views/map.html'));
@@ -59,7 +63,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/registration', function (req, res, next) {
-    res.render('registration', {title: "HELLO WORLD"});
+    res.render('registration');
 
     // if you have layout you can specify if you want to use him
     // res.render('home', {layout:false, title: "HELLO WORLD"});
