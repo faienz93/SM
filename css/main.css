@@ -193,6 +193,8 @@ svg path {
 
 
 .header-icon {
-    width: 42px;
-    height: 42px;
+    position: relative;
+    top: 7px;    
 }
+
+
