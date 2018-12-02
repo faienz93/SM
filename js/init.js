@@ -18,4 +18,29 @@ $(document).ready(function () {
 
   // Setting the map 
   map(); 
+
+  $('.swapDiv').on("click", function () {
+    var operation = $(this).attr("value");
+    if(operation==="addUser"){
+      $(".mainDiv").each(function() {
+        $(this).css("display","none");
+      });
+      $('#addUserDiv').css("display","block");
+    }else if(operation==="modifyUser"){
+      $(".mainDiv").each(function() {
+        $(this).css("display","none");
+      });
+      $('#modifyUserDiv').css("display","block");
+    }else if(operation==="deleteUser"){
+      $(".mainDiv").each(function() {
+        $(this).css("display","none");
+      });
+      $('#deleteUserDiv').css("display","block");
+    }else {
+      $(".mainDiv").each(function() {
+        $(this).css("display","none");
+      });
+      $('#map').css("display","block");
+    }
+  });
 });

@@ -22,7 +22,7 @@ basic.on('success', (result, req) => {
 // app.use(express.static(path.join(__dirname, '/')));
 
 
-router.get('/addUser', function (req, res) {
+router.get('/map', function (req, res) {
   //   res.render(path.join(__dirname, '../views/map.html'));
       res.render('map');
   });

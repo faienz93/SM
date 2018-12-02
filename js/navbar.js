@@ -16,12 +16,12 @@ function navbar(){
         $(this).toggleClass('is-active');
         var checkClass = $("#hambergerButton").hasClass('is-active');
         if (checkClass) {
-            $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
+            // $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
             $('#sidebar').toggleClass('active');
         
            
         } else {
-            $("body").css("backgroundColor", "white");
+            // $("body").css("backgroundColor", "white");
             $('#sidebar').toggleClass('active');
           
           
