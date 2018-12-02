@@ -167,14 +167,14 @@ ul.CTAs a {
 }
 
 a.download {
-    background: #fff;
-    color: #7386D5;
+    background: #c9c9c9;
+    color: #111;
 }
 
-a.article, a.article:hover {
+/* a.article, a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
-}
+} */
 
 
 /* ---------------------------------------------------
