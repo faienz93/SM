@@ -53,7 +53,7 @@ function map() {
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').on("click", function () {
-    var layerSelected = $(this).attr("value");
+    var layerSelected = $(this).attr("id");
     var groupIdHtml = $(this).parent().attr('id');
 
     var groupSelected = getGroup(groupIdHtml);

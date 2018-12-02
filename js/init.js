@@ -27,34 +27,23 @@ $(document).ready(function () {
 
 
 /**
- * This function aims to bind event to reset buttons
+ * This function aims to bind event to reset buttons and handler the 
+ * show of div
  * @method handleForm
  */
 function handleForm() {
-  // handle show div
+ 
+  /**
+   * each clickable event has the same value. 
+   * This value is equal to ID of div that i 
+   * want show or hide. 
+   */
   $('.swapDiv').on("click", function () {
     var operation = $(this).attr("value");
-    if (operation === "addUser") {
       $(".mainDiv").each(function () {
         $(this).css("display", "none");
       });
-      $('#addUserDiv').css("display", "block");
-    } else if (operation === "updateUser") {
-      $(".mainDiv").each(function () {
-        $(this).css("display", "none");
-      });
-      $('#updateyUserDiv').css("display", "block");
-    } else if (operation === "deleteUser") {
-      $(".mainDiv").each(function () {
-        $(this).css("display", "none");
-      });
-      $('#deleteUserDiv').css("display", "block");
-    } else {
-      $(".mainDiv").each(function () {
-        $(this).css("display", "none");
-      });
-      $('#map').css("display", "block");
-    }
+      $('#'+operation).css("display", "block");      
   });
 
   // Reset value of form Add User 

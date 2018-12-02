@@ -55,7 +55,7 @@
             <ul class="list-unstyled components">
                 <div class="sidebar-divider"></div>
                 <div class="select-specific" id="OSM">
-                    <li value="osm" class="active selected-layer swapDiv">
+                    <li value="map" id="osm" class="active selected-layer swapDiv">
                         <a href="#">
                             <!-- <svg class="svg-inline--fa fa-image fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z"></path></svg><i class="fas fa-image"></i> -->
                             <!-- <img src="/img/stamen.svg" class="svg-inline--fa fa-image fa-w-16"> -->
@@ -72,22 +72,22 @@
                         Here
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="Here">
-                        <li value="normal.day" class="selected-layer swapDiv">
+                        <li value="map" id="normal.day" class="selected-layer swapDiv">
                             <a href="#">Normal Day</a>
                         </li>
-                        <li value="normal.day.transit" class="selected-layer swapDiv">
+                        <li value="map" id="normal.day.transit" class="selected-layer swapDiv">
                             <a href="#">Normal Day Transit</a>
                         </li>
-                        <li value="pedestrian.day" class="selected-layer swapDiv">
+                        <li value="map" id="pedestrian.day" class="selected-layer swapDiv">
                             <a href="#">Pedestrian Day</a>
                         </li>
-                        <li value="terrain.day" class="selected-layer swapDiv">
+                        <li value="map" id="terrain.day" class="selected-layer swapDiv">
                             <a href="#">Terrain Day</a>
                         </li>
-                        <li value="satellite.day" class="selected-layer swapDiv">
+                        <li value="map" id="satellite.day" class="selected-layer swapDiv">
                             <a href="#">Satellite Day</a>
                         </li>
-                        <li value="hybrid.day" class="selected-layer swapDiv">
+                        <li value="map" id="hybrid.day" class="selected-layer swapDiv">
                             <a href="#">Hybrid Day</a>
                         </li>
                     </ul>
@@ -101,22 +101,22 @@
                         Bing
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="Bing">
-                        <li value="Aerial" class="selected-layer swapDiv">
+                        <li value="map" id="Aerial" class="selected-layer swapDiv">
                             <a href="#">Aerial</a>
                         </li>
-                        <li value="AerialWithLabels" class="selected-layer swapDiv">
+                        <li value="map" id="AerialWithLabels" class="selected-layer swapDiv">
                             <a href="#">Aerial with labels</a>
                         </li>
-                        <li value="Road" class="selected-layer swapDiv">
+                        <li value="map" id="Road" class="selected-layer swapDiv">
                             <a href="#">Road (static)</a>
                         </li>
-                        <li value="RoadOnDemand" class="selected-layer swapDiv">
+                        <li value="map" id="RoadOnDemand" class="selected-layer swapDiv">
                             <a href="#">Road (dynamic)</a>
                         </li>
-                        <!-- <li value="collinsBart" class="selected-layer swapDiv">
+                        <!-- <li value="map" value="id" class="selected-layer swapDiv">
                                     <a href="#">Collins Bart</a> 
                                 </li> -->
-                        <!-- <li value="ordnanceSurvey" class="selected-layer swapDiv">
+                        <!-- <li value="map" value="id" class="selected-layer swapDiv">
                                     <a href="#">Ordnance Survey</a>
                                 </li> -->
                     </ul>
@@ -130,26 +130,26 @@
                         Stamen
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="Stamen">
-                        <li value="watercolor" class="selected-layer swapDiv">
+                        <li value="map" id="watercolor" class="selected-layer swapDiv">
                             <a href="#">Watercolor</a>
                         </li>
-                        <li value="terrain-labels" class="selected-layer swapDiv">
+                        {{!-- <li value="map" id="terrain-labels" class="selected-layer swapDiv">
                             <a href="#">Watercolor Label</a>
-                        </li>
-                        <li value="toner" class="selected-layer swapDiv">
+                        </li> --}}
+                        <li value="map" id="toner" class="selected-layer swapDiv">
                             <a href="#">Toner</a>
                         </li>
-                        <li value="toner-lite" class="selected-layer swapDiv">
+                        <li value="map" id="toner-lite" class="selected-layer swapDiv">
                             <a href="#">Toner Lite</a>
                         </li>
-                        <li value="terrain" class="selected-layer swapDiv">
+                        <li value="map" id="terrain" class="selected-layer swapDiv">
                             <a href="#">Terrain</a>
                         </li>
                     </ul>
                 </li>
                 <div class="sidebar-divider"></div>
                 <div class="select-specific" id="debug">
-                    <li value="debug" class="selected-debug swapDiv">
+                    <li value="map" id="debug" class="selected-debug swapDiv">
                         <a href="#">
                             <img src="../img/debug.svg" class="svg icon">
                             Debug
@@ -258,7 +258,7 @@
                 //
                 ///////////////////////////////////////////////////////////////////////////////////////
                 -->
-                <div id="addUserDiv" class="mainDiv" style="display:none">
+                <div id="addUser" class="mainDiv" style="display:none">
                     <div class="card card-outline-secondary">
                         <div class="card-header" id="headerUser">
                             <h3 class="mb-0"> <a href="#"><a><img src="../img/plus.svg" class="svg icon header-icon"></a> Add User</h3>
@@ -328,7 +328,7 @@
                 //
                 ///////////////////////////////////////////////////////////////////////////////////////
                 -->
-                <div id="updateyUserDiv" class="mainDiv" style="display:none">
+                <div id="updateUser" class="mainDiv" style="display:none">
                     <div class="card-header" id="headerUser">
                             <h3 class="mb-0"> <a href="#"><a><img src="../img/reload.svg" class="svg icon header-icon"></a> Update User</h3>
                         </div>
@@ -415,48 +415,48 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
-                    <!-- 
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    //
-                    // Delete User
-                    //
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    -->
-                    <div id="deleteUserDiv" class="mainDiv" style="display:none">
-                        <div class="card-header" id="headerUser">
-                            <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Update User</h3>
-                        </div>
-                            <div class="card-body" id="cardBodyUser">
-                                <!--  -->
-                                <!--  -->
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Delete</label>
-                                    <div class="col-lg-9">
-                                        <div class="input-group form-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                                </div>
-                                                <select id="findProfessorUpdate" data-placeholder="Begin typing a name to filter..."
-                                                    class="form-control chosen-select" tabindex="4" size="0" name="updateTeacher"
-                                                    required>
-                                                    <option value=""></option>
-                                                    <!-- the otpion tag are fullied in javasctipt file init.js -->
-                                                </select>
-                                            </div>                                    
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label"></label>
-                                    <div class="col-lg-9">
-                                        <button id="buttonDeleteUser" type="button" class="btn btn-danger" value="delete">Delete</button>
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // Delete User
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
+                <div id="deleteUser" class="mainDiv" style="display:none">
+                    <div class="card-header" id="headerUser">
+                        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Update User</h3>
+                    </div>
+                        <div class="card-body" id="cardBodyUser">
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Delete</label>
+                                <div class="col-lg-9">
+                                    <div class="input-group form-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                            </div>
+                                            <select id="findProfessorUpdate" data-placeholder="Begin typing a name to filter..."
+                                                class="form-control chosen-select" tabindex="4" size="0" name="updateTeacher"
+                                                required>
+                                                <option value=""></option>
+                                                <!-- the otpion tag are fullied in javasctipt file init.js -->
+                                            </select>
+                                        </div>                                    
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"></label>
+                                <div class="col-lg-9">
+                                    <button id="buttonDeleteUser" type="button" class="btn btn-danger" value="delete">Delete</button>
+                                </div>
+                            </div>                                
+                        </div>
+                </div>
+            </div>
+        </div>
                 
             </div>
             <div id="popup" class="ol-popup">
