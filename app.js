@@ -11,6 +11,8 @@ var path = require('path');
 var express = require('express');
 var app = express();
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session')
 var exphbs  = require("express-handlebars");
 var app = express();
 
@@ -54,7 +56,8 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cookieParser());
+app.use(cookieSession({ secret: 'secret', cookie: { maxAge: 60 * 60 * 1000 }}));
 
 /**
  * Define middelware for static file
