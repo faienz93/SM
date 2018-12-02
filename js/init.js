@@ -26,11 +26,11 @@ $(document).ready(function () {
         $(this).css("display","none");
       });
       $('#addUserDiv').css("display","block");
-    }else if(operation==="modifyUser"){
+    }else if(operation==="updateUser"){
       $(".mainDiv").each(function() {
         $(this).css("display","none");
       });
-      $('#modifyUserDiv').css("display","block");
+      $('#updateyUserDiv').css("display","block");
     }else if(operation==="deleteUser"){
       $(".mainDiv").each(function() {
         $(this).css("display","none");
