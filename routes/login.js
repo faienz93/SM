@@ -59,7 +59,7 @@ router.get('/allRegistration', auth.connect(basic), (req, res) => {
 
 
 
-router.get('/', function (req, res, next) {
+router.get('/login', function (req, res, next) {
     res.render('login', { title: "SM - Login" });
 
     // if you have layout you can specify if you want to use him

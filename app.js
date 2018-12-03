@@ -26,6 +26,18 @@ var app = express();
 var login = require('./routes/login.js');
 
 
+/**
+ * Define middelware for static file
+ */
+app.use('/',express.static(path.join(__dirname, 'views')));
+app.use('/example',express.static(path.join(__dirname, 'example')));
+app.use('/css',express.static(path.join(__dirname, 'css')));
+app.use('/fonts',express.static(path.join(__dirname, 'fonts')));
+app.use('/lib',express.static(path.join(__dirname, 'lib')));
+app.use('/img',express.static(path.join(__dirname, 'img')));
+app.use('/js',express.static(path.join(__dirname, 'js')));
+// app.use(express.static(path.join(__dirname, '/'))); 
+
 // Create `ExpressHandlebars` instance with a default layout.
 var hbs = exphbs.create({
   extname: 'hbs' // extension of the file
@@ -62,16 +74,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-/**
- * Define middelware for static file
- */
-app.use('/',express.static(path.join(__dirname, 'views')));
-app.use('/example',express.static(path.join(__dirname, 'example')));
-app.use('/css',express.static(path.join(__dirname, 'css')));
-app.use('/lib',express.static(path.join(__dirname, 'lib')));
-app.use('/img',express.static(path.join(__dirname, 'img')));
-app.use('/js',express.static(path.join(__dirname, 'js')));
-// app.use(express.static(path.join(__dirname, '/'))); 
+
 
 
 app.use('/', login);
