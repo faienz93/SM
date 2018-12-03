@@ -38,11 +38,13 @@ router.post('/addUser', function (req, res) {
     const registration = new Registration(req.body);
     registration.save()
         .then(() => {
-            res.render('alert', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
+            res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
         })
         .catch(() => {
-            res.render('alert', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
+            res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
         });
+
+   
 
 });
 

@@ -11,3 +11,6 @@ https://bootsnipp.com/snippets/featured/advance-password-validation
 
 
 https://w3layouts.com/ 
+
+How to check if that data already exist in the database during update (Mongoose And Express)  
+https://stackoverflow.com/questions/16882938/how-to-check-if-that-data-already-exist-in-the-database-during-update-mongoose
