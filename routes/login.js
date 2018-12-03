@@ -3,7 +3,6 @@
 
 var express = require('express');
 const mongoose = require('mongoose');
-var app = express();
 var path = require('path');
 const auth = require('http-auth');
 
@@ -34,7 +33,7 @@ router.get('/redirect', function (req, res) {
     res.render('map');
 });
 
-router.post('/resultRegistration', function (req, res) {
+router.post('/addUser', function (req, res) {
     console.log(req.body);
     const registration = new Registration(req.body);
     registration.save()
@@ -47,7 +46,7 @@ router.post('/resultRegistration', function (req, res) {
 
 });
 
-
+// I see all people registred
 router.get('/allRegistration', auth.connect(basic), (req, res) => {
     Registration.find()
         .then((registrations) => {
@@ -73,15 +72,6 @@ router.get('/registration', function (req, res, next) {
 });
 
 
-var counter = 0;
-app.get('/counter', function (req, res) {
-    res.cookie('counter', ++counter);
 
-    if (!req.cookies.counter) {
-        res.send('This is your first visit!');
-    } else {
-        res.send('This is visit number ' + req.cookies.counter + '!');
-    }
-});
 
 module.exports = router;
