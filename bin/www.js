@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 /**
  * Database Configuration
  */
-mongoose.connect(process.env.DATABASE, {  }); // useMongoClient: true <-- deprecated
+mongoose.connect(process.env.DATABASE, {  useNewUrlParser: true }); // useMongoClient: true <-- deprecated
 mongoose.Promise = global.Promise;
 mongoose.connection
   .on('connected', () => {
