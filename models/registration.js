@@ -11,13 +11,29 @@
  const mongoose = require('mongoose');
 
  const registrationSchema = new mongoose.Schema({
-     name: {
+     username: {
          type: String,
+         unique: true,
+         required: true,
          trim: true
      },
      email: {
          type: String,
+         unique: true,
+         required: true,
          trim: true
+     },
+     password: {
+         type: String,
+         trim: true
+     },
+     passwordConfirm: {
+         type: String,
+         trim: true
+     },
+     datetime: {
+         type: Date,
+         default: Date.now
      }
  });
 

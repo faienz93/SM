@@ -24,6 +24,7 @@ var app = express();
  * Routing
  */
 var login = require('./routes/login.js');
+var userOperations = require("./routes/userDB.js");
 
 
 /**
@@ -77,6 +78,7 @@ app.use(cookieParser());
 
 
 app.use('/', login);
+app.use('/operationdb', userOperations);
 
 
 /**

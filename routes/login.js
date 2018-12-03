@@ -33,20 +33,18 @@ router.get('/redirect', function (req, res) {
     res.render('map');
 });
 
-router.post('/addUser', function (req, res) {
-    console.log(req.body);
-    const registration = new Registration(req.body);
-    registration.save()
-        .then(() => {
-            res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
-        })
-        .catch(() => {
-            res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
-        });
+// router.post('/addUser', function (req, res) {
+//     console.log(req.body);
+//     const registration = new Registration(req.body);
+//     registration.save()
+//         .then(() => {
+//             res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
+//         })
+//         .catch(() => {
+//             res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
+//         });   
 
-   
-
-});
+// });
 
 // I see all people registred
 router.get('/allRegistration', auth.connect(basic), (req, res) => {
