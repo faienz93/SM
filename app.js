@@ -32,7 +32,6 @@ var login = require('./routes/login.js');
 app.use('/',express.static(path.join(__dirname, 'views')));
 app.use('/example',express.static(path.join(__dirname, 'example')));
 app.use('/css',express.static(path.join(__dirname, 'css')));
-app.use('/fonts',express.static(path.join(__dirname, 'fonts')));
 app.use('/lib',express.static(path.join(__dirname, 'lib')));
 app.use('/img',express.static(path.join(__dirname, 'img')));
 app.use('/js',express.static(path.join(__dirname, 'js')));
