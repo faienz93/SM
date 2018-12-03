@@ -13,6 +13,8 @@ antonio.faienza@studio.unibo.it |
 * [MongoDB](https://www.mongodb.com/download-center/community)
 * (Eventually install [MongoDB Compass](https://www.mongodb.com/download-center/compass))
 
+**NOTE:** Create the directory where Mongo will store data, create the “db” directory. You can create the directory in the default location by running `sudo mkdir -p /data/db`
+
 
 ## How to Install
 * Clone project 
