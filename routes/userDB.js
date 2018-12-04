@@ -23,7 +23,6 @@ router.post('/add', function (req, res) {
            const registration = new Registration(req.body);
            registration.save()
            .then(() => {
-                // res.redirect('/map');
                 res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' });
            })
            .catch(() => {
