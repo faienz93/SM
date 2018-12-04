@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>{{title}}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <script src="../lib/jquery-3.3.1.min.js"></script>
-  <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
-  <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="shortcut icon" href="../img/openlayersLogo.png" type="image/png">
+  <meta name="description" content="In this view you can see the success/error message ">
+  <meta name="author" content="Antonio Faienza">
+
+  <!-- Failed to load resource: the server responded with a status of 404 (NOT FOUND) favicon
+    REF: https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
+  <link rel="shortcut icon" href="#" />
+
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
+
+
+  <!-- Font Awesome JS -->
+  <script defer src="../lib/fontawesome/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="../lib/fontawesome/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
+      <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+        <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
+        <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
 
-<div class="container">
-  {{#if success}}
-  <h2>{{title}}</h2>
-  <div class="alert alert-success">
-    <strong>Success!: </strong> {{ message }}
+  <div class="container">
+    {{#if success}}
+    <h2>{{title}}</h2>
+    <div class="alert alert-success">
+      <strong>Success!: </strong> {{ message }}
+    </div>
+    {{else}}
+    <h2>{{title}}</h2>
+    <div class="alert alert-danger">
+      <strong>Error!: </strong> {{ message }}
+    </div>
+    {{/if}}
+    {{!-- <div class="alert alert-info">
+      <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
+    </div>
+    <div class="alert alert-warning">
+      <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
+    </div>
+    <div class="alert alert-danger">
+      <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+    </div> --}}
+    
+    <script>
+      setTimeout(function () {
+        // after 2 seconds
+        window.location = "/map";
+      }, 2000);
+    </script>
   </div>
-  {{else}}
-  <h2>{{title}}</h2>
-  <div class="alert alert-danger">
-    <strong>Error!: </strong> {{ message }}
-  </div>
-  {{/if}}
-  {{!-- <div class="alert alert-info">
-    <strong>Info!</strong> This alert box could indicate a neutral informative change or action.
-  </div>
-  <div class="alert alert-warning">
-    <strong>Warning!</strong> This alert box could indicate a warning that might need attention.
-  </div>
-  <div class="alert alert-danger">
-    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
-  </div> --}}
-  <script>
-  setTimeout(function () {
-     // after 2 seconds
-     window.location = "/map";
-  }, 2000)
-</script>
-</div>
 
 </body>
+
 </html>
