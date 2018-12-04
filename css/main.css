@@ -198,3 +198,16 @@ svg path {
 }
 
 
+/* ---------------------------------------------------
+    CONTAINER ALERT
+----------------------------------------------------- */
+.alert-fixed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    z-index: 9999;
+    border-radius: 0px;
+    /* border-color: #23d0f7; */
+    margin-left: -37.5%;
+}
