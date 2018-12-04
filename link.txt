@@ -16,3 +16,7 @@ How to check if that data already exist in the database during update (Mongoose 
 https://stackoverflow.com/questions/16882938/how-to-check-if-that-data-already-exist-in-the-database-during-update-mongoose
 
 https://stackoverflow.com/a/51962721/4700162
+
+W3Scool validation form
+https://www.w3schools.com/howto/howto_js_password_validation.asp
+https://twitterbootstrap.org/bootstrap-form-validation/ 
