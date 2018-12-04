@@ -23,8 +23,18 @@ basic.on('success', (result, req) => {
 
 router.get('/map', function (req, res) {
 
-    //   res.render(path.join(__dirname, '../views/map.html'));
-    res.render('map');
+    /**
+     * Display all user from DB
+     */
+    Registration.find()
+        .then((registrations) => {
+            //res.render(path.join(__dirname, '../views/map.html'));
+            // console.log(registrations);
+            res.render('map', {users: registrations});
+        })
+        .catch(() => { 
+            res.render('result', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+         });
 
 });
 

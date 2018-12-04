@@ -22,6 +22,46 @@ $(document).ready(function () {
   // Setting the map 
   map();
 
+ 
+  // var str;
+  // $( ".chosen-select option:selected" ).change(function() {    
+  //   // str += $( this ).text() + " ";
+  //   console.log( $( this ).text());
+  // });
+ 
+  $('select').on('change', function() {
+
+    var val = jQuery.parseJSON( this.value );
+  
+
+    
+    console.log(val.username);
+    console.log(val.email);
+    $('#usernameUserFormUpdate').val(val.username);
+    $('#emailUserFormUpdate').val(val.email);
+    $('#passwordUserFormUpdate').val(val.password);
+    
+    
+     
+    
+     
+  });
+
+
+  // $( "select.chosen-select" )
+  // .change(function () {
+  //   $( "select.chosen-select option:selected" ).each(function() {
+  //     // str += $( this ).text() + " ";
+  //     // console.log($( this ).text());
+  //     console.log($(this));
+  //   });
+    
+  // });
+  // .change();
+
+
+
+
 
 });
 
@@ -55,4 +95,11 @@ function handleForm() {
   $('#resetUpdateUser').click(function () {
     $('#updateUserForm')[0].reset();
   });
+}
+
+
+
+
+function populateFormUpdate(user){
+  console.log(user);
 }

@@ -31,7 +31,15 @@ var userOperations = require("./routes/userDB.js");
 
 // Create `ExpressHandlebars` instance with a default layout.
 var hbs = exphbs.create({
-  extname: 'hbs' // extension of the file
+  extname: 'hbs', // extension of the file
+  // Specify helpers that permit to return result into JSON format
+  helpers: {
+    json: function (context) { 
+      return JSON.stringify(context);
+    }
+    
+    }
+
 
    
   /**
@@ -78,7 +86,7 @@ app.use('/js',express.static(path.join(__dirname, 'js')));
 
 
 app.use('/', login);
-app.use('/operationdb', userOperations);
+app.use('/', userOperations);
 
 
 /**

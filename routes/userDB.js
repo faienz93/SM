@@ -14,6 +14,9 @@
  const router = express.Router();
 var Registration = mongoose.model('Registration');
 
+/**
+ * Add a new User to DB
+ */
 router.post('/add', function (req, res) { 
     console.log(req.body);
     if(req.body.username && 
@@ -31,15 +34,16 @@ router.post('/add', function (req, res) {
        }else {
         res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Make sure all fields have been filled and try again' })
        }
-    // const registration = new Registration(req.body);
-    // registration.save()
-    //     .then(() => {
-    //         res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
-    //     })
-    //     .catch(() => {
-    //         res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
-    //     });
 });
+
+/**
+ * Find the value to update
+ */
+router.post('/update', function (req, res) { 
+    console.log(req.body);
+    
+});
+
 
 
 module.exports = router;
