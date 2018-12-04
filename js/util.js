@@ -88,7 +88,7 @@ function alertMessage(message, type = "primary") {
         $(".alert").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();
         });
-    }, 4000);
+    }, 3000);
 
     br.remove();
 }
