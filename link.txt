@@ -13,7 +13,8 @@ https://bootsnipp.com/snippets/featured/advance-password-validation
 https://w3layouts.com/ 
 
 
-
+http://bootstrap-confirmation.js.org/#ex-link 
+https://github.com/jaredhanson/connect-flash
 https://stackoverflow.com/a/51962721/4700162
 
 W3Scool validation form
