@@ -13,7 +13,9 @@ antonio.faienza@studio.unibo.it |
 * [MongoDB](https://www.mongodb.com/download-center/community)
 * (Eventually install [MongoDB Compass](https://www.mongodb.com/download-center/compass))
 
-**NOTE:** Create the directory where Mongo will store data, create the “db” directory. You can create the directory in the default location by running `sudo mkdir -p /data/db`
+**NOTE:** Create the directory where Mongo will store data, create the “db” directory. You can create the directory in the default location by running [tutorial](https://treehouse.github.io/installation-guides/mac/mongo-mac.html): 
+- `sudo mkdir -p /data/db`
+- ```sudo chown -R `id -un` /data/db```
 
 
 ## How to Install
@@ -34,8 +36,7 @@ project in this way:
 DATABASE=mongodb://localhost:27017/DATABASE-NAME
 ```
 * Run the Database
-`mongod` or `sudo mongod`
-
+`mongod` 
 ## How to Run
 To start the server: 
 * `npm run start`
