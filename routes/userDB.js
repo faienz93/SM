@@ -53,18 +53,6 @@ router.post('/update', function (req, res) {
         req.body.email &&
         req.body.password &&
         req.body.confirmPassword && req.body.password == req.body.confirmPassword) {
-
-
-            Registration.once('index', function(error) {
-                assert.ifError(error);
-                Registration.findById(req.body.id, function (err, user) {
-                  // Will error, but will *not* be a mongoose validation error, it will be
-                  // a duplicate key error.
-                  assert.ok(error);
-                  assert.ok(!error.errors);
-                  assert.ok(error.message.indexOf('duplicate key error') !== -1);
-                });
-              });
             
             Registration.findById(req.body.id, function (err, user) {
                 if (err) res.render('result', { success: false, title: 'FINDING ERROR', message: err })
@@ -86,6 +74,27 @@ router.post('/update', function (req, res) {
     
 });
 
+
+/**
+ * Delete user
+ */
+router.post('/delete', function(req,res){
+    console.log(req.body.deleteUser);
+
+    var user = JSON.parse(req.body.deleteUser);
+    
+    Registration.findById(user._id, function (err, user) {
+        if (err) res.render('result', { success: false, title: 'FINDING ERROR', message: err })
+
+        
+        user.remove(function (err, updatedTank) {
+          if (err) res.render('result', { success: false, title: 'DELETING ERROR', message: err })
+            // res.send(updatedTank);
+            res.render('result', { success: true, title: 'DELETE SUCCESS', message: 'Your deleting was successful '});
+        });
+      });
+   
+});
 
 
 module.exports = router;

@@ -22,40 +22,8 @@ $(document).ready(function () {
   // Setting the map 
   map();
 
- 
-
- 
-  $('select').on('change', function() {
-
-    var val = jQuery.parseJSON( this.value );
-  
-  
-    $('#idUserFormUpdate').val(val._id);
-    $('#usernameUserFormUpdate').val(val.username);
-    $('#emailUserFormUpdate').val(val.email);
-    $('#passwordUserFormUpdate').val(val.password);
-    
-    
-     
-    
-     
-  });
-
-
-  // $( "select.chosen-select" )
-  // .change(function () {
-  //   $( "select.chosen-select option:selected" ).each(function() {
-  //     // str += $( this ).text() + " ";
-  //     // console.log($( this ).text());
-  //     console.log($(this));
-  //   });
-    
-  // });
-  // .change();
-
-
-
-
+  // Populate the form of main page when required
+  populateFormUpdate();
 
 });
 
@@ -87,13 +55,32 @@ function handleForm() {
 
   // Reset value of form Update User 
   $('#resetUpdateUser').click(function () {
+    // i want avoid the rest of the field ID
+    var tempID = $('#idUserFormUpdate').val();
+
+    // I reset the form
     $('#updateUserForm')[0].reset();
+
+    // I write agant the ID
+    $('#idUserFormUpdate').val(tempID);
+
   });
 }
 
 
 
-
-function populateFormUpdate(user){
-  console.log(user);
+/**
+ * This method aims to populate the update form
+ * 
+ * @method populateFormUpdate
+ */
+function populateFormUpdate(){
+  $('select').on('change', function() {
+    var val = jQuery.parseJSON( this.value );  
+    $('#idUserFormUpdate').val(val._id);
+    $('#usernameUserFormUpdate').val(val.username);
+    $('#emailUserFormUpdate').val(val.email);
+    $('#passwordUserFormUpdate').val(val.password);
+     
+  });
 }

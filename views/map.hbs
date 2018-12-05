@@ -369,6 +369,7 @@
                             <!--  -->
                             <form class="form" id="updateUserForm" role="form" autocomplete="off" action="http://127.0.0.1:3000/update"
                                 method="POST">  
+                                <!-- ID Of user. It can be only read  -->
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">ID</label>
                                     <div class="col-lg-9">
@@ -441,13 +442,14 @@
                 //
                 ///////////////////////////////////////////////////////////////////////////////////////
                 -->
-                <div id="deleteUser" class="mainDiv" style="display:none">
+                <div id="deleteUser" class="mainDiv"> <!-- style="display:none"-->
                     <div class="card-header" id="headerUser">
                         <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Update User</h3>
                     </div>
                         <div class="card-body" id="cardBodyUser">
                             <!--  -->
                             <!--  -->
+                            <form class="form" id="deleteUserForm" role="form" autocomplete="off" action="http://127.0.0.1:3000/delete" method="POST">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Delete</label>
                                 <div class="col-lg-9">
@@ -456,10 +458,16 @@
                                                 <span class="input-group-text"><i class="fas fa-search"></i></span>
                                             </div>
                                             <select id="findProfessorUpdate" data-placeholder="Begin typing a name to filter..."
-                                                class="form-control chosen-select" tabindex="4" size="0" name="updateTeacher"
+                                                class="form-control chosen-select" tabindex="4" size="0" name="deleteUser"
                                                 required>
-                                                <option value=""></option>
-                                                <!-- the otpion tag are fullied in javasctipt file init.js -->
+                                                {{#if users}}
+                                                    <option disabled selected value> Select users from {{users.length}} </option>  
+                                                    {{#each users}}
+                                                   <option value="{{json this}}">{{this.username}}</option> 
+                                                   {{/each}} 
+                                                {{else}}
+                                                <option disabled selected value> NO users available </option>  
+                                                {{/if}}       
                                             </select>
                                         </div>                                    
 
@@ -468,9 +476,10 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                 <div class="col-lg-9">
-                                    <button id="buttonDeleteUser" type="button" class="btn btn-danger" value="delete">Delete</button>
+                                    <input type="submit" id="buttonDeleteUser" class="btn btn-danger" value="Delete">
                                 </div>
-                            </div>                                
+                            </div>
+                            </form>                                
                         </div>
                 </div>
             </div>
