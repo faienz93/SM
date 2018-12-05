@@ -20,3 +20,8 @@ https://stackoverflow.com/a/51962721/4700162
 W3Scool validation form
 https://www.w3schools.com/howto/howto_js_password_validation.asp
 https://twitterbootstrap.org/bootstrap-form-validation/ 
+
+
+MONGODB 
+https://mongoosejs.com/docs/models.html 
+https://mongoosejs.com/docs/documents.html UPDATE

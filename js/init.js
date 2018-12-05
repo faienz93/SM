@@ -23,20 +23,14 @@ $(document).ready(function () {
   map();
 
  
-  // var str;
-  // $( ".chosen-select option:selected" ).change(function() {    
-  //   // str += $( this ).text() + " ";
-  //   console.log( $( this ).text());
-  // });
+
  
   $('select').on('change', function() {
 
     var val = jQuery.parseJSON( this.value );
   
-
-    
-    console.log(val.username);
-    console.log(val.email);
+  
+    $('#idUserFormUpdate').val(val._id);
     $('#usernameUserFormUpdate').val(val.username);
     $('#emailUserFormUpdate').val(val.email);
     $('#passwordUserFormUpdate').val(val.password);

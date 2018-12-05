@@ -13,7 +13,7 @@
  const registrationSchema = new mongoose.Schema({
      username: {
          type: String,
-         unique: true,
+         unique: [true, 'Username already used'],
          required: true,
          trim: true
      },
