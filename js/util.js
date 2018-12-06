@@ -75,8 +75,8 @@ function createUrl(tpl, layerDesc) {
 function alertMessage(message, type = "primary") {
     var br = document.createElement("br");
     var div = document.createElement("div");
-    div.setAttribute("class", "alert alert-" + type + " text-center alert-fixed");
-    div.setAttribute("role", "alert");
+    div.setAttribute("class", "alert alert-" + type + " text-center "); // alert-fixed
+    // div.setAttribute("role", "alert");
     div.innerHTML = "<strong>" + message + "</strong>";
 
     document.getElementById("content").appendChild(br);
