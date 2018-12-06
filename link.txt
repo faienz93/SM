@@ -12,9 +12,11 @@ https://bootsnipp.com/snippets/featured/advance-password-validation
 
 https://w3layouts.com/ 
 
-
+BOOTSTRAP NOTIFICATION
 http://bootstrap-confirmation.js.org/#ex-link 
-https://github.com/jaredhanson/connect-flash
+
+
+MONGOOSE ERROR
 https://stackoverflow.com/a/51962721/4700162
 
 W3Scool validation form
@@ -31,6 +33,7 @@ https://stackoverflow.com/questions/16882938/how-to-check-if-that-data-already-e
 
 
 NOTIFICATION
+https://github.com/jaredhanson/connect-flash
 https://www.npmjs.com/package/express-flash
 https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
 https://github.com/jaredhanson/connect-flash
