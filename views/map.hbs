@@ -45,19 +45,7 @@
 </head>
 
 <body>
-    <!-- In this point I show the result of a specific operation -->
-    {{#if expressFlashInfo}}
-        <script> 
-            
-            
-             console.log(  "{{  expressFlash }}");          
-        </script>
-        {{!-- <p><strong>FLASH!</strong> {{ expressFlash }}</p> --}}
-        <p><strong>INFO!</strong> {{ expressFlashInfo }}</p>
-    {{else if expressFlashDanger }}
-
-        <p><strong>DANGER!</strong> {{ expressFlashDanger }}</p>
-    {{/if}}
+    
 
 
     <div class="wrapper">
@@ -513,25 +501,43 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
     -->
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-        <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
-        <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
-        <script src="../js/const.js" crossorigin="anonymous"></script>
-        <script src="../js/util.js" crossorigin="anonymous"></script>
-        <script src="../js/init.js" crossorigin="anonymous"></script>
-        <script src="../js/navbar.js" crossorigin="anonymous"></script>
-        <script src="../js/sidebar.js" crossorigin="anonymous"></script>
-        <script src="../js/map.js" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
+    <script src="../js/const.js" crossorigin="anonymous"></script>
+    <script src="../js/util.js" crossorigin="anonymous"></script>
+    <script src="../js/init.js" crossorigin="anonymous"></script>
+    <script src="../js/navbar.js" crossorigin="anonymous"></script>
+    <script src="../js/sidebar.js" crossorigin="anonymous"></script>
+    <script src="../js/map.js" crossorigin="anonymous"></script>
 
 
-        <!-- OpenLayer JS -->
-        <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
-        <script src="../lib/OpenLayers/ol.js"></script>
-        <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
+    <!-- OpenLayer JS -->
+    <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="../lib/OpenLayers/ol.js"></script>
+    <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Message Error
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- In this point I show the result of a specific operation -->
+    {{#if expressFlashSuccess}}
+        <script>alertMessage("{{  expressFlashSuccess }}", "success"); </script>        
+    {{else if expressFlashDanger }}        
+        <script>alertMessage("{{  expressFlashDanger }}", "danger"); </script>
+    {{else if expressFlashWarning }}        
+        <script>alertMessage("{{  expressFlashWarning }}", "warning"); </script>
+    {{else if expressFlashInfo }}        
+        <script>alertMessage("{{  expressFlashInfo }}", "info"); </script>
+    {{/if}}
 
 </body>
 

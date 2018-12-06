@@ -27,10 +27,6 @@
          type: String,
          trim: true
      },
-     passwordConfirm: {
-         type: String,
-         trim: true
-     },
      datetime: {
          type: Date,
          default: Date.now

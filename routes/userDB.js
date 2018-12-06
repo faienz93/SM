@@ -23,27 +23,21 @@ router.post('/add', function (req, res) {
        req.body.email &&
        req.body.password &&
        req.body.passwordConfirm && req.body.password == req.body.passwordConfirm) {
-        //    const registration = new Registration(req.body);
-
-        //    registration.save()
-        //    .then(() => {
-        //         res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' });
-        //    })
-        //    .catch(() => {
-        //        console.log(err);
-        //         res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong. Some field may already be in use.' })
-        //     });
+        
         Registration.create(req.body, function (err, user) {
             
-            if (err) res.send(err);
-            // res.send(user);
-            // saved!
-            req.flash('danger', "CIAO COME STAI");
+            if (err) {
+                req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
+                res.redirect('map');  //res.send(err);
+            }else {
+                req.flash('success', "Your registration was successful");            
+                res.redirect('map');
+            }
             
-            res.redirect('map');
           });
        }else {
-        res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Make sure all fields have been filled or password not Matching. Try again.' })
+        req.flash('danger', "Make sure all fields have been filled or password not Matching. Try again.");            
+        res.redirect('map');
        }
 });
 

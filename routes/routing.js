@@ -28,10 +28,12 @@ router.get('/map', function (req, res) {
      */
     Registration.find()
         .then((registrations) => {
-            //res.render(path.join(__dirname, '../views/map.html'));
-            
+            //res.render(path.join(__dirname, '../views/map.html'));            
             // i wat send a notification of result of specific operation
-            res.render('map', {users: registrations,  expressFlashInfo: req.flash('info'), expressFlashDanger: req.flash('danger')});
+            res.render('map', {users: registrations,  expressFlashSuccess: req.flash('success'),                                                      
+                                                      expressFlashDanger: req.flash('danger'),
+                                                      expressFlashWarning: req.flash('warning'), 
+                                                      expressFlashInfo: req.flash('info'), });
             
         })
         .catch(() => { 
