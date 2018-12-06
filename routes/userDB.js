@@ -28,7 +28,7 @@ router.post('/add', function (req, res) {
             
             if (err) {
                 req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
-                res.redirect('map');  //res.send(err);
+                res.redirect('map');  
             }else {
                 req.flash('success', "Your registration was successful");            
                 res.redirect('map');
@@ -52,21 +52,31 @@ router.post('/update', function (req, res) {
         req.body.confirmPassword && req.body.password == req.body.confirmPassword) {
             
             Registration.findById(req.body.id, function (err, user) {
-                if (err) res.render('result', { success: false, title: 'FINDING ERROR', message: err })
+                if (err) {
+                    req.flash('danger', err.message);
+                    res.redirect('map'); 
+                }else {
+                    user.username = req.body.username;
+                    user.email = req.body.email;
+                    user.password = req.body.password;
+                    user.save(function (err, updatedTank) {
+                        if (err) {
+                            req.flash('danger', err.message);
+                            res.redirect('map'); 
+                        }else {
+                            req.flash('success', "Your updating was successful");            
+                            res.redirect('map');
+                        }                        
+                    });
+                }
 
-                user.username = req.body.username;
-                user.email = req.body.email;
-                user.password = req.body.password;
-                user.save(function (err, updatedTank) {
-                  if (err) res.render('result', { success: false, title: 'UPDATE ERROR', message: err })
-                    // res.send(updatedTank);
-                    res.render('result', { success: true, title: 'UPDATE SUCCESS', message: 'Your updating was successful '});
-                });
+                
               });
 
 
     }else {
-        res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Make sure all fields have been filled or password not Matching. Try again.' })
+        req.flash('danger', "Make sure all fields have been filled or password not Matching. Try again.");
+        res.redirect('map');  
        }
     
 });
@@ -81,14 +91,20 @@ router.post('/delete', function(req,res){
     var user = JSON.parse(req.body.deleteUser);
     
     Registration.findById(user._id, function (err, user) {
-        if (err) res.render('result', { success: false, title: 'FINDING ERROR', message: err })
-
-        
-        user.remove(function (err, updatedTank) {
-          if (err) res.render('result', { success: false, title: 'DELETING ERROR', message: err })
-            // res.send(updatedTank);
-            res.render('result', { success: true, title: 'DELETE SUCCESS', message: 'Your deleting was successful '});
-        });
+        if (err) {
+            req.flash('danger', err.message);
+            res.redirect('map'); 
+        }else {
+            user.remove(function (err, updatedTank) {
+                if (err) {
+                    req.flash('danger', err.message);
+                    res.redirect('map'); 
+                }else {
+                    req.flash('success', "Your deleting was successful");            
+                    res.redirect('map');
+                }   
+              });
+        }        
       });
    
 });
