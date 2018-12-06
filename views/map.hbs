@@ -46,14 +46,17 @@
 
 <body>
     <!-- In this point I show the result of a specific operation -->
-    {{#if expressFlash}}
+    {{#if expressFlashInfo}}
         <script> 
             
             
              console.log(  "{{  expressFlash }}");          
         </script>
         {{!-- <p><strong>FLASH!</strong> {{ expressFlash }}</p> --}}
-        <p><strong>FLASH!</strong> {{ expressFlash }}</p>
+        <p><strong>INFO!</strong> {{ expressFlashInfo }}</p>
+    {{else if expressFlashDanger }}
+
+        <p><strong>DANGER!</strong> {{ expressFlashDanger }}</p>
     {{/if}}
 
 

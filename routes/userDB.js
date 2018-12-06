@@ -38,7 +38,7 @@ router.post('/add', function (req, res) {
             if (err) res.send(err);
             // res.send(user);
             // saved!
-            req.flash('info', "CIAO COME STAI");
+            req.flash('danger', "CIAO COME STAI");
             
             res.redirect('map');
           });

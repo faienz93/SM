@@ -31,7 +31,7 @@ router.get('/map', function (req, res) {
             //res.render(path.join(__dirname, '../views/map.html'));
             
             // i wat send a notification of result of specific operation
-            res.render('map', {users: registrations,  expressFlash: req.flash('info')});
+            res.render('map', {users: registrations,  expressFlashInfo: req.flash('info'), expressFlashDanger: req.flash('danger')});
             
         })
         .catch(() => { 
