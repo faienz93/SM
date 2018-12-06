@@ -27,3 +27,12 @@ https://mongoosejs.com/docs/models.html
 https://mongoosejs.com/docs/documents.html UPDATE
 How to check if that data already exist in the database during update (Mongoose And Express)  
 https://stackoverflow.com/questions/16882938/how-to-check-if-that-data-already-exist-in-the-database-during-update-mongoose
+
+
+
+NOTIFICATION
+https://www.npmjs.com/package/express-flash
+https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
+https://github.com/jaredhanson/connect-flash
+https://github.com/visionmedia/express-messages
+https://github.com/jack2gs/express-flash-2

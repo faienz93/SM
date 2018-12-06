@@ -36,8 +36,11 @@ router.post('/add', function (req, res) {
         Registration.create(req.body, function (err, user) {
             
             if (err) res.send(err);
-            res.send(user);
+            // res.send(user);
             // saved!
+            req.flash('info', "CIAO COME STAI");
+            
+            res.redirect('map');
           });
        }else {
         res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Make sure all fields have been filled or password not Matching. Try again.' })

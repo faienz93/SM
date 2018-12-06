@@ -17,6 +17,7 @@ var app = express();
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require("express-session");
+var flash = require('connect-flash');
 var exphbs  = require("express-handlebars");
 var app = express();
 
@@ -24,7 +25,7 @@ var app = express();
 /**
  * Routing
  */
-var login = require('./routes/login.js');
+var routing = require('./routes/routing.js');
 var userOperations = require("./routes/userDB.js");
 
 
@@ -37,9 +38,8 @@ var hbs = exphbs.create({
   helpers: {
     json: function (context) { 
       return JSON.stringify(context);
-    }
-    
-    }
+      } 
+  }
 
 
    
@@ -77,6 +77,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }));
+app.use(flash())
 
 
 /**
@@ -91,7 +92,7 @@ app.use('/js',express.static(path.join(__dirname, 'js')));
 // app.use(express.static(path.join(__dirname, '/'))); 
 
 
-app.use('/', login);
+app.use('/', routing);
 app.use('/', userOperations);
 
 

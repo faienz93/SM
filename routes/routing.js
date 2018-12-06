@@ -29,8 +29,10 @@ router.get('/map', function (req, res) {
     Registration.find()
         .then((registrations) => {
             //res.render(path.join(__dirname, '../views/map.html'));
-            // console.log(registrations);
-            res.render('map', {users: registrations});
+            
+            // i wat send a notification of result of specific operation
+            res.render('map', {users: registrations,  expressFlash: req.flash('info')});
+            
         })
         .catch(() => { 
             res.render('result', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })

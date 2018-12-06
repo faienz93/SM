@@ -45,6 +45,18 @@
 </head>
 
 <body>
+    <!-- In this point I show the result of a specific operation -->
+    {{#if expressFlash}}
+        <script> 
+            
+            
+             console.log(  "{{  expressFlash }}");          
+        </script>
+        {{!-- <p><strong>FLASH!</strong> {{ expressFlash }}</p> --}}
+        <p><strong>FLASH!</strong> {{ expressFlash }}</p>
+    {{/if}}
+
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="active">
