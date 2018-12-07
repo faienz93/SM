@@ -39,3 +39,6 @@ https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
 https://github.com/jaredhanson/connect-flash
 https://github.com/visionmedia/express-messages
 https://github.com/jack2gs/express-flash-2
+
+
+https://stackoverflow.com/questions/25480633/how-do-i-display-flash-message-without-page-refresh-using-express-and-connect-fl
