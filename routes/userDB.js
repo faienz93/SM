@@ -28,8 +28,7 @@ router.post('/add', function (req, res) {
             
             if (err) {
                 req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
-                res.redirect('/');
-                
+                res.redirect('/');                
              
             }else {
                 req.flash('success', "Your registration was successful");            
