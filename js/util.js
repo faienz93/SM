@@ -92,3 +92,40 @@ function alertMessage(message, type = "primary") {
 
     br.remove();
 }
+
+/**
+ * This function create an popub of bootstrap for confirm or decline 
+ * a specic choice. If this is positive than submit the form
+ * passed as param
+ * 
+ * @method formSubmit
+ * @param {Object} form - the form to verify
+ * @param {String} message - the message that you want display. 
+ *                          If it not specified you will see a default message
+ */
+function formSubmit(form,message = "Are you sure? "){        
+        bootbox.confirm({
+            message: message,
+            buttons: {
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm',                    
+                    className: 'btn-secondary'
+                },
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel',
+                    className: 'btn-dark'
+                }
+            },
+            callback: function (result) {                  
+                    if(result) form.submit(); 
+            }
+        });
+        return false;
+
+ 
+    
+}
+
+
+
+

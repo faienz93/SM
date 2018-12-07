@@ -37,10 +37,8 @@
     <link rel="stylesheet" href="../css/main.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="../lib/fontawesome/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-        crossorigin="anonymous"></script>
-    <script defer src="../lib/fontawesome/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-        crossorigin="anonymous"></script>
+    <script defer src="../lib/fontawesome/solid.js" crossorigin="anonymous"></script>
+    <script defer src="../lib/fontawesome/fontawesome.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -447,7 +445,7 @@
                         <div class="card-body" id="cardBodyUser">
                             <!--  -->
                             <!--  -->
-                            <form class="form" id="deleteUserForm" role="form" autocomplete="off" action="http://127.0.0.1:3000/delete" method="POST">
+                            <form class="form" id="deleteUserForm" role="form" autocomplete="off" onsubmit="return formSubmit(this)" action="http://127.0.0.1:3000/delete" method="POST">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Delete</label>
                                 <div class="col-lg-9">
@@ -477,7 +475,7 @@
                                     <input type="submit" id="buttonDeleteUser" class="btn btn-danger" value="Delete">
                                 </div>
                             </div>
-                            </form>                                
+                            </form> 
                         </div>
                 </div>
             </div>
@@ -501,6 +499,8 @@
     <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
     <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    {{!-- TODO  --}}
+    <script src="../lib/bootbox.min.js" crossorigin="anonymous"></script>
     <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
     <script src="../js/const.js" crossorigin="anonymous"></script>
     <script src="../js/util.js" crossorigin="anonymous"></script>
