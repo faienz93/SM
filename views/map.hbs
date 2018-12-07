@@ -46,6 +46,7 @@
     
 
 
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="active">
@@ -532,6 +533,10 @@
         <script>alertMessage("{{  expressFlashWarning }}", "warning"); </script>
     {{else if expressFlashInfo }}        
         <script>alertMessage("{{  expressFlashInfo }}", "info"); </script>
+    {{/if}}
+
+    {{#if errorMex}}
+        <script>alertMessage("{{  errorMex }} + ciao", "danger"); </script>
     {{/if}}
 
 </body>

@@ -28,16 +28,18 @@ router.post('/add', function (req, res) {
             
             if (err) {
                 req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
-                res.redirect('map');  
+                res.render('map');  
+                
+             
             }else {
                 req.flash('success', "Your registration was successful");            
-                res.redirect('map');
+                res.redirect('/');
             }
             
           });
        }else {
         req.flash('danger', "Make sure all fields have been filled or password not Matching. Try again.");            
-        res.redirect('map');
+        res.redirect('/');
        }
 });
 
@@ -54,7 +56,7 @@ router.post('/update', function (req, res) {
             Registration.findById(req.body.id, function (err, user) {
                 if (err) {
                     req.flash('danger', err.message);
-                    res.redirect('map'); 
+                    res.redirect('/'); 
                 }else {
                     user.username = req.body.username;
                     user.email = req.body.email;
@@ -62,10 +64,10 @@ router.post('/update', function (req, res) {
                     user.save(function (err, updatedTank) {
                         if (err) {
                             req.flash('danger', err.message);
-                            res.redirect('map'); 
+                            res.redirect('/'); 
                         }else {
                             req.flash('success', "Your updating was successful");            
-                            res.redirect('map');
+                            res.redirect('/');
                         }                        
                     });
                 }
@@ -76,7 +78,7 @@ router.post('/update', function (req, res) {
 
     }else {
         req.flash('danger', "Make sure all fields have been filled or password not Matching. Try again.");
-        res.redirect('map');  
+        res.redirect('/');  
        }
     
 });
@@ -93,15 +95,15 @@ router.post('/delete', function(req,res){
     Registration.findById(user._id, function (err, user) {
         if (err) {
             req.flash('danger', err.message);
-            res.redirect('map'); 
+            res.redirect('/'); 
         }else {
             user.remove(function (err, updatedTank) {
                 if (err) {
                     req.flash('danger', err.message);
-                    res.redirect('map'); 
+                    res.redirect('/'); 
                 }else {
                     req.flash('success', "Your deleting was successful");            
-                    res.redirect('map');
+                    res.redirect('/');
                 }   
               });
         }        

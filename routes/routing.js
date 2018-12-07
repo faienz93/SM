@@ -21,7 +21,7 @@ basic.on('success', (result, req) => {
 // app.use(express.static(path.join(__dirname, '/')));
 
 
-router.get('/map', function (req, res) {
+router.get('/', function (req, res) {
 
     /**
      * Display all user from DB
@@ -37,7 +37,7 @@ router.get('/map', function (req, res) {
             
         })
         .catch(() => { 
-            res.render('result', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
          });
 
 });
@@ -71,7 +71,7 @@ router.get('/allRegistration', auth.connect(basic), (req, res) => {
 
 
 
-router.get('/', function (req, res, next) {
+router.get('/login', function (req, res, next) {
     res.render('login', { title: "SM - Login" });
 
     // if you have layout you can specify if you want to use him
