@@ -27,7 +27,17 @@ router.post('/add', [
     check('email')
                 .isLength({ min: 1 })
                 .withMessage('Email is required.')
-                .isEmail().withMessage('Please provide a valid email address'),
+                .isEmail().withMessage('Please provide a valid email address')
+                .custom(async function(email){
+                    var user = await Registration.find({'email':email})
+                    if (user.length!=0) {
+                        if(user[0].email){
+                            throw new Error('E-mail already in use');
+                        }else {
+                            return value;
+                        }
+                    }
+                }),
     check('password')
                 .isLength({ min: 1 })
                 .withMessage('Passwords is required.')
