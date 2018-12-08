@@ -297,7 +297,10 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>
-                                            <input type="password" class="form-control" placeholder="Password123" name="password" required>
+                                            <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormAdd" name="password" required>
+                                            <!-- Meter password -->
+                                            <meter max="4" id="password-strength-meter-add"></meter>
+                                            <p class="passwordText" id="password-strength-text-add"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -408,6 +411,9 @@
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>
                                             <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormUpdate" name="password" required disabled>
+                                             <!-- Meter password -->
+                                            <meter max="4" id="password-strength-meter-update"></meter>
+                                            <p class="passwordText" id="password-strength-text-update"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -499,9 +505,9 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    {{!-- TODO  --}}
+    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>  
     <script src="../lib/bootbox.min.js" crossorigin="anonymous"></script>
+      <script src="../lib/zxcvbn.js" crossorigin="anonymous"></script>
     <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
     <script src="../js/const.js" crossorigin="anonymous"></script>
     <script src="../js/util.js" crossorigin="anonymous"></script>
