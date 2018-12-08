@@ -42,3 +42,28 @@ https://github.com/jack2gs/express-flash-2
 
 
 https://stackoverflow.com/questions/25480633/how-do-i-display-flash-message-without-page-refresh-using-express-and-connect-fl
+
+EXPRESS-VALIDATOR
+https://express-validator.github.io/docs/index.html
+
+
+
+check('email').custom(value => {       
+        
+        Registration.find({'email':value }, function(err, user) {           
+            //if user found.
+            if (user.length!=0) {
+                if(user[0].email){
+                    console.log('E-mail already in use')
+                    throw new Error('E-mail already in use');
+                }
+            }
+        });
+    }),
+    check('passwordConfirm').custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error('Password confirmation does not match password');
+        // console.log('Password confirmation does not match password')
+          
+        }
+      })
