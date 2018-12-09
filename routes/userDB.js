@@ -183,15 +183,15 @@ router.post('/delete', function (req, res) {
     Registration.findById(user._id, function (err, user) {
         if (err) {
             req.flash('danger', err.message);
-            res.redirect('/');
+            res.redirect('/formDeleteUser');
         } else {
             user.remove(function (err, updatedTank) {
                 if (err) {
                     req.flash('danger', err.message);
-                    res.redirect('/');
+                    res.redirect('/formDeleteUser');
                 } else {
                     req.flash('success', "Your deleting was successful");
-                    res.redirect('/');
+                    res.redirect('/formDeleteUser');
                 }
             });
         }

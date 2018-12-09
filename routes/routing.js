@@ -27,28 +27,63 @@ router.get('/', function (req, res) {
     /**
      * Display all user from DB
      */
-    // Registration.find()
-    //     .then((registrations) => {
-    //         //res.render(path.join(__dirname, '../views/map.html'));            
-    //         // i wat send a notification of result of specific operation
-    //         res.render('index', {title: "SM", users: registrations,  expressFlashSuccess: req.flash('success'),                                                      
-    //                                                   expressFlashDanger: req.flash('danger'),
-    //                                                   expressFlashWarning: req.flash('warning'), 
-    //                                                   expressFlashInfo: req.flash('info'), });
+    Registration.find()
+        .then((registrations) => {
+            //res.render(path.join(__dirname, '../views/map.html'));            
+            // i wat send a notification of result of specific operation
+            res.render('map', {title: "SM", users: registrations,  expressFlashSuccess: req.flash('success'),                                                      
+                                                      expressFlashDanger: req.flash('danger')});
             
-    //     })
-    //     .catch(() => { 
-    //         res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
-    //      });
+        })
+        .catch(() => { 
+            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+         });
 
-    res.render('map', {title: "SM"});
+    // res.render('map', {title: "SM"});
 
 });
 
-router.get('/redirect', function (req, res) {
-    //   res.render(path.join(__dirname, '../views/map.html'));
-    res.render('map');
+
+router.get('/formAddUser', function (req, res) {
+    res.render('adduser', {title: "SM - ADD USER"});
 });
+
+router.get('/formUpdateUser', function (req, res) {
+    
+    /**
+     * Display all user from DB
+     */
+    Registration.find()
+        .then((registrations) => {
+            //res.render(path.join(__dirname, '../views/map.html'));            
+            // i wat send a notification of result of specific operation
+            res.render('updateuser', {title: "SM - UPDATE USER", users: registrations});
+            
+        })
+        .catch(() => { 
+            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+         });
+   
+});
+
+
+router.get('/formDeleteUser', function (req, res){
+    /**
+     * Display all user from DB
+     */
+    Registration.find()
+        .then((registrations) => {
+            //res.render(path.join(__dirname, '../views/map.html'));            
+            // i wat send a notification of result of specific operation
+            res.render('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
+            expressFlashDanger: req.flash('danger')});
+            
+        })
+        .catch(() => { 
+            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+         });
+})
+
 
 
 
@@ -70,9 +105,7 @@ router.get('/login', function (req, res, next) {
     // res.render('login', {layout:false, title: "HELLO WORLD"});
 });
 
-router.get('/adduser', function (req, res) {
-    res.render('adduser',{title: 'SM - Add new user'});
-});
+
 
 
 
