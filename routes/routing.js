@@ -41,7 +41,7 @@ router.get('/', function (req, res) {
     //         res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
     //      });
 
-    res.render('index', {title: "SM"});
+    res.render('map', {title: "SM"});
 
 });
 
