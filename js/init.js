@@ -40,13 +40,13 @@ function handleForm() {
    * This value is equal to ID of div that i 
    * want show or hide. 
    */
-  $('.swapDiv').on("click", function () {
-    var operation = $(this).attr("value");
-      $(".mainDiv").each(function () {
-        $(this).css("display", "none");
-      });
-      $('#'+operation).css("display", "block");      
-  });
+  // $('.swapDiv').on("click", function () {
+  //   var operation = $(this).attr("value");
+  //     $(".mainDiv").each(function () {
+  //       $(this).css("display", "none");
+  //     });
+  //     $('#'+operation).css("display", "block");      
+  // });
 
   // Reset value of form Add User 
   $('#resetAddUser').click(function () {

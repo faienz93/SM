@@ -23,28 +23,17 @@ basic.on('success', (result, req) => {
 
 
 router.get('/', function (req, res) {
-
-    /**
-     * Display all user from DB
-     */
-    Registration.find()
-        .then((registrations) => {
-            //res.render(path.join(__dirname, '../views/map.html'));            
-            // i wat send a notification of result of specific operation
-            res.render('map', {title: "SM", users: registrations,  expressFlashSuccess: req.flash('success'),                                                      
-                                                      expressFlashDanger: req.flash('danger')});
-            
-        })
-        .catch(() => { 
-            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
-         });
-
-    // res.render('map', {title: "SM"});
+    res.status(200);
+    res.header("Content-Type", "text/html");
+    res.render('map', {title: "SM"});
+    // res.send(JSON.stringify(Obj));
 
 });
 
 
 router.get('/formAddUser', function (req, res) {
+    res.status(200);
+    res.header("Content-Type", "text/html");
     res.render('adduser', {title: "SM - ADD USER"});
 });
 
@@ -80,7 +69,7 @@ router.get('/formDeleteUser', function (req, res){
             
         })
         .catch(() => { 
-            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.render('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
          });
 })
 
