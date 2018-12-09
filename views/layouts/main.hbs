@@ -1,39 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{title}}</title>
-	<meta name="description" content="In this view you can see the login page ">
-	<meta name="author" content="Antonio Faienza">
-	
-	<!-- Failed to load resource: the server responded with a status of 404 (NOT FOUND) favicon
-    REF: https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
-	<link rel="shortcut icon" href="#" />
-
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css" crossorigin="anonymous">
-
-	<!-- Font Awesome JS -->
-	<script defer src="../lib/fontawesome/solid.js" crossorigin="anonymous"></script>
-	<script defer src="../lib/fontawesome/fontawesome.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../css/login-registration.css">
-	<style>
-		html,body{
-		background-color: black;
-		}
-	</style>
+    {{>head}}
+    <title>{{title}}</title>
 </head>
-
 <body>
-	
-    {{{body}}}
-	<script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-	<script src="../lib/popper.min.js" crossorigin="anonymous"></script>
-	<script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
-</body>
+       {{!-- <div class="wrapper"> --}}
+        {{>navbar}}
+        {{>sidebar}}
+       {{!-- </div> --}}
+    
+ 
+        {{{body}}}
+  
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Load Scripts
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    {{!-- TODO  --}}
+    <script src="../lib/bootbox.min.js" crossorigin="anonymous"></script>
+    <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
+    <script src="../js/const.js" crossorigin="anonymous"></script>
+    <script src="../js/util.js" crossorigin="anonymous"></script>
+    <script src="../js/init.js" crossorigin="anonymous"></script>
+    <script src="../js/navbar.js" crossorigin="anonymous"></script>
+    <script src="../js/sidebar.js" crossorigin="anonymous"></script>
+    <script src="../js/map.js" crossorigin="anonymous"></script>
 
+
+    <!-- OpenLayer JS -->
+    <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="../lib/OpenLayers/ol.js"></script>
+    <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Message Error
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- In this point I show the result of a specific operation -->
+    {{#if expressFlashSuccess}}
+        <script>alertMessage("{{  expressFlashSuccess }}", "success"); </script>        
+    {{else if expressFlashDanger }}        
+        <script>alertMessage("{{  expressFlashDanger }}", "danger"); </script>
+    {{/if}}
+</body>
 </html>

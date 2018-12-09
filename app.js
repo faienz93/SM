@@ -19,7 +19,7 @@ var cookieParser = require('cookie-parser');
 var session = require("express-session");
 var flash = require('connect-flash');
 var exphbs  = require("express-handlebars");
-var app = express();
+
 
 
 
@@ -39,7 +39,12 @@ var hbs = exphbs.create({
   helpers: {
     json: function (context) { 
       return JSON.stringify(context);
-      } 
+      },
+      section: function(name, options){
+        if(!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
+    }
   },
 
 
@@ -53,7 +58,7 @@ var hbs = exphbs.create({
    */
   defaultLayout: 'main',  // name of the layout file name i.e main.hbs
   layoutsDir: path.join(__dirname, '/views/layouts/'), // dir where is contained the layout file
-  
+  partialsDir: path.join(__dirname, '/views/partials/')
 });
 
 
