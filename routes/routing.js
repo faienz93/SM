@@ -34,7 +34,7 @@ router.get('/', function (req, res) {
 router.get('/formAddUser', function (req, res) {
     res.status(200);
     res.header("Content-Type", "text/html");
-    res.render('adduser', {title: "SM - ADD USER"});
+    res.renderPjax('adduser', {title: "SM - ADD USER"});
 });
 
 router.get('/formUpdateUser', function (req, res) {
@@ -46,11 +46,11 @@ router.get('/formUpdateUser', function (req, res) {
         .then((registrations) => {
             //res.render(path.join(__dirname, '../views/map.html'));            
             // i wat send a notification of result of specific operation
-            res.render('updateuser', {title: "SM - UPDATE USER", users: registrations});
+            res.renderPjax('updateuser', {title: "SM - UPDATE USER", users: registrations});
             
         })
         .catch(() => { 
-            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.renderPjax('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
          });
    
 });
@@ -64,12 +64,12 @@ router.get('/formDeleteUser', function (req, res){
         .then((registrations) => {
             //res.render(path.join(__dirname, '../views/map.html'));            
             // i wat send a notification of result of specific operation
-            res.render('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
+            res.renderPjax('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
             expressFlashDanger: req.flash('danger')});
             
         })
         .catch(() => { 
-            res.render('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.renderPjax('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
          });
 })
 

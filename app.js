@@ -19,6 +19,7 @@ var cookieParser = require('cookie-parser');
 var session = require("express-session");
 var flash = require('connect-flash');
 var exphbs  = require("express-handlebars");
+var pjax    = require('express-pjax');
 
 
 
@@ -83,7 +84,8 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }));
-app.use(flash())
+app.use(flash());
+app.use(pjax());
 
 
 /**

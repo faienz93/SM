@@ -10,6 +10,8 @@
 
 $(document).ready(function () {
 
+  $('a[data-pjax]').pjax();
+  
   // Setting navbar
   navbar();
 

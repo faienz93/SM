@@ -128,13 +128,13 @@
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="operationDB">
                         <li value="addUser" class="swapDiv">
-                            <a href="http://127.0.0.1:3000/formAddUser">Add User</a>
+                            <a href="http://127.0.0.1:3000/formAddUser" data-pjax='#main'>Add User</a>
                         </li>
                         <li value="updateUser" class="swapDiv">
-                            <a href="http://127.0.0.1:3000/formUpdateUser">Modify User</a>
+                            <a href="http://127.0.0.1:3000/formUpdateUser" data-pjax='#main'>Modify User</a>
                         </li>
                         <li value="deleteUser" class="swapDiv">
-                            <a href="http://127.0.0.1:3000/formDeleteUser">Delete User</a>
+                            <a href="http://127.0.0.1:3000/formDeleteUser" data-pjax='#main'>Delete User</a>
                         </li>
 
                     </ul>
@@ -202,7 +202,7 @@
                     </div>
                 </div>
             </nav>
-            <div id="fullscreen" class="fullscreen">
+            <div id="main" class="main">
                 
                 {{{body}}}
                 
@@ -224,8 +224,10 @@
     <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
     <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
     {{!-- TODO  --}}
     <script src="../lib/bootbox.min.js" crossorigin="anonymous"></script>
+    <script src="../lib/jquery.pjax.js" crossorigin="anonymous"></script>
     <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
     <script src="../js/const.js" crossorigin="anonymous"></script>
     <script src="../js/util.js" crossorigin="anonymous"></script>
