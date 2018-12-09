@@ -47,18 +47,7 @@ router.get('/redirect', function (req, res) {
     res.render('map');
 });
 
-// router.post('/addUser', function (req, res) {
-//     console.log(req.body);
-//     const registration = new Registration(req.body);
-//     registration.save()
-//         .then(() => {
-//             res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
-//         })
-//         .catch(() => {
-//             res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
-//         });   
 
-// });
 
 // I see all people registred
 router.get('/allRegistration', auth.connect(basic), (req, res) => {
@@ -75,14 +64,11 @@ router.get('/login', function (req, res, next) {
     res.render('login', { title: "SM - Login" });
 
     // if you have layout you can specify if you want to use him
-    // res.render('home', {layout:false, title: "HELLO WORLD"});
+    // res.render('login', {layout:false, title: "HELLO WORLD"});
 });
 
-router.get('/registration', function (req, res, next) {
-    res.render('registration', { title: "SM - Registration" });
-
-    // if you have layout you can specify if you want to use him
-    // res.render('home', {layout:false, title: "HELLO WORLD"});
+router.get('/adduser', function (req, res) {
+    res.render('addUser',{layout:false});
 });
 
 

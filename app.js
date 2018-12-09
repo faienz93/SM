@@ -40,7 +40,7 @@ var hbs = exphbs.create({
     json: function (context) { 
       return JSON.stringify(context);
       } 
-  }
+  },
 
 
    
@@ -51,8 +51,8 @@ var hbs = exphbs.create({
    * 
    * REF: https://www.npmjs.com/package/express-handlebars 
    */
-  // defaultLayout: 'main',  --> name of the layout file name i.e main.hbs
-  // layoutsDir: path.join(__dirname, '/views/layouts/'), // dir where is contained the layout file
+  defaultLayout: 'main',  // name of the layout file name i.e main.hbs
+  layoutsDir: path.join(__dirname, '/views/layouts/'), // dir where is contained the layout file
   
 });
 
