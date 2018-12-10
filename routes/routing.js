@@ -23,10 +23,23 @@ basic.on('success', (result, req) => {
 
 
 router.get('/', function (req, res) {
+    
     res.status(200);
     res.header("Content-Type", "text/html");
     res.render('map', {title: "SM"});
     // res.send(JSON.stringify(Obj));
+
+});
+
+router.get('/rendermap', function (req, res) {
+
+    
+    // todelete
+    // console.log(req.query.map);
+    // console.log(req.query.type)    
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({map:req.query.map, type: req.query.type }));
+ 
 
 });
 
@@ -44,7 +57,8 @@ router.get('/formUpdateUser', function (req, res) {
      */
     Registration.find()
         .then((registrations) => {
-            //res.render(path.join(__dirname, '../views/map.html'));            
+            res.status(200);
+            res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
             res.renderPjax('updateuser', {title: "SM - UPDATE USER", users: registrations});
             
@@ -62,7 +76,8 @@ router.get('/formDeleteUser', function (req, res){
      */
     Registration.find()
         .then((registrations) => {
-            //res.render(path.join(__dirname, '../views/map.html'));            
+            res.status(200);
+            res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
             res.renderPjax('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
             expressFlashDanger: req.flash('danger')});

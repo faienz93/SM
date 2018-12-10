@@ -44,7 +44,7 @@ function map() {
 
 
 
-  var layers = map.getLayers().array_;
+  var layers = map.getLayers().getArray();
   for (var i = 0; i < layers.length; ++i) {
     layers[i].setVisible("OSM");
   }
@@ -52,42 +52,78 @@ function map() {
   geocoder();
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
-  $('.selected-layer').on("click", function () {
-    var layerSelected = $(this).attr("id");
-    var groupIdHtml = $(this).parent().attr('id');
+  $('.selected-layer').click(function (event) {
+    event.preventDefault();
+    var url = $(this).find('a').attr('href');
+    $.ajax({
+      dataType: "json",
+      url: url,
+      method: 'GET',
+      success: function (result, status) {
+        var type = result.type;
+        var mapview = result.map;
+        var groupSelected = getGroup(mapview);
+        map.setLayerGroup(groupSelected);
 
-    var groupSelected = getGroup(groupIdHtml);
-    map.setLayerGroup(groupSelected);
-    var layers = map.getLayers().getArray();
-    var debugLayer = getCurrentLayerByTitle(layers, "Debug");
+        var layers = map.getLayers().getArray();
+        var debugLayer = getCurrentLayerByTitle(layers, "Debug");
 
-    // disable debug if active a different view
-    if (debugLayer != undefined) {
-      var index = layers.indexOf(debugLayer);
-      layers.splice(index, 1);
-    }
+        // disable debug if active a different view
+        if (debugLayer != undefined) {
+          var index = layers.indexOf(debugLayer);
+          layers.splice(index, 1);
+        }
 
-    for (var i = 0; i < layers.length; ++i) {
-      if (groupSelected.values_.title === "Bing") {
-        layers[i].setVisible(bingStyles[i] === layerSelected);
-      } else if (groupSelected.values_.title === "Here") {
-        layers[i].setVisible(hereStyles[i].scheme === layerSelected);
-      } else if (groupSelected.values_.title === "Stamen") {
-        layers[i].setVisible(stamenStyles[i] === layerSelected);
-      } else {
-        layers[i].setVisible("OSM");
+        for (var i = 0; i < layers.length; ++i) {
+          if (groupSelected.values_.title === "Bing") {
+            layers[i].setVisible(bingStyles[i] === type);
+          } else if (groupSelected.values_.title === "Here") {
+            layers[i].setVisible(hereStyles[i].scheme === type);
+          } else if (groupSelected.values_.title === "Stamen") {
+            layers[i].setVisible(stamenStyles[i] === type);
+          } else {
+            layers[i].setVisible("OSM");
+          }
+        }
+      },
+      error: function (result, status) {
+        console.log(result);
       }
-    }
+    })
+    return false;
   });
 
+
+
+
   // Define click debug
-  $('.selected-debug').on("click", function () {
-    var currentLayers = map.getLayers().getArray();
+  $('.selected-debug').on("click", function (event) {
+    event.preventDefault();
+    var url = $(this).find('a').attr('href');
+    console.log(url);
+    $.ajax({
+      dataType: "json",
+      url: url,
+      method: 'GET',
+      success: function (result, status) {
+        // var type = result.type;
+        // var mapview = result.map;
+        var currentLayers = map.getLayers().getArray();
     var currentLayer = getCurrentLayerByVisible(currentLayers);
     var deb = debugLayer(currentLayer.getSource());
     map.getLayers().getArray().push(deb);
     alertMessage("Zoom in, Zoom out to see the tiles", "info");
+        
+      },
+      error: function (result, status) {
+        console.log(result);
+      }
+    
+
+    
   });
+  return false;
+});
 
 
   // default value of filter
@@ -340,7 +376,7 @@ function geocoder() {
     var feature = evt.feature;
     var coord = evt.coordinate;
     var address = evt.address;
-    
+
 
     // application specific
     // app.addMarker(feature, coord); // TODO ADD MARKERS
@@ -365,7 +401,7 @@ function popup() {
   /**
    * Elements that make up the popup.
    */
-  var container = $('#popup')[0];     
+  var container = $('#popup')[0];
   var closer = $('#popup-closer')[0];
   /**
    * Create an overlay to anchor the popup to the map.
@@ -382,7 +418,7 @@ function popup() {
    * Add a click handler to hide the popup.
    * @return {boolean} Don't follow the href.
    */
-  closer.onclick = function() {
+  closer.onclick = function () {
     popup.setPosition(undefined);
     closer.blur();
     return false;

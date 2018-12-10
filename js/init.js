@@ -10,6 +10,7 @@
 
 $(document).ready(function () {
 
+  // I enable my client to send request with pjax
   $('a[data-pjax]').pjax();
   
   // Setting navbar
