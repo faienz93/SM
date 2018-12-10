@@ -31,7 +31,7 @@ router.get('/map', function (req, res) {
 
 });
 
-router.get('/rendermap', function (req, res) { 
+router.get('/map.type', function (req, res) { 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({map:req.query.map, type: req.query.type }));
 });
