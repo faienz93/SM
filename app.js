@@ -19,7 +19,7 @@ var cookieParser = require('cookie-parser');
 var session = require("express-session");
 var flash = require('connect-flash');
 var exphbs  = require("express-handlebars");
-var pjax    = require('express-pjax');
+var pjax    = require('express-pjax'); 
 
 
 
