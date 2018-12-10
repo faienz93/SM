@@ -75,12 +75,12 @@ router.post('/add', [
         if (err) {
             console.log(err);
             req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
-            res.redirect('/');
+            res.redirect('/map');
 
 
         } else {
             req.flash('success', "Your registration was successful");
-            res.redirect('/');
+            res.redirect('/map');
         }
 
     });
@@ -147,7 +147,7 @@ router.post('/update', [
     Registration.findById(req.body.id, function (err, user) {
         if (err) {
             req.flash('danger', err.message);
-            res.redirect('/');
+            res.redirect('/map');
         } else {
             user.username = req.body.username;
             user.email = req.body.email;
@@ -155,10 +155,10 @@ router.post('/update', [
             user.save(function (err, updatedTank) {
                 if (err) {
                     req.flash('danger', err.message);
-                    res.redirect('/');
+                    res.redirect('/map');
                 } else {
                     req.flash('success', "Your updating was successful");
-                    res.redirect('/');
+                    res.redirect('/map');
                 }
             });
         }
