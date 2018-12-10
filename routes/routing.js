@@ -22,7 +22,7 @@ basic.on('success', (result, req) => {
 // app.use(express.static(path.join(__dirname, '/')));
 
 
-router.get('/', function (req, res) {
+router.get('/map', function (req, res) {
     
     res.status(200);
     res.header("Content-Type", "text/html");
@@ -31,16 +31,9 @@ router.get('/', function (req, res) {
 
 });
 
-router.get('/rendermap', function (req, res) {
-
-    
-    // todelete
-    // console.log(req.query.map);
-    // console.log(req.query.type)    
+router.get('/rendermap', function (req, res) { 
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({map:req.query.map, type: req.query.type }));
- 
-
 });
 
 
