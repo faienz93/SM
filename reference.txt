@@ -53,3 +53,6 @@ https://stackoverflow.com/questions/44901025/expressjs-change-route-without-refr
 HANDLE SERVER RESPONSE
 https://stackoverflow.com/questions/46372715/ajax-post-data-from-form-to-send-to-express-js-body-parser --> it conteint multer for upoad file
 https://stackoverflow.com/questions/44415130/how-can-i-send-information-from-nodejs-server-to-client-side
+
+ERROR HANDLING
+https://expressjs.com/it/guide/error-handling.html
