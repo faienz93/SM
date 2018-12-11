@@ -40,6 +40,8 @@ function map() {
 
   // we define here the layer 
   // to maintain the same approach of access to the layers
+  // I read the param of url that specify which view I want.
+  // if the url has not param i set the default view: OSM
   var m = getUrlParameter('map');
   var t = getUrlParameter('type');
   m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)
@@ -52,6 +54,9 @@ function map() {
     var url = $(this).find('a').attr('href');
     var u = 'http://' + window.location.hostname + window.location.pathname;
 
+    // if i change view for example form user i need to render before the 
+    // view and then get the value. This is a constraint of Express 
+    // who does not want to render and send object at the same time
     if (u != 'http://127.0.0.1/map') {
       var newUrl = url.replace('map.type', 'map');
       window.location.href = newUrl;
@@ -142,6 +147,14 @@ function map() {
 }
 
 
+/**
+ * This method draw the view of open layer
+ * 
+ * @method setCurrentLayer
+ * 
+ * @param mapview {String} - set the view for example Stamen
+ * @param type {String} - set the type of view. For example terrain
+ */
 function setCurrentLayer(mapview, type) {
   var groupSelected = getGroup(mapview);
   map.setLayerGroup(groupSelected);
