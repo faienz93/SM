@@ -58,5 +58,6 @@ ERROR HANDLING
 https://expressjs.com/it/guide/error-handling.html
 
 SEND JSON AND RENDER AT SAME TIME
+https://stackoverflow.com/questions/31961171/make-http-request-to-get-json-before-express-js-res-render
 https://stackoverflow.com/questions/21172889/express-send-a-page-and-custom-data-to-the-browser-in-a-single-request
 https://stackoverflow.com/questions/25300017/how-to-ensure-the-javascript-is-at-the-bottom-of-the-code-in-express-handlebars
