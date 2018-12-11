@@ -22,6 +22,11 @@ basic.on('success', (result, req) => {
 // app.use(express.static(path.join(__dirname, '/')));
 
 
+
+router.get('/', function(req, res) {
+    res.redirect('/map');
+});
+
 router.get('/map', function (req, res) {
     
     res.status(200);

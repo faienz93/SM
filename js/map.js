@@ -36,60 +36,43 @@ function map() {
     })
   });
 
+  geocoder();
+
   // we define here the layer 
   // to maintain the same approach of access to the layers
-  var osm = getGroup("OSM");
-  map.setLayerGroup(osm);
+  var m = getUrlParameter('map');
+  var t = getUrlParameter('type');
+  m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)
 
 
-
-
-  var layers = map.getLayers().getArray();
-  for (var i = 0; i < layers.length; ++i) {
-    layers[i].setVisible("OSM");
-  }
-
-  geocoder();
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
   $('.selected-layer').click(function (event) {
     event.preventDefault();
     var url = $(this).find('a').attr('href');
-    $.ajax({
-      dataType: "json",
-      url: url,
-      method: 'GET',
-      success: function (result, status) {
-        var type = result.type;
-        var mapview = result.map;
-        var groupSelected = getGroup(mapview);
-        map.setLayerGroup(groupSelected);
+    var u = 'http://' + window.location.hostname + window.location.pathname;
 
-        var layers = map.getLayers().getArray();
-        var debugLayer = getCurrentLayerByTitle(layers, "Debug");
-
-        // disable debug if active a different view
-        if (debugLayer != undefined) {
-          var index = layers.indexOf(debugLayer);
-          layers.splice(index, 1);
+    if (u != 'http://127.0.0.1/map') {
+      var newUrl = url.replace('map.type', 'map');
+      window.location.href = newUrl;
+    } else {
+      $.ajax({
+        dataType: "json",
+        url: url,
+        method: 'GET',
+        success: function (result, status) {
+          var type = result.type;
+          var mapview = result.map;
+          setCurrentLayer(mapview, type)
+        },
+        error: function (result, status) {
+          console.log("ERROR");
+          console.log(result);
         }
+      })
 
-        for (var i = 0; i < layers.length; ++i) {
-          if (groupSelected.values_.title === "Bing") {
-            layers[i].setVisible(bingStyles[i] === type);
-          } else if (groupSelected.values_.title === "Here") {
-            layers[i].setVisible(hereStyles[i].scheme === type);
-          } else if (groupSelected.values_.title === "Stamen") {
-            layers[i].setVisible(stamenStyles[i] === type);
-          } else {
-            layers[i].setVisible("OSM");
-          }
-        }
-      },
-      error: function (result, status) {
-        console.log(result);
-      }
-    })
+    }
+
     return false;
   });
 
@@ -100,7 +83,7 @@ function map() {
   $('.selected-debug').on("click", function (event) {
     event.preventDefault();
     var url = $(this).find('a').attr('href');
-    console.log(url);
+
     $.ajax({
       dataType: "json",
       url: url,
@@ -109,21 +92,21 @@ function map() {
         // var type = result.type;
         // var mapview = result.map;
         var currentLayers = map.getLayers().getArray();
-    var currentLayer = getCurrentLayerByVisible(currentLayers);
-    var deb = debugLayer(currentLayer.getSource());
-    map.getLayers().getArray().push(deb);
-    alertMessage("Zoom in, Zoom out to see the tiles", "info");
-        
+        var currentLayer = getCurrentLayerByVisible(currentLayers);
+        var deb = debugLayer(currentLayer.getSource());
+        map.getLayers().getArray().push(deb);
+        alertMessage("Zoom in, Zoom out to see the tiles", "info");
+
       },
       error: function (result, status) {
         console.log(result);
       }
-    
 
-    
+
+
+    });
+    return false;
   });
-  return false;
-});
 
 
   // default value of filter
@@ -158,6 +141,32 @@ function map() {
 
 }
 
+
+function setCurrentLayer(mapview, type) {
+  var groupSelected = getGroup(mapview);
+  map.setLayerGroup(groupSelected);
+
+  var layers = map.getLayers().getArray();
+  var debugLayer = getCurrentLayerByTitle(layers, "Debug");
+
+  // disable debug if active a different view
+  if (debugLayer != undefined) {
+    var index = layers.indexOf(debugLayer);
+    layers.splice(index, 1);
+  }
+
+  for (var i = 0; i < layers.length; ++i) {
+    if (groupSelected.values_.title === "Bing") {
+      layers[i].setVisible(bingStyles[i] === type);
+    } else if (groupSelected.values_.title === "Here") {
+      layers[i].setVisible(hereStyles[i].scheme === type);
+    } else if (groupSelected.values_.title === "Stamen") {
+      layers[i].setVisible(stamenStyles[i] === type);
+    } else {
+      layers[i].setVisible("OSM");
+    }
+  }
+}
 
 /**
  * This function return a default OSM
