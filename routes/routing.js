@@ -42,52 +42,6 @@ router.get('/map.type', function (req, res) {
 });
 
 
-router.get('/formAddUser', function (req, res) {
-    res.status(200);
-    res.header("Content-Type", "text/html");
-    res.renderPjax('adduser', {title: "SM - ADD USER"});
-});
-
-router.get('/formUpdateUser', function (req, res) {
-    
-    /**
-     * Display all user from DB
-     */
-    Registration.find()
-        .then((registrations) => {
-            res.status(200);
-            res.header("Content-Type", "text/html");        
-            // i wat send a notification of result of specific operation
-            res.renderPjax('updateuser', {title: "SM - UPDATE USER", users: registrations});
-            
-        })
-        .catch(() => { 
-            res.renderPjax('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
-         });
-   
-});
-
-
-router.get('/formDeleteUser', function (req, res){
-    /**
-     * Display all user from DB
-     */
-    Registration.find()
-        .then((registrations) => {
-            res.status(200);
-            res.header("Content-Type", "text/html");        
-            // i wat send a notification of result of specific operation
-            res.renderPjax('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
-            expressFlashDanger: req.flash('danger')});
-            
-        })
-        .catch(() => { 
-            res.renderPjax('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
-         });
-})
-
-
-
 
 // I see all people registred
 router.get('/allRegistration', auth.connect(basic), (req, res) => {

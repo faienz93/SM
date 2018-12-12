@@ -15,10 +15,21 @@ const router = express.Router();
 var Registration = mongoose.model('Registration');
 const { body, check, validationResult } = require('express-validator/check');
 
+
+
+/* ---------------------------------------------------
+    ADD USER
+----------------------------------------------------- */
+router.get('/adduser', function (req, res) {
+    res.status(200);
+    res.header("Content-Type", "text/html");
+    res.renderPjax('adduser', {title: "SM - ADD USER"});
+});
+
 /**
  * Add a new User to DB
  */
-router.post('/add', [
+router.post('/adduser', [
     // handle username
     body('username')
         .isLength({ min: 1 })
@@ -87,10 +98,30 @@ router.post('/add', [
 
 });
 
-/**
- * Find the value to update
- */
-router.post('/update', [
+/* ---------------------------------------------------
+    UPDATE USER
+----------------------------------------------------- */
+// Find the value to update
+router.get('/updateuser', function (req, res) {
+    
+    /**
+     * Display all user from DB
+     */
+    Registration.find()
+        .then((registrations) => {
+            res.status(200);
+            res.header("Content-Type", "text/html");        
+            // i wat send a notification of result of specific operation
+            res.renderPjax('updateuser', {title: "SM - UPDATE USER", users: registrations});
+            
+        })
+        .catch(() => { 
+            res.renderPjax('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+         });
+   
+});
+
+router.post('/updateuser', [
     // handle username
     body('username')
         .isLength({ min: 1 })
@@ -166,10 +197,30 @@ router.post('/update', [
 });
 
 
-/**
- * Delete user
- */
-router.post('/delete', function (req, res) {
+/* ---------------------------------------------------
+    DELETE USER
+----------------------------------------------------- */
+// GET request for display teh form of Deleting.
+router.get('/deleteuser', function (req, res){
+    /**
+     * Display all user from DB
+     */
+    Registration.find()
+        .then((registrations) => {
+            res.status(200);
+            res.header("Content-Type", "text/html");        
+            // i wat send a notification of result of specific operation
+            res.renderPjax('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
+            expressFlashDanger: req.flash('danger')});
+            
+        })
+        .catch(() => { 
+            res.renderPjax('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+         });
+})
+
+// POST request for send the data
+router.post('/deleteuser', function (req, res) {
     console.log(req.body.deleteUser);
 
     var user = JSON.parse(req.body.deleteUser);
