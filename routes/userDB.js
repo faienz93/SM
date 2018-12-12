@@ -17,6 +17,7 @@ const { body, check, validationResult } = require('express-validator/check');
 
 
 
+
 /* ---------------------------------------------------
     ADD USER
 ----------------------------------------------------- */
@@ -82,7 +83,6 @@ router.post('/adduser', [
     }
 
     Registration.create(req.body, function (err, user) {
-
         if (err) {
             console.log(err);
             req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
