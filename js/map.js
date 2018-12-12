@@ -96,11 +96,7 @@ function map() {
       success: function (result, status) {
         // var type = result.type;
         // var mapview = result.map;
-        var currentLayers = map.getLayers().getArray();
-        var currentLayer = getCurrentLayerByVisible(currentLayers);
-        var deb = debugLayer(currentLayer.getSource());
-        map.getLayers().getArray().push(deb);
-        alertMessage("Zoom in, Zoom out to see the tiles", "info");
+        defineDebug();
 
       },
       error: function (result, status) {
@@ -146,6 +142,15 @@ function map() {
 
 }
 
+
+
+function defineDebug(){
+  var currentLayers = map.getLayers().getArray();
+        var currentLayer = getCurrentLayerByVisible(currentLayers);
+        var deb = debugLayer(currentLayer.getSource());
+        map.getLayers().getArray().push(deb);
+        alertMessage("Zoom in, Zoom out to see the tiles", "info");
+}
 
 /**
  * This method draw the view of open layer
