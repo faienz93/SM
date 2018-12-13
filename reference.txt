@@ -79,3 +79,10 @@ if (u != 'http://127.0.0.1/map') {
         ....
 where refresh the page to map and thanks tha param retrieved by "getUrlParameter" i set a new view
 
+RICORDA: 
+server-db 
+    |
+    |
+    |-> refactor-view
+            |
+            |-> refactor-map-NEW
