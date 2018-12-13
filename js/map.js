@@ -57,7 +57,8 @@ function map() {
     // if i change view for example form user i need to render before the 
     // view and then get the value. This is a constraint of Express 
     // who does not want to render and send object at the same time
-    if (u != 'http://127.0.0.1/map') {
+    if (window.location.pathname != '/map') {
+      
       var newUrl = url.replace('map.type', 'map');
       window.location.href = newUrl;
     } else {
