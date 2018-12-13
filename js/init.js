@@ -17,29 +17,40 @@ $(document).ready(function () {
   // Setting the sidebar
   sidebar();
 
-  // reset form
-  handleForm();
-
-  // Setting the map 
-  defineMap();
-
-  // Populate the form of main page when required
-  populateFormUpdate();
-
   
 
-  $('#add-new-user').click(function (event) {
-      
+  
+  
+
+  
+  $('#osm').click(function (event) {      
+    $.get('/map?map=OSM&type=osm').then(function (data) {
+      $('#main').html(data);
+    });    
+  });
+
+  $('#ciao').click(function (event) {      
+    $.get('/map?map=Here&type=normal.day').then(function (data) {
+     
+      $('#main').html(data);
+    });    
+  });
+
+  $('#add-new-user').click(function (event) {      
     $.get('/adduser').then(function (data) {
       $('#main').html(data);
-    });
-    
+    });    
   });
   
 
   $('#update-user').click(function (event) {
-    $.get('/updateuser', async= true).then(function (data) {
-      populateFormUpdate();
+    $.get('/updateuser').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
+  $('#delete-user').click(function(event){
+    $.get('/deleteuser').then(function (data) {
       $('#main').html(data);
     });
   });
@@ -47,72 +58,7 @@ $(document).ready(function () {
 });
 
 
-/**
- * This function aims to bind event to reset buttons and handler the 
- * show of div
- * @method handleForm
- */
-function handleForm() {
- 
-  /**
-   * each clickable event has the same value. 
-   * This value is equal to ID of div that i 
-   * want show or hide. 
-   */
-  // $('.swapDiv').on("click", function () {
-  //   var operation = $(this).attr("value");
-  //     $(".mainDiv").each(function () {
-  //       $(this).css("display", "none");
-  //     });
-  //     $('#'+operation).css("display", "block");      
-  // });
-
-  // Reset value of form Add User 
-  $('#resetAddUser').click(function () {
-    $('#addUserForm')[0].reset();
-  });
-
-  // Reset value of form Update User 
-  $('#resetUpdateUser').click(function () {
-    // i want avoid the rest of the field ID
-    var tempID = $('#idUserFormUpdate').val();
-
-    // I reset the form
-    $('#updateUserForm')[0].reset();
-
-    // I write agant the ID
-    $('#idUserFormUpdate').val(tempID);
-
-  });
-}
 
 
 
-/**
- * This method aims to populate the update form
- * 
- * @method populateFormUpdate
- */
-function populateFormUpdate(){
-  console.log("adlfsdjf");
-  $('select').on('change', function() {
 
-    console.log("sdjkafjsdkofjsdokfjosdfkjsdofi");
-    // at the start all field are disabled. Then when i choice from dropdown becomes enabled
-    $('#usernameUserFormUpdate').removeAttr("disabled");
-    $('#emailUserFormUpdate').removeAttr("disabled");
-    $('#passwordUserFormUpdate').removeAttr("disabled");
-    $('#confirmPasswordUserFormUpdate').removeAttr("disabled"); 
-    $('#sendUserFormUpdate').removeAttr("disabled");
-    $("#resetUpdateUser").removeAttr("disabled");
-  
-
-    // set the field with the information of value from dropdown
-    var val = jQuery.parseJSON( this.value );  
-    $('#idUserFormUpdate').val(val._id);
-    $('#usernameUserFormUpdate').val(val.username);
-    $('#emailUserFormUpdate').val(val.email);
-    $('#passwordUserFormUpdate').val(val.password);
-     
-  });
-}

@@ -7,7 +7,10 @@
  * This file contains the settings of map
  * ===========================================================================
  */
-
+$(document).ready(function(){
+     // Setting the map 
+      defineMap();
+});
 
 function defineMap() {
 
@@ -18,7 +21,7 @@ function defineMap() {
 
 
   // When inizialize the map it set with Default OSM
-  map = new ol.Map({
+  globalMap = new ol.Map({
     controls: ol.control.defaults().extend([
       new ol.control.FullScreen({
         source: 'fullscreen'
@@ -42,9 +45,16 @@ function defineMap() {
   // to maintain the same approach of access to the layers
   // I read the param of url that specify which view I want.
   // if the url has not param i set the default view: OSM
+
   var m = getUrlParameter('map');
   var t = getUrlParameter('type');
-  m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)
+  // var decodedJson = await decodeURIComponent("{{{encodedJson}}}");
+  // console.log(decodedJson);
+  // var jsonObj = JSON.parse(decodedJson);
+  // console.log(jsonObj);
+  console.log(m);
+  console.log(t);
+  // m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)
 
 
 
@@ -95,17 +105,11 @@ function defineMap() {
       url: url,
       method: 'GET',
       success: function (result, status) {
-        // var type = result.type;
-        // var mapview = result.map;
         defineDebug();
-
       },
       error: function (result, status) {
         console.log(result);
       }
-
-
-
     });
     return false;
   });
@@ -119,7 +123,7 @@ function defineMap() {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
     selectedKernel = normalize(kernels[filterSelected]);
-    map.render();
+    globalMap.render();
   });
 
 
@@ -146,10 +150,10 @@ function defineMap() {
 
 
 function defineDebug(){
-  var currentLayers = map.getLayers().getArray();
+  var currentLayers = globalMap.getLayers().getArray();
         var currentLayer = getCurrentLayerByVisible(currentLayers);
         var deb = debugLayer(currentLayer.getSource());
-        map.getLayers().getArray().push(deb);
+        globalMap.getLayers().getArray().push(deb);
         alertMessage("Zoom in, Zoom out to see the tiles", "info");
 }
 
@@ -163,9 +167,9 @@ function defineDebug(){
  */
 function setCurrentLayer(mapview, type) {
   var groupSelected = getGroup(mapview);
-  map.setLayerGroup(groupSelected);
+  globalMap.setLayerGroup(groupSelected);
 
-  var layers = map.getLayers().getArray();
+  var layers = globalMap.getLayers().getArray();
   var debugLayer = getCurrentLayerByTitle(layers, "Debug");
 
   // disable debug if active a different view
@@ -379,7 +383,7 @@ function debugLayer(currentSource) {
 function geocoder() {
 
   var p = popup();
-  map.addOverlay(p);
+  globalMap.addOverlay(p);
 
   //Instantiate with some options and add the Control
   var geocoder = new Geocoder('nominatim', {
@@ -393,7 +397,7 @@ function geocoder() {
     autoComplete: true,
     keepOpen: true
   });
-  map.addControl(geocoder);
+  globalMap.addControl(geocoder);
 
 
   // I don't want/need Geocoder layer to be visible

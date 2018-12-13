@@ -23,7 +23,7 @@ const { body, check, validationResult } = require('express-validator/check');
 ----------------------------------------------------- */
 router.get('/adduser', function (req, res) {
     res.status(200);
-    // res.header("Content-Type", "text/html");
+    res.header("Content-Type", "text/html");
     res.render('partials/adduser', {title: "SM - ADD USER"});
 });
 

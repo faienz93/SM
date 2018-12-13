@@ -11,7 +11,7 @@
 /**
  * Global Map
  */
-var map;
+var globalMap;
 
 /**
  * LONGITUDE - LATITUDE of BOLOGNA

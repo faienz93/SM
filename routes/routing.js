@@ -28,18 +28,28 @@ router.get('/', function(req, res) {
 });
 
 router.get('/map', function (req, res) {
-    
-    res.status(200);
-    res.header("Content-Type", "text/html");
-    res.render('partials/map', {title: "SM"});
+    console.log("===========")
+    console.log(req.query.map);
+    console.log(req.query.type);
+    console.log("===========")
+    if(req.query.map === undefined && req.query.type === undefined){
+        res.status(200);
+        res.header("Content-Type", "text/html");
+        res.render('partials/map', {title: "SM",map:"OSM", type: "osm"});
+    }else {    
+        res.status(200);
+        res.header("Content-Type", "text/html");
+        res.render('partials/map', {title: "SM",map:req.query.map, type: req.query.type});
+        // encodeURIComponent(JSON.stringify(jsonData)
+    }
     // res.send(JSON.stringify(Obj));
 
 });
 
-router.get('/map.type', function (req, res) { 
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({map:req.query.map, type: req.query.type }));
-});
+// router.get('/map.type', function (req, res) { 
+//     res.setHeader('Content-Type', 'application/json');
+//     res.send(JSON.stringify({map:req.query.map, type: req.query.type }));
+// });
 
 
 
