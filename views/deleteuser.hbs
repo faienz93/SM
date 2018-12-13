@@ -1,47 +1,47 @@
 <!-- 
-                ///////////////////////////////////////////////////////////////////////////////////////
-                //
-                // Delete User
-                //
-                ///////////////////////////////////////////////////////////////////////////////////////
-                -->
-                <div id="deleteUser" class="mainDiv"> <!-- style="display:none"-->
-                    <div class="card-header" id="headerUser">
-                        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Update User</h3>
-                    </div>
-                        <div class="card-body" id="cardBodyUser">
-                            <!--  -->
-                            <!--  -->
-                            <form class="form" id="deleteUserForm" role="form" autocomplete="off" onsubmit="return formSubmit(this)" action="/deleteuser" method="POST">
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Delete</label>
-                                <div class="col-lg-9">
-                                    <div class="input-group form-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                            </div>
-                                            <select id="findProfessorUpdate" data-placeholder="Begin typing a name to filter..."
-                                                class="form-control chosen-select" tabindex="4" size="0" name="deleteUser"
-                                                required>
-                                                {{#if users}}
-                                                    <option disabled selected value> Select users from {{users.length}} </option>  
-                                                    {{#each users}}
-                                                   <option value="{{json this}}">{{this.username}}</option> 
-                                                   {{/each}} 
-                                                {{else}}
-                                                <option disabled selected value> NO users available </option>  
-                                                {{/if}}       
-                                            </select>
-                                        </div>                                    
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Delete User
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<div id="deleteUser" class="mainDiv"> <!-- style="display:none"-->
+    <div class="card-header" id="headerUser">
+        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Update User</h3>
+    </div>
+        <div class="card-body" id="cardBodyUser">
+            <!--  -->
+            <!--  -->
+            <form class="form" id="deleteUserForm" role="form" autocomplete="off" onsubmit="return formSubmit(this)" action="/deleteuser" method="POST">
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Delete</label>
+                <div class="col-lg-9">
+                    <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                            <select id="findProfessorUpdate" data-placeholder="Begin typing a name to filter..."
+                                class="form-control chosen-select" tabindex="4" size="0" name="deleteUser"
+                                required>
+                                {{#if users}}
+                                    <option disabled selected value> Select users from {{users.length}} </option>  
+                                    {{#each users}}
+                                    <option value="{{json this}}">{{this.username}}</option> 
+                                    {{/each}} 
+                                {{else}}
+                                <option disabled selected value> NO users available </option>  
+                                {{/if}}       
+                            </select>
+                        </div>                                    
 
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                <div class="col-lg-9">
-                                    <input type="submit" id="buttonDeleteUser" class="btn btn-danger" value="Delete">
-                                </div>
-                            </div>
-                            </form> 
-                        </div>
                 </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label"></label>
+                <div class="col-lg-9">
+                    <input type="submit" id="buttonDeleteUser" class="btn btn-danger" value="Delete">
+                </div>
+            </div>
+            </form> 
+        </div>
+</div>
