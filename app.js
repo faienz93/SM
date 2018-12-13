@@ -56,7 +56,7 @@ var hbs = exphbs.create({
    * 
    * REF: https://www.npmjs.com/package/express-handlebars 
    */
-  defaultLayout: 'main',  // name of the layout file name i.e main.hbs
+  defaultLayout: 'index',  // name of the layout file name i.e main.hbs
   layoutsDir: path.join(__dirname, '/views/layouts/'), // dir where is contained the layout file
   partialsDir: path.join(__dirname, '/views/partials/')
 });
