@@ -86,3 +86,6 @@ server-db
     |-> refactor-view
             |
             |-> refactor-map-NEW
+
+IMPORTANT: 
+https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-reloading-entire-page-in-node-js-using-ejs-templ
