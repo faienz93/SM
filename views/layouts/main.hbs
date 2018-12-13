@@ -129,13 +129,13 @@
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="operationDB">
                         <li value="addUser" class="swapDiv">
-                            <a href="/adduser" data-pjax='#main'>Add User</a>
+                            <a href="/adduser">Add User</a>
                         </li>
                         <li value="updateUser" class="swapDiv">
-                            <a href="/updateuser" data-pjax='#main'>Modify User</a>
+                            <a href="/updateuser">Modify User</a>
                         </li>
                         <li value="deleteUser" class="swapDiv">
-                            <a href="/deleteuser" data-pjax='#main'>Delete User</a>
+                            <a href="/deleteuser">Delete User</a>
                         </li>
 
                     </ul>
@@ -244,19 +244,7 @@
     <script src="../lib/OpenLayers/ol.js"></script>
     <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Message Error
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-    -->
-    <!-- In this point I show the result of a specific operation -->
-    {{#if expressFlashSuccess}}
-        <script>alertMessage("{{  expressFlashSuccess }}", "success"); </script>        
-    {{else if expressFlashDanger }}        
-        <script>alertMessage("{{  expressFlashDanger }}", "danger"); </script>
-    {{/if}}
+ 
 
     
 

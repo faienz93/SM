@@ -24,7 +24,7 @@ const { body, check, validationResult } = require('express-validator/check');
 router.get('/adduser', function (req, res) {
     res.status(200);
     res.header("Content-Type", "text/html");
-    res.renderPjax('adduser', {title: "SM - ADD USER"});
+    res.render('adduser', {title: "SM - ADD USER"});
 });
 
 /**
@@ -85,12 +85,12 @@ router.post('/adduser', [
     Registration.create(req.body, function (err, user) {
         if (err) {
             console.log(err);
-            req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
+            // // req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
             res.redirect('/map');
 
 
         } else {
-            req.flash('success', "Your registration was successful");
+            // // req.flash('success', "Your registration was successful");
             res.redirect('/map');
         }
 
@@ -112,11 +112,11 @@ router.get('/updateuser', function (req, res) {
             res.status(200);
             res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
-            res.renderPjax('updateuser', {title: "SM - UPDATE USER", users: registrations});
+            res.render('updateuser', {title: "SM - UPDATE USER", users: registrations});
             
         })
         .catch(() => { 
-            res.renderPjax('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
          });
    
 });
@@ -177,7 +177,7 @@ router.post('/updateuser', [
 
     Registration.findById(req.body.id, function (err, user) {
         if (err) {
-            req.flash('danger', err.message);
+            // req.flash('danger', err.message);
             res.redirect('/map');
         } else {
             user.username = req.body.username;
@@ -185,10 +185,10 @@ router.post('/updateuser', [
             user.password = req.body.password;
             user.save(function (err, updatedTank) {
                 if (err) {
-                    req.flash('danger', err.message);
+                    // req.flash('danger', err.message);
                     res.redirect('/map');
                 } else {
-                    req.flash('success', "Your updating was successful");
+                    // req.flash('success', "Your updating was successful");
                     res.redirect('/map');
                 }
             });
@@ -210,12 +210,11 @@ router.get('/deleteuser', function (req, res){
             res.status(200);
             res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
-            res.renderPjax('deleteuser', {title: "SM - DELETE USER", users: registrations, expressFlashSuccess: req.flash('success'),                                                      
-            expressFlashDanger: req.flash('danger')});
+            res.render('deleteuser', {title: "SM - DELETE USER", users: registrations});
             
         })
         .catch(() => { 
-            res.renderPjax('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.render('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
          });
 })
 
@@ -227,15 +226,15 @@ router.post('/deleteuser', function (req, res) {
 
     Registration.findById(user._id, function (err, user) {
         if (err) {
-            req.flash('danger', err.message);
+            // req.flash('danger', err.message);
             res.redirect('/formDeleteUser');
         } else {
             user.remove(function (err, updatedTank) {
                 if (err) {
-                    req.flash('danger', err.message);
+                    // req.flash('danger', err.message);
                     res.redirect('/formDeleteUser');
                 } else {
-                    req.flash('success', "Your deleting was successful");
+                    // req.flash('success', "Your deleting was successful");
                     res.redirect('/formDeleteUser');
                 }
             });
