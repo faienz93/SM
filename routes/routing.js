@@ -24,14 +24,14 @@ basic.on('success', (result, req) => {
 
 
 router.get('/', function(req, res) {
-    res.redirect('/map');
+    res.render('index', {title: "Index"});
 });
 
 router.get('/map', function (req, res) {
     
     res.status(200);
     res.header("Content-Type", "text/html");
-    res.render('map', {title: "SM"});
+    res.render('partials/map', {title: "SM"});
     // res.send(JSON.stringify(Obj));
 
 });

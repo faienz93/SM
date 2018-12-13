@@ -9,7 +9,7 @@
  */
 
 
-function map() {
+function defineMap() {
 
   defaultOSM();
   bingMaps();

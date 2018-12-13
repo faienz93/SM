@@ -10,8 +10,6 @@
 
 $(document).ready(function () {
 
-  // I enable my client to send request with pjax
-  $('a[data-pjax]').pjax();
   
   // Setting navbar
   navbar();
@@ -23,10 +21,28 @@ $(document).ready(function () {
   handleForm();
 
   // Setting the map 
-  map();
+  defineMap();
 
   // Populate the form of main page when required
   populateFormUpdate();
+
+  
+
+  $('#add-new-user').click(function (event) {
+      
+    $.get('/adduser').then(function (data) {
+      $('#main').html(data);
+    });
+    
+  });
+  
+
+  $('#update-user').click(function (event) {
+    $.get('/updateuser', async= true).then(function (data) {
+      populateFormUpdate();
+      $('#main').html(data);
+    });
+  });
 
 });
 
@@ -78,8 +94,10 @@ function handleForm() {
  * @method populateFormUpdate
  */
 function populateFormUpdate(){
+  console.log("adlfsdjf");
   $('select').on('change', function() {
 
+    console.log("sdjkafjsdkofjsdokfjosdfkjsdofi");
     // at the start all field are disabled. Then when i choice from dropdown becomes enabled
     $('#usernameUserFormUpdate').removeAttr("disabled");
     $('#emailUserFormUpdate').removeAttr("disabled");

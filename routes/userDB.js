@@ -23,8 +23,8 @@ const { body, check, validationResult } = require('express-validator/check');
 ----------------------------------------------------- */
 router.get('/adduser', function (req, res) {
     res.status(200);
-    res.header("Content-Type", "text/html");
-    res.render('adduser', {title: "SM - ADD USER"});
+    // res.header("Content-Type", "text/html");
+    res.render('partials/adduser', {title: "SM - ADD USER"});
 });
 
 /**
@@ -112,7 +112,7 @@ router.get('/updateuser', function (req, res) {
             res.status(200);
             res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
-            res.render('updateuser', {title: "SM - UPDATE USER", users: registrations});
+            res.render('partials/updateuser', {layout: false,title: "SM - UPDATE USER", users: registrations});
             
         })
         .catch(() => { 
@@ -210,7 +210,7 @@ router.get('/deleteuser', function (req, res){
             res.status(200);
             res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
-            res.render('deleteuser', {title: "SM - DELETE USER", users: registrations});
+            res.render('partials/deleteuser', {title: "SM - DELETE USER", users: registrations});
             
         })
         .catch(() => { 
