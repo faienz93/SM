@@ -90,3 +90,4 @@ server-db
 IMPORTANT: 
 https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-reloading-entire-page-in-node-js-using-ejs-templ
 https://github.com/foundersandcoders/express-handlebars-workshop#extra-error-refactor
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/forms#Express_forms_subarticles
