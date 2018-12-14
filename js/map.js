@@ -7,10 +7,10 @@
  * This file contains the settings of map
  * ===========================================================================
  */
-$(document).ready(function(){
-     // Setting the map 
-      defineMap();
-});
+// $(document).ready(function(){
+//      // Setting the map 
+//       // defineMap();
+// });
 
 function defineMap() {
 
@@ -46,14 +46,14 @@ function defineMap() {
   // I read the param of url that specify which view I want.
   // if the url has not param i set the default view: OSM
 
-  var m = getUrlParameter('map');
-  var t = getUrlParameter('type');
+  // var m = getUrlParameter('map');
+  // var t = getUrlParameter('type');
   // var decodedJson = await decodeURIComponent("{{{encodedJson}}}");
   // console.log(decodedJson);
   // var jsonObj = JSON.parse(decodedJson);
   // console.log(jsonObj);
-  console.log(m);
-  console.log(t);
+  // console.log(m);
+  // console.log(t);
   // m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)
 
 

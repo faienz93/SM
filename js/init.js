@@ -17,7 +17,7 @@ $(document).ready(function () {
   // Setting the sidebar
   sidebar();
 
-  
+  // defineMap();
 
   
   
