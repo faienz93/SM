@@ -1,5 +1,3 @@
-
-
 /**
  * ===========================================================================
  * File: Map.js 
@@ -92,9 +90,6 @@ function defineMap() {
   //   return false;
   // });
 
-
-
-
   // Define click debug
   $('.selected-debug').on("click", function (event) {
     event.preventDefault();    
@@ -136,7 +131,12 @@ function defineMap() {
 }
 
 
-
+/**
+ * Get the gloabal map, retrieve the current layers visible and then
+ * define a grid for debug
+ * 
+ * @method defineDebug
+ */
 function defineDebug(){
   var currentLayers = globalMap.getLayers().getArray();
   var currentLayer = getCurrentLayerByVisible(currentLayers);
