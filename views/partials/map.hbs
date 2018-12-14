@@ -36,8 +36,8 @@
 
 <script>
     
-     var m = "OSM"
-     var t = "osm"
+     var m = "{{map}}"
+     var t = "{{type}}"
      defineMap();
      console.log(globalMap);
      m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)

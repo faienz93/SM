@@ -59,58 +59,46 @@ function defineMap() {
 
 
   // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
-  $('.selected-layer').click(function (event) {
-    event.preventDefault();
-    var url = $(this).find('a').attr('href');
-    var u = 'http://' + window.location.hostname + window.location.pathname;
+  // $('.selected-layer').click(function (event) {
+  //   event.preventDefault();
+  //   var url = $(this).find('a').attr('href');
+  //   var u = 'http://' + window.location.hostname + window.location.pathname;
 
-    // if i change view for example form user i need to render before the 
-    // view and then get the value. This is a constraint of Express 
-    // who does not want to render and send object at the same time
-    if (window.location.pathname != '/map') {
+  //   // if i change view for example form user i need to render before the 
+  //   // view and then get the value. This is a constraint of Express 
+  //   // who does not want to render and send object at the same time
+  //   if (window.location.pathname != '/map') {
       
-      var newUrl = url.replace('map.type', 'map');
-      window.location.href = newUrl;
-    } else {
-      $.ajax({
-        dataType: "json",
-        url: url,
-        method: 'GET',
-        success: function (result, status) {
-          var type = result.type;
-          var mapview = result.map;
-          setCurrentLayer(mapview, type)
-        },
-        error: function (result, status) {
-          console.log("ERROR");
-          console.log(result);
-        }
-      })
+  //     var newUrl = url.replace('map.type', 'map');
+  //     window.location.href = newUrl;
+  //   } else {
+  //     $.ajax({
+  //       dataType: "json",
+  //       url: url,
+  //       method: 'GET',
+  //       success: function (result, status) {
+  //         var type = result.type;
+  //         var mapview = result.map;
+  //         setCurrentLayer(mapview, type)
+  //       },
+  //       error: function (result, status) {
+  //         console.log("ERROR");
+  //         console.log(result);
+  //       }
+  //     })
 
-    }
+  //   }
 
-    return false;
-  });
+  //   return false;
+  // });
 
 
 
 
   // Define click debug
   $('.selected-debug').on("click", function (event) {
-    event.preventDefault();
-    var url = $(this).find('a').attr('href');
-
-    $.ajax({
-      dataType: "json",
-      url: url,
-      method: 'GET',
-      success: function (result, status) {
-        defineDebug();
-      },
-      error: function (result, status) {
-        console.log(result);
-      }
-    });
+    event.preventDefault();    
+    defineDebug();
     return false;
   });
 
@@ -151,10 +139,10 @@ function defineMap() {
 
 function defineDebug(){
   var currentLayers = globalMap.getLayers().getArray();
-        var currentLayer = getCurrentLayerByVisible(currentLayers);
-        var deb = debugLayer(currentLayer.getSource());
-        globalMap.getLayers().getArray().push(deb);
-        alertMessage("Zoom in, Zoom out to see the tiles", "info");
+  var currentLayer = getCurrentLayerByVisible(currentLayers);
+  var deb = debugLayer(currentLayer.getSource());
+  globalMap.getLayers().getArray().push(deb);
+  alertMessage("Zoom in, Zoom out to see the tiles", "info");
 }
 
 /**
