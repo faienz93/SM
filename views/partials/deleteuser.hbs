@@ -45,12 +45,17 @@
             </form> 
         </div>
 </div>
+
 <!-- 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
 // Load Scripts
+// REF: https://stackoverflow.com/a/28478146/4700162
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 -->
-<script src="../../js/form.js" type="text/javascript"></script>
-<script src="../../lib/bootbox.min.js" crossorigin="anonymous"></script>
+<script>       
+        $.getScript("../../js/util.js");
+        $.getScript("../../js/form.js");
+        $.getScript("../../lib/bootbox.min.js");
+</script>
