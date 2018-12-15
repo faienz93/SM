@@ -65,19 +65,7 @@ https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-rel
 
 
 
-I have adopted a dirty method for the view. Since express does not want to render and send object at the same time
-i have two route. One for send.json to client: map and type and another for rendering.
-If I swich view from map to user form for example then if i would return to map i need first to 
-rendering the page and then send the json. For this i reading a lot of answer in Stack overflow and different from others.
-I used two route one for render and one for send json. Into the url i pass a params for example 
-http://127.0.0.1:3000/map?map=OSM&type=osm. if i have the same view (map) i use the route map.json then when i return to this view 
-i use this piece of code 
-if (u != 'http://127.0.0.1/map') {
-      var newUrl = url.replace('map.type', 'map');
-      window.location.href = newUrl;
-    } else {
-        ....
-where refresh the page to map and thanks tha param retrieved by "getUrlParameter" i set a new view
+
 
 RICORDA: 
 server-db 
