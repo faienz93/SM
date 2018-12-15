@@ -267,7 +267,7 @@
                         </div>
                         <div class="card-body" id="cardBodyUser">
                             <form class="form" id="addUserForm" role="form" autocomplete="off" action="http://127.0.0.1:3000/add"
-                                method="POST">    
+                                method="POST" oninput='passwordConfirm.setCustomValidity(passwordConfirm.value != password.value ? "Passwords do not match." : "")'>    
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">Username</label>
                                     <div class="col-lg-9">
@@ -297,7 +297,10 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>
-                                            <input type="password" class="form-control" placeholder="Password123" name="password" required>
+                                            <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormAdd" name="password" required>
+                                            <!-- Meter password -->
+                                            <meter max="4" id="password-strength-meter-add"></meter>
+                                            <p class="passwordText" id="password-strength-text-add"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -365,7 +368,7 @@
                             <!--  -->
                             <!--  -->
                             <form class="form" id="updateUserForm" role="form" autocomplete="off" action="http://127.0.0.1:3000/update"
-                                method="POST">  
+                                method="POST" oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>  
                                 <!-- ID Of user. It can be only read  -->
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label form-control-label">ID</label>
@@ -408,6 +411,9 @@
                                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                                             </div>
                                             <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormUpdate" name="password" required disabled>
+                                             <!-- Meter password -->
+                                            <meter max="4" id="password-strength-meter-update"></meter>
+                                            <p class="passwordText" id="password-strength-text-update"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -441,7 +447,7 @@
                 -->
                 <div id="deleteUser" class="mainDiv"> <!-- style="display:none"-->
                     <div class="card-header" id="headerUser">
-                        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Update User</h3>
+                        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> Delete User</h3>
                     </div>
                         <div class="card-body" id="cardBodyUser">
                             <!--  -->
@@ -499,9 +505,9 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    {{!-- TODO  --}}
+    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>  
     <script src="../lib/bootbox.min.js" crossorigin="anonymous"></script>
+      <script src="../lib/zxcvbn.js" crossorigin="anonymous"></script>
     <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
     <script src="../js/const.js" crossorigin="anonymous"></script>
     <script src="../js/util.js" crossorigin="anonymous"></script>

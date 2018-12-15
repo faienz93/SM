@@ -6,22 +6,20 @@ EXPRESS SESSION AND COOKIE
 https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
 
 
-PASSWORD VALIDATION
+VALIDATION
 https://bootsnipp.com/snippets/featured/advance-password-validation
+https://express-validator.github.io/docs/
+https://www.w3schools.com/howto/howto_js_password_validation.asp
+https://twitterbootstrap.org/bootstrap-form-validation/ 
 
 
-https://w3layouts.com/ 
 
-BOOTSTRAP NOTIFICATION
-http://bootstrap-confirmation.js.org/#ex-link 
 
 
 MONGOOSE ERROR
 https://stackoverflow.com/a/51962721/4700162
 
-W3Scool validation form
-https://www.w3schools.com/howto/howto_js_password_validation.asp
-https://twitterbootstrap.org/bootstrap-form-validation/ 
+
 
 
 MONGODB 
