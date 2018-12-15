@@ -156,6 +156,12 @@ $(document).ready(function () {
     });
   });
 
+  $('#show-user').click(function (event) {
+    $.get('/showuser').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
 });
 
 

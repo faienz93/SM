@@ -12,11 +12,19 @@ var express = require("express");
 const mongoose = require('mongoose');
 var path = require("path");
 const router = express.Router();
-var Registration = mongoose.model('Registration');
+const auth = require('http-auth');
 const { body, check, validationResult } = require('express-validator/check');
 
 
+const Registration = mongoose.model('Registration');
 
+const basic = auth.basic({
+    file: path.join(__dirname, '../users.htpasswd'),
+});
+
+basic.on('success', (result, req) => {
+    console.log(`User authenticated: ${result.user}`);
+});
 
 /* ---------------------------------------------------
     ADD USER
@@ -112,7 +120,7 @@ router.get('/updateuser', function (req, res) {
             res.status(200);
             res.header("Content-Type", "text/html");        
             // i wat send a notification of result of specific operation
-            res.render('partials/updateuser', {layout: false,title: "Update User", users: registrations});
+            res.render('partials/updateuser', {title: "Update User", users: registrations});
             
         })
         .catch(() => { 
@@ -241,6 +249,18 @@ router.post('/deleteuser', function (req, res) {
         }
     });
 
+});
+
+/* ---------------------------------------------------
+    SHOW USER
+----------------------------------------------------- */
+// I see all people registred
+router.get('/showuser', auth.connect(basic), (req, res) => {
+    Registration.find()
+        .then((registrations) => {       
+            res.render('partials/showuser', {title: "Show User - [User authenticated: " + req.user + "]", users: registrations});
+        })
+        .catch(() => { res.send('Sorry! Something went wrong.'); });
 });
 
 
