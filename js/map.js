@@ -54,8 +54,7 @@ function settingMap(){
 
 function createMap(m = "OSM",t = "osm") {
 
-  if(globalMap == undefined){
-    // When inizialize the map it set with Default OSM
+  // When inizialize the map it set with Default OSM
   globalMap = new ol.Map({
     controls: ol.control.defaults().extend([
       new ol.control.FullScreen({
@@ -76,9 +75,7 @@ function createMap(m = "OSM",t = "osm") {
 
   geocoder();
   setCurrentLayer(m, t)
-  }else {
-    setCurrentLayer(m, t)
-  }
+
   
 
   
