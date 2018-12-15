@@ -17,7 +17,10 @@ $(document).ready(function () {
   // Setting the sidebar
   sidebar();
 
-  // defineMap(); 
+
+  settingMap();
+  createMap(); 
+  
 
 
   // OSM

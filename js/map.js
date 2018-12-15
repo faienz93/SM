@@ -5,92 +5,15 @@
  * This file contains the settings of map
  * ===========================================================================
  */
-// $(document).ready(function(){
-//      // Setting the map 
-//       // defineMap();
-// });
 
-function defineMap() {
+
+function settingMap(){
 
   defaultOSM();
   bingMaps();
   stamenMap();
   hereMap();
 
-
-  // When inizialize the map it set with Default OSM
-  globalMap = new ol.Map({
-    controls: ol.control.defaults().extend([
-      new ol.control.FullScreen({
-        source: 'fullscreen'
-      })
-    ]),
-    target: 'map',
-    renderer: 'webgl',
-    // layers, // NOT DEFINED HERE
-    // Improve user experience by loading tiles while animating. Will make
-    // animations stutter on mobile or slow devices.
-    loadTilesWhileAnimating: true, // is used for old smartphone during the animations
-    view: new ol.View({
-      center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
-      zoom: 10
-    })
-  });
-
-  geocoder();
-
-  // we define here the layer 
-  // to maintain the same approach of access to the layers
-  // I read the param of url that specify which view I want.
-  // if the url has not param i set the default view: OSM
-
-  // var m = getUrlParameter('map');
-  // var t = getUrlParameter('type');
-  // var decodedJson = await decodeURIComponent("{{{encodedJson}}}");
-  // console.log(decodedJson);
-  // var jsonObj = JSON.parse(decodedJson);
-  // console.log(jsonObj);
-  // console.log(m);
-  // console.log(t);
-  // m == undefined && t == undefined ? setCurrentLayer('OSM', 'osm') : setCurrentLayer(m, t)
-
-
-
-  // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
-  // $('.selected-layer').click(function (event) {
-  //   event.preventDefault();
-  //   var url = $(this).find('a').attr('href');
-  //   var u = 'http://' + window.location.hostname + window.location.pathname;
-
-  //   // if i change view for example form user i need to render before the 
-  //   // view and then get the value. This is a constraint of Express 
-  //   // who does not want to render and send object at the same time
-  //   if (window.location.pathname != '/map') {
-      
-  //     var newUrl = url.replace('map.type', 'map');
-  //     window.location.href = newUrl;
-  //   } else {
-  //     $.ajax({
-  //       dataType: "json",
-  //       url: url,
-  //       method: 'GET',
-  //       success: function (result, status) {
-  //         var type = result.type;
-  //         var mapview = result.map;
-  //         setCurrentLayer(mapview, type)
-  //       },
-  //       error: function (result, status) {
-  //         console.log("ERROR");
-  //         console.log(result);
-  //       }
-  //     })
-
-  //   }
-
-  //   return false;
-  // });
-
-  // Define click debug
   $('.selected-debug').on("click", function (event) {
     event.preventDefault();    
     defineDebug();
@@ -127,6 +50,39 @@ function defineMap() {
       });
     }
   }
+}
+
+function createMap(m = "OSM",t = "osm") {
+
+  if(globalMap == undefined){
+    // When inizialize the map it set with Default OSM
+  globalMap = new ol.Map({
+    controls: ol.control.defaults().extend([
+      new ol.control.FullScreen({
+        source: 'fullscreen'
+      })
+    ]),
+    target: 'map',
+    renderer: 'webgl',
+    // layers, // NOT DEFINED HERE
+    // Improve user experience by loading tiles while animating. Will make
+    // animations stutter on mobile or slow devices.
+    loadTilesWhileAnimating: true, // is used for old smartphone during the animations
+    view: new ol.View({
+      center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
+      zoom: 10
+    })
+  });
+
+  geocoder();
+  setCurrentLayer(m, t)
+  }else {
+    setCurrentLayer(m, t)
+  }
+  
+
+  
+  
 
 }
 
