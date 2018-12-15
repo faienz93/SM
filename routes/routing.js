@@ -24,14 +24,10 @@ basic.on('success', (result, req) => {
 
 
 router.get('/', function(req, res) {
-    res.render('index', {title: "Index"});
+    res.render('index', {title: "SM - Mobile System"});
 });
 
 router.get('/map', function (req, res) {
-    console.log("===========")
-    console.log(req.query.map);
-    console.log(req.query.type);
-    console.log("===========")
     if(req.query.map === undefined && req.query.type === undefined){
         res.status(200);
         res.header("Content-Type", "text/html");
