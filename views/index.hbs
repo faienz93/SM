@@ -1,6 +1,7 @@
 {{> head}}
 <title>{{title}}</title>
 </head>
+
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
@@ -12,9 +13,9 @@
             <ul class="list-unstyled components">
                 <div class="sidebar-divider"></div>
                 <div class="select-specific" id="OSM">
-                    <li value="map" class="active selected-layer swapDiv">
-                        <a href="#" id="osm">      
-                        
+                    <li value="map" class="active    ">
+                        <a href="#" id="osm">
+
                             <!-- <svg class="svg-inline--fa fa-image fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M464 448H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h416c26.51 0 48 21.49 48 48v288c0 26.51-21.49 48-48 48zM112 120c-30.928 0-56 25.072-56 56s25.072 56 56 56 56-25.072 56-56-25.072-56-56-56zM64 384h384V272l-87.515-87.515c-4.686-4.686-12.284-4.686-16.971 0L208 320l-55.515-55.515c-4.686-4.686-12.284-4.686-16.971 0L64 336v48z"></path></svg><i class="fas fa-image"></i> -->
                             <!-- <img src="/img/stamen.svg" class="svg-inline--fa fa-image fa-w-16"> -->
                             <img src="../img/osm.svg" class="svg icon">
@@ -30,22 +31,22 @@
                         Here
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="Here">
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="normal-day">Normal Day</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="normal-day-transit">Normal Day Transit</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="pedestrian-day">Pedestrian Day</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="terrain-day">Terrain Day</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="satellite-day">Satellite Day</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="hybrid-day">Hybrid Day</a>
                         </li>
                     </ul>
@@ -59,22 +60,22 @@
                         Bing
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="Bing">
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="aerial">Aerial</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="aerial-with-labels">Aerial with labels</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="road">Road (static)</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="road-on-demand">Road (dynamic)</a>
                         </li>
-                        <!-- <li value="map" value="id" class="selected-layer swapDiv">
+                        <!-- <li value="map" value="id"  >
                                     <a href="#">Collins Bart</a> 
                                 </li> -->
-                        <!-- <li value="map" value="id" class="selected-layer swapDiv">
+                        <!-- <li value="map" value="id"  >
                                     <a href="#">Ordnance Survey</a>
                                 </li> -->
                     </ul>
@@ -88,26 +89,26 @@
                         Stamen
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="Stamen">
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="watercolor">Watercolor</a>
                         </li>
-                        {{!-- <li value="map" class="selected-layer swapDiv">
+                        {{!-- <li value="map">
                             <a href="#" id="terrain-labels">Watercolor Label</a>
                         </li> --}}
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="toner">Toner</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="toner-lite">Toner Lite</a>
                         </li>
-                        <li value="map" class="selected-layer swapDiv">
+                        <li value="map">
                             <a href="#" id="terrain">Terrain</a>
                         </li>
                     </ul>
                 </li>
                 <div class="sidebar-divider"></div>
                 <div class="select-specific" id="debug">
-                    <li value="map" class="selected-debug swapDiv">
+                    <li value="map" class="selected-debug  ">
                         <a href="#" id="debug">
                             <img src="../img/debug.svg" class="svg icon">
                             Debug
@@ -125,16 +126,16 @@
                         Database
                     </a>
                     <ul class="collapse list-unstyled select-specific" id="operationDB">
-                        <li value="addUser" class="swapDiv">
+                        <li value="addUser" class=" ">
                             <a href="#" id="add-new-user">Add User</a>
                         </li>
-                        <li value="updateUser" class="swapDiv">
+                        <li value="updateUser" class=" ">
                             <a href="#" id="update-user">Update User</a>
                         </li>
-                        <li value="deleteUser" class="swapDiv">
+                        <li value="deleteUser" class=" ">
                             <a href="#" id="delete-user">Delete User</a>
                         </li>
-                        <li value="showUser" class="swapDiv">
+                        <li value="showUser" class=" ">
                             <a href="#" id="show-user">Show User</a>
                         </li>
 
@@ -203,12 +204,12 @@
                     </div>
                 </div>
             </nav>
-            <div id="main" class="main">                     
-                {{> map}}         
+            <div id="main" class="main">
+                {{> map}}
             </div>
-            
-</div>
+
         </div>
+    </div>
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -223,9 +224,8 @@
     <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="../lib/DataTable/js/dataTables.min.js" crossorigin="anonymous"></script>
     <script src="../lib/DataTable/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    
 
-    
+
     <script src="../js/const.js" type="text/javascript"></script>
     <script src="../js/map.js" type="text/javascript"></script>
     <script src="../lib/jquery.pjax.js" crossorigin="anonymous"></script>
@@ -237,19 +237,19 @@
 
 
 
-<!-- OpenLayer JS -->
-<!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
-<script src="../lib/OpenLayers/ol.js"></script>
-<script src="../lib/ol-geocoder/ol-geocoder.js"></script>
+    <!-- OpenLayer JS -->
+    <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script src="../lib/OpenLayers/ol.js"></script>
+    <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
 
 
 
-    
 
- 
 
-    
+
+
+
 
 </body>
 
