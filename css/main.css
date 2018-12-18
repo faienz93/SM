@@ -214,3 +214,16 @@ svg path {
     border: 1px solid transparent;
     border-radius: .25rem;
 }
+
+/* ---------------------------------------------------
+    STYLE TABLE USERS
+    REF: https://stackoverflow.com/a/31911215/4700162
+----------------------------------------------------- */
+/* https://stackoverflow.com/a/13039098/4700162 */ 
+.dataTables_filter, .dataTables_paginate{
+    /* width: 50%; */
+    float: right;
+    text-align: right;
+ }
+
+ 
