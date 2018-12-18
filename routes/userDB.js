@@ -14,6 +14,7 @@ var path = require("path");
 const router = express.Router();
 const auth = require('http-auth');
 const { body, check, validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
 
 
 const Registration = mongoose.model('Registration');
@@ -53,6 +54,8 @@ router.post('/adduser', [
             }
 
         }),
+    // Sanitize (trim and escape) the username field.
+    sanitizeBody('username').trim().escape(), // replace <, >, &, ', " and / with HTML entities and delete the space
 
     // email must be an email
     check('email')
@@ -69,13 +72,13 @@ router.post('/adduser', [
             }
         
         }),
+    // REF  https://stackoverflow.com/a/46013025/4700162   
     check('password')
         .isLength({ min: 1 })
         .withMessage('Passwords is required.')
         .custom((value, { req }) => {
             if (value !== req.body.passwordConfirm) {
-                throw new Error('Password confirmation does not match password');
-                // REF  https://stackoverflow.com/a/46013025/4700162                      
+                throw new Error('Password confirmation does not match password');                   
             } else {
                 return value;
             }
@@ -87,19 +90,25 @@ router.post('/adduser', [
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+        // return res.status(422).json({ errors: errors.array() });
+        return res.status(422).render("index", {
+            insertionError: true,
+            statusCode: 422,
+            errorMessage: errors.array()
+        });
+        // https://stackoverflow.com/a/46373314/4700162
     }
 
     Registration.create(req.body, function (err, user) {
         if (err) {
             console.log(err);
             // // req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
-            res.redirect('/map');
+            res.render('index');
 
 
         } else {
             // // req.flash('success', "Your registration was successful");
-            res.redirect('/map');
+            res.render('index');
         }
 
     });
@@ -134,40 +143,23 @@ router.post('/updateuser', [
     body('username')
         .isLength({ min: 1 })
         .withMessage('Username is required.'),
-        // .custom(async function (username) {
-        //     // i check if already exist user with this username
-        //     var user = await Registration.find({ 'username': username })
-        //     console.log("LUNGHEZZA " + user.length);
-        //     if (user.length != 0 && user[0].username) {
-        //         throw new Error('Username already in use');
-        //     } else {
-        //         return username;
-        //     }
-        // }),
+        
+    // Sanitize (trim and escape) the username field.
+    sanitizeBody('username').trim().escape(), // replace <, >, &, ', " and / with HTML entities.
 
     // email must be an email
     check('email')
         .isLength({ min: 1 })
         .withMessage('Email is required.')
-        .isEmail().withMessage('Please provide a valid email address')
-        .custom(async function (email) {
-            // i check if already exist user with this email
-            var mail = await Registration.find({ 'email': email })
-            if (mail.length != 0) {
-                if (mail[0].email) {
-                    throw new Error('E-mail already in use');
-                } else {
-                    return email;
-                }
-            }
-        }),
+        .isEmail().withMessage('Please provide a valid email address'),
+        
+    // REF  https://stackoverflow.com/a/46013025/4700162 
     check('password')
         .isLength({ min: 1 })
         .withMessage('Passwords is required.')
         .custom((value, { req }) => {
             if (value !== req.body.confirmPassword) {
-                throw new Error('Password confirmation does not match password');
-                // REF  https://stackoverflow.com/a/46013025/4700162                      
+                throw new Error('Password confirmation does not match password');                     
             } else {
                 return value;
             }
@@ -228,10 +220,8 @@ router.get('/deleteuser', function (req, res){
 
 // POST request for send the data
 router.post('/deleteuser', function (req, res) {
-    console.log(req.body.deleteUser);
-
+    // console.log(req.body.deleteUser);
     var user = JSON.parse(req.body.deleteUser);
-
     Registration.findById(user._id, function (err, user) {
         if (err) {
             // req.flash('danger', err.message);
