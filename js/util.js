@@ -83,7 +83,7 @@ function createUrl(tpl, layerDesc) {
 //     document.getElementById('content').appendChild(div);
 
 //     // Auto close alert
-//     // REF:https://codepen.io/CSWApps/pen/XJoLmN
+//     REF:https://codepen.io/CSWApps/pen/XJoLmN
 //     window.setTimeout(function () {
 //         $('.alert').fadeTo(500, 0).slideUp(500, function () {
 //             $(this).remove();
@@ -94,7 +94,7 @@ function createUrl(tpl, layerDesc) {
 // }
 
 function alertMessage(message, type='primary'){
-  var a = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>" + 
+  var a = "<div id='alert' class='alert alert-warning alert-dismissible fade show' role='alert'>" + 
                 "<h4 class='alert-heading'>Well done!</h4>" +
                 "<p>"+message+"</p>"+
                 "<hr>" +
@@ -103,8 +103,14 @@ function alertMessage(message, type='primary'){
                 "<span aria-hidden='true'>&times;</span>"+
             "</button>"+
             "</div>";
-            $('.alert').alert();
-    $('#main').html(a);
+            // https://stackoverflow.com/a/18105437/4700162
+            // https://stackoverflow.com/a/10156924/4700162
+            // https://stackoverflow.com/a/52887758/4700162
+
+    // $('#main').html(a);
+    // $("#alert").html(`<b>SUCCESS ! </b> res.success`);
+    //     $("#alert").toggleClass('d-none').toggleClass('d-none', 2000);
+    $('#alert').show();
 }
 
 /**

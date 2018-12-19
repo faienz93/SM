@@ -10,6 +10,7 @@
 
 $(document).ready(function () {
 
+  $('#alert').hide();
 
   // Setting navbar
   navbar();

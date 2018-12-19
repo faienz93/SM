@@ -85,10 +85,13 @@ function populateFormUpdate(){
       data: $('#addUserForm').serialize(),
       success: function(res){
         console.log(res.success);
-        alertMessage(res.success);
+        alertMessage(res.success, "success");
+        // alert.html(`<b>${type} ! </b> ${value}`);
+        
       },
       error: function(error){
-        console.log(error);
+        // console.log(error);
+        alertMessage("errore", "error");
       }
     });
 
