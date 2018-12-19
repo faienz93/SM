@@ -5,6 +5,11 @@ $(document).ready(function () {
 
     // Populate the form of main page when required
     populateFormUpdate();    
+
+
+    const addUserForm = $('#addUserForm');
+
+    addUserForm.on('submit', addNewUser);
      
 });
 
@@ -65,4 +70,27 @@ function populateFormUpdate(){
          
       });
     
+  }
+
+
+  /*****************************************************
+   * HANDLE FORM
+   ****************************************************/
+  function addNewUser(e){
+    e.preventDefault();
+
+    $.ajax({
+      url: '/adduser',
+      method: 'POST',
+      data: $('#addUserForm').serialize(),
+      success: function(res){
+        console.log(res.success);
+        alertMessage(res.success);
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
+
+    return false;
   }

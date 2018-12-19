@@ -108,7 +108,7 @@ router.post('/adduser', [
 
         } else {
             // // req.flash('success', "Your registration was successful");
-            res.render('index');
+            res.send({success: "Your registration was successful"});
         }
 
     });

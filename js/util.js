@@ -72,25 +72,39 @@ function createUrl(tpl, layerDesc) {
  *                  @info
  *                  and other: https://getbootstrap.com/docs/4.0/components/alerts/
  */
-function alertMessage(message, type = "primary") {
-    var br = document.createElement("br");
-    var div = document.createElement("div");
-    div.setAttribute("class", "alert alert-" + type + " text-center "); // alert-fixed
-    // div.setAttribute("role", "alert");
-    div.innerHTML = "<strong>" + message + "</strong>";
+// function alertMessage(message, type = 'primary') {
+//     var br = document.createElement('br');
+//     var div = document.createElement('div');
+//     div.setAttribute('class', 'alert alert-' + type + ' text-center '); // alert-fixed
+//     // div.setAttribute('role', 'alert');
+//     div.innerHTML = '<strong>' + message + '</strong>';
 
-    document.getElementById("content").appendChild(br);
-    document.getElementById("content").appendChild(div);
+//     document.getElementById('content').appendChild(br);
+//     document.getElementById('content').appendChild(div);
 
-    // Auto close alert
-    // REF:https://codepen.io/CSWApps/pen/XJoLmN
-    window.setTimeout(function () {
-        $(".alert").fadeTo(500, 0).slideUp(500, function () {
-            $(this).remove();
-        });
-    }, 3000);
+//     // Auto close alert
+//     // REF:https://codepen.io/CSWApps/pen/XJoLmN
+//     window.setTimeout(function () {
+//         $('.alert').fadeTo(500, 0).slideUp(500, function () {
+//             $(this).remove();
+//         });
+//     }, 3000);
 
-    br.remove();
+//     br.remove();
+// }
+
+function alertMessage(message, type='primary'){
+  var a = "<div class='alert alert-warning alert-dismissible fade show' role='alert'>" + 
+                "<h4 class='alert-heading'>Well done!</h4>" +
+                "<p>"+message+"</p>"+
+                "<hr>" +
+                "<p class='mb-0'>"+message+"</p>"
+            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+                "<span aria-hidden='true'>&times;</span>"+
+            "</button>"+
+            "</div>";
+            $('.alert').alert();
+    $('#main').html(a);
 }
 
 /**
@@ -103,16 +117,16 @@ function alertMessage(message, type = "primary") {
  * @param {String} message - the message that you want display. 
  *                          If it not specified you will see a default message
  */
-function formSubmit(form,message = "Are you sure? "){        
+function formSubmit(form,message = 'Are you sure? '){        
         bootbox.confirm({
             message: message,
             buttons: {
                 confirm: {
-                    label: '<i class="fa fa-check"></i> Confirm',                    
+                    label: "<i class='fa fa-check'></i> Confirm",                    
                     className: 'btn-secondary'
                 },
                 cancel: {
-                    label: '<i class="fa fa-times"></i> Cancel',
+                    label: "<i class='fa fa-times'></i> Cancel",
                     className: 'btn-dark'
                 }
             },
