@@ -89,9 +89,15 @@ function populateFormUpdate(){
         // alert.html(`<b>${type} ! </b> ${value}`);
         
       },
-      error: function(error){
-        // console.log(error);
-        alertMessage("errore", "error");
+      error: function(err){
+        var errorJSON = err.responseJSON.errors;
+        console.log(errorJSON);
+        var e = "";        
+        for(var i = 0; i < errorJSON.length; i++){         
+          e += errorJSON[i].msg + "</br>";         
+        }
+        bootstrap_alert.warning(e);
+        
       }
     });
 

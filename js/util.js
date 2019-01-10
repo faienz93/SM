@@ -83,35 +83,46 @@ function createUrl(tpl, layerDesc) {
 //     document.getElementById('content').appendChild(div);
 
 //     // Auto close alert
-//     REF:https://codepen.io/CSWApps/pen/XJoLmN
-//     window.setTimeout(function () {
-//         $('.alert').fadeTo(500, 0).slideUp(500, function () {
-//             $(this).remove();
-//         });
-//     }, 3000);
+//     // REF:https://codepen.io/CSWApps/pen/XJoLmN
+//     // window.setTimeout(function () {
+//     //     $('.alert').fadeTo(500, 0).slideUp(500, function () {
+//     //         $(this).remove();
+//     //     });
+//     // }, 3000);
 
 //     br.remove();
 // }
+bootstrap_alert = function() {}
+bootstrap_alert.warning = function(message) {
+            $('#alert_placeholder').hide().html(
+                '<div class="alert alert-danger alert-dismissable">'+
+                    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
+                    '<h4 class="alert-heading">Error</h4>'+
+                        '<span>'+message+'</span>'+
+                '</div>').fadeIn(1000);
+        }
+    
 
-function alertMessage(message, type='primary'){
-  var a = "<div id='alert' class='alert alert-warning alert-dismissible fade show' role='alert'>" + 
-                "<h4 class='alert-heading'>Well done!</h4>" +
-                "<p>"+message+"</p>"+
-                "<hr>" +
-                "<p class='mb-0'>"+message+"</p>"
-            "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
-                "<span aria-hidden='true'>&times;</span>"+
-            "</button>"+
-            "</div>";
-            // https://stackoverflow.com/a/18105437/4700162
-            // https://stackoverflow.com/a/10156924/4700162
-            // https://stackoverflow.com/a/52887758/4700162
 
-    // $('#main').html(a);
-    // $("#alert").html(`<b>SUCCESS ! </b> res.success`);
-    //     $("#alert").toggleClass('d-none').toggleClass('d-none', 2000);
-    $('#alert').show();
-}
+// function alertMessage(message, type='primary'){
+//   var a = "<div id='alert' class='alert alert-warning alert-dismissible fade show' role='alert'>" + 
+//                 "<h4 class='alert-heading'>Well done!</h4>" +
+//                 "<p>"+message+"</p>"+
+//                 "<hr>" +
+//                 "<p class='mb-0'>"+message+"</p>"
+//             "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
+//                 "<span aria-hidden='true'>&times;</span>"+
+//             "</button>"+
+//             "</div>";
+//             // https://stackoverflow.com/a/18105437/4700162
+//             // https://stackoverflow.com/a/10156924/4700162
+//             // https://stackoverflow.com/a/52887758/4700162
+
+//     $('#main').html(a);
+//     // $("#alert").html(`<b>SUCCESS ! </b> res.success`);
+//     //     $("#alert").toggleClass('d-none').toggleClass('d-none', 2000);
+//     $('#alert').show();
+// }
 
 /**
  * This function create an popub of bootstrap for confirm or decline 

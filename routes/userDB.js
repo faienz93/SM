@@ -90,12 +90,13 @@ router.post('/adduser', [
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        // return res.status(422).json({ errors: errors.array() });
-        return res.status(422).render("index", {
+        console.log(errors.array());
+        
+        return res.status(422).send({
             insertionError: true,
-            statusCode: 422,
-            errorMessage: errors.array()
-        });
+            errors: errors.array(),
+            statusCode: 422
+            });
         // https://stackoverflow.com/a/46373314/4700162
     }
 
@@ -107,8 +108,7 @@ router.post('/adduser', [
 
 
         } else {
-            // // req.flash('success', "Your registration was successful");
-            res.send({success: "Your registration was successful"});
+            res.status(200).send({success: "Your registration was successful"});
         }
 
     });

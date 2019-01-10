@@ -10,15 +10,16 @@
 
 $(document).ready(function () {
 
-  $('#alert').hide();
-
   // Setting navbar
   navbar();
 
   // Setting the sidebar
   sidebar();
 
-
+  // The first function set the app: 
+  // - Define layers 
+  // - Define filter 
+  // Then we Create for the first time the map
   settingMap();
   createMap(); 
   
