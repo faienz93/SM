@@ -226,4 +226,16 @@ svg path {
     text-align: right;
  }
 
+/* ---------------------------------------------------
+ Keep position of alert Bootstrap
+  REF: http://jsfiddle.net/losmescaleros/xfopaebv/ 
+       https://stackoverflow.com/a/25776315/4700162
+----------------------------------------------------- */
+#alert_placeholder {
+    position: absolute;
+    z-index: 1;
+    width: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);  
+ }
  

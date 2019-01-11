@@ -52,77 +52,49 @@ jQuery('img.svg').each(function () {
  */
 function createUrl(tpl, layerDesc) {
     return tpl
-      .replace('{base}', layerDesc.base)
-      .replace('{type}', layerDesc.type)
-      .replace('{scheme}', layerDesc.scheme)
-      .replace('{app_id}', layerDesc.app_id)
-      .replace('{app_code}', layerDesc.app_code);
-  }
+        .replace('{base}', layerDesc.base)
+        .replace('{type}', layerDesc.type)
+        .replace('{scheme}', layerDesc.scheme)
+        .replace('{app_id}', layerDesc.app_id)
+        .replace('{app_code}', layerDesc.app_code);
+}
 
 
 
-  /**
- * This function create an Alert Bootsrap
- * 
- * @method alertMessage
- * @param {*} message the message that appear
- * @param {*} type there are different type of alert:
- *                  @danger
- *                  @warning
- *                  @info
- *                  and other: https://getbootstrap.com/docs/4.0/components/alerts/
- */
-// function alertMessage(message, type = 'primary') {
-//     var br = document.createElement('br');
-//     var div = document.createElement('div');
-//     div.setAttribute('class', 'alert alert-' + type + ' text-center '); // alert-fixed
-//     // div.setAttribute('role', 'alert');
-//     div.innerHTML = '<strong>' + message + '</strong>';
-
-//     document.getElementById('content').appendChild(br);
-//     document.getElementById('content').appendChild(div);
-
-//     // Auto close alert
-//     // REF:https://codepen.io/CSWApps/pen/XJoLmN
-//     // window.setTimeout(function () {
-//     //     $('.alert').fadeTo(500, 0).slideUp(500, function () {
-//     //         $(this).remove();
-//     //     });
-//     // }, 3000);
-
-//     br.remove();
-// }
-bootstrap_alert = function() {}
-bootstrap_alert.warning = function(message) {
-            $('#alert_placeholder').hide().html(
-                '<div class="alert alert-danger alert-dismissable">'+
-                    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'+
-                    '<h4 class="alert-heading">Error</h4>'+
-                        '<span>'+message+'</span>'+
-                '</div>').fadeIn(1000);
-        }
-    
+/**
+* This function create an Alert Bootsrap
+* REF: https://stackoverflow.com/a/10156924/4700162
+* 
+* @method bootstrapAlert
+* @param {*} message the message that appear
+* @param {*} heading the title of alert
+* @param {*} type there are different type of alert:
+*                  @danger
+*                  @warning
+*                  @info
+*                  and other: https://getbootstrap.com/docs/4.0/components/alerts/
+* @param {*} autoclose if true after 3s wil be close
+*/
+function bootstrapAlert(message, heading = 'Message:', type = 'primary', autoclose = true) {
+    $('#alert_placeholder').hide().html(
+        '<div class="alert alert-' + type + ' alert-dismissable">' +
+        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+        '<h4 class="alert-heading">' + heading + '</h4>' +
+        '<span>' + message + '</span>' +
+        '</div>').fadeIn(1000);
 
 
-// function alertMessage(message, type='primary'){
-//   var a = "<div id='alert' class='alert alert-warning alert-dismissible fade show' role='alert'>" + 
-//                 "<h4 class='alert-heading'>Well done!</h4>" +
-//                 "<p>"+message+"</p>"+
-//                 "<hr>" +
-//                 "<p class='mb-0'>"+message+"</p>"
-//             "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>"+
-//                 "<span aria-hidden='true'>&times;</span>"+
-//             "</button>"+
-//             "</div>";
-//             // https://stackoverflow.com/a/18105437/4700162
-//             // https://stackoverflow.com/a/10156924/4700162
-//             // https://stackoverflow.com/a/52887758/4700162
+    // Auto close alert
+    // REF:https://codepen.io/CSWApps/pen/XJoLmN
+    if (autoclose) {
+        window.setTimeout(function () {
+            $('.alert').fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    }
+}
 
-//     $('#main').html(a);
-//     // $("#alert").html(`<b>SUCCESS ! </b> res.success`);
-//     //     $("#alert").toggleClass('d-none').toggleClass('d-none', 2000);
-//     $('#alert').show();
-// }
 
 /**
  * This function create an popub of bootstrap for confirm or decline 
@@ -134,25 +106,25 @@ bootstrap_alert.warning = function(message) {
  * @param {String} message - the message that you want display. 
  *                          If it not specified you will see a default message
  */
-function formSubmit(form,message = 'Are you sure? '){        
-        bootbox.confirm({
-            message: message,
-            buttons: {
-                confirm: {
-                    label: "<i class='fa fa-check'></i> Confirm",                    
-                    className: 'btn-secondary'
-                },
-                cancel: {
-                    label: "<i class='fa fa-times'></i> Cancel",
-                    className: 'btn-dark'
-                }
+function formSubmit(form, message = 'Are you sure? ') {
+    bootbox.confirm({
+        message: message,
+        buttons: {
+            confirm: {
+                label: "<i class='fa fa-check'></i> Confirm",
+                className: 'btn-secondary'
             },
-            callback: function (result) {                  
-                    if(result) form.submit(); 
+            cancel: {
+                label: "<i class='fa fa-times'></i> Cancel",
+                className: 'btn-dark'
             }
-        });
-        return false;
-    
+        },
+        callback: function (result) {
+            if (result) form.submit();
+        }
+    });
+    return false;
+
 }
 
 
