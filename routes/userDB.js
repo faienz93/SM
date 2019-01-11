@@ -135,7 +135,7 @@ router.get('/updateuser', function (req, res) {
             
         })
         .catch(() => { 
-            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.status(422).send({msg: "I cannot show the user"});
          });
    
 });
@@ -201,7 +201,13 @@ router.post('/updateuser', [
                         });
 
                 } else {
-                    res.status(200).send({success: "Successful Update"});
+                    Registration.find()
+                            .then((registrations) => {
+                                res.status(200).send({success: "Successful Update", users: registrations });                                
+                            })
+                            .catch(() => { 
+                                res.status(422).send({msg: "I cannot show the user"});
+                            });
                 }
             });
         }
@@ -226,7 +232,7 @@ router.get('/deleteuser', function (req, res){
             
         })
         .catch(() => { 
-            res.render('error', { title: 'DISPLAY ERROR', message: 'I cannot show the user' })
+            res.status(422).send({msg: "I cannot show the user"});
          });
 })
 
@@ -250,7 +256,14 @@ router.post('/deleteuser', function (req, res) {
                         statusCode: 11000
                         });
                 } else {
-                    res.status(200).send({success: "Cancellation Successful"});
+                    
+                    Registration.find()
+                            .then((registrations) => {
+                                res.status(200).send({success: "Cancellation Successful", users: registrations });                                
+                            })
+                            .catch(() => { 
+                                res.status(422).send({msg: "I cannot show the user"});
+                            });
                 }
             });
         }
@@ -267,7 +280,7 @@ router.get('/showuser', auth.connect(basic), (req, res) => {
         .then((registrations) => {       
             res.render('partials/showuser', {title: "Show User - [User authenticated: " + req.user + "]", users: registrations});
         })
-        .catch(() => { res.send('Sorry! Something went wrong.'); });
+        .catch(() => { res.status(422).send({msg: "Sorry! Something went wrong."});  });
 });
 
 

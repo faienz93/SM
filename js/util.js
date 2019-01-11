@@ -102,8 +102,7 @@ function bootstrapAlert(message, heading = 'Message:', type = 'primary', autoclo
 /**
  * This method get the value of param passed into URL
  * 
- * @method getUrlParameter
- * 
+ * @method getUrlParameter * 
  * @param sParam {String} - param passed
  * 
  * REF: https://stackoverflow.com/a/21903119/4700162

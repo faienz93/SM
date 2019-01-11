@@ -13,10 +13,6 @@ $(document).ready(function () {
   const updateUserForm = $('#updateUserForm');
   updateUserForm.on('submit', updateUser);
 
-  // <form class="form" id="" role="form" autocomplete="off" onsubmit="return formSubmit(this)" action="/deleteuser" method="POST"></form>
-  const deleteUserForm = $('#deleteUserForm');
-  deleteUserForm.on('submit', deleteUser);
-
 
 });
 
@@ -83,9 +79,9 @@ function populateFormUpdate() {
  * HANDLE FORM
  ****************************************************/
 
- /**
- * This function add New User to Database
- */
+/**
+* This function add New User to Database
+*/
 function addNewUser(e) {
   e.preventDefault();
 
@@ -131,6 +127,33 @@ function updateUser(e) {
     method: 'POST',
     data: $('#updateUserForm').serialize(),
     success: function (res) {
+
+      // -----------------------
+      // REFRESH DROPDOWN
+      // -----------------------
+      // Update the dropdown list
+      $('#findUserUpdate').empty();
+
+      // Set the new Length of dropdown
+      $("#findUserUpdate").append(
+        $('<option disabled selected></option>').html("Select users from " + res.users.length)
+      );
+
+      // Appen all items
+      $(res.users).each(function () {
+        $("<option />", {
+          val: JSON.stringify(this),
+          text: this.username
+        }).appendTo("#findUserUpdate");
+      });
+
+      // -----------------------
+      // RESET FORM
+      // -----------------------
+      $('#updateUserForm')[0].reset();
+
+
+      // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
 
     },
@@ -172,49 +195,67 @@ function updateUser(e) {
  */
 function deleteUserForm(form, message = 'Are you sure? ') {
   bootbox.confirm({
-      message: message,
-      buttons: {
-          confirm: {
-              label: "<i class='fa fa-check'></i> Confirm",
-              className: 'btn-secondary'
-          },
-          cancel: {
-              label: "<i class='fa fa-times'></i> Cancel",
-              className: 'btn-dark'
-          }
+    message: message,
+    buttons: {
+      confirm: {
+        label: "<i class='fa fa-check'></i> Confirm",
+        className: 'btn-secondary'
       },
-      callback: function (result) {
-          if (result) {
-              // form.submit();
-
-              $.ajax({
-                  url: '/deleteuser',
-                  method: 'POST',
-                  data: $('#deleteUserForm').serialize(),
-                  success: function (res) {
-                    bootstrapAlert(res.success, "Success", "success");                
-                  },
-                  error: function (err) {
-                    // console.log(err);
-                    var statusCode = err.responseJSON.statusCode;
-                    if (statusCode == 422) {
-                      var errorJSON = err.responseJSON.errors;
-                      // console.log(errorJSON);
-                      var e = "";
-                      for (var i = 0; i < errorJSON.length; i++) {
-                        e += errorJSON[i].msg + "</br>";
-                      }
-                      bootstrapAlert(e, "Error", "danger", false);
-                    } else if (statusCode == 11000) {
-                      var errorJSON = err.responseJSON.errors;
-                      // console.log(errorJSON);
-                      bootstrapAlert(errorJSON.name + " - " + errorJSON.message, "Error", "danger", false);
-                    }
-              
-                  }
-                });
-          }
+      cancel: {
+        label: "<i class='fa fa-times'></i> Cancel",
+        className: 'btn-dark'
       }
+    },
+    callback: function (result) {
+      if (result) {
+        // form.submit();
+
+        $.ajax({
+          url: '/deleteuser',
+          method: 'POST',
+          data: $('#deleteUserForm').serialize(),
+          success: function (res) {
+
+            // Update the dropdown list
+            $('#findProfessorDelete').empty();
+
+            // Set the new Length of dropdown
+            $("#findProfessorDelete").append(
+              $('<option disabled selected></option>').html("Select users from " + res.users.length)
+            );
+
+            // Appen all items
+            $(res.users).each(function () {
+              $("<option />", {
+                val: JSON.stringify(this),
+                text: this.username
+              }).appendTo("#findProfessorDelete");
+            });
+
+            // Feedback to User
+            bootstrapAlert(res.success, "Success", "success");
+          },
+          error: function (err) {
+            // console.log(err);
+            var statusCode = err.responseJSON.statusCode;
+            if (statusCode == 422) {
+              var errorJSON = err.responseJSON.errors;
+              // console.log(errorJSON);
+              var e = "";
+              for (var i = 0; i < errorJSON.length; i++) {
+                e += errorJSON[i].msg + "</br>";
+              }
+              bootstrapAlert(e, "Error", "danger", false);
+            } else if (statusCode == 11000) {
+              var errorJSON = err.responseJSON.errors;
+              // console.log(errorJSON);
+              bootstrapAlert(errorJSON.name + " - " + errorJSON.message, "Error", "danger", false);
+            }
+
+          }
+        });
+      }
+    }
   });
   return false;
 
