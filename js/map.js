@@ -95,7 +95,7 @@ function defineDebug(){
   var currentLayer = getCurrentLayerByVisible(currentLayers);
   var deb = debugLayer(currentLayer.getSource());
   globalMap.getLayers().getArray().push(deb);
-  alertMessage("Zoom in, Zoom out to see the tiles", "info");
+  bootstrapAlert("Zoom in, Zoom out to see the tiles", "Info", "info");
 }
 
 /**

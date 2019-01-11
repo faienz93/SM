@@ -91,21 +91,23 @@ router.post('/adduser', [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors.array());
-        
+
+        // https://stackoverflow.com/a/46373314/4700162
         return res.status(422).send({
             insertionError: true,
             errors: errors.array(),
             statusCode: 422
             });
-        // https://stackoverflow.com/a/46373314/4700162
+        
     }
 
     Registration.create(req.body, function (err, user) {
         if (err) {
-            console.log(err);
-            // // req.flash('danger', "Sorry! Something went wrong. Some field may already be in use.");
-            res.render('index');
-
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+                });
 
         } else {
             res.status(200).send({success: "Your registration was successful"});
@@ -172,24 +174,34 @@ router.post('/updateuser', [
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+        return res.status(422).send({
+            insertionError: true,
+            errors: errors.array(),
+            statusCode: 422
+            });
     }
 
     Registration.findById(req.body.id, function (err, user) {
         if (err) {
-            // req.flash('danger', err.message);
-            res.redirect('/map');
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+                });
         } else {
             user.username = req.body.username;
             user.email = req.body.email;
             user.password = req.body.password;
             user.save(function (err, updatedTank) {
                 if (err) {
-                    // req.flash('danger', err.message);
-                    res.redirect('/map');
+                    return res.status(422).send({
+                        insertionError: true,
+                        errors: err,
+                        statusCode: 11000
+                        });
+
                 } else {
-                    // req.flash('success', "Your updating was successful");
-                    res.redirect('/map');
+                    res.status(200).send({success: "Successful Update"});
                 }
             });
         }
@@ -224,16 +236,21 @@ router.post('/deleteuser', function (req, res) {
     var user = JSON.parse(req.body.deleteUser);
     Registration.findById(user._id, function (err, user) {
         if (err) {
-            // req.flash('danger', err.message);
-            res.redirect('/formDeleteUser');
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+                });
         } else {
             user.remove(function (err, updatedTank) {
                 if (err) {
-                    // req.flash('danger', err.message);
-                    res.redirect('/formDeleteUser');
+                    return res.status(422).send({
+                        insertionError: true,
+                        errors: err,
+                        statusCode: 11000
+                        });
                 } else {
-                    // req.flash('success', "Your deleting was successful");
-                    res.redirect('/formDeleteUser');
+                    res.status(200).send({success: "Cancellation Successful"});
                 }
             });
         }
