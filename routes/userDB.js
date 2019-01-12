@@ -1,4 +1,3 @@
-
 /**
  * ===========================================================================
  * File: UserDB.js 
@@ -17,7 +16,7 @@ const { body, check, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
 
-const Registration = mongoose.model('Registration');
+const Users = mongoose.model('Users');
 
 const basic = auth.basic({
     file: path.join(__dirname, '../users.htpasswd'),
@@ -46,7 +45,7 @@ router.post('/adduser', [
         .withMessage('Username is required.')
         .custom(async function (username) {
             // i check if already exist user with this username
-            var user = await Registration.find({ 'username': username })
+            var user = await Users.find({ 'username': username })
             if (user.length != 0 && user[0].username) {
                 throw new Error('Username already in use');
             } else {
@@ -64,7 +63,7 @@ router.post('/adduser', [
         .isEmail().withMessage('Please provide a valid email address')
         .custom(async function (email) {
             // i check if already exist user with this email
-            var mail = await Registration.find({ 'email': email })
+            var mail = await Users.find({ 'email': email })
             if (mail.length != 0 && mail[0].email) {
                 throw new Error('E-mail already in use');
             } else {
@@ -101,7 +100,7 @@ router.post('/adduser', [
         
     }
 
-    Registration.create(req.body, function (err, user) {
+    Users.create(req.body, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -126,7 +125,7 @@ router.get('/updateuser', function (req, res) {
     /**
      * Display all user from DB
      */
-    Registration.find()
+    Users.find()
         .then((registrations) => {
             res.status(200);
             res.header("Content-Type", "text/html");        
@@ -181,7 +180,7 @@ router.post('/updateuser', [
             });
     }
 
-    Registration.findById(req.body.id, function (err, user) {
+    Users.findById(req.body.id, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -201,7 +200,7 @@ router.post('/updateuser', [
                         });
 
                 } else {
-                    Registration.find()
+                    Users.find()
                             .then((registrations) => {
                                 res.status(200).send({success: "Successful Update", users: registrations });                                
                             })
@@ -223,7 +222,7 @@ router.get('/deleteuser', function (req, res){
     /**
      * Display all user from DB
      */
-    Registration.find()
+    Users.find()
         .then((registrations) => {
             res.status(200);
             res.header("Content-Type", "text/html");        
@@ -240,7 +239,7 @@ router.get('/deleteuser', function (req, res){
 router.post('/deleteuser', function (req, res) {
     // console.log(req.body.deleteUser);
     var user = JSON.parse(req.body.deleteUser);
-    Registration.findById(user._id, function (err, user) {
+    Users.findById(user._id, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -257,7 +256,7 @@ router.post('/deleteuser', function (req, res) {
                         });
                 } else {
                     
-                    Registration.find()
+                    Users.find()
                             .then((registrations) => {
                                 res.status(200).send({success: "Cancellation Successful", users: registrations });                                
                             })
@@ -276,7 +275,7 @@ router.post('/deleteuser', function (req, res) {
 ----------------------------------------------------- */
 // I see all people registred
 router.get('/showuser', auth.connect(basic), (req, res) => {
-    Registration.find()
+    Users.find()
         .then((registrations) => {       
             res.render('partials/showuser', {title: "Show User - [User authenticated: " + req.user + "]", users: registrations});
         })

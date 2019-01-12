@@ -33,4 +33,4 @@
      }
  });
 
- module.exports = mongoose.model('Registration', registrationSchema);
+ module.exports = mongoose.model('Users', registrationSchema);

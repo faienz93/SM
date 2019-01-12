@@ -108,6 +108,7 @@ function addNewUser(e) {
       bootstrapAlert(res.success, "Success", "success");
       // Reset value of form Add User       
       $('#addUserForm')[0].reset();
+      $('#password-strength-text-add').empty();
     },
     error: function (err) {
       // console.log(err);
@@ -166,6 +167,7 @@ function updateUser(e) {
       // RESET FORM
       // -----------------------
       $('#updateUserForm')[0].reset();
+      $('#password-strength-text-update').empty();
 
 
       // FEEDBACK
