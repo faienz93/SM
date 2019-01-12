@@ -10,6 +10,8 @@
 
 $(document).ready(function () {
 
+  
+
   // Setting navbar
   navbar();
 
@@ -218,3 +220,5 @@ function sidebar() {
     lastClicked = $(this);
   });
 }
+
+

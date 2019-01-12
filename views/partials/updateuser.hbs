@@ -40,7 +40,7 @@
             
             <!--  -->
             <!--  -->
-            <form class="form" id="updateUserForm" role="form" autocomplete="off">  
+            <form class="form" id="updateUserForm" role="form" autocomplete="off" oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>  
                 <!-- ID Of user. It can be only read  -->
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">ID</label>
@@ -83,6 +83,9 @@
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormUpdate" name="password" required disabled>
+                            <!-- Meter password -->
+                            <meter max="4" id="password-strength-meter-update"></meter>
+                            <p class="passwordText" id="password-strength-text-update"></p>
                         </div>
                     </div>
                 </div>

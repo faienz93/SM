@@ -12,7 +12,7 @@
             <h3 class="mb-0"> <a href="#"><a><img src="../img/plus.svg" class="svg icon header-icon"></a> {{title}}</h3>
         </div>
         <div class="card-body" id="cardBodyUser">
-            <form class="form" id="addUserForm" role="form" autocomplete="off">    
+            <form class="form" id="addUserForm" role="form" autocomplete="off" oninput='passwordConfirm.setCustomValidity(passwordConfirm.value != password.value ? "Passwords do not match." : "")'>    
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Username</label>
                     <div class="col-lg-9">
@@ -42,7 +42,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="Password123" name="password" required>
+                            <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormAdd" name="password" required>
+                             <!-- Meter password -->
+                            <meter max="4" id="password-strength-meter-add"></meter>
+                            <p class="passwordText" id="password-strength-text-add"></p>
                         </div>
                     </div>
                 </div>

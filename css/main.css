@@ -6,8 +6,6 @@
  * ===========================================================================
  */
 
-
-
 body {
     font-family: "Lato", sans-serif;
     background: #fafafa;
@@ -26,8 +24,6 @@ a, a:hover, a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
-
-
 
 .line {
     width: 100%;
@@ -54,6 +50,7 @@ i, span {
 /* ---------------------------------------------------
     MAIN DIV
 ----------------------------------------------------- */
+
 .mainDiv {
     /* width: 100vh; */
     height: 90vh;
@@ -63,19 +60,21 @@ i, span {
 /* ---------------------------------------------------
     POPUP MAP
 ----------------------------------------------------- */
+
 .ol-popup {
     position: absolute;
     background-color: white;
-    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
     padding: 15px;
     border-radius: 10px;
     border: 1px solid #cccccc;
     bottom: 12px;
     left: -50px;
     min-width: 280px;
-  }
-  .ol-popup:after, .ol-popup:before {
+}
+
+.ol-popup:after, .ol-popup:before {
     top: 100%;
     border: solid transparent;
     content: " ";
@@ -83,70 +82,79 @@ i, span {
     width: 0;
     position: absolute;
     pointer-events: none;
-  }
-  .ol-popup:after {
+}
+
+.ol-popup:after {
     border-top-color: white;
     border-width: 10px;
     left: 48px;
     margin-left: -10px;
-  }
-  .ol-popup:before {
+}
+
+.ol-popup:before {
     border-top-color: #cccccc;
     border-width: 11px;
     left: 48px;
     margin-left: -11px;
-  }
-  .ol-popup-closer {
+}
+
+.ol-popup-closer {
     text-decoration: none;
     position: absolute;
     top: 2px;
     right: 8px;
-  }
-  .ol-popup-closer:after {
+}
+
+.ol-popup-closer:after {
     content: "✖";
-  }
+}
 
 /* ---------------------------------------------------
     SEARCH - ZOOM IN - ZOOM OUT
 ----------------------------------------------------- */
-.ol-control button { 
+
+.ol-control button {
     background-color: rgba(40, 40, 40, 0.8) !important;
 }
-.ol-control button:hover { 
+
+.ol-control button:hover {
     background-color: rgba(40, 40, 40, 1) !important;
 }
-
 
 /* ---------------------------------------------------
     FULL SCREEN
 ----------------------------------------------------- */
+
 .fullscreen:-moz-full-screen {
     height: 100%;
-  }
-  .fullscreen:-webkit-full-screen {
-    height: 100%;
-  }
-  .fullscreen:-ms-fullscreen {
-    height: 100%;
-  }
+}
 
-  .fullscreen:fullscreen {
+.fullscreen:-webkit-full-screen {
     height: 100%;
-  }
+}
 
-  .fullscreen {
+.fullscreen:-ms-fullscreen {
+    height: 100%;
+}
+
+.fullscreen:fullscreen {
+    height: 100%;
+}
+
+.fullscreen {
     margin-bottom: 10px;
     width: 100%;
     height: 400px;
-  }
+}
 
-  .ol-rotate {
+.ol-rotate {
     top: 3em;
-  }
+}
 
- /* ---------------------------------------------------
+/* ---------------------------------------------------
     Define style of alert message
 ----------------------------------------------------- */
+
 .alert-fixed {
     position: fixed;
     top: 0px;
@@ -156,18 +164,18 @@ i, span {
     border-radius: 0px
 }
 
-
 /* ---------------------------------------------------
     STYLE ICON SVG
 ----------------------------------------------------- */
+
 .icon {
     display: inline-block;
     font-size: inherit;
     /* height: 1em; */
     overflow: visible;
     vertical-align: -.125em;
-    padding-left: 8px; 
-    padding-right: 8px; 
+    padding-left: 8px;
+    padding-right: 8px;
     width: 45px;
     height: 45px;
 }
@@ -178,48 +186,30 @@ svg path {
 
 .icon-nav {
     /* float: left; */
-      padding-left: 8px; 
-      /* padding-right: 8px;  */
-      width: 35px;
-      height: 35px;
-  }
+    padding-left: 8px;
+    /* padding-right: 8px;  */
+    width: 35px;
+    height: 35px;
+}
 
 .arrow-left {
     float: left;
     width: 24px;
     height: 24px;
-    padding-right: 8px;    
+    padding-right: 8px;
 }
-
 
 .header-icon {
     position: relative;
-    top: 7px;    
+    top: 7px;
 }
 
-
-/* ---------------------------------------------------
-    CONTAINER ALERT
------------------------------------------------------ */
-.alert-fixed {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 75%;
-    z-index: 9999;
-    border-radius: 0px;
-    margin-left: -37.5%;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-}
 
 /* ---------------------------------------------------
     STYLE TABLE USERS
     REF: https://stackoverflow.com/a/31911215/4700162
 ----------------------------------------------------- */
-/* https://stackoverflow.com/a/13039098/4700162 */ 
+
 .dataTables_filter, .dataTables_paginate{
     /* width: 50%; */
     float: right;
@@ -239,3 +229,87 @@ svg path {
     transform: translate(-50%, -50%);  
  }
  
+
+
+/* ---------------------------------------------------
+    STRENGH PASSWORD
+    Styling the meter bar
+----------------------------------------------------- */
+
+meter {
+    /* Reset the default appearance */
+    /* In Chrome exist a bug. For color the meter is needed comment the following line
+    REF: https://stackoverflow.com/a/38892123/4700162 */
+    /* -webkit-appearance: none; */
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0 auto 1em;
+    width: 100%;
+    height: 0.5em;
+    /* Applicable only to Firefox */
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------------------------------
+    STRENGH PASSWORD
+    Styling the meter value
+----------------------------------------------------- */
+
+/* Webkit based browsers */
+
+meter[value="1"]::-webkit-meter-optimum-value {
+    background: red;
+}
+
+meter[value="2"]::-webkit-meter-optimum-value {
+    background: yellow;
+}
+
+meter[value="3"]::-webkit-meter-optimum-value {
+    background: orange;
+}
+
+meter[value="4"]::-webkit-meter-optimum-value {
+    background: green;
+}
+
+/* Gecko based browsers */
+
+meter[value="1"]::-moz-meter-bar {
+    background: red;
+}
+
+meter[value="2"]::-moz-meter-bar {
+    background: yellow;
+}
+
+meter[value="3"]::-moz-meter-bar {
+    background: orange;
+}
+
+meter[value="4"]::-moz-meter-bar {
+    background: green;
+}
+
+.feedback {
+    color: #9ab;
+    font-size: 90%;
+    padding: 0 .25em;
+    font-family: Courgette, cursive;
+    margin-top: 1em;
+}
+
+.passwordText {
+    font-family: "Lato", sans-serif;
+    font-size: 1.1em;
+    /* font-weight: 300; */
+    font-weight: bold;
+    line-height: 1.7em;
+    color: #346;
+}
