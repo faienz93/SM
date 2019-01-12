@@ -204,23 +204,32 @@ svg path {
     top: 7px;
 }
 
+
 /* ---------------------------------------------------
-    CONTAINER ALERT
+    STYLE TABLE USERS
+    REF: https://stackoverflow.com/a/31911215/4700162
 ----------------------------------------------------- */
 
-/* .alert-fixed {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 75%;
-    z-index: 9999;
-    border-radius: 0px;
-    margin-left: -37.5%;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-} */
+.dataTables_filter, .dataTables_paginate{
+    /* width: 50%; */
+    float: right;
+    text-align: right;
+ }
+
+/* ---------------------------------------------------
+ Keep position of alert Bootstrap
+  REF: http://jsfiddle.net/losmescaleros/xfopaebv/ 
+       https://stackoverflow.com/a/25776315/4700162
+----------------------------------------------------- */
+#alert_placeholder {
+    position: absolute;
+    z-index: 1;
+    width: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);  
+ }
+ 
+
 
 /* ---------------------------------------------------
     STRENGH PASSWORD

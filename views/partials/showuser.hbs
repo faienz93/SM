@@ -1,0 +1,66 @@
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Show user
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<div id="showUser" >
+  <div class="card card-outline-secondary">
+    <div class="card-header" id="headerUser">
+      <h3 class="mb-0"> <a href="#"><a><img src="../img/multiusers.svg" class="svg icon header-icon"></a> {{title}}</h3>
+    </div>
+    <div class="card-body" id="cardBodyUser">
+      {{#if users}}
+
+      
+      <table id="users-table" class="table"  style="width:100%" >
+        <thead>
+          <tr class="bg-dark text-white">
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of registration</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <td>{{this._id}}</td>
+            <td>{{this.username}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.datetime}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{else}}
+      <div class="p-3 mb-2 bg-dark text-white">No registrations yet</div>
+      {{/if}}
+    </div>
+  </div>
+</div>
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Load Scripts
+// REF: https://stackoverflow.com/a/28478146/4700162
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<script>
+  $.getScript("../../js/util.js");
+
+  /**
+    * Define a user table based on Data Table Plugin. 
+    * REF: https://datatables.net/examples/styling/bootstrap4.html
+    **/
+  $('#users-table').DataTable({
+    language: {
+        searchPlaceholder: "Search user.."
+    }
+   
+});
+</script>

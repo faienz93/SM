@@ -1,0 +1,167 @@
+https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/
+https://codeforgeek.com/2015/01/render-html-file-expressjs/
+http://expressjs.com/it/starter/static-files.html
+
+EXPRESS SESSION AND COOKIE
+https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
+
+
+PASSWORD VALIDATION
+https://bootsnipp.com/snippets/featured/advance-password-validation
+
+
+https://w3layouts.com/ 
+
+BOOTSTRAP NOTIFICATION
+http://bootstrap-confirmation.js.org/#ex-link 
+
+
+MONGOOSE ERROR
+https://stackoverflow.com/a/51962721/4700162
+
+W3Scool validation form
+https://www.w3schools.com/howto/howto_js_password_validation.asp
+https://twitterbootstrap.org/bootstrap-form-validation/ 
+
+
+MONGODB 
+https://mongoosejs.com/docs/models.html 
+https://mongoosejs.com/docs/documents.html UPDATE
+How to check if that data already exist in the database during update (Mongoose And Express)  
+https://stackoverflow.com/questions/16882938/how-to-check-if-that-data-already-exist-in-the-database-during-update-mongoose
+
+
+
+NOTIFICATION
+https://github.com/jaredhanson/connect-flash
+https://www.npmjs.com/package/express-flash
+https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
+https://github.com/jaredhanson/connect-flash
+https://github.com/visionmedia/express-messages
+https://github.com/jack2gs/express-flash-2
+
+
+https://stackoverflow.com/questions/25480633/how-do-i-display-flash-message-without-page-refresh-using-express-and-connect-fl
+
+EXPRESS-VALIDATOR
+https://express-validator.github.io/docs/index.html
+
+
+REFRESH WITH PJAX
+https://stackoverflow.com/questions/44901025/expressjs-change-route-without-refresh
+
+HANDLE SERVER RESPONSE
+https://stackoverflow.com/questions/46372715/ajax-post-data-from-form-to-send-to-express-js-body-parser --> it conteint multer for upoad file
+https://stackoverflow.com/questions/44415130/how-can-i-send-information-from-nodejs-server-to-client-side
+
+ERROR HANDLING
+https://expressjs.com/it/guide/error-handling.html
+
+SEND JSON AND RENDER AT SAME TIME
+https://stackoverflow.com/questions/31961171/make-http-request-to-get-json-before-express-js-res-render
+https://stackoverflow.com/questions/21172889/express-send-a-page-and-custom-data-to-the-browser-in-a-single-request
+https://stackoverflow.com/questions/25300017/how-to-ensure-the-javascript-is-at-the-bottom-of-the-code-in-express-handlebars
+https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-reloading-entire-page-in-node-js-using-ejs-templ
+
+
+
+
+
+RICORDA: 
+server-db 
+    |
+    |
+    |-> refactor-view
+            
+
+IMPORTANT: 
+https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-reloading-entire-page-in-node-js-using-ejs-templ
+https://github.com/foundersandcoders/express-handlebars-workshop#extra-error-refactor
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/forms#Express_forms_subarticles
+https://github.com/helpers/handlebars-helpers/issues/204
+https://stackoverflow.com/questions/31905684/dynamic-partial-in-handlebars
+
+
+
+
+
+
+
+
+
+User authenticated: antonio
+[ { _id: 5c082a2c98f9121cb1e7d46f,
+    username: 'aaaa',
+    email: 'a@a',
+    password: 'a',
+    passwordConfirm: 'a',
+    datetime: 2018-12-05T19:42:36.710Z,
+    __v: 0 },
+  { _id: 5c084ed72d6c25127e7b3949,
+    username: 'aad',
+    email: 'a@ad',
+    password: 'a',
+    passwordConfirm: 'a',
+    datetime: 2018-12-05T22:19:03.018Z,
+    __v: 0 },
+  { _id: 5c0853bc57e09217e10f1ec5,
+    username: 'g',
+    email: 'g@g',
+    password: 'a',
+    passwordConfirm: 'a',
+    datetime: 2018-12-05T22:39:56.103Z,
+    __v: 0 },
+  { _id: 5c0bbde0a13ff853a2df2c92,
+    username: 'a',
+    email: 'antonio.faienza@studio.unibo.it',
+    password: 'aaaaaa',
+    datetime: 2018-12-08T12:49:36.428Z,
+    __v: 0 },
+  { _id: 5c0be3251b0e876ef8af954f,
+    username: 'deasdas',
+    email: 'faienza.giuseppe@alice.it',
+    password: 'A',
+    datetime: 2018-12-08T15:28:38.002Z,
+    __v: 0 },
+  { _id: 5c0c01d675b2d716a34a0dff,
+    username: 'gfetyrtretsdfsdf',
+    email: 'antonio.faienza@example.it',
+    password: 'a',
+    datetime: 2018-12-08T17:39:34.287Z,
+    __v: 0 },
+  { _id: 5c0c0551e0e68e19a2c63743,
+    username: 'erwefsdfsd',
+    email: 'antonio.faienza@exampleee.it',
+    password: 'a',
+    datetime: 2018-12-08T17:54:25.718Z,
+    __v: 0 },
+  { _id: 5c0c0b9482c70b1fb76027ad,
+    username: 'uiyuutyutyuryu',
+    email: 'antonio.faienza@studio.unibo.comcom',
+    password: 'a',
+    datetime: 2018-12-08T18:21:08.575Z,
+    __v: 0 },
+  { _id: 5c11856567be4529e86f56b6,
+    username: 'sdfsdfsdfrsdgjuhyutrert',
+    email: 'a936@example.it',
+    password: 'a',
+    datetime: 2018-12-12T22:02:13.552Z,
+    __v: 0 },
+  { _id: 5c11896abd43f72dec932ca9,
+    username: 'caccaaasdfsdf',
+    email: 'a9455@example.it',
+    password: 'a',
+    datetime: 2018-12-12T22:19:22.900Z,
+    __v: 0 },
+  { _id: 5c1190b6df4044341821c1c8,
+    username: 'sdfsdfsd fdsf',
+    email: 's@example.it',
+    password: 'a',
+    datetime: 2018-12-12T22:50:30.998Z,
+    __v: 0 },
+  { _id: 5c151bd12ed9f5651e92550e,
+    username: 'michelino',
+    email: 'afaienza95@gmail.com',
+    password: 'asd',
+    datetime: 2018-12-15T15:20:49.214Z,
+    __v: 0 } ]

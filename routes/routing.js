@@ -4,86 +4,44 @@
 var express = require('express');
 const mongoose = require('mongoose');
 var path = require('path');
-const auth = require('http-auth');
+
+var app = express();
 
 const router = express.Router();
-const Registration = mongoose.model('Registration');
 
-const basic = auth.basic({
-    file: path.join(__dirname, '../users.htpasswd'),
-});
-
-basic.on('success', (result, req) => {
-    console.log(`User authenticated: ${result.user}`);
-});
 
 // define reading of stating file
 // app.use(express.static(path.join(__dirname, '/')));
 
 
-router.get('/', function (req, res) {
 
-    /**
-     * Display all user from DB
-     */
-    Registration.find()
-        .then((registrations) => {
-            //res.render(path.join(__dirname, '../views/map.html'));            
-            // i wat send a notification of result of specific operation
-            res.render('map', {users: registrations,  expressFlashSuccess: req.flash('success'),                                                      
-                                                      expressFlashDanger: req.flash('danger'),
-                                                      expressFlashWarning: req.flash('warning'), 
-                                                      expressFlashInfo: req.flash('info'), });
-            
-        })
-        .catch(() => { 
-            res.render('error', { success: false, title: 'DISPLAY ERROR', message: 'I cannot show the user' })
-         });
-
+router.get('/', function(req, res) {
+    res.render('index', {title: "SM - Mobile System"});
 });
 
-router.get('/redirect', function (req, res) {
-    //   res.render(path.join(__dirname, '../views/map.html'));
-    res.render('map');
+router.get('/map', function (req, res) {
+    if(req.query.map === undefined && req.query.type === undefined){
+        res.status(200);
+        res.header("Content-Type", "text/html");
+        res.render('partials/map', {title: "SM",map:"OSM", type: "osm"});
+    }else {    
+        res.status(200);
+        res.header("Content-Type", "text/html");
+        res.render('partials/map', {title: "SM",map:req.query.map, type: req.query.type});
+        // encodeURIComponent(JSON.stringify(jsonData)
+    }
+    // res.send(JSON.stringify(Obj));
+
 });
-
-// router.post('/addUser', function (req, res) {
-//     console.log(req.body);
-//     const registration = new Registration(req.body);
-//     registration.save()
-//         .then(() => {
-//             res.render('result', { success: true, title: 'REGISTRATION SUCCESS', message: 'Your registration was successful' })
-//         })
-//         .catch(() => {
-//             res.render('result', { success: false, title: 'REGISTRATION ERROR', message: 'Sorry! Something went wrong.' })
-//         });   
-
-// });
-
-// I see all people registred
-router.get('/allRegistration', auth.connect(basic), (req, res) => {
-    Registration.find()
-        .then((registrations) => {
-            res.send(registrations)
-        })
-        .catch(() => { res.send('Sorry! Something went wrong.'); });
-});
-
-
 
 router.get('/login', function (req, res, next) {
-    res.render('login', { title: "SM - Login" });
+    res.render('login', {title: "SM - Login" });
 
     // if you have layout you can specify if you want to use him
-    // res.render('home', {layout:false, title: "HELLO WORLD"});
+    // res.render('login', {layout:false, title: "HELLO WORLD"});
 });
 
-router.get('/registration', function (req, res, next) {
-    res.render('registration', { title: "SM - Registration" });
 
-    // if you have layout you can specify if you want to use him
-    // res.render('home', {layout:false, title: "HELLO WORLD"});
-});
 
 
 

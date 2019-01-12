@@ -52,80 +52,74 @@ jQuery('img.svg').each(function () {
  */
 function createUrl(tpl, layerDesc) {
     return tpl
-      .replace('{base}', layerDesc.base)
-      .replace('{type}', layerDesc.type)
-      .replace('{scheme}', layerDesc.scheme)
-      .replace('{app_id}', layerDesc.app_id)
-      .replace('{app_code}', layerDesc.app_code);
-  }
+        .replace('{base}', layerDesc.base)
+        .replace('{type}', layerDesc.type)
+        .replace('{scheme}', layerDesc.scheme)
+        .replace('{app_id}', layerDesc.app_id)
+        .replace('{app_code}', layerDesc.app_code);
+}
 
 
 
-  /**
- * This function create an Alert Bootsrap
- * 
- * @method alertMessage
- * @param {*} message the message that appear
- * @param {*} type there are different type of alert:
- *                  @danger
- *                  @warning
- *                  @info
- *                  and other: https://getbootstrap.com/docs/4.0/components/alerts/
- */
-function alertMessage(message, type = "primary") {
-    var br = document.createElement("br");
-    var div = document.createElement("div");
-    div.setAttribute("class", "alert alert-" + type + " text-center "); // alert-fixed
-    // div.setAttribute("role", "alert");
-    div.innerHTML = "<strong>" + message + "</strong>";
+/**
+* This function create an Alert Bootsrap
+* REF: https://stackoverflow.com/a/10156924/4700162
+* 
+* @method bootstrapAlert
+* @param {*} message the message that appear
+* @param {*} heading the title of alert
+* @param {*} type there are different type of alert:
+*                  @danger
+*                  @warning
+*                  @info
+*                  and other: https://getbootstrap.com/docs/4.0/components/alerts/
+* @param {*} autoclose if true after 3s wil be close
+*/
+function bootstrapAlert(message, heading = 'Message:', type = 'primary', autoclose = true) {
+    $('#alert_placeholder').hide().html(
+        '<div class="alert alert-' + type + ' alert-dismissable">' +
+        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+        '<h4 class="alert-heading">' + heading + '</h4>' +
+        '<span>' + message + '</span>' +
+        '</div>').fadeIn(1000);
 
-    document.getElementById("content").appendChild(br);
-    document.getElementById("content").appendChild(div);
 
     // Auto close alert
     // REF:https://codepen.io/CSWApps/pen/XJoLmN
-    window.setTimeout(function () {
-        $(".alert").fadeTo(500, 0).slideUp(500, function () {
-            $(this).remove();
-        });
-    }, 3000);
-
-    br.remove();
+    if (autoclose) {
+        window.setTimeout(function () {
+            $('.alert').fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 3000);
+    }
 }
+
+
+
+
 
 /**
- * This function create an popub of bootstrap for confirm or decline 
- * a specic choice. If this is positive than submit the form
- * passed as param
+ * This method get the value of param passed into URL
  * 
- * @method formSubmit
- * @param {Object} form - the form to verify
- * @param {String} message - the message that you want display. 
- *                          If it not specified you will see a default message
+ * @method getUrlParameter * 
+ * @param sParam {String} - param passed
+ * 
+ * REF: https://stackoverflow.com/a/21903119/4700162
  */
-function formSubmit(form,message = "Are you sure? "){        
-        bootbox.confirm({
-            message: message,
-            buttons: {
-                confirm: {
-                    label: '<i class="fa fa-check"></i> Confirm',                    
-                    className: 'btn-secondary'
-                },
-                cancel: {
-                    label: '<i class="fa fa-times"></i> Cancel',
-                    className: 'btn-dark'
-                }
-            },
-            callback: function (result) {                  
-                    if(result) form.submit(); 
-            }
-        });
-        return false;
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
 
- 
-    
-}
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
 
-
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
 
 

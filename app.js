@@ -17,9 +17,9 @@ var app = express();
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require("express-session");
-var flash = require('connect-flash');
 var exphbs  = require("express-handlebars");
-var app = express();
+
+
 
 
 
@@ -39,8 +39,13 @@ var hbs = exphbs.create({
   helpers: {
     json: function (context) { 
       return JSON.stringify(context);
-      } 
-  }
+      },
+      section: function(name, options){
+        if(!this._sections) this._sections = {};
+        this._sections[name] = options.fn(this);
+        return null;
+    }
+  },
 
 
    
@@ -51,9 +56,9 @@ var hbs = exphbs.create({
    * 
    * REF: https://www.npmjs.com/package/express-handlebars 
    */
-  // defaultLayout: 'main',  --> name of the layout file name i.e main.hbs
+  // defaultLayout: 'default',  // name of the layout file name i.e main.hbs
   // layoutsDir: path.join(__dirname, '/views/layouts/'), // dir where is contained the layout file
-  
+  partialsDir: path.join(__dirname, '/views/partials/')
 });
 
 
@@ -78,7 +83,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }));
-app.use(flash())
+
 
 
 /**

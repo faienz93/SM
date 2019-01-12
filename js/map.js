@@ -1,5 +1,3 @@
-
-
 /**
  * ===========================================================================
  * File: Map.js 
@@ -9,84 +7,17 @@
  */
 
 
-function map() {
+function settingMap(){
 
   defaultOSM();
   bingMaps();
   stamenMap();
   hereMap();
 
-
-  // When inizialize the map it set with Default OSM
-  map = new ol.Map({
-    controls: ol.control.defaults().extend([
-      new ol.control.FullScreen({
-        source: 'fullscreen'
-      })
-    ]),
-    target: 'map',
-    renderer: 'webgl',
-    // layers, // NOT DEFINED HERE
-    // Improve user experience by loading tiles while animating. Will make
-    // animations stutter on mobile or slow devices.
-    loadTilesWhileAnimating: true, // is used for old smartphone during the animations
-    view: new ol.View({
-      center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
-      zoom: 10
-    })
-  });
-
-  // we define here the layer 
-  // to maintain the same approach of access to the layers
-  var osm = getGroup("OSM");
-  map.setLayerGroup(osm);
-
-
-
-
-  var layers = map.getLayers().array_;
-  for (var i = 0; i < layers.length; ++i) {
-    layers[i].setVisible("OSM");
-  }
-
-  geocoder();
-
-  // https://stackoverflow.com/questions/27658280/layer-switching-in-openlayers-3
-  $('.selected-layer').on("click", function () {
-    var layerSelected = $(this).attr("id");
-    var groupIdHtml = $(this).parent().attr('id');
-
-    var groupSelected = getGroup(groupIdHtml);
-    map.setLayerGroup(groupSelected);
-    var layers = map.getLayers().getArray();
-    var debugLayer = getCurrentLayerByTitle(layers, "Debug");
-
-    // disable debug if active a different view
-    if (debugLayer != undefined) {
-      var index = layers.indexOf(debugLayer);
-      layers.splice(index, 1);
-    }
-
-    for (var i = 0; i < layers.length; ++i) {
-      if (groupSelected.values_.title === "Bing") {
-        layers[i].setVisible(bingStyles[i] === layerSelected);
-      } else if (groupSelected.values_.title === "Here") {
-        layers[i].setVisible(hereStyles[i].scheme === layerSelected);
-      } else if (groupSelected.values_.title === "Stamen") {
-        layers[i].setVisible(stamenStyles[i] === layerSelected);
-      } else {
-        layers[i].setVisible("OSM");
-      }
-    }
-  });
-
-  // Define click debug
-  $('.selected-debug').on("click", function () {
-    var currentLayers = map.getLayers().getArray();
-    var currentLayer = getCurrentLayerByVisible(currentLayers);
-    var deb = debugLayer(currentLayer.getSource());
-    map.getLayers().getArray().push(deb);
-    alertMessage("Zoom in, Zoom out to see the tiles", "info");
+  $('.selected-debug').on("click", function (event) {
+    event.preventDefault();    
+    defineDebug();
+    return false;
   });
 
 
@@ -98,7 +29,7 @@ function map() {
     var filterSelected = $(this).attr("value");
     console.log(filterSelected);
     selectedKernel = normalize(kernels[filterSelected]);
-    map.render();
+    globalMap.render();
   });
 
 
@@ -119,9 +50,87 @@ function map() {
       });
     }
   }
+}
+
+function createMap(m = "OSM",t = "osm") {
+
+  // When inizialize the map it set with Default OSM
+  globalMap = new ol.Map({
+    controls: ol.control.defaults().extend([
+      new ol.control.FullScreen({
+        source: 'fullscreen'
+      })
+    ]),
+    target: 'map',
+    renderer: 'webgl',
+    // layers, // NOT DEFINED HERE
+    // Improve user experience by loading tiles while animating. Will make
+    // animations stutter on mobile or slow devices.
+    loadTilesWhileAnimating: true, // is used for old smartphone during the animations
+    view: new ol.View({
+      center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
+      zoom: 10
+    })
+  });
+
+  geocoder();
+  setCurrentLayer(m, t)
+
+  
+
+  
+  
 
 }
 
+
+/**
+ * Get the gloabal map, retrieve the current layers visible and then
+ * define a grid for debug
+ * 
+ * @method defineDebug
+ */
+function defineDebug(){
+  var currentLayers = globalMap.getLayers().getArray();
+  var currentLayer = getCurrentLayerByVisible(currentLayers);
+  var deb = debugLayer(currentLayer.getSource());
+  globalMap.getLayers().getArray().push(deb);
+  bootstrapAlert("Zoom in, Zoom out to see the tiles", "Info", "info");
+}
+
+/**
+ * This method draw the view of open layer
+ * 
+ * @method setCurrentLayer
+ * 
+ * @param mapview {String} - set the view for example Stamen
+ * @param type {String} - set the type of view. For example terrain
+ */
+function setCurrentLayer(mapview, type) {
+  var groupSelected = getGroup(mapview);
+  globalMap.setLayerGroup(groupSelected);
+
+  var layers = globalMap.getLayers().getArray();
+  var debugLayer = getCurrentLayerByTitle(layers, "Debug");
+
+  // disable debug if active a different view
+  if (debugLayer != undefined) {
+    var index = layers.indexOf(debugLayer);
+    layers.splice(index, 1);
+  }
+
+  for (var i = 0; i < layers.length; ++i) {
+    if (groupSelected.values_.title === "Bing") {
+      layers[i].setVisible(bingStyles[i] === type);
+    } else if (groupSelected.values_.title === "Here") {
+      layers[i].setVisible(hereStyles[i].scheme === type);
+    } else if (groupSelected.values_.title === "Stamen") {
+      layers[i].setVisible(stamenStyles[i] === type);
+    } else {
+      layers[i].setVisible("OSM");
+    }
+  }
+}
 
 /**
  * This function return a default OSM
@@ -315,7 +324,7 @@ function debugLayer(currentSource) {
 function geocoder() {
 
   var p = popup();
-  map.addOverlay(p);
+  globalMap.addOverlay(p);
 
   //Instantiate with some options and add the Control
   var geocoder = new Geocoder('nominatim', {
@@ -329,7 +338,7 @@ function geocoder() {
     autoComplete: true,
     keepOpen: true
   });
-  map.addControl(geocoder);
+  globalMap.addControl(geocoder);
 
 
   // I don't want/need Geocoder layer to be visible
@@ -340,7 +349,7 @@ function geocoder() {
     var feature = evt.feature;
     var coord = evt.coordinate;
     var address = evt.address;
-    
+
 
     // application specific
     // app.addMarker(feature, coord); // TODO ADD MARKERS
@@ -365,7 +374,7 @@ function popup() {
   /**
    * Elements that make up the popup.
    */
-  var container = $('#popup')[0];     
+  var container = $('#popup')[0];
   var closer = $('#popup-closer')[0];
   /**
    * Create an overlay to anchor the popup to the map.
@@ -382,7 +391,7 @@ function popup() {
    * Add a click handler to hide the popup.
    * @return {boolean} Don't follow the href.
    */
-  closer.onclick = function() {
+  closer.onclick = function () {
     popup.setPosition(undefined);
     closer.blur();
     return false;
