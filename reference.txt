@@ -82,6 +82,19 @@ https://github.com/helpers/handlebars-helpers/issues/204
 https://stackoverflow.com/questions/31905684/dynamic-partial-in-handlebars
 
 
+MARKERS OPEN LAYERS
+https://wiki.openstreetmap.org/wiki/OpenLayers_Marker_Example
+https://openlayers.org/en/latest/examples/?q=marker
+    --> https://openlayers.org/en/latest/examples/icon.html?q=marker
+    --> https://openlayers.org/en/latest/examples/icon-color.html (CHANGE COLOR)
+https://openlayers.org/en/latest/examples/?q=cluster
+https://openlayers.org/en/latest/examples/?q=heat
+
+COLOR PICKER
+http://www.bestjquery.com/2018/09/pickr-flat-simple-hackable-color-picker/
+
+
+
 
 
 
