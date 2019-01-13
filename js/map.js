@@ -130,6 +130,56 @@ function setCurrentLayer(mapview, type) {
     }
   }
 
+  // =============================================================================
+  // REF https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
+  var rome = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.fromLonLat(initialCoordinatesMap))
+  });
+
+  var london = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([-0.12755, 51.507222]))
+  });
+
+  var madrid = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([-3.683333, 40.4]))
+  });
+
+
+  rome.setStyle(new ol.style.Style({
+    image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
+      color: '#8959A8',
+      crossOrigin: 'anonymous',
+      src: '/img/dot.png'
+    }))
+  }));
+
+  london.setStyle(new ol.style.Style({
+    image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
+      color: '#4271AE',
+      crossOrigin: 'anonymous',
+      src: '/img/dot.png'
+    }))
+  }));
+
+  madrid.setStyle(new ol.style.Style({
+    image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
+      color: [113, 140, 0],
+      crossOrigin: 'anonymous',
+      src: '/img/dot.png'
+    }))
+  }));
+
+  var vectorSource = new ol.source.Vector({
+    features: [rome, london, madrid]
+  });
+
+  var vectorLayer = new ol.layer.Vector({
+    source: vectorSource
+  });
+
+  globalMap.addLayer(vectorLayer);
+
+  // ==================================================================
   
 }
 
