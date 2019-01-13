@@ -10,7 +10,7 @@
 
 $(document).ready(function () {
 
-  
+
 
   // Setting navbar
   navbar();
@@ -23,8 +23,8 @@ $(document).ready(function () {
   // - Define filter 
   // Then we Create for the first time the map
   settingMap();
-  createMap(); 
-  
+  createMap();
+
 
 
   // OSM
@@ -164,6 +164,25 @@ $(document).ready(function () {
     $.get('/showuser').then(function (data) {
       $('#main').html(data);
     });
+  });
+
+
+
+  // Informations
+  $('.selected-informations').on("click", function (event) {
+    event.preventDefault();
+    bootbox.alert({
+      message: "<span style='width: 100%; text-align: center'>" +
+        "<img style='width: 150px; height: 150px;' src='../img/openlayersLogo.png'> </br>" +
+        "<b>University of Bologna - Alma Mater Studiorum</b> </br>" +
+        "Mobile Systems (MSc, Semester II) </br>" +
+        "<i>Antonio Faienza</i>" +
+        "</span>",
+      backdrop: true,
+    });
+
+
+    return false;
   });
 
 });
