@@ -10,8 +10,6 @@
 
 $(document).ready(function () {
 
-
-
   // Setting navbar
   navbar();
 
@@ -25,15 +23,11 @@ $(document).ready(function () {
   settingMap();
   createMap();
 
-
-
   // Definition of view of Partials
   definePartialsMaps();
   definePartialsForms();
 
-
-
-  // Informations
+  // Informations alerts
   $('.selected-informations').on("click", function (event) {
     event.preventDefault();
     bootbox.alert({
@@ -45,8 +39,6 @@ $(document).ready(function () {
         "</span>",
       backdrop: true,
     });
-
-
     return false;
   });
 
