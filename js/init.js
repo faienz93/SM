@@ -26,6 +26,7 @@ $(document).ready(function () {
   // Definition of view of Partials
   definePartialsMaps();
   definePartialsForms();
+  definePartialsTest();
 
   // Informations alerts
   $('.selected-informations').on("click", function (event) {
@@ -225,7 +226,7 @@ function definePartialsMaps(){
  */
 function definePartialsForms(){
 
-    // USER DATABASE
+   // Add new User
     $('#add-new-user').click(function (event) {
       $.get('/adduser').then(function (data) {
         $('#main').html(data);
@@ -233,21 +234,59 @@ function definePartialsForms(){
     });
   
   
+    // Update Existing User
     $('#update-user').click(function (event) {
       $.get('/updateuser').then(function (data) {
         $('#main').html(data);
       });
     });
   
+    // Delete Existing User
     $('#delete-user').click(function (event) {
       $.get('/deleteuser').then(function (data) {
         $('#main').html(data);
       });
     });
   
+    // Show all Users
     $('#show-user').click(function (event) {
       $.get('/showuser').then(function (data) {
         $('#main').html(data);
       });
     });
+}
+
+
+/**
+ * This function define the view of Partials Test
+ */
+function definePartialsTest(){
+  // Add new Test
+  $('#add-new-test').click(function (event) {
+    $.get('/addtest').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
+
+  // Update Existing Test
+  $('#update-test').click(function (event) {
+    $.get('/updatetest').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
+  // Delete Existing Test
+  $('#delete-test').click(function (event) {
+    $.get('/deletetest').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
+  // Show All Test
+  $('#show-test').click(function (event) {
+    $.get('/showtest').then(function (data) {
+      $('#main').html(data);
+    });
+  });
 }

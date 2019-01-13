@@ -120,14 +120,49 @@
                 <div class="sidebar-divider"></div>
             </ul>
 
-            <ul class="list-unstyled CTAs">
-
+            <ul class="list-unstyled CTAs">                
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // Test
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
                 <li>
-                    <a href="#operationDB" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <a href="#testDB" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="../img/database-data.svg" class="svg icon">
+                        Test
+                    </a>
+                    <ul class="collapse list-unstyled select-specific" id="testDB">
+                        <li value="addTest" class=" ">
+                            <a href="#" id="add-new-test">Add Test</a>
+                        </li>
+                        <li value="updateTest" class=" ">
+                            <a href="#" id="update-test">Update Test</a>
+                        </li>
+                        <li value="deleteTest" class=" ">
+                            <a href="#" id="delete-test">Delete Test</a>
+                        </li>
+                        <li value="showTest" class=" ">
+                            <a href="#" id="show-test">Show Test</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <div class="sidebar-divider"></div>
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // Users
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
+                <li>
+                    <a href="#usersDB" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <img src="../img/database-users.svg" class="svg icon">
                         Users
                     </a>
-                    <ul class="collapse list-unstyled select-specific" id="operationDB">
+                    <ul class="collapse list-unstyled select-specific" id="usersDB">
                         <li value="addUser" class=" ">
                             <a href="#" id="add-new-user">Add User</a>
                         </li>
