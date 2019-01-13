@@ -27,6 +27,90 @@ $(document).ready(function () {
 
 
 
+  // Definition of view of Partials
+  definePartialsMaps();
+  definePartialsForms();
+
+
+
+  // Informations
+  $('.selected-informations').on("click", function (event) {
+    event.preventDefault();
+    bootbox.alert({
+      message: "<span style='width: 100%; text-align: center'>" +
+        "<img style='width: 150px; height: 150px;' src='../img/openlayersLogo.png'> </br>" +
+        "<b>University of Bologna - Alma Mater Studiorum</b> </br>" +
+        "Mobile Systems (MSc, Semester II) </br>" +
+        "<i>Antonio Faienza</i>" +
+        "</span>",
+      backdrop: true,
+    });
+
+
+    return false;
+  });
+
+});
+
+
+
+/**
+* Handle the Navbar
+*/
+function navbar() {
+  // When click on the hamburger icon (Thanks the appropriate library) it open and close the 
+  // sidebar
+  $('#hambergerButton').click(function () {
+    $(this).toggleClass('is-active');
+    var checkClass = $("#hambergerButton").hasClass('is-active');
+    if (checkClass) {
+      // $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
+      $('#sidebar').toggleClass('active');
+
+
+    } else {
+      // $("body").css("backgroundColor", "white");
+      $('#sidebar').toggleClass('active');
+
+
+    }
+  });
+
+  var lastClickedFilter;
+  var filter = $('.dropdown-menu').find('a');
+  lastClickedFilter = filter;
+  filter.click(function () {
+    if (lastClickedFilter != undefined) {
+      lastClickedFilter.removeClass('active');
+    }
+    $(this).addClass('active');
+    lastClickedFilter = $(this);
+  });
+}
+
+
+/**
+ * Handle the Sidebar
+ */
+function sidebar() {
+  var lastClicked;
+  var a = $('.select-specific > li');
+  lastClicked = a;
+  a.click(function () {
+    if (lastClicked !== undefined) {
+      lastClicked.removeClass('active');
+    }
+    $(this).addClass('active');
+    lastClicked = $(this);
+  });
+}
+
+
+/**
+ * This function define the view of Partials for differents map
+ */
+function definePartialsMaps(){
+
   // OSM
   $('#osm').click(function (event) {
     $.get('/map?map=OSM&type=osm').then(function (data) {
@@ -140,104 +224,38 @@ $(document).ready(function () {
   // });
 
 
-  // USER DATABASE
-  $('#add-new-user').click(function (event) {
-    $.get('/adduser').then(function (data) {
-      $('#main').html(data);
-    });
-  });
 
-
-  $('#update-user').click(function (event) {
-    $.get('/updateuser').then(function (data) {
-      $('#main').html(data);
-    });
-  });
-
-  $('#delete-user').click(function (event) {
-    $.get('/deleteuser').then(function (data) {
-      $('#main').html(data);
-    });
-  });
-
-  $('#show-user').click(function (event) {
-    $.get('/showuser').then(function (data) {
-      $('#main').html(data);
-    });
-  });
-
-
-
-  // Informations
-  $('.selected-informations').on("click", function (event) {
-    event.preventDefault();
-    bootbox.alert({
-      message: "<span style='width: 100%; text-align: center'>" +
-        "<img style='width: 150px; height: 150px;' src='../img/openlayersLogo.png'> </br>" +
-        "<b>University of Bologna - Alma Mater Studiorum</b> </br>" +
-        "Mobile Systems (MSc, Semester II) </br>" +
-        "<i>Antonio Faienza</i>" +
-        "</span>",
-      backdrop: true,
-    });
-
-
-    return false;
-  });
-
-});
-
-
-
-/**
-* Handle the Navbar
-*/
-function navbar() {
-  // When click on the hamburger icon (Thanks the appropriate library) it open and close the 
-  // sidebar
-  $('#hambergerButton').click(function () {
-    $(this).toggleClass('is-active');
-    var checkClass = $("#hambergerButton").hasClass('is-active');
-    if (checkClass) {
-      // $("body").css("backgroundColor", "rgba(0,0,0,0.4)");
-      $('#sidebar').toggleClass('active');
-
-
-    } else {
-      // $("body").css("backgroundColor", "white");
-      $('#sidebar').toggleClass('active');
-
-
-    }
-  });
-
-  var lastClickedFilter;
-  var filter = $('.dropdown-menu').find('a');
-  lastClickedFilter = filter;
-  filter.click(function () {
-    if (lastClickedFilter != undefined) {
-      lastClickedFilter.removeClass('active');
-    }
-    $(this).addClass('active');
-    lastClickedFilter = $(this);
-  });
 }
 
 
 /**
- * Handle the Sidebar
+ * This function define the view of Partials for different Form
  */
-function sidebar() {
-  var lastClicked;
-  var a = $('.select-specific > li');
-  lastClicked = a;
-  a.click(function () {
-    if (lastClicked !== undefined) {
-      lastClicked.removeClass('active');
-    }
-    $(this).addClass('active');
-    lastClicked = $(this);
-  });
+function definePartialsForms(){
+
+    // USER DATABASE
+    $('#add-new-user').click(function (event) {
+      $.get('/adduser').then(function (data) {
+        $('#main').html(data);
+      });
+    });
+  
+  
+    $('#update-user').click(function (event) {
+      $.get('/updateuser').then(function (data) {
+        $('#main').html(data);
+      });
+    });
+  
+    $('#delete-user').click(function (event) {
+      $.get('/deleteuser').then(function (data) {
+        $('#main').html(data);
+      });
+    });
+  
+    $('#show-user').click(function (event) {
+      $.get('/showuser').then(function (data) {
+        $('#main').html(data);
+      });
+    });
 }
-
-
