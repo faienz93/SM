@@ -122,8 +122,17 @@ function getUrlParameter(sParam) {
     }
 };
 
+// REF: https://stackoverflow.com/a/7574300/4700162
+// https://stackoverflow.com/a/36404533/4700162
 
-
+function parseJson(str) {
+    try {
+        return $.parseJSON(str);
+    }
+    catch (err) {
+        return false;
+    }
+}
 
 // TODO Timestamp conversion
 // REF: https://stackoverflow.com/questions/46929778/how-convert-input-type-date-in-timestamp-javascript-jquery
