@@ -28,8 +28,6 @@ $(document).ready(function () {
   definePartialsForms();
   definePartialsTest();
 
-  slideDownAndUp();
-
 
   // Informations alerts
   $('.selected-informations').on("click", function (event) {
@@ -296,12 +294,3 @@ function definePartialsTest() {
   });
 }
 
-
-function slideDownAndUp() {
-
-  // slideToggle Test
-  $('#headerTest').click(function () {
-    alert("alkdslaksdl");
-    $('#cardBodyTest').slideToggle("slow");
-});
-}

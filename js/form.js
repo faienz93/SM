@@ -1,7 +1,8 @@
 $(document).ready(function () {
  
   // reset form
-  handleForm();
+  handleFormUser();
+  handleFormTest();
 
   // Populate the form of main page when required
   populateFormUpdate();
@@ -21,6 +22,8 @@ $(document).ready(function () {
   var strenghtPwdUpdate = $('#password-strength-text-update');
   strengthPassword(passUpdateForm[0],meterUpdate[0],strenghtPwdUpdate[0]);
 
+  slideDownAndUp();
+
 
 });
 
@@ -29,9 +32,9 @@ $(document).ready(function () {
 /**
  * This function aims to bind event to reset buttons and handler the 
  * show of div
- * @method handleForm
+ * @method handleFormUser
  */
-function handleForm() {
+function handleFormUser() {
 
   // Reset value of form Add User 
   $('#resetAddUser').click(function () {
@@ -52,7 +55,22 @@ function handleForm() {
   });
 }
 
+/**
+ * This function aims to bind event to reset buttons and handler the 
+ * show of div of Test Form
+ * @method handleFormTest
+ */
+function handleFormTest() {
+  // Reset value of form Add Test 
+  $('#resetAddTest').click(function () {
+    $('#addTestForm')[0].reset();
+  });
 
+  // Reset value of form Add Test 
+  $('#resetAddTestText').click(function () {
+    $('#addTestFormText')[0].reset();
+  });
+}
 /**
 * This method aims to populate the update form
 * 
@@ -82,6 +100,23 @@ function populateFormUpdate() {
 
 }
 
+
+/**
+ * This function is used for show and hide the header of test
+ */
+function slideDownAndUp() {
+
+  // slideToggle Test
+  $('#headerTest').click(function () {
+      $('#cardBodyTest').slideToggle("slow");
+  });
+
+  // slideToggle Test Text
+  $('#headerTestText').click(function () {
+      $('#cardBodyTestText').slideToggle("slow");
+  });    
+  
+}
 
 /*****************************************************
  * HANDLE FORM

@@ -138,11 +138,11 @@
     </div>
     {{!-- Multi Test --}}
     <div class="card card-outline-secondary">
-        <div class="card-header" id="headerTest2">
+        <div class="card-header" id="headerTestText">
             <h3 class="mb-0"> <a href="#"><a><img src="../img/plus.svg" class="svg icon header-icon"></a> {{titleMultiTest}}</h3>
         </div>
-        <div class="card-body" id="cardBodyUser">
-            <form class="form" id="addTestForm" role="form" autocomplete="off">    
+        <div class="card-body" id="cardBodyTestText">
+            <form class="form" id="addTestFormText" role="form" autocomplete="off">    
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Add JSON</label>
                     <div class="col-lg-9">
@@ -157,7 +157,7 @@
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label"></label>
                     <div class="col-lg-9">
-                        <input type="button" id="resetAddTest" class="btn btn-secondary" value="Cancel">
+                        <input type="button" id="resetAddTestText" class="btn btn-secondary" value="Cancel">
                         <input type="submit" class="btn btn-dark" value="Save">
                     </div>
                 </div>
@@ -176,6 +176,6 @@
 <script>       
         $.getScript("../../js/util.js");
         $.getScript("../../js/form.js");
-         $.getScript("../../lib/bootbox.min.js");
+        $.getScript("../../lib/bootbox.min.js");
 </script>
  
