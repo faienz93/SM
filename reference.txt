@@ -105,3 +105,5 @@ http://www.bestjquery.com/?EFq8USju
 
 
 https://www.npmjs.com/package/jsonschema
+
+https://stackoverflow.com/a/7574300/4700162

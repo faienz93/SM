@@ -2,7 +2,7 @@
 <!-- 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
-// Add User
+// Add Test
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 -->
@@ -11,7 +11,7 @@
         <div class="card-header" id="headerTest">
             <h3 class="mb-0"> <a href="#"><a><img src="../img/plus.svg" class="svg icon header-icon"></a> {{titleSingleTest}}</h3>
         </div>
-        <div class="card-body" id="cardBodyUser">
+        <div class="card-body" id="cardBodyTest">
             <form class="form" id="addTestForm" role="form" autocomplete="off">    
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Latitude</label>
@@ -47,8 +47,7 @@
                         </div>
                     </div>
                 </div>
-                {{!-- ============ Metrics ================ --}}
-                
+                {{!-- ============ Metrics ================ --}}                
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">
                         <h5 class="mb-0">Metrics</h5> 
@@ -127,6 +126,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetAddTest" class="btn btn-secondary" value="Cancel">
+                        <input type="submit" class="btn btn-dark" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{!-- Multi Test --}}
+    <div class="card card-outline-secondary">
+        <div class="card-header" id="headerTest2">
+            <h3 class="mb-0"> <a href="#"><a><img src="../img/plus.svg" class="svg icon header-icon"></a> {{titleMultiTest}}</h3>
+        </div>
+        <div class="card-body" id="cardBodyUser">
+            <form class="form" id="addTestForm" role="form" autocomplete="off">    
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Add JSON</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map"></i></span>
+                            </div>
+                            <textarea class="form-control" rows="5" id="multitest" name="multitest" required></textarea>                                                                         
+                        </div>
+                    </div>
+                </div> 
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label"></label>
                     <div class="col-lg-9">

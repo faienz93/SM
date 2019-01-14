@@ -28,6 +28,9 @@ $(document).ready(function () {
   definePartialsForms();
   definePartialsTest();
 
+  slideDownAndUp();
+
+
   // Informations alerts
   $('.selected-informations').on("click", function (event) {
     event.preventDefault();
@@ -42,6 +45,8 @@ $(document).ready(function () {
     });
     return false;
   });
+
+  
 
 });
 
@@ -102,7 +107,7 @@ function sidebar() {
 /**
  * This function define the view of Partials for differents map
  */
-function definePartialsMaps(){
+function definePartialsMaps() {
 
   // OSM
   $('#osm').click(function (event) {
@@ -224,43 +229,43 @@ function definePartialsMaps(){
 /**
  * This function define the view of Partials for different Form
  */
-function definePartialsForms(){
+function definePartialsForms() {
 
-   // Add new User
-    $('#add-new-user').click(function (event) {
-      $.get('/adduser').then(function (data) {
-        $('#main').html(data);
-      });
+  // Add new User
+  $('#add-new-user').click(function (event) {
+    $.get('/adduser').then(function (data) {
+      $('#main').html(data);
     });
-  
-  
-    // Update Existing User
-    $('#update-user').click(function (event) {
-      $.get('/updateuser').then(function (data) {
-        $('#main').html(data);
-      });
+  });
+
+
+  // Update Existing User
+  $('#update-user').click(function (event) {
+    $.get('/updateuser').then(function (data) {
+      $('#main').html(data);
     });
-  
-    // Delete Existing User
-    $('#delete-user').click(function (event) {
-      $.get('/deleteuser').then(function (data) {
-        $('#main').html(data);
-      });
+  });
+
+  // Delete Existing User
+  $('#delete-user').click(function (event) {
+    $.get('/deleteuser').then(function (data) {
+      $('#main').html(data);
     });
-  
-    // Show all Users
-    $('#show-user').click(function (event) {
-      $.get('/showuser').then(function (data) {
-        $('#main').html(data);
-      });
+  });
+
+  // Show all Users
+  $('#show-user').click(function (event) {
+    $.get('/showuser').then(function (data) {
+      $('#main').html(data);
     });
+  });
 }
 
 
 /**
  * This function define the view of Partials Test
  */
-function definePartialsTest(){
+function definePartialsTest() {
   // Add new Test
   $('#add-new-test').click(function (event) {
     $.get('/addtest').then(function (data) {
@@ -289,4 +294,14 @@ function definePartialsTest(){
       $('#main').html(data);
     });
   });
+}
+
+
+function slideDownAndUp() {
+
+  // slideToggle Test
+  $('#headerTest').click(function () {
+    alert("alkdslaksdl");
+    $('#cardBodyTest').slideToggle("slow");
+});
 }
