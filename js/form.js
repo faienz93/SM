@@ -1,12 +1,5 @@
 $(document).ready(function () {
  
-  // https://stackoverflow.com/questions/49943610/can-i-check-password-confirmation-in-bootstrap-4-with-default-validation-options
-  // define password strenght
-  
-
-  
-
-
   // reset form
   handleForm();
 
@@ -108,6 +101,7 @@ function addNewUser(e) {
       bootstrapAlert(res.success, "Success", "success");
       // Reset value of form Add User       
       $('#addUserForm')[0].reset();
+      // Reset Suggestion password
       $('#password-strength-text-add').empty();
     },
     error: function (err) {

@@ -28,6 +28,7 @@ var exphbs  = require("express-handlebars");
  */
 var routing = require('./routes/routing.js');
 var userOperations = require("./routes/userDB.js");
+var testOperaions = require("./routes/testDB.js");
 
 
 
@@ -100,6 +101,7 @@ app.use('/js',express.static(path.join(__dirname, 'js')));
 
 app.use('/', routing);
 app.use('/', userOperations);
+app.use('/', testOperaions);
 
 
 /**

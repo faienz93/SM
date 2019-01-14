@@ -2,10 +2,6 @@
 // https://codeforgeek.com/2015/01/render-html-file-expressjs/
 
 var express = require('express');
-const mongoose = require('mongoose');
-var path = require('path');
-
-var app = express();
 
 const router = express.Router();
 

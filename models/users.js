@@ -1,6 +1,6 @@
 /*
  * ===========================================================================
- * File: Registration.js 
+ * File: Users.js 
  * Author: Antonio Faienza
  * Desc: This file allow to defines the Database Schema. Schemas allow you to 
  * define the fields stored in each document along with their type, validation
@@ -10,7 +10,7 @@
 
  const mongoose = require('mongoose');
 
- const registrationSchema = new mongoose.Schema({
+ const userSchema = new mongoose.Schema({
      username: {
          type: String,
          unique: true,
@@ -33,4 +33,4 @@
      }
  });
 
- module.exports = mongoose.model('Users', registrationSchema);
+ module.exports = mongoose.model('Users', userSchema);

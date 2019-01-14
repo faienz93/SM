@@ -123,3 +123,6 @@ function getUrlParameter(sParam) {
 };
 
 
+
+// TODO Timestamp conversion
+// REF: https://stackoverflow.com/questions/46929778/how-convert-input-type-date-in-timestamp-javascript-jquery
