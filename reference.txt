@@ -109,17 +109,15 @@ https://www.npmjs.com/package/jsonschema
 https://stackoverflow.com/a/7574300/4700162
 
 
-_id:5c3b4e1994a1440f91143d8b
-username:"antonio"
-email:"antonio.faienza@studio.unibo.it"
-password:"a"
-datetime:2019-01-13 14:41:29.643
-__v:0
+{ username: 'iyuiyu',
+  email: 'antsonio.faienza@studio.unibo.it',
+  password: 'a',
+  passwordConfirm: 'a' }
 
 {
-    latitude: 44.498955,
-    longitude: 11.327591,
-    experiment: Prova,
-    latitudeServer:44.498955,
-    longitudeServer:11.327591
+    "latitude": "44.498955",
+    "longitude": "11.327591",
+    "experiment": "Prova",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
 }

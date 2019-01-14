@@ -4,6 +4,9 @@ $(document).ready(function () {
   handleFormUser();
   handleFormTest();
 
+  // Show and Hide the Test Form
+  slideDownAndUp();
+
   // Populate the form of main page when required
   populateFormUpdate();
 
@@ -22,9 +25,12 @@ $(document).ready(function () {
   var strenghtPwdUpdate = $('#password-strength-text-update');
   strengthPassword(passUpdateForm[0],meterUpdate[0],strenghtPwdUpdate[0]);
 
-  slideDownAndUp();
 
-
+  /**
+   * Test Form
+   */
+  const addTestFormText = $('#addTestFormText');
+  addTestFormText.on('submit', addNewTestJSON);
 });
 
 
@@ -117,6 +123,10 @@ function slideDownAndUp() {
   });    
   
 }
+
+
+
+
 
 /*****************************************************
  * HANDLE FORM
@@ -347,8 +357,27 @@ function strengthPassword(password,meter,text) {
     });
   }
 
+}
 
 
-  
 
+/*****************************************************
+   * TEST FORM
+ ****************************************************/
+function addNewTestJSON(e){
+  e.preventDefault();
+
+  $.ajax({
+    url: '/addtest',
+    method: 'POST',
+    data: $('#addTestFormText').serialize(),
+    success: function (res) {
+      console.log(res);
+    },
+    error: function (err) {
+      console.log(err);
+    }
+  });
+
+  return false;
 }
