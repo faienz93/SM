@@ -26,10 +26,12 @@ const experimentSchema = new mongoose.Schema({
         trim: true 
     },
     
-    metrics: [{ 
+    metrics: { 
         pdr: {
             type: Number,
-            default: 0 
+            default: 0,
+            min: 0,
+            max: 1
         },
         delay: { 
             type: Number,
@@ -38,10 +40,12 @@ const experimentSchema = new mongoose.Schema({
         throughput: {
             type: Number,
             default: 0
-        } 
-    }],
-    configurations: [{
-        pdr: [{ 
+        }
+    },
+    configurations: {
+        // type: mongoose.Schema.Types.Mixed,
+        // default : { },
+        pdr: { 
             thresholdPdrValue: {
                 type: Number,
                 default: 0
@@ -51,8 +55,8 @@ const experimentSchema = new mongoose.Schema({
                 default: '#FF0000',
                 trim: true
             }
-        }],
-        delay: [{
+        },
+        delay: {
             thresholdDelayValue: {
                 type: Number,
                 default: 0
@@ -62,8 +66,8 @@ const experimentSchema = new mongoose.Schema({
                 default: '#00FF00',
                 trim: true
             }
-        }],
-        throughput: [{
+        },
+        throughput: {
             thresholdDelayValue: {
                 type: Number,
                 default: 0
@@ -73,8 +77,8 @@ const experimentSchema = new mongoose.Schema({
                 default: '#0000FF',
                 trim: true
             }
-        }]      
-    }],
+        }     
+    },
     experiment: { 
         type: String, 
         required: true,

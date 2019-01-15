@@ -114,9 +114,31 @@ https://stackoverflow.com/a/7574300/4700162
   password: 'a',
   passwordConfirm: 'a' }
 
+JSON: 
+
+CON TUTTO
 {
     "latitude": "44.498955",
     "longitude": "11.327591",
+    "metrics": { 
+        "pdr":"0.21",
+        "delay":"0.22",
+        "throughput":"0.23"
+    },
+    "configurations": {
+        "pdr": {
+            "thresholdPdrValue":"0",
+            "thresholdPdrColor":"#FF0000"
+        },
+        "delay": {
+            "thresholdDelayValue":"0",
+            "thresholdDelayColor":"#FF0000"
+        },
+        "throughput": {
+            "thresholdThroughputValue":"0",
+            "thresholdThroughputColor":"#FF0000"
+        }
+    },
     "experiment": "Prova",
     "latitudeServer":"44.498955",
     "longitudeServer":"11.327591"
