@@ -14,6 +14,11 @@
 var globalMap;
 
 /**
+ * Define the popup to display
+ */
+var popup;
+
+/**
  * LONGITUDE - LATITUDE of BOLOGNA
  */
 var initialCoordinatesMap = [11.327591, 44.498955];  

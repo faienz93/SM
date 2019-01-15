@@ -9,6 +9,9 @@
 
 function settingMap(){
 
+  // Creation of Popou
+  definePopup();
+
   defaultOSM();
   bingMaps();
   stamenMap();
@@ -133,15 +136,17 @@ function setCurrentLayer(mapview, type) {
   // =============================================================================
   // REF https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
   var rome = new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.fromLonLat(initialCoordinatesMap))
+    geometry: new ol.geom.Point(ol.proj.fromLonLat(initialCoordinatesMap)),
+    name: 'Bologna',
+    prova: 'PROVA'
   });
 
   var london = new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.fromLonLat([-0.12755, 51.507222]))
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([11.347788, 44.632478]))
   });
 
   var madrid = new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.fromLonLat([-3.683333, 40.4]))
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([11.439629, 44.380309]))
   });
 
 
@@ -149,7 +154,7 @@ function setCurrentLayer(mapview, type) {
     image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
       color: '#8959A8',
       crossOrigin: 'anonymous',
-      src: '/img/dot.png'
+      src: '/img/dot2.png'
     }))
   }));
 
@@ -157,7 +162,7 @@ function setCurrentLayer(mapview, type) {
     image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
       color: '#4271AE',
       crossOrigin: 'anonymous',
-      src: '/img/dot.png'
+      src: '/img/dot2.png'
     }))
   }));
 
@@ -165,9 +170,15 @@ function setCurrentLayer(mapview, type) {
     image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
       color: [113, 140, 0],
       crossOrigin: 'anonymous',
-      src: '/img/dot.png'
+      src: '/img/dot2.png'
     }))
   }));
+
+  // ================
+  // To see key and value of Features
+  // =================
+  // console.log(rome.getKeys());
+  // console.log(rome.getProperties());
 
   var vectorSource = new ol.source.Vector({
     features: [rome, london, madrid]
@@ -178,6 +189,28 @@ function setCurrentLayer(mapview, type) {
   });
 
   globalMap.addLayer(vectorLayer);
+
+  // https://openlayers.org/en/latest/examples/icon.html
+  // var p = popup();
+  globalMap.addOverlay(popup);
+
+ 
+
+  // display popup on click
+  globalMap.on('click', function(evt) {
+    var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
+      function(feature) {
+        return feature;
+      });
+    if (feature) {
+      var coordinates = feature.getGeometry().getCoordinates();
+      popup.setPosition(coordinates);
+      var content = $('#popup-content');
+      content.html('<p>You have selected here:</p>' + feature.get('name'));
+    } else {
+      popup.setPosition(undefined);
+    }
+  });
 
   // ==================================================================
   
@@ -377,8 +410,8 @@ function debugLayer(currentSource) {
  */
 function geocoder() {
 
-  var p = popup();
-  globalMap.addOverlay(p);
+  // var p = popup();
+  globalMap.addOverlay(popup);
 
   //Instantiate with some options and add the Control
   var geocoder = new Geocoder('nominatim', {
@@ -409,7 +442,7 @@ function geocoder() {
     // app.addMarker(feature, coord); // TODO ADD MARKERS
     var content = $('#popup-content');
     content.html('<p>You have selected here:</p>' + address.details.name);
-    p.setPosition(coord);
+    popup.setPosition(coord);
   });
 }
 
@@ -424,7 +457,7 @@ function geocoder() {
  * 
  * @method popup
  */
-function popup() {
+function definePopup() {
   /**
    * Elements that make up the popup.
    */
@@ -433,7 +466,7 @@ function popup() {
   /**
    * Create an overlay to anchor the popup to the map.
    */
-  var popup = new ol.Overlay({
+  popup = new ol.Overlay({
     element: container,
     autoPan: true,
     autoPanAnimation: {
@@ -454,3 +487,4 @@ function popup() {
 
   return popup;
 }
+
