@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<head> 
-{{> head}}
-<title>{{title}}</title>
+
+<head>
+    {{> head}}
+    <title>{{title}}</title>
 </head>
 
 <body>
@@ -120,7 +121,7 @@
                 <div class="sidebar-divider"></div>
             </ul>
 
-            <ul class="list-unstyled CTAs">                
+            <ul class="list-unstyled CTAs">
                 <!-- 
                 ///////////////////////////////////////////////////////////////////////////////////////
                 //
@@ -201,12 +202,34 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
+                            {{!-- Filter Marker Cluster --}}
+                            <li class="nav-item dropdown">
+                                <!-- Filter -->
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../img/filter-map.svg" class="svg icon-nav">
+                                    <span>Marke</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a href="#" value="emboss" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">Markers</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="none" class="dropdown-item selected-filter active"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">Cluster</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="none" class="dropdown-item selected-filter active"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">Heatmap</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="none" class="dropdown-item selected-filter active"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">None</a>
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <!-- Filter -->
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img src="../img/filter-tool-black-shape.svg" class="svg icon-nav">
-                                    <span>Filter</span>
+                                    <span>View</span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a href="#" value="none" class="dropdown-item selected-filter active"><img src="../img/right-arrow.svg"
@@ -231,6 +254,7 @@
                                             class="svg arrow-left">Edge</a>
                                 </div>
                             </li>
+                            
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Sign Up</a>
                             </li>
@@ -240,9 +264,9 @@
                         </ul>
                     </div>
                 </div>
-            </nav>                         
-            <div id = "alert_placeholder"></div>  
-            <div id="main" class="main">                                  
+            </nav>
+            <div id="alert_placeholder"></div>
+            <div id="main" class="main">
                 {{> map}}
             </div>
 

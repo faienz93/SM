@@ -91,15 +91,14 @@ https://openlayers.org/en/latest/examples/?q=marker
 https://openlayers.org/en/latest/examples/?q=cluster
 https://openlayers.org/en/latest/examples/?q=heat
 
-COLOR PICKER
-http://www.bestjquery.com/2018/09/pickr-flat-simple-hackable-color-picker/
-http://www.bestjquery.com/?EFq8USju
-https://github.com/Simonwep/pickr (github)
 
 
 
+https://luminfire.com/tech_files/gis_demos/demo_4516/ --> markers Cluster
 
-
+ICONFINDER
+FLATICON
+FONTAWESOME
 
 
 
