@@ -29,8 +29,16 @@ $(document).ready(function () {
   /**
    * Experiment Form
    */
+  var addExperimentForm = $('#addExperimentForm');
+  addExperimentForm.on('submit', addNewExperiment);
+
+  /**
+   * Experiment Form JSON
+   */
   const addExperimentFormText = $('#addExperimentFormText');
   addExperimentFormText.on('submit', addNewExperimentJSON);
+
+
 });
 
 
@@ -362,7 +370,7 @@ function strengthPassword(password,meter,text) {
 
 
 /*****************************************************
-   * TEST FORM
+   * EXPERIMENT FORM
  ****************************************************/
 /**
  * validation and then send request to Server
@@ -394,8 +402,38 @@ function addNewExperimentJSON(e){
     });
   }else if(parseJsonExperiment[0]==400){
     bootstrapAlert(parseJsonExperiment[1],"JSON Error","danger")
-  }
+  }  
+  return false;
+}
 
-  
+function addNewExperiment(e){
+  e.preventDefault();
+
+  $.ajax({
+    url: '/addexperimentform',
+    method: 'POST',
+    data: $('#addExperimentForm').serialize(),
+    async: true,
+    success: function (res) {
+      $('#addExperimentForm')[0].reset();
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+    },
+    error: function (err) {
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }else if(statusCode===422){
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      }
+    }
+  });
+
   return false;
 }

@@ -94,6 +94,7 @@ https://openlayers.org/en/latest/examples/?q=heat
 COLOR PICKER
 http://www.bestjquery.com/2018/09/pickr-flat-simple-hackable-color-picker/
 http://www.bestjquery.com/?EFq8USju
+https://github.com/Simonwep/pickr (github)
 
 
 
@@ -139,7 +140,7 @@ CON TUTTO
             "thresholdThroughputColor":"#FF0000"
         }
     },
-    "experiment": "Prova",
+    "name": "Prova",
     "latitudeServer":"44.498955",
     "longitudeServer":"11.327591"
 }

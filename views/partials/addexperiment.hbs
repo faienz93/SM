@@ -20,7 +20,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-map"></i></span>
                             </div>
-                            <input type="number" class="form-control"  min="0" value="0" name="latitude" step=".01" required>                                              
+                            <input type="number" class="form-control" value="0" name="latitude" step=".01" required>                                                                        
                         </div>
                     </div>
                 </div>                            
@@ -31,12 +31,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-map"></i></span>
                             </div>
-                            <input type="number" class="form-control"  min="0" value="0" name="longitude" step=".01" required>                                              
+                            <input type="number" class="form-control" value="0" name="longitude" step=".01" required>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
+                {{!-- <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Timestamp</label>
                     <div class="col-lg-9">
                             <div class="input-group form-group">
@@ -46,7 +46,7 @@
                             <input type="date" class="form-control" name="timestamp" id="timestamp">                                              
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 {{!-- ============ Metrics ================ --}}                
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">
@@ -71,7 +71,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
                             </div>
-                            <input type="number" class="form-control"  min="0" max="1" value="0" name="delay" id="delay" step=".01">                                              
+                            <input type="number" class="form-control"  min="0" value="0" name="delay" id="delay" step=".01">                                              
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,81 @@
                     </div>
                 </div>
                 
-                {{!-- ===================================== --}}
+                {{!-- ============================================ --}}
+                {{!-- ============ Configurations ================ --}}
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Configurations</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">PDR threshold</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-cog"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" max="1" value="0" name="pdrthreshold" id="pdrthreshold" step=".01">                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">PDR Color</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-palette"></i></span>
+                            </div>
+                            <input type="color" class="form-control"  value="#FF0000">                                             
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Delay threshold</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-cog"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" max="1" value="0" name="delaythreshold" id="delaythreshold" step=".01">                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Delay Color</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-palette"></i></span>
+                            </div>
+                            <input type="color" class="form-control"  value="#00FF00">                                              
+                            
+                            </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Throughput threshold</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-cog"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" max="1" value="0" name="throughputthreshold" id="throughputthreshold" step=".01">                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Throughput Color</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-palette"></i></span>
+                            </div>                            
+                            <input type="color" class="form-control"  value="#0000FF">                                              
+                        </div>
+                    </div>
+                </div>
+                {{!-- ============================================ --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">
                         <h5 class="mb-0">Others</h5> 
@@ -100,7 +174,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-font"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Experiment name" name="experimentName" required>                                    
+                            <input type="text" class="form-control" placeholder="Experiment name" name="name" required>                                    
                         </div>
                     </div>
                 </div>
@@ -111,7 +185,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-globe"></i></span>
                             </div>
-                            <input type="number" class="form-control"  min="0" value="0" name="latitude-server" step=".01" required>                                              
+                            <input type="number" class="form-control"  min="0" value="0" name="latitudeServer" step=".01" required>                                              
                         </div>
                     </div>
                 </div>
@@ -122,7 +196,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-globe"></i></span>
                             </div>
-                            <input type="number" class="form-control"  min="0" value="0" name="longitude-server" step=".01" required>                                              
+                            <input type="number" class="form-control"  min="0" value="0" name="longitudeServer" step=".01" required>                                              
                         </div>
                     </div>
                 </div>

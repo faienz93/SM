@@ -51,7 +51,6 @@ router.post('/adduser', [
             } else {
                 return username;
             }
-
         }),
     // Sanitize (trim and escape) the username field.
     sanitizeBody('username').trim().escape(), // replace <, >, &, ', " and / with HTML entities and delete the space

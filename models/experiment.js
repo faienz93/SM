@@ -39,7 +39,9 @@ const experimentSchema = new mongoose.Schema({
         }, 
         throughput: {
             type: Number,
-            default: 0
+            default: 0,
+            min: 0,
+            max: 1
         }
     },
     configurations: {
@@ -48,7 +50,9 @@ const experimentSchema = new mongoose.Schema({
         pdr: { 
             thresholdPdrValue: {
                 type: Number,
-                default: 0
+                default: 0,
+                min: 0,
+                max: 1
             },
             thresholdPdrColor: {
                 type: String,
@@ -70,7 +74,9 @@ const experimentSchema = new mongoose.Schema({
         throughput: {
             thresholdDelayValue: {
                 type: Number,
-                default: 0
+                default: 0,
+                min: 0,
+                max: 1
             },
             thresholdDelayColor: {
                 type: String,
@@ -79,8 +85,9 @@ const experimentSchema = new mongoose.Schema({
             }
         }     
     },
-    experiment: { 
-        type: String, 
+    name: { 
+        type: String,
+        unique: true,
         required: true,
         trim: true
     },
