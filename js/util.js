@@ -122,15 +122,28 @@ function getUrlParameter(sParam) {
     }
 };
 
-// REF: https://stackoverflow.com/a/7574300/4700162
-// https://stackoverflow.com/a/36404533/4700162
 
+/**
+ * This function return a JSON. If it malformed it resurn a status code 400
+ * and the error
+ * @method parseJSON
+ * @param {String} - The string to convert
+ * REF: https://stackoverflow.com/a/7574300/4700162
+ *      https://stackoverflow.com/a/36404533/4700162
+ */
 function parseJson(str) {
+     
     try {
-        return $.parseJSON(str);
+        var res = [];
+        res.push(200);
+        res.push($.parseJSON(str));
+        return res;
     }
     catch (err) {
-        return false;
+        var res = [];
+        res.push(400);
+        res.push(err);
+        return res;
     }
 }
 

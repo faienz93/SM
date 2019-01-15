@@ -265,30 +265,30 @@ function definePartialsForms() {
  */
 function definePartialsTest() {
   // Add new Test
-  $('#add-new-test').click(function (event) {
-    $.get('/addtest').then(function (data) {
+  $('#add-new-experiment').click(function (event) {
+    $.get('/addexperiment').then(function (data) {
       $('#main').html(data);
     });
   });
 
 
   // Update Existing Test
-  $('#update-test').click(function (event) {
-    $.get('/updatetest').then(function (data) {
+  $('#update-experiment').click(function (event) {
+    $.get('/updateexperiment').then(function (data) {
       $('#main').html(data);
     });
   });
 
   // Delete Existing Test
-  $('#delete-test').click(function (event) {
-    $.get('/deletetest').then(function (data) {
+  $('#delete-experiment').click(function (event) {
+    $.get('/deleteexperiment').then(function (data) {
       $('#main').html(data);
     });
   });
 
   // Show All Test
-  $('#show-test').click(function (event) {
-    $.get('/showtest').then(function (data) {
+  $('#show-experiment').click(function (event) {
+    $.get('/showexperiment').then(function (data) {
       $('#main').html(data);
     });
   });

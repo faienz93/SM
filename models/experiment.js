@@ -13,7 +13,7 @@
 
 const mongoose = require('mongoose');
 
-const testSchema = new mongoose.Schema({
+const experimentSchema = new mongoose.Schema({
 
     latitude: { 
         type: Number,
@@ -95,4 +95,4 @@ const testSchema = new mongoose.Schema({
     createdAt: 'created_at' 
 });
 
-module.exports = mongoose.model('Test', testSchema);
+module.exports = mongoose.model('Experiment', experimentSchema);

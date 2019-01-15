@@ -2,9 +2,9 @@ $(document).ready(function () {
  
   // reset form
   handleFormUser();
-  handleFormTest();
+  handleFormExperiment();
 
-  // Show and Hide the Test Form
+  // Show and Hide the Experiment Form
   slideDownAndUp();
 
   // Populate the form of main page when required
@@ -27,10 +27,10 @@ $(document).ready(function () {
 
 
   /**
-   * Test Form
+   * Experiment Form
    */
-  const addTestFormText = $('#addTestFormText');
-  addTestFormText.on('submit', addNewTestJSON);
+  const addExperimentFormText = $('#addExperimentFormText');
+  addExperimentFormText.on('submit', addNewExperimentJSON);
 });
 
 
@@ -63,18 +63,18 @@ function handleFormUser() {
 
 /**
  * This function aims to bind event to reset buttons and handler the 
- * show of div of Test Form
- * @method handleFormTest
+ * show of div of Experiment Form
+ * @method handleFormExperiment
  */
-function handleFormTest() {
-  // Reset value of form Add Test 
-  $('#resetAddTest').click(function () {
-    $('#addTestForm')[0].reset();
+function handleFormExperiment() {
+  // Reset value of form Add Experiment 
+  $('#resetAddExperiment').click(function () {
+    $('#addExperimentForm')[0].reset();
   });
 
-  // Reset value of form Add Test 
-  $('#resetAddTestText').click(function () {
-    $('#addTestFormText')[0].reset();
+  // Reset value of form Add Experiment 
+  $('#resetAddExperimentText').click(function () {
+    $('#addExperimentFormText')[0].reset();
   });
 }
 /**
@@ -108,18 +108,18 @@ function populateFormUpdate() {
 
 
 /**
- * This function is used for show and hide the header of test
+ * This function is used for show and hide the header of experiment
  */
 function slideDownAndUp() {
 
-  // slideToggle Test
-  $('#headerTest').click(function () {
-      $('#cardBodyTest').slideToggle("slow");
+  // slideToggle Experiment
+  $('#headerExperiment').click(function () {
+      $('#cardBodyExperiment').slideToggle("slow");
   });
 
-  // slideToggle Test Text
-  $('#headerTestText').click(function () {
-      $('#cardBodyTestText').slideToggle("slow");
+  // slideToggle Experiment Text
+  $('#headerExperimentText').click(function () {
+      $('#cardBodyExperimentText').slideToggle("slow");
   });    
   
 }
@@ -364,20 +364,44 @@ function strengthPassword(password,meter,text) {
 /*****************************************************
    * TEST FORM
  ****************************************************/
-function addNewTestJSON(e){
+function addNewExperimentJSON(e){
   e.preventDefault();
 
+  var jsonExperiment = $('#multiexperiments').val();  
+  var parseJsonExperiment = parseJson(jsonExperiment);
+
+  // If the validation of JSON is true, then will send the request
+  // to the server
+  // if(parseJsonExperiment[0]==200){
+  //     $.ajax({
+  //     url: '/addtest',
+  //     method: 'POST',
+  //     data: $('#addExperimentFormText').serialize(),
+  //     success: function (res) {
+  //       console.log(res);
+  //     },
+  //     error: function (err) {
+  //       console.log(err);
+  //     }
+  //   });
+  // }else if(parseJsonExperiment[0]==400){
+  //   bootstrapAlert(parseJsonExperiment[1],"JSON Error","danger")
+  // }
+
   $.ajax({
-    url: '/addtest',
+    url: '/addexperiment',
     method: 'POST',
-    data: $('#addTestFormText').serialize(),
+    data: $('#addExperimentFormText').serialize(),
+    async: true,
     success: function (res) {
       console.log(res);
     },
     error: function (err) {
-      console.log(err);
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }
     }
   });
-
   return false;
 }
