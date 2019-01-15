@@ -364,6 +364,9 @@ function strengthPassword(password,meter,text) {
 /*****************************************************
    * TEST FORM
  ****************************************************/
+/**
+ * validation and then send request to Server
+ */
 function addNewExperimentJSON(e){
   e.preventDefault();
 
@@ -372,36 +375,27 @@ function addNewExperimentJSON(e){
 
   // If the validation of JSON is true, then will send the request
   // to the server
-  // if(parseJsonExperiment[0]==200){
-  //     $.ajax({
-  //     url: '/addtest',
-  //     method: 'POST',
-  //     data: $('#addExperimentFormText').serialize(),
-  //     success: function (res) {
-  //       console.log(res);
-  //     },
-  //     error: function (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // }else if(parseJsonExperiment[0]==400){
-  //   bootstrapAlert(parseJsonExperiment[1],"JSON Error","danger")
-  // }
-
-  $.ajax({
-    url: '/addexperiment',
-    method: 'POST',
-    data: $('#addExperimentFormText').serialize(),
-    async: true,
-    success: function (res) {
-      console.log(res);
-    },
-    error: function (err) {
-      var statusCode = err.responseJSON.statusCode;
-      if(statusCode==400){
-        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+  if(parseJsonExperiment[0]==200){
+    $.ajax({
+      url: '/addexperiment',
+      method: 'POST',
+      data: $('#addExperimentFormText').serialize(),
+      async: true,
+      success: function (res) {
+        // FEEDBACK
+        bootstrapAlert(res.success, "Success", "success");
+      },
+      error: function (err) {
+        var statusCode = err.responseJSON.statusCode;
+        if(statusCode==400){
+          bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+        }
       }
-    }
-  });
+    });
+  }else if(parseJsonExperiment[0]==400){
+    bootstrapAlert(parseJsonExperiment[1],"JSON Error","danger")
+  }
+
+  
   return false;
 }
