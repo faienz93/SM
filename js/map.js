@@ -154,7 +154,7 @@ function setCurrentLayer(mapview, type) {
     image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
       color: '#8959A8',
       crossOrigin: 'anonymous',
-      src: '/img/dot2.png'
+      src: '/img/dot.png'
     }))
   }));
 
@@ -162,7 +162,7 @@ function setCurrentLayer(mapview, type) {
     image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
       color: '#4271AE',
       crossOrigin: 'anonymous',
-      src: '/img/dot2.png'
+      src: '/img/dot.png'
     }))
   }));
 
@@ -170,7 +170,7 @@ function setCurrentLayer(mapview, type) {
     image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
       color: [113, 140, 0],
       crossOrigin: 'anonymous',
-      src: '/img/dot2.png'
+      src: '/img/dot.png'
     }))
   }));
 
