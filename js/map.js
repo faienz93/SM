@@ -9,8 +9,7 @@
 
 function settingMap(){
 
-  // Creation of Popou
-  definePopup();
+
 
   defaultOSM();
   bingMaps();
@@ -188,11 +187,13 @@ function setCurrentLayer(mapview, type) {
     source: vectorSource
   });
 
-  globalMap.addLayer(vectorLayer);
+  globalMap.addLayer(vectorLayer); 
 
   // https://openlayers.org/en/latest/examples/icon.html
-  // var p = popup();
-  globalMap.addOverlay(popup);
+  var container = $('#popup')[0];
+  var closer = $('#popup-closer')[0];
+  var popup = definePopup(container,closer);
+  globalMap.addOverlay(popup); // ok deve esserci
 
  
 
@@ -410,8 +411,10 @@ function debugLayer(currentSource) {
  */
 function geocoder() {
 
-  // var p = popup();
-  globalMap.addOverlay(popup);
+  var container = $('#popupGeocoder')[0]; 
+  var closer = $('#popup-closerGeocoder')[0];
+  var p = definePopup(container,closer);
+  globalMap.addOverlay(p);
 
   //Instantiate with some options and add the Control
   var geocoder = new Geocoder('nominatim', {
@@ -440,9 +443,9 @@ function geocoder() {
 
     // application specific
     // app.addMarker(feature, coord); // TODO ADD MARKERS
-    var content = $('#popup-content');
+    var content = $('#popup-contentGeocoder');
     content.html('<p>You have selected here:</p>' + address.details.name);
-    popup.setPosition(coord);
+    p.setPosition(coord);
   });
 }
 
@@ -455,18 +458,20 @@ function geocoder() {
  * and a place for the content.
  * REF: https://openlayers.org/en/latest/examples/popup.html
  * 
- * @method popup
+ * @param container the Div that rapresent the popup
+ * @param closer the html element that close the popup
+ * @method definePopup
  */
-function definePopup() {
+function definePopup(container,closer) {
   /**
    * Elements that make up the popup.
    */
-  var container = $('#popup')[0];
-  var closer = $('#popup-closer')[0];
+  // var container = $('#popup')[0];
+  // var closer = $('#popup-closer')[0];
   /**
    * Create an overlay to anchor the popup to the map.
    */
-  popup = new ol.Overlay({
+  var popup = new ol.Overlay({
     element: container,
     autoPan: true,
     autoPanAnimation: {
@@ -487,4 +492,5 @@ function definePopup() {
 
   return popup;
 }
+
 

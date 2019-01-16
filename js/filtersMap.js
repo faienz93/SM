@@ -49,6 +49,7 @@ function convolve(context, kernel) {
   var size = Math.sqrt(kernel.length);
   var half = Math.floor(size / 2);
 
+  context.crossOrigin = "Anonymous";
   var inputData = context.getImageData(0, 0, width, height).data;
 
   var output = context.createImageData(width, height);

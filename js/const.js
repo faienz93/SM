@@ -13,10 +13,7 @@
  */
 var globalMap;
 
-/**
- * Define the popup to display
- */
-var popup;
+
 
 /**
  * LONGITUDE - LATITUDE of BOLOGNA
