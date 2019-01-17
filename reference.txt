@@ -63,8 +63,8 @@ https://stackoverflow.com/questions/21172889/express-send-a-page-and-custom-data
 https://stackoverflow.com/questions/25300017/how-to-ensure-the-javascript-is-at-the-bottom-of-the-code-in-express-handlebars
 https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-reloading-entire-page-in-node-js-using-ejs-templ
 
-
-
+CHOOSEN
+https://harvesthq.github.io/chosen/#no-results-text-support
 
 
 RICORDA: 
@@ -100,6 +100,10 @@ ICONFINDER
 FLATICON
 FONTAWESOME
 
+
+LOADFAST: https://www.solodev.com/blog/web-design/how-to-load-css-and-javascript-faster.stml
+AVOID flickering https://stackoverflow.com/a/3629799/4700162 
+                https://conversionista.se/en/avoid-flickering-abtesting/
 
 
 
