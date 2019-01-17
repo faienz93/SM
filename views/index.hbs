@@ -6,6 +6,10 @@
 </head>
 
 <body>
+    <div  style="display: none" id="hideAll"> 
+        &nbsp;
+        <div class="loader"></div>
+    </div>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" class="active">
@@ -201,9 +205,22 @@
                         </span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <form class="form-inline my-2 ml-auto">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        {{!-- <form class="form-inline my-2 ml-auto">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> 
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form> --}}
+                        <form class="form-inline ml-auto" role="form" autocomplete="off"> 
+                            <div class="col-lg-9">
+                            <select id="selectExperiment" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" tabindex="4" size="0" name="selectExperiment"> 
+                                <option value=""></option>
+                            <!-- the otpion tag are fullied in javasctipt file init.js -->
+                            </select>
+                            </div>
+                            <div class="col-lg-3"> 
+                                {{!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> --}}
+                                <button type="submit" class="btn btn-dark"><i class="fa fa-search"></i></button>
+                            </div>
+                            
                         </form>
                         <ul class="nav navbar-nav ml-auto">
                             {{!-- Filter Marker Cluster --}}
@@ -283,22 +300,35 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
     -->
+    <!-- AVOID FLICKERING -->
+    <!-- REF: https://stackoverflow.com/a/3629799/4700162 -->
+    {{!-- <script type="text/javascript">
+        document.getElementById("hideAll").style.display = "block";
+        window.onload = function() 
+        { document.getElementById("hideAll").style.display = "none"; }
+    </script>  --}}
+    <!-- Font Awesome JS -->
+    <script src="../lib/fontawesome/solid.js" crossorigin="anonymous"></script>
+    <script src="../lib/fontawesome/fontawesome.js" crossorigin="anonymous"></script>
+
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="../lib/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/popper.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/DataTable/js/dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/DataTable/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="../lib/zxcvbn.js" crossorigin="anonymous"></script>
-    <script src="../lib/bootbox.min.js" crossorigin="anonymous"></script>
-    <script src="../js/const.js" type="text/javascript"></script>
-    <script src="../js/map.js" type="text/javascript"></script>
-    <script src="../lib/jquery.pjax.js" crossorigin="anonymous"></script>
-    <script src="../js/filtersMap.js" crossorigin="anonymous"></script>
-    <script src="../js/const.js" crossorigin="anonymous"></script>
-    <script src="../js/util.js" crossorigin="anonymous"></script>
-    <script src="../js/init.js" crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->       
+    <script src="../lib/jquery-3.3.1.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/popper.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/choosen/chosen.jquery.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> --}}
+    <script src="../lib/DataTable/js/dataTables.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/DataTable/js/dataTables.bootstrap4.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    
+    <script src="../lib/zxcvbn.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../lib/bootbox.min.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../js/const.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../js/map.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../js/filtersMap.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../js/const.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../js/util.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../js/init.js" type="text/javascript" crossorigin="anonymous" ></script>
 
 
 
@@ -306,12 +336,12 @@
     <!-- OpenLayer JS -->
     <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
-    <script src="../lib/OpenLayers/ol.js"></script>
-    <script src="../lib/ol-geocoder/ol-geocoder.js"></script>
+    <script src="../lib/OpenLayers/ol.js" type="text/javascript"></script>
+    <script src="../lib/ol-geocoder/ol-geocoder.js" type="text/javascript"></script>
 
 
-
-
+    
+    
 
 
 
