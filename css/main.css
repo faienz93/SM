@@ -321,3 +321,64 @@ meter[value="4"]::-moz-meter-bar {
     background-color: #23272b;
     border-color: #343a40;
 }
+
+
+#selectExperiment {
+    display: block;
+    width: 350% !important;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+ /* ---------------------------------------------------
+    AVOID FLICKERING
+    REF: https://stackoverflow.com/a/3629799/4700162 
+----------------------------------------------------- */
+#hideAll
+ {
+   position: fixed;
+   left: 0px; 
+   right: 0px; 
+   top: 0px; 
+   bottom: 0px; 
+   background-color: white;
+   z-index: 99; /* Higher than anything else in the document */
+
+ }
+
+
+ /* ---------------------------------------------------
+    SPINNER-LOADER
+    REF: https://www.w3schools.com/howto/howto_css_loader.asp
+----------------------------------------------------- */
+ .loader {
+    position: relative;
+    margin: auto;
+    top: 40%;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #343a40;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
