@@ -10,6 +10,23 @@
 
 $(document).ready(function () {
 
+  chosenPlugin();
+
+  var updateChosenProfessor = []; 
+  var result = ['Prova1', 'Prova2', 'Prova3'];
+  for(var i = 0; i < result.length; i++){
+      // var singleProfessorID = result[i].split("-");                       
+      updateChosenProfessor.push(result[i]);
+  }
+  console.log(updateChosenProfessor);
+  // $('#selectExperiment').append('<option value="foo">Bar</option>').trigger("chosen:updated");
+  // Other choice...
+  for(var j = 0; j < updateChosenProfessor.length; j++){
+    appendToChosen(updateChosenProfessor[i], "CACCA");
+  }
+  
+
+
   // Setting navbar
   navbar();
 
@@ -48,7 +65,32 @@ $(document).ready(function () {
 
 });
 
+function appendToChosen(id,value){
+  $('#selectExperiment')
+      .append($('<option></option>')
+      .val(id)
+      // .attr('selected', 'selected')
+      .html(value)).trigger('chosen:updated');
+}
 
+/**
+ * Config the Chosen Plugin
+ * @method chosenPlugin
+ */
+function chosenPlugin() {
+
+  var config = {
+      '.chosen-select': {},
+      '.chosen-select-deselect': { allow_single_deselect: true },
+      '.chosen-select-no-single': { disable_search_threshold: 10 },
+      '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+      '.chosen-select-rtl': { rtl: true },
+      '.chosen-select-width': { width: '200%' }
+  }
+  for (var selector in config) {
+      $(selector).chosen(config[selector]);
+  }
+}
 
 /**
 * Handle the Navbar
