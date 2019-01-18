@@ -10,22 +10,11 @@
 
 $(document).ready(function () {
 
+  // setting the Chosen Plugin
   chosenPlugin();
 
-  var updateChosenProfessor = []; 
-  var result = ['Prova1', 'Prova2', 'Prova3'];
-  for(var i = 0; i < result.length; i++){
-      // var singleProfessorID = result[i].split("-");                       
-      updateChosenProfessor.push(result[i]);
-  }
-  console.log(updateChosenProfessor);
-  // $('#selectExperiment').append('<option value="foo">Bar</option>').trigger("chosen:updated");
-  // Other choice...
-  for(var j = 0; j < updateChosenProfessor.length; j++){
-    appendToChosen(updateChosenProfessor[i], "CACCA");
-  }
-  
-
+  // Define value of Search Bar using Chosen Plugin
+  setValueSearchBar();
 
   // Setting navbar
   navbar();
@@ -65,13 +54,7 @@ $(document).ready(function () {
 
 });
 
-function appendToChosen(id,value){
-  $('#selectExperiment')
-      .append($('<option></option>')
-      .val(id)
-      // .attr('selected', 'selected')
-      .html(value)).trigger('chosen:updated');
-}
+
 
 /**
  * Config the Chosen Plugin
@@ -90,6 +73,43 @@ function chosenPlugin() {
   for (var selector in config) {
       $(selector).chosen(config[selector]);
   }
+}
+
+/**
+ * Define a value of Search Bar using Chose Plugin. In this context
+ * there is a AJAX call to the server that retrieve the value 
+ * of experiment. Then we appen the reult to Search Bar
+ * 
+ * @method setValueSearchBar
+ */
+function setValueSearchBar(){
+  $.ajax({
+    url: '/getexperiments',
+    method: 'GET',    
+    success: function (res) {    
+      $.each(res, function (index, element) {
+        appendToChosen(element, element.name);
+      });
+    },
+    error: function(err){
+      bootstrapAlert(err, "Error", "danger", false);
+    }
+  });
+}
+
+/**
+ * This function add value to Chosen Plugin.
+ * 
+ * @param id - The id of element
+ * @param value - the value that will be displayed on select
+ * @method appendToChosen
+ */
+function appendToChosen(id,value){
+  $('#selectExperiment')
+      .append($('<option></option>')
+      .val(id)
+      // .attr('selected', 'selected')
+      .html(value)).trigger('chosen:updated');
 }
 
 /**

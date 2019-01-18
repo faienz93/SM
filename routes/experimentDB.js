@@ -171,6 +171,19 @@ router.post('/addexperimentform', [
 });
 
 /**
+ * Return all experiments list
+ */
+router.get('/getexperiments', function (req, res) {    
+    Experiment.find({}, function(err, experiment) {        
+        var experimentMap = [];    
+        experiment.forEach(function(test) {              
+            experimentMap.push(test);
+        });   
+        res.status(200).send(experimentMap);          
+      });
+});
+
+/**
  * This function return a JSON. If it malformed it resurn a status code 400
  * and the error
  * @method parseJSON

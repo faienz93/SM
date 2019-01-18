@@ -256,8 +256,8 @@ router.post('/deleteuser', function (req, res) {
                 } else {
                     
                     Users.find()
-                            .then((registrations) => {
-                                res.status(200).send({success: "Cancellation Successful", users: registrations });                                
+                            .then((user) => {
+                                res.status(200).send({success: "Cancellation Successful", users: user });                                
                             })
                             .catch(() => { 
                                 res.status(422).send({msg: "I cannot show the user"});
