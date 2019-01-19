@@ -132,67 +132,6 @@ function setCurrentLayer(mapview, type) {
       layers[i].setVisible("OSM");
     }
   }
-
-  
-
- 
-
-  // ==================================================================
-
-  // Cluster
-  // REF: https://openlayers.org/en/v4.6.5/examples/cluster.html?q=cluster
-
-  // var count = 2000;
-  // var features = new Array(count);
-  // var e = 4500000;
-  // for (var i = 0; i < count; ++i) {
-  //   var coordinates = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
-  //   features[i] = new ol.Feature(new ol.geom.Point(coordinates));
-  // }
-  // var source = new ol.source.Vector({
-  //   features: features
-  // });
-
-  // var clusterSource = new ol.source.Cluster({
-  //   distance: parseInt(10, 10),
-  //   source: source
-  // });
-
-  // var styleCache = {};
-  // var clusters = new ol.layer.Vector({
-  //   source: clusterSource,
-  //   style: function(feature) {
-  //     var size = feature.get('features').length;
-  //     var style = styleCache[size];
-  //     if (!style) {
-  //       style = new ol.style.Style({
-  //         image: new ol.style.Circle({
-  //           radius: 10,
-  //           stroke: new ol.style.Stroke({
-  //             color: '#fff'
-  //           }),
-  //           fill: new ol.style.Fill({
-  //             color: '#3399CC'
-  //           })
-  //         }),
-  //         text: new ol.style.Text({
-  //           text: size.toString(),
-  //           fill: new ol.style.Fill({
-  //             color: '#fff'
-  //           })
-  //         })
-  //       });
-  //       styleCache[size] = style;
-  //     }
-  //     return style;
-  //   }
-  // });
-
-  // globalMap.addLayer(clusters); 
-
-
-  // ==================================================================
-
   
 }
 
@@ -551,32 +490,18 @@ function markersMap(experiment){
 function heatMap(experiment){
   
   var location = [];
-  for(var i = 0, len=experiment.length; i < len; i++){
-       
+  for(var i = 0, len=experiment.length; i < len; i++){       
       location[i] = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude]))
-      });
-      
-     
+      });    
   }
-  // var count = 2000;
-  // var features = new Array(count);
-  // var e = 4500000;
-  // for (var i = 0; i < count; ++i) {
-  //   var coordinates = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
-  //   features[i] = new ol.Feature(new ol.geom.Point(coordinates));
-  // }
-
+  
   var vector = new ol.layer.Heatmap({
     source: new ol.source.Vector({
-      // url: '../kml/2012_Earthquakes_Mag5.kml', // https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
-      // format: new ol.format.KML({
-      //   extractStyles: false
-      // })
       features: location
     }),
-    blur: parseInt(5, 10),
-    radius: parseInt(5, 10)
+    blur: parseInt(5, 10), // TODO fare il setting
+    radius: parseInt(5, 10) // TODO fare il setting
   });
 
   vector.getSource().on('addfeature', function(event) {
@@ -592,6 +517,64 @@ function heatMap(experiment){
 }
 
 /**
+ * This function define a Cluster based on Database.
+ * REF: https://openlayers.org/en/v4.6.5/examples/cluster.html?q=cluster
+ * @param experiment the list of experiment download from server
+ * @method clusterMap
+ */
+function clusterMap(experiment){
+
+  var location = [];
+  for(var i = 0, len=experiment.length; i < len; i++){       
+      location[i] = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude]))
+      });    
+  }
+  
+  var source = new ol.source.Vector({
+    features: location
+  });
+
+  var clusterSource = new ol.source.Cluster({
+    distance: parseInt(10, 10),
+    source: source
+  });
+
+  var styleCache = {};
+  var clusters = new ol.layer.Vector({
+    source: clusterSource,
+    style: function(feature) {
+      var size = feature.get('features').length;
+      var style = styleCache[size];
+      if (!style) {
+        style = new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 10,
+            stroke: new ol.style.Stroke({
+              color: '#fff'
+            }),
+            fill: new ol.style.Fill({
+              color: '#3399CC'
+            })
+          }),
+          text: new ol.style.Text({
+            text: size.toString(),
+            fill: new ol.style.Fill({
+              color: '#fff'
+            })
+          })
+        });
+        styleCache[size] = style;
+      }
+      return style;
+    }
+  });
+
+  globalMap.addLayer(clusters); 
+
+}
+
+/**
  * This function return the experiment that will be displayed 
  * on the map
  */
@@ -601,7 +584,8 @@ function defineCoordinatePoint(){
     method: 'GET',    
     success: function (res) {   
       markersMap(res); 
-      heatMap(res);
+      // heatMap(res);
+      clusterMap(res);
     },
     error: function(err){
       bootstrapAlert(err, "Error", "danger", false);
