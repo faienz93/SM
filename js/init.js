@@ -50,6 +50,17 @@ $(document).ready(function () {
     return false;
   });
 
+  /**
+   * Search Experiment Form
+   */
+$('#searchExperiment').on('submit', function(event){
+  event.preventDefault();
+    var selectExperiment = $('#selectExperiment').chosen().val();
+    console.log(selectExperiment); 
+  return false;
+});
+
+
   
 
 });
@@ -88,7 +99,9 @@ function setValueSearchBar(){
     method: 'GET',    
     success: function (res) {    
       $.each(res, function (index, element) {
-        appendToChosen(element, element.name);
+        
+        // the value will be JSON String
+        appendToChosen(JSON.stringify(element), element.name);
       });
     },
     error: function(err){
