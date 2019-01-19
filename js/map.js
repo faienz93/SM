@@ -15,6 +15,7 @@ function settingMap(){
   bingMaps();
   stamenMap();
   hereMap();
+  defineCoordinatePoint();
 
   
 
@@ -132,89 +133,7 @@ function setCurrentLayer(mapview, type) {
     }
   }
 
-  // MERKERS
-  // =============================================================================
-  // REF https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
-  // var rome = new ol.Feature({
-  //   geometry: new ol.geom.Point(ol.proj.fromLonLat(initialCoordinatesMap)),
-  //   name: 'Bologna',
-  //   prova: 'PROVA'
-  // });
-
-  // var london = new ol.Feature({
-  //   geometry: new ol.geom.Point(ol.proj.fromLonLat([11.347788, 44.632478]))
-  // });
-
-  // var madrid = new ol.Feature({
-  //   geometry: new ol.geom.Point(ol.proj.fromLonLat([11.439629, 44.380309]))
-  // });
-
-
-  // rome.setStyle(new ol.style.Style({
-  //   image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
-  //     color: '#8959A8',
-  //     crossOrigin: 'anonymous',
-  //     src: '/img/dot.png'
-  //   }))
-  // }));
-
-  // london.setStyle(new ol.style.Style({
-  //   image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
-  //     color: '#4271AE',
-  //     crossOrigin: 'anonymous',
-  //     src: '/img/dot.png'
-  //   }))
-  // }));
-
-  // madrid.setStyle(new ol.style.Style({
-  //   image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({
-  //     color: [113, 140, 0],
-  //     crossOrigin: 'anonymous',
-  //     src: '/img/dot.png'
-  //   }))
-  // }));
-
-  // // ================
-  // // To see key and value of Features
-  // // =================
-  // // console.log(rome.getKeys());
-  // // console.log(rome.getProperties());
-
-  // var vectorSource = new ol.source.Vector({
-  //   features: [rome, london, madrid]
-  // });
-
-  // var vectorLayer = new ol.layer.Vector({
-  //   source: vectorSource
-  // });
-
-  // globalMap.addLayer(vectorLayer); 
-
-  // https://openlayers.org/en/latest/examples/icon.html
-  var container = $('#popup')[0];
-  var closer = $('#popup-closer')[0];
-  var popup = definePopup(container,closer);
-  globalMap.addOverlay(popup); 
-
- 
-
-  // display popup on click
-  // globalMap.on('click', function(evt) {
-  //   var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
-  //     function(feature) {
-  //       return feature;
-  //     });
-  //   if (feature) {
-  //     var coordinates = feature.getGeometry().getCoordinates();
-  //     popup.setPosition(coordinates);
-  //     var content = $('#popup-content');
-  //     content.html('<p>You have selected here:</p>' + feature.get('name'));
-  //   } else {
-  //     popup.setPosition(undefined);
-  //   }
-  // });
-
-  // ==================================================================
+  
 
   // ===========================
   // heatmap.
@@ -586,4 +505,93 @@ function definePopup(container,closer) {
   return popup;
 }
 
+
+/**
+ * This function define a Markers based on Database.
+ * REF: https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
+ * @param experiment the list of experiment download from server
+ * @method markersMap
+ */
+function markersMap(experiment){
+  // console.log(experiment);
+
+  var location = [];
+  for(var i = 0, len=experiment.length; i < len; i++){
+      var marker = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude])),
+        name: experiment[i].name,
+      });
+      
+      marker.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
+          color: '#FF0000',
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+
+      location.push(marker)
+
+      
+  } 
+
+  // ================
+  // To see key and value of Features
+  // =================
+  // console.log(rome.getKeys());
+  // console.log(rome.getProperties());
+
+  var vectorSource = new ol.source.Vector({
+    features: location
+  });
+
+  var vectorLayer = new ol.layer.Vector({
+    source: vectorSource
+  });
+
+  globalMap.addLayer(vectorLayer); 
+
+  // https://openlayers.org/en/latest/examples/icon.html
+  var container = $('#popup')[0];
+  var closer = $('#popup-closer')[0];
+  var popup = definePopup(container,closer);
+  globalMap.addOverlay(popup); 
+
+ 
+
+  // display popup on click
+  globalMap.on('click', function(evt) {
+    var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
+      function(feature) {
+        return feature;
+      });
+    if (feature) {
+      var coordinates = feature.getGeometry().getCoordinates();
+      popup.setPosition(coordinates);
+      var content = $('#popup-content');
+      content.html('<p>You have selected here:</p>' + feature.get('name'));
+    } else {
+      popup.setPosition(undefined);
+    }
+  });
+
+  
+}
+
+/**
+ * This function return the experiment that will be displayed 
+ * on the map
+ */
+function defineCoordinatePoint(){
+  $.ajax({
+    url: '/getexperiments',
+    method: 'GET',    
+    success: function (res) {   
+      markersMap(res); 
+    },
+    error: function(err){
+      bootstrapAlert(err, "Error", "danger", false);
+    }
+  });
+}
 

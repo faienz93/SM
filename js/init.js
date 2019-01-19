@@ -53,12 +53,12 @@ $(document).ready(function () {
   /**
    * Search Experiment Form
    */
-$('#searchExperiment').on('submit', function(event){
-  event.preventDefault();
-    var selectExperiment = $('#selectExperiment').chosen().val();
-    console.log(selectExperiment); 
-  return false;
-});
+  $('#searchExperiment').on('submit', function(event){
+    event.preventDefault();
+      var selectExperiment = $('#selectExperiment').chosen().val();
+      console.log(selectExperiment); 
+    return false;
+  });
 
 
   
