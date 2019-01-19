@@ -135,40 +135,7 @@ function setCurrentLayer(mapview, type) {
 
   
 
-  // ===========================
-  // heatmap.
-  // REF: https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
-  // ===========================
-  var count = 2000;
-  var features = new Array(count);
-  var e = 4500000;
-  for (var i = 0; i < count; ++i) {
-    var coordinates = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
-    features[i] = new ol.Feature(new ol.geom.Point(coordinates));
-  }
-
-  var vector = new ol.layer.Heatmap({
-    source: new ol.source.Vector({
-      // url: '../kml/2012_Earthquakes_Mag5.kml', // https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
-      // format: new ol.format.KML({
-      //   extractStyles: false
-      // })
-      features: features
-    }),
-    blur: parseInt(5, 10),
-    radius: parseInt(5, 10)
-  });
-
-  vector.getSource().on('addfeature', function(event) {
-    // 2012_Earthquakes_Mag5.kml stores the magnitude of each earthquake in a
-    // standards-violating <magnitude> tag in each Placemark.  We extract it from
-    // the Placemark's name instead.
-    var name = event.feature.get('name');
-    var magnitude = parseFloat(name.substr(2));
-    event.feature.set('weight', magnitude - 5);
-  });
-
-  globalMap.addLayer(vector); 
+ 
 
   // ==================================================================
 
@@ -513,45 +480,44 @@ function definePopup(container,closer) {
  * @method markersMap
  */
 function markersMap(experiment){
-  // console.log(experiment);
-
-  var location = [];
-  for(var i = 0, len=experiment.length; i < len; i++){
-      var marker = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude])),
-        name: experiment[i].name,
-      });
+ 
+  // var location = [];
+  // for(var i = 0, len=experiment.length; i < len; i++){
+  //     var marker = new ol.Feature({
+  //       geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude])),
+  //       name: experiment[i].name,
+  //     });
       
-      marker.setStyle(new ol.style.Style({
-        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
-          color: '#FF0000',
-          crossOrigin: 'anonymous',
-          src: '/img/dot.png'
-        }))
-      }));
+  //     marker.setStyle(new ol.style.Style({
+  //       image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
+  //         color: '#FF0000',
+  //         crossOrigin: 'anonymous',
+  //         src: '/img/dot.png'
+  //       }))
+  //     }));
 
-      location.push(marker)
+  //     location.push(marker)
 
       
-  } 
+  // } 
 
-  // ================
-  // To see key and value of Features
-  // =================
-  // console.log(rome.getKeys());
-  // console.log(rome.getProperties());
+  // // ================
+  // // To see key and value of Features
+  // // =================
+  // // console.log(rome.getKeys());
+  // // console.log(rome.getProperties());
 
-  var vectorSource = new ol.source.Vector({
-    features: location
-  });
+  // var vectorSource = new ol.source.Vector({
+  //   features: location
+  // });
 
-  var vectorLayer = new ol.layer.Vector({
-    source: vectorSource
-  });
+  // var vectorLayer = new ol.layer.Vector({
+  //   source: vectorSource
+  // });
 
-  globalMap.addLayer(vectorLayer); 
+  // globalMap.addLayer(vectorLayer); 
 
-  // https://openlayers.org/en/latest/examples/icon.html
+  // // https://openlayers.org/en/latest/examples/icon.html
   var container = $('#popup')[0];
   var closer = $('#popup-closer')[0];
   var popup = definePopup(container,closer);
@@ -559,23 +525,70 @@ function markersMap(experiment){
 
  
 
-  // display popup on click
-  globalMap.on('click', function(evt) {
-    var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
-      function(feature) {
-        return feature;
+  // // display popup on click
+  // globalMap.on('click', function(evt) {
+  //   var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
+  //     function(feature) {
+  //       return feature;
+  //     });
+  //   if (feature) {
+  //     var coordinates = feature.getGeometry().getCoordinates();
+  //     popup.setPosition(coordinates);
+  //     var content = $('#popup-content');
+  //     content.html('<p>You have selected here:</p>' + feature.get('name'));
+  //   } else {
+  //     popup.setPosition(undefined);
+  //   }
+  // });  
+}
+
+/**
+ * This function define a Heatmap based on Database.
+ * REF: https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
+ * @param experiment the list of experiment download from server
+ * @method heatMap
+ */
+function heatMap(experiment){
+  
+  var location = [];
+  for(var i = 0, len=experiment.length; i < len; i++){
+       
+      location[i] = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude]))
       });
-    if (feature) {
-      var coordinates = feature.getGeometry().getCoordinates();
-      popup.setPosition(coordinates);
-      var content = $('#popup-content');
-      content.html('<p>You have selected here:</p>' + feature.get('name'));
-    } else {
-      popup.setPosition(undefined);
-    }
+      
+     
+  }
+  // var count = 2000;
+  // var features = new Array(count);
+  // var e = 4500000;
+  // for (var i = 0; i < count; ++i) {
+  //   var coordinates = [2 * e * Math.random() - e, 2 * e * Math.random() - e];
+  //   features[i] = new ol.Feature(new ol.geom.Point(coordinates));
+  // }
+
+  var vector = new ol.layer.Heatmap({
+    source: new ol.source.Vector({
+      // url: '../kml/2012_Earthquakes_Mag5.kml', // https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
+      // format: new ol.format.KML({
+      //   extractStyles: false
+      // })
+      features: location
+    }),
+    blur: parseInt(5, 10),
+    radius: parseInt(5, 10)
   });
 
-  
+  vector.getSource().on('addfeature', function(event) {
+    // 2012_Earthquakes_Mag5.kml stores the magnitude of each earthquake in a
+    // standards-violating <magnitude> tag in each Placemark.  We extract it from
+    // the Placemark's name instead.
+    var name = event.feature.get('name');
+    var magnitude = parseFloat(name.substr(2));
+    event.feature.set('weight', magnitude - 5);
+  });
+
+  globalMap.addLayer(vector); 
 }
 
 /**
@@ -588,6 +601,7 @@ function defineCoordinatePoint(){
     method: 'GET',    
     success: function (res) {   
       markersMap(res); 
+      heatMap(res);
     },
     error: function(err){
       bootstrapAlert(err, "Error", "danger", false);
