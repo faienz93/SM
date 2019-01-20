@@ -16,7 +16,7 @@ var globalMap;
 /**
  * Array of Experiments
  */
-var experiments;
+var experiments = [];
 
 /**
  * LONGITUDE - LATITUDE of BOLOGNA

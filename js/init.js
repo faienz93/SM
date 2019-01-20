@@ -64,16 +64,13 @@ $(document).ready(function () {
   var actualValueView = $('.selected-view').attr("value");
   setView(actualValueView);
   
+  
+  
   $('.selected-view').on("click", function () {
     var viewSelected = $(this).attr("value");
     setView(viewSelected);
     
   });
-
-
-
-
-  
 
 });
 
@@ -108,20 +105,21 @@ function chosenPlugin() {
 function getExperiments(){
   $.ajax({
     url: '/getexperiments',
-    method: 'GET',    
+    method: 'GET',  
+    async: false,  
     success: function (res) {   
 
-  
-     
-
+      
       $.each(res, function (index, element) {
         
         // the value will be JSON String
         appendToChosen(JSON.stringify(element), element.name);
 
+        experiments.push(element);
+
       });
 
-      markersMap(res);
+      // markersMap(res);
     },
     error: function(err){
       bootstrapAlert(err, "Error", "danger", false);
@@ -390,11 +388,11 @@ function definePartialsTest() {
 
 function setView(v){
   if(v==='markers'){
-    console.log("MARKERS");
+    markersMap(experiments);
   }else if(v==='cluster'){
-    console.log("CLUSTER");
+    clusterMap(experiments);
   }else if((v === 'heatmap')){
-    console.log("HEATMAP");
+    heatMap(experiments);
   }else {
     console.log("NONE");
   }
