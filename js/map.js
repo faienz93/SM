@@ -15,7 +15,7 @@ function settingMap(){
   bingMaps();
   stamenMap();
   hereMap();
-  defineCoordinatePoint();
+  // defineCoordinatePoint();
 
   
 
@@ -24,6 +24,8 @@ function settingMap(){
     defineDebug();
     return false;
   });
+
+  
 
 
   // default value of filter
@@ -74,7 +76,7 @@ function createMap(m = "OSM",t = "osm") {
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
     view: new ol.View({
       center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
-      zoom: 10
+      zoom: 12
     })
   });
 
@@ -415,46 +417,49 @@ function definePopup(container,closer) {
 /**
  * This function define a Markers based on Database.
  * REF: https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
- * @param experiment the list of experiment download from server
+ * @param test the list of experiment download from server
  * @method markersMap
  */
-function markersMap(experiment){
+function markersMap(test){
  
-  // var location = [];
-  // for(var i = 0, len=experiment.length; i < len; i++){
-  //     var marker = new ol.Feature({
-  //       geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude])),
-  //       name: experiment[i].name,
-  //     });
+  
+  var location = [];
+  for(var i = 0, len=test.length; i < len; i++){
+   
+      var marker = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([test[i].longitude,test[i].latitude])),
+        name: test[i].name,
+      });
       
-  //     marker.setStyle(new ol.style.Style({
-  //       image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
-  //         color: '#FF0000',
-  //         crossOrigin: 'anonymous',
-  //         src: '/img/dot.png'
-  //       }))
-  //     }));
+      marker.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */ ({ // /** @type {olx.style.IconOptions} */
+          color: '#ea4335', //  #FF0000
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
 
-  //     location.push(marker)
+      location.push(marker)
 
       
-  // } 
+  } 
 
-  // // ================
-  // // To see key and value of Features
-  // // =================
-  // // console.log(rome.getKeys());
-  // // console.log(rome.getProperties());
+ 
+  // ================
+  // To see key and value of Features
+  // =================
+  // console.log(rome.getKeys());
+  // console.log(rome.getProperties());
 
-  // var vectorSource = new ol.source.Vector({
-  //   features: location
-  // });
+  var vectorSource = new ol.source.Vector({
+    features: location
+  });
 
-  // var vectorLayer = new ol.layer.Vector({
-  //   source: vectorSource
-  // });
+  var vectorLayer = new ol.layer.Vector({
+    source: vectorSource
+  });
 
-  // globalMap.addLayer(vectorLayer); 
+  globalMap.addLayer(vectorLayer); 
 
   // // https://openlayers.org/en/latest/examples/icon.html
   var container = $('#popup')[0];
@@ -464,21 +469,21 @@ function markersMap(experiment){
 
  
 
-  // // display popup on click
-  // globalMap.on('click', function(evt) {
-  //   var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
-  //     function(feature) {
-  //       return feature;
-  //     });
-  //   if (feature) {
-  //     var coordinates = feature.getGeometry().getCoordinates();
-  //     popup.setPosition(coordinates);
-  //     var content = $('#popup-content');
-  //     content.html('<p>You have selected here:</p>' + feature.get('name'));
-  //   } else {
-  //     popup.setPosition(undefined);
-  //   }
-  // });  
+  // display popup on click
+  globalMap.on('click', function(evt) {
+    var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
+      function(feature) {
+        return feature;
+      });
+    if (feature) {
+      var coordinates = feature.getGeometry().getCoordinates();
+      popup.setPosition(coordinates);
+      var content = $('#popup-content');
+      content.html('<p>You have selected here:</p>' + feature.get('name'));
+    } else {
+      popup.setPosition(undefined);
+    }
+  });  
 }
 
 /**
@@ -527,7 +532,8 @@ function clusterMap(experiment){
   var location = [];
   for(var i = 0, len=experiment.length; i < len; i++){       
       location[i] = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude]))
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude,experiment[i].latitude])),
+        name: experiment[i].name
       });    
   }
   
@@ -572,6 +578,31 @@ function clusterMap(experiment){
 
   globalMap.addLayer(clusters); 
 
+
+  // TODO: forse
+  // var container = $('#popup')[0];
+  // var closer = $('#popup-closer')[0];
+  // var popup = definePopup(container,closer);
+  // globalMap.addOverlay(popup); 
+
+ 
+
+  // // display popup on click
+  // globalMap.on('click', function(evt) {
+  //   var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
+  //     function(feature) {
+  //       return feature;
+  //     });
+  //   if (feature) {
+  //     var coordinates = feature.getGeometry().getCoordinates();
+  //     popup.setPosition(coordinates);
+  //     var content = $('#popup-content');
+  //     content.html('<p>You have selected here:</p>' + feature.get('name'));
+  //   } else {
+  //     popup.setPosition(undefined);
+  //   }
+  // });  
+
 }
 
 /**
@@ -583,9 +614,10 @@ function defineCoordinatePoint(){
     url: '/getexperiments',
     method: 'GET',    
     success: function (res) {   
+      console.log(res)
       markersMap(res); 
       // heatMap(res);
-      clusterMap(res);
+      // clusterMap(res);
     },
     error: function(err){
       bootstrapAlert(err, "Error", "danger", false);

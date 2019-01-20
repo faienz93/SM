@@ -14,7 +14,7 @@ $(document).ready(function () {
   chosenPlugin();
 
   // Define value of Search Bar using Chosen Plugin
-  setValueSearchBar();
+  getExperiments();
 
   // Setting navbar
   navbar();
@@ -61,6 +61,16 @@ $(document).ready(function () {
   });
 
 
+
+  
+  $('.selected-view').on("click", function () {
+    var viewSelected = $(this).attr("value");
+    console.log(viewSelected);
+    
+  });
+  
+
+
   
 
 });
@@ -91,18 +101,25 @@ function chosenPlugin() {
  * there is a AJAX call to the server that retrieve the value 
  * of experiment. Then we appen the reult to Search Bar
  * 
- * @method setValueSearchBar
+ * @method getExperiments
  */
-function setValueSearchBar(){
+function getExperiments(){
   $.ajax({
     url: '/getexperiments',
     method: 'GET',    
-    success: function (res) {    
+    success: function (res) {   
+
+  
+     
+
       $.each(res, function (index, element) {
         
         // the value will be JSON String
         appendToChosen(JSON.stringify(element), element.name);
+
       });
+
+      markersMap(res);
     },
     error: function(err){
       bootstrapAlert(err, "Error", "danger", false);
