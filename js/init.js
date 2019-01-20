@@ -61,14 +61,16 @@ $(document).ready(function () {
   });
 
 
-
+  var actualValueView = $('.selected-view').attr("value");
+  setView(actualValueView);
   
   $('.selected-view').on("click", function () {
     var viewSelected = $(this).attr("value");
-    console.log(viewSelected);
+    setView(viewSelected);
     
   });
-  
+
+
 
 
   
@@ -386,3 +388,14 @@ function definePartialsTest() {
   });
 }
 
+function setView(v){
+  if(v==='markers'){
+    console.log("MARKERS");
+  }else if(v==='cluster'){
+    console.log("CLUSTER");
+  }else if((v === 'heatmap')){
+    console.log("HEATMAP");
+  }else {
+    console.log("NONE");
+  }
+}
