@@ -422,6 +422,9 @@ function markersMap(exp) {
     var marker = new ol.Feature({
       geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
       name: exp[i].name,
+      pdr: exp[i].metrics.pdr,
+      delay: exp[i].metrics.delay,
+      throughput: exp[i].metrics.throughput
     });
 
     marker.setStyle(new ol.style.Style({
@@ -474,7 +477,7 @@ function markersMap(exp) {
       var coordinates = feature.getGeometry().getCoordinates();
       popup.setPosition(coordinates);
       var content = $('#popup-content');
-      content.html('<p>You have selected here:</p>' + feature.get('name'));
+      content.html('<p>' + feature.get('name') +'</p>' + feature.get('pdr') + feature.get('delay') + feature.get('throughput'));
     } else {
       popup.setPosition(undefined);
     }
