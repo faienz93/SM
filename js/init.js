@@ -386,14 +386,3 @@ function definePartialsTest() {
   });
 }
 
-function setView(v){
-  if(v==='markers'){
-    markersMap(experiments);
-  }else if(v==='cluster'){
-    clusterMap(experiments);
-  }else if((v === 'heatmap')){
-    heatMap(experiments);
-  }else {
-    console.log("NONE");
-  }
-}

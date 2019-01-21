@@ -109,9 +109,7 @@ function defineDebug(){
  */
 function setCurrentLayer(mapview, type) {
   var groupSelected = getGroup(mapview);
-  globalMap.setLayerGroup(groupSelected);
-
-  
+  globalMap.setLayerGroup(groupSelected);  
 
   var layers = globalMap.getLayers().getArray();
   console.log(layers);
@@ -456,7 +454,8 @@ function markersMap(test){
   });
 
   var vectorLayer = new ol.layer.Vector({
-    source: vectorSource
+    source: vectorSource,
+    title: "markers"
   });
 
   globalMap.addLayer(vectorLayer); 
@@ -505,6 +504,7 @@ function heatMap(experiment){
     source: new ol.source.Vector({
       features: location
     }),
+    title: 'heatmap',
     blur: parseInt(5, 10), // TODO fare il setting
     radius: parseInt(5, 10) // TODO fare il setting
   });
@@ -543,11 +543,12 @@ function clusterMap(experiment){
 
   var clusterSource = new ol.source.Cluster({
     distance: parseInt(10, 10),
-    source: source
+    source: source    
   });
 
   var styleCache = {};
   var clusters = new ol.layer.Vector({
+    title: 'cluster',
     source: clusterSource,
     style: function(feature) {
       var size = feature.get('features').length;
@@ -625,3 +626,25 @@ function defineCoordinatePoint(){
   });
 }
 
+
+function setView(v){
+  var layers = globalMap.getLayers().getArray();
+  console.log(layers);
+  // var debugLayer = getCurrentLayerByTitle(layers, "Debug");
+
+  // // disable debug if active a different view
+  // if (debugLayer != undefined) {
+  //   var index = layers.indexOf(debugLayer);
+  //   layers.splice(index, 1);
+  // }
+
+  if(v==='markers'){
+    markersMap(experiments);
+  }else if(v==='cluster'){
+    clusterMap(experiments);
+  }else if((v === 'heatmap')){
+    heatMap(experiments);
+  }else {
+    console.log("NONE");
+  }
+}
