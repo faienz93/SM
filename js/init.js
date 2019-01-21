@@ -54,6 +54,15 @@ $(document).ready(function () {
   definePartialsTest();
 
 
+  // Settings
+  $('.settings').on("click", function (event) {
+    event.preventDefault();
+    $.get('/settings').then(function (data) {
+      $('#main').html(data);
+    });
+    return false;
+  });
+
   // Informations alerts
   $('.selected-informations').on("click", function (event) {
     event.preventDefault();
@@ -79,14 +88,13 @@ $(document).ready(function () {
     return false;
   });
 
-
-  
-  
-  // whenever change the value, will be call the same method
+  // whenever change the value of View (Navbar), will be call the same method for select
+  // markers
+  // cluster
+  // heatmpa
   $('.selected-view').on("click", function () {
     var viewSelected = $(this).attr("value");
-    setView(viewSelected);
-    
+    setView(viewSelected);    
   });
 
 });

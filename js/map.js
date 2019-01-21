@@ -552,6 +552,9 @@ function clusterMap(exp) {
  */
 function heatMap(exp) {
 
+  var blur = document.getElementById('blur');
+      var radius = document.getElementById('radius');
+
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
     location[i] = new ol.Feature({
@@ -565,8 +568,8 @@ function heatMap(exp) {
       features: location
     }),
     title: 'heatmap',
-    blur: parseInt(5, 10), // TODO fare il setting
-    radius: parseInt(5, 10) // TODO fare il setting
+    blur: parseInt(blur.value, 10), 
+    radius: parseInt(radius.value, 10) 
   });
 
   vector.getSource().on('addfeature', function (event) {

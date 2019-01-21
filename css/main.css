@@ -382,3 +382,11 @@ meter[value="4"]::-moz-meter-bar {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+ /* ---------------------------------------------------
+   SETTINGS
+----------------------------------------------------- */
+  input[type=range] {
+    display: block;
+    width: 100%;
+}

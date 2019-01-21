@@ -67,6 +67,10 @@ function handleFormUser() {
     $('#idUserFormUpdate').val(tempID);
 
   });
+
+  $('#resetCluster').click(function () {
+    $('#settingsForm')[0].reset();    
+  })
 }
 
 /**

@@ -1,0 +1,75 @@
+
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Add User
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<div id="change-setting" class="mainDiv"> 
+    <div class="card card-outline-secondary">
+        <div class="card-header" id="headerUser">
+            <h3 class="mb-0"> <a href="#"><a><img src="../img/settings.svg" class="svg icon header-icon"></a> {{title}}</h3>
+        </div>
+        <div class="card-body" id="cardBodySetting">
+              
+            <form class="form" id="settingsForm" role="form" autocomplete="off">    
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Cluster</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Distance</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <input id="distance" type="range" min="0" max="100" step="1" value="40">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">HeatMap</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Radius Size</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <input id="radius" type="range" min="1" max="50" step="1" value="5">
+                        </div>
+                    </div>
+                </div> 
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Blur Size</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <input id="blur" type="range" min="1" max="50" step="1" value="15">
+                        </div>
+                    </div>
+                </div>                 
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetCluster" class="btn btn-secondary" value="Original Setting">
+                        <input type="submit" class="btn btn-dark" value="Save">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Load Scripts
+// REF: https://stackoverflow.com/a/28478146/4700162
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<script>       
+        $.getScript("../../js/util.js");
+        $.getScript("../../js/form.js");
+        $.getScript("../../js/map.js");
+</script>
+ 
