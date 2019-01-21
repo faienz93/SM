@@ -68,10 +68,10 @@ https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-rel
 
 
 RICORDA: 
-server-db 
+master
     |
     |
-    |-> refactor-view
+    |-> session
             
 
 IMPORTANT: 
