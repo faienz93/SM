@@ -318,8 +318,4 @@ function strengthPassword(password,meter,text) {
     });
   }
 
-
-
-  
-
 }
