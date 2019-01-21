@@ -133,6 +133,10 @@ function setCurrentLayer(mapview, type) {
     }
   }
 
+  // get the value from dropdown inside navbar
+  var actualValueView = $('.selected-view').attr("value");
+  setView(actualValueView);
+
 }
 
 /**
@@ -629,19 +633,17 @@ function defineCoordinatePoint() {
 
 function setView(v) {
   if (v === 'markers') {
-    console.log("MARKERS");
-    clearViewLayer()
+    clearViewLayer();
     markersMap(experiments);
   } else if (v === 'cluster') {
-    console.log("CLUSTER");
     clearViewLayer()
     clusterMap(experiments);
   } else if ((v === 'heatmap')) {
-    console.log("HEATMPAP");
     clearViewLayer()
     heatMap(experiments);
   } else if((v === 'none')){
     clearViewLayer();
+    
   }
 }
 
@@ -653,10 +655,8 @@ function clearViewLayer() {
   
 
   if (markersLayer != undefined) {
-    var index = layers.indexOf(markersLayer);
-    console.log(layers);
+    var index = layers.indexOf(markersLayer);    
     layers.splice(index, 1);
-    console.log(layers);
   }
 
   if (clusterLayer != undefined) {
@@ -668,5 +668,7 @@ function clearViewLayer() {
     var index = layers.indexOf(heatmapLayer);
     layers.splice(index, 1);
   }
+
+  globalMap.render();
 
 }

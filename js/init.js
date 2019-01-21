@@ -14,7 +14,26 @@ $(document).ready(function () {
   chosenPlugin();
 
   // Define value of Search Bar using Chosen Plugin
-  getExperiments();
+  // getExperiments();
+  queryExperiments().then(function (exp) {
+    
+        // experiments.push(element);
+        experiments = exp;
+        
+        // get the value from dropdown inside navbar
+        var actualValueView = $('.selected-view').attr("value");
+        setView(actualValueView);
+        
+        $.each(exp, function (index, element) {
+          
+          // the value will be JSON String
+          appendToChosen(JSON.stringify(element), element.name);  
+          
+  
+        });
+  
+        
+  });
 
   // Setting navbar
   navbar();
@@ -61,11 +80,9 @@ $(document).ready(function () {
   });
 
 
-  var actualValueView = $('.selected-view').attr("value");
-  setView(actualValueView);
   
   
-  
+  // whenever change the value, will be call the same method
   $('.selected-view').on("click", function () {
     var viewSelected = $(this).attr("value");
     setView(viewSelected);
@@ -95,37 +112,7 @@ function chosenPlugin() {
   }
 }
 
-/**
- * Define a value of Search Bar using Chose Plugin. In this context
- * there is a AJAX call to the server that retrieve the value 
- * of experiment. Then we appen the reult to Search Bar
- * 
- * @method getExperiments
- */
-function getExperiments(){
-  $.ajax({
-    url: '/getexperiments',
-    method: 'GET',  
-    async: false,  
-    success: function (res) {   
 
-      
-      $.each(res, function (index, element) {
-        
-        // the value will be JSON String
-        appendToChosen(JSON.stringify(element), element.name);
-
-        experiments.push(element);
-
-      });
-
-      // markersMap(res);
-    },
-    error: function(err){
-      bootstrapAlert(err, "Error", "danger", false);
-    }
-  });
-}
 
 /**
  * This function add value to Chosen Plugin.
@@ -386,3 +373,32 @@ function definePartialsTest() {
   });
 }
 
+/**
+ * Define a value of Search Bar using Chose Plugin. In this context
+ * there is a AJAX call to the server that retrieve the value 
+ * of experiment. Then we appen the reult to Search Bar
+ * 
+ * @method getExperiments
+ */
+function getExperiments(){
+
+  return new Promise(function(resolve, reject){
+    $.ajax({
+      url: '/getexperiments',
+      method: 'GET',  
+      success: function (res) {   
+        if(res.length > 0){
+            resolve(res);
+        }
+      },
+      error: function(err){
+        bootstrapAlert(err, "Error", "danger", false);
+      }
+    });
+  });  
+}
+
+
+function queryExperiments(){
+  return getExperiments();
+}
