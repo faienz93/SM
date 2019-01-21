@@ -8,25 +8,16 @@
 
 
 function settingMap() {
-
-
-
   defaultOSM();
   bingMaps();
   stamenMap();
   hereMap();
-  
-
-
 
   $('.selected-debug').on("click", function (event) {
     event.preventDefault();
     defineDebug();
     return false;
   });
-
-
-
 
   // default value of filter
   var selectedKernel = normalize(kernels["none"]);
@@ -41,7 +32,7 @@ function settingMap() {
 
 
   // Setting filter 
-  for (var i = 0; i < groupsMap.length; i++) {
+  for (var i = 0, len = groupsMap.length; i < len; i++) {
     var layers = groupsMap[i].values_.layers.array_;
 
     //  This function allows to apply a filter based on a matrix and methods defined
@@ -51,7 +42,7 @@ function settingMap() {
     //  it has not visible
     //  REF: https://openlayers.org/en/latest/examples/image-filter.html
 
-    for (var j = 0; j < layers.length; j++) {
+    for (var j = 0, layerlen = layers.length; j < layerlen; j++) {
       layers[j].on('postcompose', function (event) {
         convolve(event.context, selectedKernel);
       });
@@ -126,7 +117,7 @@ function setCurrentLayer(mapview, type) {
     layers.splice(index, 1);
   }
 
-  for (var i = 0; i < layers.length; ++i) {
+  for (var i = 0, len = layers.length; i < len; i++) {
     if (groupSelected.values_.title === "Bing") {
       layers[i].setVisible(bingStyles[i] === type);
     } else if (groupSelected.values_.title === "Here") {
@@ -173,9 +164,8 @@ function defaultOSM() {
  * @method bingMaps
  */
 function bingMaps() {
-  var layers = [];
-  var i;
-  for (i = 0; i < bingStyles.length; ++i) {
+  var layers = []; 
+  for (var i = 0, len = bingStyles.length; i < len; ++i) {
     layers.push(new ol.layer.Tile({
       title: bingStyles[i],
       visible: false,
@@ -212,7 +202,7 @@ function hereMap() {
     '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
     '?app_id={app_id}&app_code={app_code}';
   var layers = [];
-  for (var i = 0; i < hereStyles.length; ++i) {
+  for (var i = 0, len = hereStyles.length; i < len; ++i) {
     var layerDesc = hereStyles[i];
     layers.push(new ol.layer.Tile({
       title: hereStyles[i].scheme,
@@ -247,8 +237,7 @@ function stamenMap() {
 
 
   var layers = [];
-  var i;
-  for (i = 0; i < stamenStyles.length; ++i) {
+  for (var i = 0, len = stamenStyles.length; i < len; ++i) {
     layers.push(new ol.layer.Tile({
       title: stamenStyles[i],
       visible: false,
