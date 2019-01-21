@@ -566,7 +566,7 @@ function heatMap(exp) {
     }),
     title: 'heatmap',
     blur: parseInt(5, 10), // TODO fare il setting
-    radius: parseInt(5, 10) // TODO fare il setting
+    radius: parseInt(15, 10) // TODO fare il setting
   });
 
   vector.getSource().on('addfeature', function (event) {
