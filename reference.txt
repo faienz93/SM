@@ -120,6 +120,45 @@ https://stackoverflow.com/a/7574300/4700162
 
 JSON: 
 
+SEMPLICE
+[{
+    "latitude": "44.4984508",
+    "longitude": "11.3335356",
+    "name": "Via Riva Reno",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.4908989",
+    "longitude": "11.3748269",
+    "name": "Via Spartaco",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.4983908",
+    "longitude": "11.3541623",
+    "name": "Porta San Donato",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.5023288",
+    "longitude": "11.331106",
+    "name": "Porta Lame",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.4868099",
+    "longitude": "11.3641759",
+    "name": "Via Mazzini",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+}
+
+]
+
 CON TUTTO
 {
     "latitude": "44.498955",
