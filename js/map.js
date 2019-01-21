@@ -413,9 +413,8 @@ function definePopup(container, closer) {
  * @param exp the list of experiment download from server
  * @method markersMap
  */
-function markersMap(exp) {
+function markersMap(exp) { 
 
-  
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
 
@@ -424,7 +423,13 @@ function markersMap(exp) {
       name: exp[i].name,
       pdr: exp[i].metrics.pdr,
       delay: exp[i].metrics.delay,
-      throughput: exp[i].metrics.throughput
+      throughput: exp[i].metrics.throughput,
+      latitude: exp[i].latitude,
+      longitude: exp[i].longitude,
+      latitudeServer: exp[i].latitudeServer,
+      longitudeServer: exp[i].longitudeServer,
+      createdAt: exp[i].createdAt,
+      updatedAt: exp[i].updatedAt
     });
 
     marker.setStyle(new ol.style.Style({
@@ -433,12 +438,8 @@ function markersMap(exp) {
         crossOrigin: 'anonymous',
         src: '/img/dot.png'
       }))
-    }));
-
-    
-    location.push(marker)
-
-
+    }));    
+    location.push(marker);
   }
 
 
@@ -477,11 +478,28 @@ function markersMap(exp) {
       var coordinates = feature.getGeometry().getCoordinates();
       popup.setPosition(coordinates);
       var content = $('#popup-content');
-      content.html('<p>' + feature.get('name') +'</p>' + feature.get('pdr') + feature.get('delay') + feature.get('throughput'));
+      var pdr = '<b> PDR: </b>' + feature.get('pdr') + '<br>';
+      var delay = '<b> Delay: </b>' + feature.get('delay') + '<br>';
+      var throughput = '<b> Throughput: </b>' + feature.get('throughput') + '<br>';
+      var latitude = '<i> Latitude: </i>' + feature.get('latitude') + '<br>';
+      var longitude = '<i> Longitude: </i>' + feature.get('longitude') + '<br>';
+      var latitudeServer = '<i> Latitude Server: </i>' + feature.get('latitudeServer') + '<br>';
+      var longitudeServer = '<i> Longitude Server: </i>' + feature.get('longitudeServer') + '<br>';
+      var createdAt = '<sub> Created At: </sub>' + '<sub>' + feature.get('createdAt')+ '</sub>'  + '<br>';
+      var updatedAt = '<sub> Updated At: </sub>' + '<sub>' + feature.get('updatedAt') + '</sub>'  + '<br>';
+      var newline = '<br>';
+      content.html('<p>' + feature.get('name') +'</p>' + pdr + delay + throughput + newline + latitude + longitude + newline + latitudeServer + longitudeServer + newline + createdAt + updatedAt);
     } else {
       popup.setPosition(undefined);
     }
   });
+
+  // latitude: exp[i].latitude,
+  //     longitude: exp[i].longitude,
+  //     latitudeServer: exp[i].latitudeServer,
+  //     longitudeServer: exp[i].longitudeServer,
+  //     createdAt: exp[i].createdAt,
+  //     updatedAt: exp[i].updatedAt
   
 }
 
