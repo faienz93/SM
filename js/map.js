@@ -415,7 +415,7 @@ function definePopup(container, closer) {
  */
 function markersMap(exp) {
 
-
+  
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
 

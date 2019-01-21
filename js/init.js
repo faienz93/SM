@@ -74,8 +74,31 @@ $(document).ready(function () {
    */
   $('#searchExperiment').on('submit', function(event){
     event.preventDefault();
+     
       var selectExperiment = $('#selectExperiment').chosen().val();
-      console.log(selectExperiment); 
+     
+      for(var i = 0; i < selectExperiment.length; i++){
+        selectExperiment[i] = JSON.parse(selectExperiment[i])       
+      }           
+      experiments = selectExperiment;
+
+       // get the value from dropdown inside navbar
+       var actualValueView = $('.selected-view').attr("value");
+       setView(actualValueView);
+
+       // no filter selected
+      if(selectExperiment.length === 0){        
+        $("#selectExperiment option").each(function(index)
+        {
+          if(index === 0) return;
+          selectExperiment.push(JSON.parse($(this).val())) ;         
+        });
+        experiments = selectExperiment;
+         // get the value from dropdown inside navbar
+         var actualValueView = $('.selected-view').attr("value");
+         setView(actualValueView);
+      }
+
     return false;
   });
 
