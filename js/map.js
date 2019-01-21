@@ -15,7 +15,7 @@ function settingMap() {
   bingMaps();
   stamenMap();
   hereMap();
-  // defineCoordinatePoint();
+  
 
 
 
@@ -57,6 +57,8 @@ function settingMap() {
       });
     }
   }
+
+  
 }
 
 function createMap(m = "OSM", t = "osm") {
@@ -82,6 +84,9 @@ function createMap(m = "OSM", t = "osm") {
 
   geocoder();
   setCurrentLayer(m, t);
+  
+
+  
 }
 
 
@@ -156,9 +161,6 @@ function defaultOSM() {
       })
     ]
   });
-
-
-
 
   // return layersOSM;
   groupsMap.push(layersOSM);
@@ -419,18 +421,18 @@ function definePopup(container, closer) {
 /**
  * This function define a Markers based on Database.
  * REF: https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
- * @param test the list of experiment download from server
+ * @param exp the list of experiment download from server
  * @method markersMap
  */
-function markersMap(test) {
+function markersMap(exp) {
 
 
   var location = [];
-  for (var i = 0, len = test.length; i < len; i++) {
+  for (var i = 0, len = exp.length; i < len; i++) {
 
     var marker = new ol.Feature({
-      geometry: new ol.geom.Point(ol.proj.fromLonLat([test[i].longitude, test[i].latitude])),
-      name: test[i].name,
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
+      name: exp[i].name,
     });
 
     marker.setStyle(new ol.style.Style({
@@ -441,6 +443,7 @@ function markersMap(test) {
       }))
     }));
 
+    
     location.push(marker)
 
 
@@ -460,11 +463,11 @@ function markersMap(test) {
   var vectorLayer = new ol.layer.Vector({
     source: vectorSource,
     title: "markers"
-  });
+  });  
 
   globalMap.addLayer(vectorLayer);
 
-  // // https://openlayers.org/en/latest/examples/icon.html
+  // https://openlayers.org/en/latest/examples/icon.html
   var container = $('#popup')[0];
   var closer = $('#popup-closer')[0];
   var popup = definePopup(container, closer);
@@ -487,60 +490,28 @@ function markersMap(test) {
       popup.setPosition(undefined);
     }
   });
+  
 }
 
-/**
- * This function define a Heatmap based on Database.
- * REF: https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
- * @param experiment the list of experiment download from server
- * @method heatMap
- */
-function heatMap(experiment) {
 
-  var location = [];
-  for (var i = 0, len = experiment.length; i < len; i++) {
-    location[i] = new ol.Feature({
-      geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude, experiment[i].latitude]))
-    });
-  }
-
-  var vector = new ol.layer.Heatmap({
-    source: new ol.source.Vector({
-      features: location
-    }),
-    title: 'heatmap',
-    blur: parseInt(5, 10), // TODO fare il setting
-    radius: parseInt(5, 10) // TODO fare il setting
-  });
-
-  vector.getSource().on('addfeature', function (event) {
-    // 2012_Earthquakes_Mag5.kml stores the magnitude of each earthquake in a
-    // standards-violating <magnitude> tag in each Placemark.  We extract it from
-    // the Placemark's name instead.
-    var name = event.feature.get('name');
-    var magnitude = parseFloat(name.substr(2));
-    event.feature.set('weight', magnitude - 5);
-  });
-
-  globalMap.addLayer(vector);
-}
 
 /**
  * This function define a Cluster based on Database.
  * REF: https://openlayers.org/en/v4.6.5/examples/cluster.html?q=cluster
- * @param experiment the list of experiment download from server
+ * @param exp the list of experiment download from server
  * @method clusterMap
  */
-function clusterMap(experiment) {
+function clusterMap(exp) {
 
   var location = [];
-  for (var i = 0, len = experiment.length; i < len; i++) {
+  for (var i = 0, len = exp.length; i < len; i++) {
     location[i] = new ol.Feature({
-      geometry: new ol.geom.Point(ol.proj.fromLonLat([experiment[i].longitude, experiment[i].latitude])),
-      name: experiment[i].name
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
+      name: exp[i].name
     });
   }
 
+  
   var source = new ol.source.Vector({
     features: location
   });
@@ -582,55 +553,52 @@ function clusterMap(experiment) {
   });
 
   globalMap.addLayer(clusters);
-
-
-  // TODO: forse
-  // var container = $('#popup')[0];
-  // var closer = $('#popup-closer')[0];
-  // var popup = definePopup(container,closer);
-  // globalMap.addOverlay(popup); 
-
-
-
-  // // display popup on click
-  // globalMap.on('click', function(evt) {
-  //   var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
-  //     function(feature) {
-  //       return feature;
-  //     });
-  //   if (feature) {
-  //     var coordinates = feature.getGeometry().getCoordinates();
-  //     popup.setPosition(coordinates);
-  //     var content = $('#popup-content');
-  //     content.html('<p>You have selected here:</p>' + feature.get('name'));
-  //   } else {
-  //     popup.setPosition(undefined);
-  //   }
-  // });  
-
 }
 
 /**
- * This function return the experiment that will be displayed 
- * on the map
+ * This function define a Heatmap based on Database.
+ * REF: https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
+ * @param exp the list of experiment download from server
+ * @method heatMap
  */
-function defineCoordinatePoint() {
-  $.ajax({
-    url: '/getexperiments',
-    method: 'GET',
-    success: function (res) {
-      console.log(res)
-      markersMap(res);
-      // heatMap(res);
-      // clusterMap(res);
-    },
-    error: function (err) {
-      bootstrapAlert(err, "Error", "danger", false);
-    }
+function heatMap(exp) {
+
+  var location = [];
+  for (var i = 0, len = exp.length; i < len; i++) {
+    location[i] = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
+      name: exp[i].name
+    });
+  }
+
+  var vector = new ol.layer.Heatmap({
+    source: new ol.source.Vector({
+      features: location
+    }),
+    title: 'heatmap',
+    blur: parseInt(5, 10), // TODO fare il setting
+    radius: parseInt(5, 10) // TODO fare il setting
   });
+
+  vector.getSource().on('addfeature', function (event) {
+    // 2012_Earthquakes_Mag5.kml stores the magnitude of each earthquake in a
+    // standards-violating <magnitude> tag in each Placemark.  We extract it from
+    // the Placemark's name instead.
+    var name = event.feature.get('name');
+    var magnitude = parseFloat(name.substr(2));
+    event.feature.set('weight', magnitude - 5);
+  });
+
+  globalMap.addLayer(vector);
 }
 
 
+/**
+ * Based on param, set Markers, Clusters or HeatMap
+ * 
+ * @param v {String} - the choice of User
+ * @method setView
+ */
 function setView(v) {
   if (v === 'markers') {
     clearViewLayer();
@@ -647,6 +615,14 @@ function setView(v) {
   }
 }
 
+/**
+ * Clear from Map of all layers that are Vector. In particular: 
+ * - Markers
+ * - Cluster
+ * - HeatMap
+ * 
+ * @method clearViewLayer
+ */
 function clearViewLayer() {
   var layers = globalMap.getLayers().getArray();
   var markersLayer = getCurrentLayerByTitle(layers, "markers");
@@ -672,3 +648,5 @@ function clearViewLayer() {
   globalMap.render();
 
 }
+
+
