@@ -22,6 +22,20 @@ router.get('/', requiresLogin, function(req, res) {
     res.render('index', {title: "SM - Mobile System"});
 });
 
+router.get('/map', requiresLogin,function (req, res) {
+    if(req.query.map === undefined && req.query.type === undefined){
+        res.status(200);
+        res.header("Content-Type", "text/html");
+        res.render('partials/map', {title: "SM",map:"OSM", type: "osm"});
+    }else {    
+        res.status(200);
+        res.header("Content-Type", "text/html");
+        res.render('partials/map', {title: "SM",map:req.query.map, type: req.query.type});
+        // encodeURIComponent(JSON.stringify(jsonData)
+    }
+    // res.send(JSON.stringify(Obj));
+
+});
 
 
 function requiresLogin(req,res,next){
