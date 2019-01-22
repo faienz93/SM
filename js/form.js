@@ -95,24 +95,7 @@ function updateUser(e) {
     data: $('#updateUserForm').serialize(),
     success: function (res) {
 
-      // -----------------------
-      // REFRESH DROPDOWN
-      // -----------------------
-      // Update the dropdown list
-      $('#findUserUpdate').empty();
-
-      // Set the new Length of dropdown
-      $("#findUserUpdate").append(
-        $('<option disabled selected></option>').html("Select users from " + res.users.length)
-      );
-
-      // Appen all items
-      $(res.users).each(function () {
-        $("<option />", {
-          val: JSON.stringify(this),
-          text: this.username
-        }).appendTo("#findUserUpdate");
-      });
+      
 
       // -----------------------
       // RESET FORM

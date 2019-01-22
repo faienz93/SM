@@ -76,11 +76,10 @@ master
 
 
 TODO: 
-- al momento della login vedere se ci sono utenti e nel caso creare uno di default con user e password: root e root
+
 - inserire il nome all'interno del file .htaccess
-- modificare i form di update e delete. 
+
 - inviare una mail nel momento in cui si crea un nuovo utente
-- fare il logout
 - vedere se si può fare lo store nel DATABASE delle sessione attualmente in RAM
             
 
