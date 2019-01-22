@@ -19,9 +19,7 @@ const User = mongoose.model('Users');
 
 
 
-router.get('/', function(req, res) {
-    // console.log(req.session);
-    // https://github.com/Createdd/authenticationIntro/blob/master/routes/router.js RIGA 62
+router.get('/', function(req, res) {    
     User.findById(req.session.userId)
         .exec(function(error, user){
             if(error){
@@ -35,11 +33,10 @@ router.get('/', function(req, res) {
                             statusCode: 400
                             });
                 }else {
-                    res.render('index', {title: "SM - Mobile System", user: user.username});
+                    res.render('index', {title: "SM - Mobile System", user: user});
                 }
             }
         });
-    
 });
 
 /**

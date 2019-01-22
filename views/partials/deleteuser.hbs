@@ -7,15 +7,15 @@
 -->
 <div id="deleteUser" class="mainDiv"> <!-- style="display:none"-->
     <div class="card-header" id="headerUser">
-        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> {{title}}</h3>
+        <h3 class="mb-0"> <a href="#"><a><img src="../img/rubbish.svg" class="svg icon header-icon"></a> {{title}} {{user.username}}</h3>
     </div>
         <div class="card-body" id="cardBodyUser">
             <!--  -->
             <!--  -->
             <form class="form" id="deleteUserForm" role="form" autocomplete="off" onsubmit="return deleteUserForm(this)">
-            <div class="form-group row">
+            {{!-- <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Delete</label>
-                <div class="col-lg-9">
+                <div class="col-lg-9">                    
                     <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -34,7 +34,7 @@
                         </div>                                    
 
                 </div>
-            </div>
+            </div> --}}
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label"></label>
                 <div class="col-lg-9">
