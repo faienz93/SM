@@ -22,7 +22,7 @@ router.get('/', requiresLogin, function(req, res) {
     res.render('index', {title: "SM - Mobile System"});
 });
 
-router.get('/map', requiresLogin,function (req, res) {
+router.get('/map', function (req, res) {
     if(req.query.map === undefined && req.query.type === undefined){
         res.status(200);
         res.header("Content-Type", "text/html");

@@ -80,6 +80,7 @@ TODO:
 - inserire il nome all'interno del file .htaccess
 - modificare i form di update e delete. 
 - inviare una mail nel momento in cui si crea un nuovo utente
+- fare il logout
             
 
 IMPORTANT: 
