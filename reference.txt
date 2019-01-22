@@ -81,6 +81,7 @@ TODO:
 - modificare i form di update e delete. 
 - inviare una mail nel momento in cui si crea un nuovo utente
 - fare il logout
+- vedere se si può fare lo store nel DATABASE delle sessione attualmente in RAM
             
 
 IMPORTANT: 

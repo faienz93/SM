@@ -9,6 +9,9 @@
 
 var express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
+const User = mongoose.model('Users');
 
 
 // define reading of stating file
@@ -19,7 +22,24 @@ const router = express.Router();
 router.get('/', requiresLogin, function(req, res) {
     // console.log(req.session);
     // https://github.com/Createdd/authenticationIntro/blob/master/routes/router.js RIGA 62
-    res.render('index', {title: "SM - Mobile System"});
+    User.findById(req.session.userId)
+        .exec(function(error, user){
+            if(error){
+                return next(error);
+            }else {
+                if(user === null){
+                    var err = new Error('Not authorized! Go back!');   //TODO vedere se mettere una pagina di errore      
+                    return res.status(400).send({
+                            insertionError: true,
+                            errors: err.message,
+                            statusCode: 400
+                            });
+                }else {
+                    res.render('index', {title: "SM - Mobile System", user: user.username});
+                }
+            }
+        });
+    
 });
 
 router.get('/map', function (req, res) {
