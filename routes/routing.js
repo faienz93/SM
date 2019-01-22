@@ -1,12 +1,13 @@
-// http://expressjs.com/it/starter/static-files.html
-// https://codeforgeek.com/2015/01/render-html-file-expressjs/
+/**
+ * ===========================================================================
+ * File: UserDB.js 
+ * Author: Antonio Faienza
+ * TODO description
+ * ===========================================================================
+ */
+
 
 var express = require('express');
-const mongoose = require('mongoose');
-var path = require('path');
-
-var app = express();
-
 const router = express.Router();
 
 
@@ -16,34 +17,21 @@ const router = express.Router();
 
 
 router.get('/', function(req, res) {
+    // console.log(req.session);
     res.render('index', {title: "SM - Mobile System"});
 });
 
-router.get('/map', function (req, res) {
-    if(req.query.map === undefined && req.query.type === undefined){
-        res.status(200);
-        res.header("Content-Type", "text/html");
-        res.render('partials/map', {title: "SM",map:"OSM", type: "osm"});
-    }else {    
-        res.status(200);
-        res.header("Content-Type", "text/html");
-        res.render('partials/map', {title: "SM",map:req.query.map, type: req.query.type});
-        // encodeURIComponent(JSON.stringify(jsonData)
+
+
+function requiresLogin(req,res,next){
+    if(req.session && req.session.userId){
+        return next();
+    }else {
+        var err = new Error('You must be logged in to view this page.');
+        err.status(401);
+        return next(err);
     }
-    // res.send(JSON.stringify(Obj));
-
-});
-
-router.get('/login', function (req, res, next) {
-    res.render('login', {title: "SM - Login" });
-
-    // if you have layout you can specify if you want to use him
-    // res.render('login', {layout:false, title: "HELLO WORLD"});
-});
-
-
-
-
+}
 
 
 module.exports = router;

@@ -27,6 +27,7 @@ var exphbs  = require("express-handlebars");
  * Routing
  */
 var routing = require('./routes/routing.js');
+var handleSession = require('./routes/session.js');
 var userOperations = require("./routes/userDB.js");
 
 
@@ -88,6 +89,7 @@ app.use(session({
 
 /**
  * Define middelware for static file
+ * REF: http://expressjs.com/it/starter/static-files.html
  */
 app.use('/',express.static(path.join(__dirname, 'views')));
 app.use('/example',express.static(path.join(__dirname, 'example')));
@@ -98,7 +100,9 @@ app.use('/js',express.static(path.join(__dirname, 'js')));
 // app.use(express.static(path.join(__dirname, '/'))); 
 
 
+
 app.use('/', routing);
+app.use('/',handleSession);
 app.use('/', userOperations);
 
 
