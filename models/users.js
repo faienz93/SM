@@ -37,6 +37,8 @@
 
  // authenticate input against database
  registrationSchema.static.authenticate = function(email, password, callback){
+     console.log(email)
+     console.log(password);
      Users.findOne({email:email})
         .exec(function (err,user){
             if(err){
@@ -45,6 +47,11 @@
                 var err = new Error('User not found.');
                 err.status(401);
                 return callback(err);
+                // return res.status(422).send({
+                //     insertionError: true,
+                //     errors: errors.array(),
+                //     statusCode: 422
+                //     });
             }
             bcrypt.compare(password,user.password, function(err,result){
                 if(result===true){

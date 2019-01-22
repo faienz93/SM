@@ -43,9 +43,14 @@ router.post('/login', function(req,res,next){
             }
         })
     }else {
-        var err = new Error('All fields required.');
-        err.status = 400;
-        return next(err);
+        // console.log("INSERISCI TUTTI I CAMPI");
+        var err = new Error('All fields required.');   
+        console.log(err);     
+        return res.status(400).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 400
+                });
     }
 })
 
