@@ -18,9 +18,37 @@
  * Define Login
  */
  router.get('/login', function (req, res, next) {
+    Users.count(function(err,count){
+        if(err){
+            return res.status(500).send({
+                insertionError: true,
+                errors: err.message,
+                statusCode: 500
+                });
+        }else{             
+            /**
+             * For the first access or if all user are delete we add a default user
+             * user: root
+             * pass: root
+             */
+            if(count==0){
+                Users.create({ username: 'root', email:'root@root.com', password:'root',  }, function (err, user) {
+                    if (err) {
+                        return res.status(422).send({
+                            insertionError: true,
+                            errors: err,
+                            statusCode: 11000
+                        });            
+                    } else {
+                        res.render('login', {title: "SM - Login" });
+                    }
+            
+                });
+            }
+        }
+        
+    });
     res.render('login', {title: "SM - Login" });
-    // if you have layout you can specify if you want to use him
-    // res.render('login', {layout:false, title: "HELLO WORLD"});
 });
 
 

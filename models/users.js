@@ -26,6 +26,7 @@
      },
      password: {
          type: String,
+         required: true,
          trim: true
      },
      datetime: {
