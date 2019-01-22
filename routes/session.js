@@ -27,28 +27,23 @@
 router.post('/login', function(req,res,next){
     console.log(req.body);
     if(req.body.email && req.body.password){
-        console.log("Prima dell'autenticate");
-        Users.authenticate(req.body.email && req.body.password, function (error, user){
-            console.log("sto quaaaaaaaaaaaaaaaaaaa");
+        Users.authenticate(req.body.email, req.body.password, function (error, user){
             if(error || !user){
-                var err = new Error('Wrong email or password');
-                err.status = 401; 
-                return next(err);
+                return res.status(401).send({
+                    insertionError: true,
+                    errors: error.message,
+                    statusCode: 401
+                    });
             }else {
                 req.session.userId = user._id;
-                console.log("===========================");
-                console.log(req.session.userId);
-                console.log("===========================");
-                return redirect('/login')
+                return res.redirect('/')
             }
         })
-    }else {
-        // console.log("INSERISCI TUTTI I CAMPI");
-        var err = new Error('All fields required.');   
-        console.log(err);     
+    }else {       
+        var err = new Error('All fields required.');           
         return res.status(400).send({
                 insertionError: true,
-                errors: err,
+                errors: err.message,
                 statusCode: 400
                 });
     }
