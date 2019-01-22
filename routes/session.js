@@ -52,13 +52,16 @@ router.post('/login', function(req,res,next){
 /**
  * Define Logout
  */
-router.get('/logout', function(req, res,next){
+router.post('/logout', function(req, res,next){
+    console.log(req.session)
     if(req.session){
         //delete session object
         req.session.destroy(function(err){
             if(err){
+                console.log("ERRORE")
                 return next(err);
             }else {
+                console.log("REDIRECT")
                 return res.redirect('/login');
             }
         });

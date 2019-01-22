@@ -19,7 +19,7 @@ const User = mongoose.model('Users');
 
 
 
-router.get('/', requiresLogin, function(req, res) {
+router.get('/', function(req, res) {
     // console.log(req.session);
     // https://github.com/Createdd/authenticationIntro/blob/master/routes/router.js RIGA 62
     User.findById(req.session.userId)
@@ -42,6 +42,9 @@ router.get('/', requiresLogin, function(req, res) {
     
 });
 
+/**
+ * Show the map based on Params
+ */
 router.get('/map', function (req, res) {
     if(req.query.map === undefined && req.query.type === undefined){
         res.status(200);

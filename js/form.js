@@ -278,6 +278,7 @@ function deleteUserForm(form, message = 'Are you sure? ') {
 }
 
 
+
 /**
  * This method define a strength of a password based on 
  * "xcvbn" library. 

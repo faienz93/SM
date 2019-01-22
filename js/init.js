@@ -24,6 +24,10 @@ $(document).ready(function () {
   // Then we Create for the first time the map
   settingMap();
   createMap(); 
+
+
+  // destroy session
+  logout();
   
 
 
@@ -168,7 +172,14 @@ $(document).ready(function () {
 
 });
 
-
+/**
+ * Execute logout
+ */
+function logout(){
+  $('#makeLogout').click(function(event){
+    $('#logout').submit();    
+  });
+}
 
 /**
 * Handle the Navbar

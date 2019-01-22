@@ -200,10 +200,13 @@
                                 <a class="nav-link" href="#">Hi {{user}} </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <form action="/logout" method="POST" id="logout">
+                                    <a class="nav-link" href="#" id="makeLogout">
                                     <img src="../img/logout.svg" class="svg icon-nav">
                                     <span>Logout</span>
                                 </a>
+                                </form>
+                                
                             </li>
                         </ul>
                     </div>
