@@ -73,6 +73,12 @@ master
     |
     |
     |-> session
+
+
+TODO: 
+- al momento della login vedere se ci sono utenti e nel caso creare uno di default con user e password: root e root
+- inserire il nome all'interno del file .htaccess
+- modificare i form di update e delete. 
             
 
 IMPORTANT: 
