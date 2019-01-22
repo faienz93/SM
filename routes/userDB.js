@@ -259,9 +259,7 @@ router.get('/deleteuser', function (req, res) {
 
 // POST request for send the data
 router.post('/deleteuser', function (req, res) {
-    // console.log(req.body.deleteUser);
-    var user = JSON.parse(req.body.deleteUser);
-    Users.findById(user._id, function (err, user) {
+    Users.findById(req.body.id, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -276,15 +274,10 @@ router.post('/deleteuser', function (req, res) {
                         errors: err,
                         statusCode: 11000
                     });
-                } else {
-
-                    Users.find()
-                        .then((registrations) => {
-                            res.status(200).send({ success: "Cancellation Successful", users: registrations });
-                        })
-                        .catch(() => {
-                            res.status(422).send({ msg: "I cannot show the user" });
-                        });
+                }
+                else {
+                    // Error: Can't set headers after they are sent.
+                    res.end();
                 }
             });
         }

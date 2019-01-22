@@ -18,7 +18,10 @@
  * Define Login
  */
  router.get('/login', function (req, res, next) {
-    Users.count(function(err,count){
+     /**
+      * Define the default account
+      */
+    Users.countDocuments(function(err,count){
         if(err){
             return res.status(500).send({
                 insertionError: true,
@@ -30,9 +33,10 @@
              * For the first access or if all user are delete we add a default user
              * user: root
              * pass: root
+             * mail: root@root.it
              */
             if(count==0){
-                Users.create({ username: 'root', email:'root@root.com', password:'root',  }, function (err, user) {
+                Users.create({ username: 'root', email:'root@root.com', password:'root'}, function (err, user) {
                     if (err) {
                         return res.status(422).send({
                             insertionError: true,
@@ -41,14 +45,14 @@
                         });            
                     } else {
                         res.render('login', {title: "SM - Login" });
-                    }
-            
+                    }            
                 });
+            }else {
+                res.render('login', {title: "SM - Login" });
             }
-        }
-        
+        }        
     });
-    res.render('login', {title: "SM - Login" });
+    // res.render('login', {title: "SM - Login" });
 });
 
 
@@ -86,10 +90,12 @@ router.post('/logout', function(req, res,next){
         //delete session object
         req.session.destroy(function(err){
             if(err){
-                console.log("ERRORE")
-                return next(err);
+                return res.status(400).send({
+                    insertionError: true,
+                    errors: err.message,
+                    statusCode: 400
+                    });
             }else {
-                console.log("REDIRECT")
                 return res.redirect('/login');
             }
         });

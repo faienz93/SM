@@ -181,29 +181,9 @@ function deleteUserForm(form, message = 'Are you sure? ') {
         $.ajax({
           url: '/deleteuser',
           method: 'POST',
-          // data: $('#deleteUserForm').serialize(),
-          success: function (res) {
-
-            // TODO fare il delete
-
-            // Update the dropdown list
-            $('#findProfessorDelete').empty();
-
-            // Set the new Length of dropdown
-            $("#findProfessorDelete").append(
-              $('<option disabled selected></option>').html("Select users from " + res.users.length)
-            );
-
-            // Appen all items
-            $(res.users).each(function () {
-              $("<option />", {
-                val: JSON.stringify(this),
-                text: this.username
-              }).appendTo("#findProfessorDelete");
-            });
-
-            // Feedback to User
-            bootstrapAlert(res.success, "Success", "success");
+          data: $('#deleteUserForm').serialize(),
+          success: function (res) {         
+            $('#logout').submit();         
           },
           error: function (err) {
             // console.log(err);
