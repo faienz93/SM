@@ -18,6 +18,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require("express-session");
 var exphbs  = require("express-handlebars");
+var flash = require('connect-flash');
 
 
 
@@ -84,7 +85,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false
 }));
-
+app.use(flash());
 
 
 /**
