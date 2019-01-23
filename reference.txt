@@ -78,7 +78,7 @@ master
 TODO: 
 
 - inserire il nome all'interno del file .htaccess
-
+- mettere FLASH per le notifiche
 - inviare una mail nel momento in cui si crea un nuovo utente
 - vedere se si può fare lo store nel DATABASE delle sessione attualmente in RAM
             
