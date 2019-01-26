@@ -76,12 +76,6 @@ router.post('/login', function(req,res,next){
             }
         })
     }else {       
-        // var err = new Error('All fields required.');           
-        // return res.status(400).send({
-        //         insertionError: true,
-        //         errors: err.message,
-        //         statusCode: 400
-        //         });
         req.flash('danger', 'All fields required.')
         res.redirect('/login');
     }

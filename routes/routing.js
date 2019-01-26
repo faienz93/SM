@@ -26,13 +26,6 @@ router.get('/', function(req, res) {
                 return next(error);
             }else {
                 if(user === null){
-                    // var err = new Error('Not authorized! Go back!');        
-                    // return res.status(400).send({
-                    //         insertionError: true,
-                    //         errors: err.message,
-                    //         statusCode: 400
-                    //         });
-                    // res.render('login', {title: "SM - Login", prova: 'Not authorized! Go back!'});
                     req.flash('danger', 'Not authorized! Go back!')
                     res.redirect('/login');
                 }else {
@@ -64,12 +57,6 @@ function requiresLogin(req,res,next){
     if(req.session && req.session.userId){
         return next();
     }else {
-        // var err = new Error('You must be logged in to view this page.');         
-        // return res.status(401).send({
-        //         insertionError: true,
-        //         errors: err.message,
-        //         statusCode: 401
-        //         });
         req.flash('danger', 'You must be logged in to view this page.')
         res.redirect('/login');
     }
