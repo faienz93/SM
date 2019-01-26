@@ -1,24 +1,3 @@
-
-
-/**
- * DB Module dependencies.
- */
-require('dotenv').config();
-const mongoose = require('mongoose');
-
-/**
- * Database Configuration
- */
-mongoose.connect(process.env.DATABASE, {  useNewUrlParser: true }); // useMongoClient: true <-- deprecated
-mongoose.Promise = global.Promise;
-mongoose.connection
-  .on('connected', () => {
-    console.log(`Mongoose connection open on ${process.env.DATABASE}`);
-  })
-  .on('error', (err) => {
-    console.log(`Connection error: ${err.message}`);
-  });
-
 /**
  * Module dependencies.
  */

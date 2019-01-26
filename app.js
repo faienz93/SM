@@ -7,6 +7,26 @@
  * ===========================================================================
  */
 
+
+/**
+ * DB Module dependencies.
+ */
+require('dotenv').config();
+const mongoose = require('mongoose');
+
+/**
+ * Database Configuration
+ */
+mongoose.connect(process.env.DATABASE, {  useNewUrlParser: true }); // useMongoClient: true <-- deprecated
+mongoose.Promise = global.Promise;
+mongoose.connection
+  .on('connected', () => {
+    console.log(`Mongoose connection open on ${process.env.DATABASE}`);
+  })
+  .on('error', (err) => {
+    console.log(`Connection error: ${err.message}`);
+  });
+
  /**
   * Requirements
   */
@@ -16,12 +36,10 @@ var express = require('express');
 var app = express();
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var session = require("express-session");
 var exphbs  = require("express-handlebars");
 var flash = require('connect-flash');
-
-
-
+var session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 
 
 /**
@@ -82,8 +100,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
   secret: 'work hard',
-  resave: true,
-  saveUninitialized: false
+  resave: true, 
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  }),
+  // REF: https://stackoverflow.com/a/11827382/4700162
+  // 1 month
+  expires: Date.now() + (30 * 86400 * 1000) 
 }));
 app.use(flash());
 

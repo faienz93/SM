@@ -6,6 +6,7 @@
   "dependencies": {
     "bcrypt": "^3.0.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "debug": "^4.1.0",
