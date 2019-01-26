@@ -44,11 +44,16 @@
                             statusCode: 11000
                         });            
                     } else {
-                        res.render('login', {title: "SM - Login" });
+                        /**
+                         * inizialize the messageFlash..
+                         * In this case, if you need to be redirected to the login page,
+                         * you will see the messageFlashDanger or messageFlashSuccess
+                         */
+                        res.render('login', {title: "SM - Login", messageFlashDanger: req.flash('danger') });
                     }            
                 });
             }else {
-                res.render('login', {title: "SM - Login" });
+                res.render('login', {title: "SM - Login", messageFlashDanger: req.flash('danger') });
             }
         }        
     });
@@ -71,12 +76,14 @@ router.post('/login', function(req,res,next){
             }
         })
     }else {       
-        var err = new Error('All fields required.');           
-        return res.status(400).send({
-                insertionError: true,
-                errors: err.message,
-                statusCode: 400
-                });
+        // var err = new Error('All fields required.');           
+        // return res.status(400).send({
+        //         insertionError: true,
+        //         errors: err.message,
+        //         statusCode: 400
+        //         });
+        req.flash('danger', 'All fields required.')
+        res.redirect('/login');
     }
 })
 
@@ -94,7 +101,7 @@ router.post('/logout', function(req, res,next){
                     errors: err.message,
                     statusCode: 400
                     });
-            }else {
+            }else {                
                 return res.redirect('/login');
             }
         });

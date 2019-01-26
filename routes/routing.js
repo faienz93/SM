@@ -26,12 +26,15 @@ router.get('/', function(req, res) {
                 return next(error);
             }else {
                 if(user === null){
-                    var err = new Error('Not authorized! Go back!');   //TODO vedere se mettere una pagina di errore      
-                    return res.status(400).send({
-                            insertionError: true,
-                            errors: err.message,
-                            statusCode: 400
-                            });
+                    // var err = new Error('Not authorized! Go back!');        
+                    // return res.status(400).send({
+                    //         insertionError: true,
+                    //         errors: err.message,
+                    //         statusCode: 400
+                    //         });
+                    // res.render('login', {title: "SM - Login", prova: 'Not authorized! Go back!'});
+                    req.flash('danger', 'Not authorized! Go back!')
+                    res.redirect('/login');
                 }else {
                     res.render('index', {title: "SM - Mobile System", user: user});
                 }
@@ -51,9 +54,8 @@ router.get('/map', function (req, res) {
         res.status(200);
         res.header("Content-Type", "text/html");
         res.render('partials/map', {title: "SM",map:req.query.map, type: req.query.type});
-        // encodeURIComponent(JSON.stringify(jsonData)
     }
-    // res.send(JSON.stringify(Obj));
+    
 
 });
 
@@ -62,12 +64,14 @@ function requiresLogin(req,res,next){
     if(req.session && req.session.userId){
         return next();
     }else {
-        var err = new Error('You must be logged in to view this page.');         
-        return res.status(401).send({
-                insertionError: true,
-                errors: err.message,
-                statusCode: 401
-                });
+        // var err = new Error('You must be logged in to view this page.');         
+        // return res.status(401).send({
+        //         insertionError: true,
+        //         errors: err.message,
+        //         statusCode: 401
+        //         });
+        req.flash('danger', 'You must be logged in to view this page.')
+        res.redirect('/login');
     }
 }
 
