@@ -52,7 +52,6 @@
             }
         }        
     });
-    // res.render('login', {title: "SM - Login" });
 });
 
 
