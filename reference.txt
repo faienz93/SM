@@ -80,7 +80,7 @@ TODO:
 - inserire il nome all'interno del file .htaccess
 
 - inviare una mail nel momento in cui si crea un nuovo utente (https://www.npmjs.com/package/express-mailer#sending-an-email)
-- vedere se si può fare lo store nel DATABASE delle sessione attualmente in RAM
+
             
 
 IMPORTANT: 

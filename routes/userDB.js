@@ -11,20 +11,15 @@ var express = require("express");
 const mongoose = require('mongoose');
 var path = require("path");
 const router = express.Router();
-const auth = require('http-auth');
 const { body, check, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
-
+/**
+ * Mongoose
+ */
 const Users = mongoose.model('Users');
 
-const basic = auth.basic({
-    file: path.join(__dirname, '../users.htpasswd'),
-});
 
-basic.on('success', (result, req) => {
-    console.log(`User authenticated: ${result.user}`);
-});
 
 /* ---------------------------------------------------
     ADD USER
@@ -289,7 +284,7 @@ router.post('/deleteuser', function (req, res) {
     SHOW USER
 ----------------------------------------------------- */
 // I see all people registred
-router.get('/showuser', auth.connect(basic), (req, res) => {
+router.get('/showuser', function(req, res) {
     Users.find()
         .then((registrations) => {
             res.render('partials/showuser', { title: "Show User - [User authenticated: " + req.user + "]", users: registrations });
