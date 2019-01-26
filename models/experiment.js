@@ -31,7 +31,7 @@ const experimentSchema = new mongoose.Schema({
             type: Number,
             default: 0,
             min: 0,
-            max: 1
+            max: 100
         },
         delay: { 
             type: Number,
