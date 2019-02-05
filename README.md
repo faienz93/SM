@@ -13,7 +13,7 @@ antonio.faienza@studio.unibo.it |
 * [MongoDB](https://www.mongodb.com/download-center/community)
 * (Eventually install [MongoDB Compass](https://www.mongodb.com/download-center/compass))
 
-**NOTE:** Create the directory where Mongo will store data, create the “db” directory. You can create the directory in the default location by running [tutorial](https://treehouse.github.io/installation-guides/mac/mongo-mac.html): 
+**NOTE:** Create the directory where Mongo will store data, called “db” directory. You can create the directory in the default location by running [tutorial](https://treehouse.github.io/installation-guides/mac/mongo-mac.html): 
 - `sudo mkdir -p /data/db`
 - ```sudo chown -R `id -un` /data/db```
 
