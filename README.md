@@ -43,12 +43,17 @@ To start the server:
 
 ### Development Mode
 To start the server in development mode: 
-* `npm run dev`
+* `npm run watch`
 
 ### Debug Mode
 To start the server in debug mode: 
 * `npm run debug`
 
+# Possible Error: 
+* `self signed certificate in certificate chain`
+**SOLUTION**
+* `npm set strict-ssl false`
+##### [REF](https://stackoverflow.com/a/34945326)
 
 
 
