@@ -49,11 +49,11 @@ To start the server in development mode:
 To start the server in debug mode: 
 * `npm run debug`
 
-# Possible Error: 
+# Possible Error [REF](https://stackoverflow.com/a/34945326): 
 * `self signed certificate in certificate chain`
 **SOLUTION**
 * `npm set strict-ssl false`
-##### [REF](https://stackoverflow.com/a/34945326)
+
 
 
 
