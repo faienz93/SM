@@ -1,4 +1,5 @@
 # Mobile Systems 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Master Degree in Computer Science <br> University of Bologna - Alma Mater Studiorum <br> A.A. 2018/2019
 Antonio Faienza | 
 ------------ | 
@@ -51,7 +52,9 @@ To start the server in debug mode:
 
 # Possible Error [REF](https://stackoverflow.com/a/34945326): 
 * `self signed certificate in certificate chain`
+
 **SOLUTION**
+
 * `npm set strict-ssl false`
 
 
