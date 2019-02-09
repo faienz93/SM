@@ -9,7 +9,7 @@
 // dependency
 var express = require("express");
 const mongoose = require('mongoose');
-var path = require("path");
+var nodemailer = require('nodemailer');
 const router = express.Router();
 const { body, check, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -18,7 +18,6 @@ const { sanitizeBody } = require('express-validator/filter');
  * Mongoose
  */
 const Users = mongoose.model('Users');
-
 
 
 /* ---------------------------------------------------
@@ -104,6 +103,7 @@ router.post('/adduser', [
             });
 
         } else {
+            sendEmail(req.body.email);
             res.status(200).send({ success: "Your registration was successful" });
         }
 
@@ -284,7 +284,7 @@ router.post('/deleteuser', function (req, res) {
     SHOW USER
 ----------------------------------------------------- */
 // I see all people registred
-router.get('/showuser', function(req, res) {
+router.get('/showuser', function (req, res) {
     Users.find()
         .then((registrations) => {
             res.render('partials/showuser', { title: "Show User - [User authenticated: " + req.user + "]", users: registrations });
@@ -292,5 +292,40 @@ router.get('/showuser', function(req, res) {
         .catch(() => { res.status(422).send({ msg: "Sorry! Something went wrong." }); });
 });
 
+
+/**
+ * Nodemailer
+ * REF: https://www.w3schools.com/nodejs/nodejs_email.asp
+ *      https://nodemailer.com/about/
+ */
+async function sendEmail(email) {
+    console.log(email)
+    // Generate test SMTP service account from ethereal.email
+    // Only needed if you don't have a real mail account for testing
+    let account = await nodemailer.createTestAccount();
+
+
+
+    var transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false,
+        auth: {
+            user: account.user,
+            pass: account.pass
+        }
+    });
+
+    let info = await transporter.sendMail({
+        from: 'youremail@gmail.com',
+        to: email,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+}
 
 module.exports = router;
