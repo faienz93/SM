@@ -24,8 +24,7 @@ const experimentSchema = new mongoose.Schema({
         type: Number,
         required: true, 
         trim: true 
-    },
-    
+    },    
     metrics: { 
         pdr: {
             type: Number,
@@ -44,52 +43,12 @@ const experimentSchema = new mongoose.Schema({
             max: 1
         }
     },
-    configurations: {
-        // type: mongoose.Schema.Types.Mixed,
-        // default : { },
-        pdr: { 
-            thresholdPdrValue: {
-                type: Number,
-                default: 0,
-                min: 0,
-                max: 1
-            },
-            thresholdPdrColor: {
-                type: String,
-                default: '#FF0000',
-                trim: true
-            }
-        },
-        delay: {
-            thresholdDelayValue: {
-                type: Number,
-                default: 0
-            },
-            thresholdDelayColor: {
-                type: String,
-                default: '#00FF00',
-                trim: true
-            }
-        },
-        throughput: {
-            thresholdDelayValue: {
-                type: Number,
-                default: 0,
-                min: 0,
-                max: 1
-            },
-            thresholdDelayColor: {
-                type: String,
-                default: '#0000FF',
-                trim: true
-            }
-        }     
-    },
     name: { 
         type: String,
-        unique: true,
         required: true,
-        trim: true
+        trim: true,
+        index: true,
+        unique: true,
     },
     latitudeServer: {
         type: Number,

@@ -47,7 +47,8 @@ router.post('/addexperiment',function (req, res) {
     var parseJsonExperiment = parseJson(req.body.multiexperiments);
     if(parseJsonExperiment[0]==200){
 
-        Experiment.create(parseJsonExperiment[1], function (err, user) {
+        Experiment.create(parseJsonExperiment[1], function (err, exp) {
+            
         if (err) {
             console.log(err.name + " " + err.message)
             return res.status(422).send({
@@ -60,6 +61,7 @@ router.post('/addexperiment',function (req, res) {
             res.status(200).send({success: "Experiment added correctly"});
         }
         });
+
     }else if(parseJsonExperiment[0]==400){       
         return res.status(422).send({
             insertionError: true,
@@ -70,7 +72,7 @@ router.post('/addexperiment',function (req, res) {
 })
 
 /**
- * Add Experiment from form
+ * Add Experiment from FORM
  */
 router.post('/addexperimentform', [
 
@@ -88,8 +90,8 @@ router.post('/addexperimentform', [
         .isNumeric()
         .withMessage('Please provide an numeric value for the Packet Delivery Ratio')
         .custom((value, { req }) => {
-            if (value < 0 || value > 1 ) {
-                throw new Error('Please provide a value between 0 and 1 for the Packet Delivery Ratio');                   
+            if (value < 0 || value > 100 ) {
+                throw new Error('Please provide a value between 0 and 100 for the Packet Delivery Ratio');                   
             } else {
                 return value;
             }
@@ -109,8 +111,6 @@ router.post('/addexperimentform', [
                 return value;
             }
         }),
-    
-    // TODO fare configurazione 
     
     body('name')
     .isLength({ min: 1 })

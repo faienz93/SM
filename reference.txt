@@ -168,20 +168,6 @@ CON TUTTO
         "delay":"0.22",
         "throughput":"0.23"
     },
-    "configurations": {
-        "pdr": {
-            "thresholdPdrValue":"0",
-            "thresholdPdrColor":"#FF0000"
-        },
-        "delay": {
-            "thresholdDelayValue":"0",
-            "thresholdDelayColor":"#FF0000"
-        },
-        "throughput": {
-            "thresholdThroughputValue":"0",
-            "thresholdThroughputColor":"#FF0000"
-        }
-    },
     "name": "Prova",
     "latitudeServer":"44.498955",
     "longitudeServer":"11.327591"
