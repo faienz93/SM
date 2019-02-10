@@ -150,3 +150,8 @@ CON TUTTO
     "latitudeServer":"44.498955",
     "longitudeServer":"11.327591"
 }
+
+
+
+http://ionden.com/a/plugins/ion.rangeSlider/demo.html
+https://stackoverflow.com/questions/28361916/ion-rangeslider-2-0-3
