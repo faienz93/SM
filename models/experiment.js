@@ -38,9 +38,7 @@ const experimentSchema = new mongoose.Schema({
         }, 
         throughput: {
             type: Number,
-            default: 0,
-            min: 0,
-            max: 1
+            default: 0
         }
     },
     name: { 

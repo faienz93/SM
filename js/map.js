@@ -108,6 +108,7 @@ function setCurrentLayer(mapview, type) {
   globalMap.setLayerGroup(groupSelected);
 
   var layers = globalMap.getLayers().getArray();
+  // TODO delete
   console.log(layers);
   var debugLayer = getCurrentLayerByTitle(layers, "Debug");
 
@@ -131,7 +132,7 @@ function setCurrentLayer(mapview, type) {
 
   // get the value from dropdown inside navbar
   var actualValueView = $('.selected-view').attr("value");
-  setView(actualValueView);
+  setMarkersView(actualValueView);
 
 }
 
@@ -493,13 +494,6 @@ function markersMap(exp) {
       popup.setPosition(undefined);
     }
   });
-
-  // latitude: exp[i].latitude,
-  //     longitude: exp[i].longitude,
-  //     latitudeServer: exp[i].latitudeServer,
-  //     longitudeServer: exp[i].longitudeServer,
-  //     createdAt: exp[i].createdAt,
-  //     updatedAt: exp[i].updatedAt
   
 }
 
@@ -607,9 +601,9 @@ function heatMap(exp) {
  * Based on param, set Markers, Clusters or HeatMap
  * 
  * @param v {String} - the choice of User
- * @method setView
+ * @method setMarkersView
  */
-function setView(v) {
+function setMarkersView(v) {
   if (v === 'markers') {
     clearViewLayer();
     markersMap(experiments);

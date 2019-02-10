@@ -8,8 +8,12 @@ $(document).ready(function () {
   slideDownAndUp();
 
   // Populate the form of main page when required
-  populateFormUpdate();
+  populateFormUpdateUser();
+  populateFormUpdateExperiment();
 
+  /**
+   * Add User
+   */
   const addUserForm = $('#addUserForm');
   addUserForm.on('submit', addNewUser);
   var passAddForm = $('#passwordUserFormAdd');
@@ -18,6 +22,9 @@ $(document).ready(function () {
   strengthPassword(passAddForm[0],meterAdd[0],strenghtPwdAdd[0]);
 
 
+  /**
+   * Update User
+   */
   const updateUserForm = $('#updateUserForm');
   updateUserForm.on('submit', updateUser);
   var passUpdateForm = $('#passwordUserFormUpdate');
@@ -27,16 +34,22 @@ $(document).ready(function () {
 
 
   /**
-   * Experiment Form
+   * Add Experiment Form
    */
   var addExperimentForm = $('#addExperimentForm');
   addExperimentForm.on('submit', addNewExperiment);
 
   /**
-   * Experiment Form JSON
+   * Add Experiment Form JSON
    */
   const addExperimentFormText = $('#addExperimentFormText');
   addExperimentFormText.on('submit', addNewExperimentJSON);
+
+  /**
+   * Update Experiment
+   */
+  const updateExperimentForm = $('#updateExperimentForm');
+  updateExperimentForm.on('submit', updateExperiment)
 
 
 });
@@ -50,11 +63,13 @@ $(document).ready(function () {
  */
 function handleFormUser() {
 
+  // ADD USER
   // Reset value of form Add User 
   $('#resetAddUser').click(function () {
     $('#addUserForm')[0].reset();
   });
 
+  // UPDATE USER
   // Reset value of form Update User 
   $('#resetUpdateUser').click(function () {
     // i want avoid the rest of the field ID
@@ -84,13 +99,27 @@ function handleFormExperiment() {
   $('#resetAddExperimentText').click(function () {
     $('#addExperimentFormText')[0].reset();
   });
+
+  // UPDATE EXPERIMENT
+  // Reset value of form Update User 
+  $('#resetUpdateExperiment').click(function () {
+    // i want avoid the rest of the field ID
+    var tempID = $('#idExperimentFormUpdate').val();
+
+    // I reset the form
+    $('#updateExperimentForm')[0].reset();
+
+    // I write agant the ID
+    $('#idExperimentFormUpdate').val(tempID);
+
+  });
 }
 /**
 * This method aims to populate the update form
 * 
-* @method populateFormUpdate
+* @method populateFormUpdateUser
 */
-function populateFormUpdate() {
+function populateFormUpdateUser() {
 
   $('select').on('change', function () {
 
@@ -112,6 +141,39 @@ function populateFormUpdate() {
 
   });
 
+}
+
+/**
+* This method aims to populate the update form of the Experiments
+* 
+* @method populateFormUpdateExperiment
+*/
+function populateFormUpdateExperiment(){
+  $('#findExperimentUpdate').on('change',function (){
+
+    // at the start all field are disabled. Then when i choice from dropdown becomes enabled    
+    $('#latitudeExperimentFormUpdate').removeAttr("disabled");
+    $('#longitudeExperimentFormUpdate').removeAttr("disabled");
+    $('#pdrExperimentFormUpdate').removeAttr("disabled");
+    $('#delayExperimentFormUpdate').removeAttr("disabled");
+    $('#throughputExperimentFormUpdate').removeAttr("disabled");
+    $('#nameExperimentFormUpdate').removeAttr("disabled");
+    $('#latitudeServerExperimentFormUpdate').removeAttr("disabled");
+    $('#longitudeServerExperimentFormUpdate').removeAttr("disabled");
+    $('#sendExperimentFormUpdate').removeAttr("disabled");
+    $("#resetUpdateExperiment").removeAttr("disabled");
+   
+    var val = jQuery.parseJSON(this.value);
+    $('#idExperimentFormUpdate').val(val._id);
+    $('#latitudeExperimentFormUpdate').val(val.latitude);
+    $('#longitudeExperimentFormUpdate').val(val.longitude);
+    $('#pdrExperimentFormUpdate').val(val.metrics.pdr);
+    $('#delayExperimentFormUpdate').val(val.metrics.delay);
+    $('#throughputExperimentFormUpdate').val(val.metrics.throughput);
+    $('#nameExperimentFormUpdate').val(val.name);
+    $('#latitudeServerExperimentFormUpdate').val(val.latitudeServer);
+    $('#longitudeServerExperimentFormUpdate').val(val.latitudeServer);
+  })
 }
 
 
@@ -245,6 +307,71 @@ function updateUser(e) {
 }
 
 
+ /**
+  * Update Experiment 
+  */
+ function updateExperiment(e){
+  e.preventDefault();
+  
+  $.ajax({
+    url: ' /updateexperiment',
+    method: 'POST',
+    data: $('#updateExperimentForm').serialize(),
+    success: function (res) {
+      console.log(res);
+      // -----------------------
+      // REFRESH DROPDOWN
+      // -----------------------
+      // Update the dropdown list
+      $('#findExperimentUpdate').empty();
+
+      // Set the new Length of dropdown
+      $("#findExperimentUpdate").append(
+        $('<option disabled selected></option>').html("Select experiment from " + res.experiments.length)
+      );
+
+      // Appen all items
+      $(res.experiments).each(function () {
+        $("<option />", {
+          val: JSON.stringify(this),
+          text: this.name
+        }).appendTo("#findExperimentUpdate");
+      });
+
+      // -----------------------
+      // RESET FORM
+      // -----------------------
+      $('#updateExperimentForm')[0].reset();
+      
+
+      // refresh Experiments
+      refreshExperiments();
+
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+
+    },
+    error: function (err) {
+      // console.log(err);
+      var statusCode = err.responseJSON.statusCode;
+      if (statusCode == 422) {
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      } else if (statusCode == 11000) {
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        bootstrapAlert(errorJSON.name + " - " + errorJSON.message, "Error", "danger", false);
+      }
+
+    }
+  });
+  return false;
+}
 
 
 /**
@@ -281,10 +408,10 @@ function deleteUserForm(form, message = 'Are you sure? ') {
           success: function (res) {
 
             // Update the dropdown list
-            $('#findProfessorDelete').empty();
+            $('#findUserDelete').empty();
 
             // Set the new Length of dropdown
-            $("#findProfessorDelete").append(
+            $("#findUserDelete").append(
               $('<option disabled selected></option>').html("Select users from " + res.users.length)
             );
 
@@ -293,7 +420,7 @@ function deleteUserForm(form, message = 'Are you sure? ') {
               $("<option />", {
                 val: JSON.stringify(this),
                 text: this.username
-              }).appendTo("#findProfessorDelete");
+              }).appendTo("#findUserDelete");
             });
 
             // Feedback to User
@@ -301,6 +428,84 @@ function deleteUserForm(form, message = 'Are you sure? ') {
           },
           error: function (err) {
             // console.log(err);
+            var statusCode = err.responseJSON.statusCode;
+            if (statusCode == 422) {
+              var errorJSON = err.responseJSON.errors;
+              // console.log(errorJSON);
+              var e = "";
+              for (var i = 0; i < errorJSON.length; i++) {
+                e += errorJSON[i].msg + "</br>";
+              }
+              bootstrapAlert(e, "Error", "danger", false);
+            } else if (statusCode == 11000) {
+              var errorJSON = err.responseJSON.errors;
+              // console.log(errorJSON);
+              bootstrapAlert(errorJSON.name + " - " + errorJSON.message, "Error", "danger", false);
+            }
+
+          }
+        });
+      }
+    }
+  });
+  return false;
+}
+
+
+/**
+ * This function create an popub of bootstrap for confirm or decline 
+ * a specic choice. If this is positive than submit the form
+ * passed as param
+ * 
+ * @method deleteExperimentForm
+ * @param {Object} form - the form to verify
+ * @param {String} message - the message that you want display. 
+ *                          If it not specified you will see a default message
+ */
+function deleteExperimentForm(form, message = 'Are you sure to delete this Experiment? ') {
+  bootbox.confirm({
+    message: message,
+    buttons: {
+      confirm: {
+        label: "<i class='fa fa-check'></i> Confirm",
+        className: 'btn-secondary'
+      },
+      cancel: {
+        label: "<i class='fa fa-times'></i> Cancel",
+        className: 'btn-dark'
+      }
+    },
+    callback: function (result) {
+      if (result) {
+        // form.submit();
+        $.ajax({
+          url: '/deleteexperiment',
+          method: 'POST',
+          data: $('#deleteExperimentForm').serialize(),
+          success: function (res) {
+
+            // Update the dropdown list
+            $('#findExperimentDelete').empty();
+
+            // Set the new Length of dropdown
+            $("#findExperimentDelete").append(
+              $('<option disabled selected></option>').html("Select experiments from " + res.experiments.length)
+            );
+
+            // Appen all items
+            $(res.experiments).each(function () {
+              $("<option />", {
+                val: JSON.stringify(this),
+                text: this.name
+              }).appendTo("#findExperimentDelete");
+            });
+
+            refreshExperiments();
+           
+            // Feedback to User
+            bootstrapAlert(res.success, "Success", "success");
+          },
+          error: function (err) {
             var statusCode = err.responseJSON.statusCode;
             if (statusCode == 422) {
               var errorJSON = err.responseJSON.errors;
@@ -390,6 +595,7 @@ function addNewExperimentJSON(e){
       data: $('#addExperimentFormText').serialize(),
       async: true,
       success: function (res) {
+        refreshExperiments();
         // FEEDBACK
         bootstrapAlert(res.success, "Success", "success");
       },
@@ -416,7 +622,7 @@ function addNewExperiment(e){
     async: true,
     success: function (res) {
       $('#addExperimentForm')[0].reset();
-      // FEEDBACK
+      refreshExperiments();
       bootstrapAlert(res.success, "Success", "success");
     },
     error: function (err) {

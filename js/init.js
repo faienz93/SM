@@ -13,27 +13,7 @@ $(document).ready(function () {
   // setting the Chosen Plugin
   chosenPlugin();
 
-  // Define value of Search Bar using Chosen Plugin
-  // getExperiments();
-  queryExperiments().then(function (exp) {
-    
-        // experiments.push(element);
-        experiments = exp;
-        
-        // get the value from dropdown inside navbar
-        var actualValueView = $('.selected-view').attr("value");
-        setView(actualValueView);
-        
-        $.each(exp, function (index, element) {
-          
-          // the value will be JSON String
-          appendToChosen(JSON.stringify(element), element.name);  
-          
-  
-        });
-  
-        
-  });
+  refreshExperiments();
 
   // Setting navbar
   navbar();
@@ -51,7 +31,7 @@ $(document).ready(function () {
   // Definition of view of Partials
   definePartialsMaps();
   definePartialsForms();
-  definePartialsTest();
+  definePartialsExperiments();
 
 
   // Informations alerts
@@ -72,44 +52,43 @@ $(document).ready(function () {
   /**
    * Search Experiment Form
    */
-  $('#searchExperiment').on('submit', function(event){
+  $('#searchExperiment').on('submit', function (event) {
     event.preventDefault();
-     
-      var selectExperiment = $('#selectExperiment').chosen().val();
-     
-      for(var i = 0; i < selectExperiment.length; i++){
-        selectExperiment[i] = JSON.parse(selectExperiment[i])       
-      }           
+
+    var selectExperiment = $('#selectExperiment').chosen().val();
+
+    for (var i = 0; i < selectExperiment.length; i++) {
+      selectExperiment[i] = JSON.parse(selectExperiment[i])
+    }
+    experiments = selectExperiment;
+
+    // get the value from dropdown inside navbar
+    var actualValueView = $('.selected-view').attr("value");
+    setMarkersView(actualValueView);
+
+    // no filter selected
+    if (selectExperiment.length === 0) {
+      $("#selectExperiment option").each(function (index) {
+        if (index === 0) return;
+        selectExperiment.push(JSON.parse($(this).val()));
+      });
       experiments = selectExperiment;
-
-       // get the value from dropdown inside navbar
-       var actualValueView = $('.selected-view').attr("value");
-       setView(actualValueView);
-
-       // no filter selected
-      if(selectExperiment.length === 0){        
-        $("#selectExperiment option").each(function(index)
-        {
-          if(index === 0) return;
-          selectExperiment.push(JSON.parse($(this).val())) ;         
-        });
-        experiments = selectExperiment;
-         // get the value from dropdown inside navbar
-         var actualValueView = $('.selected-view').attr("value");
-         setView(actualValueView);
-      }
+      // get the value from dropdown inside navbar
+      var actualValueView = $('.selected-view').attr("value");
+      setMarkersView(actualValueView);
+    }
 
     return false;
   });
 
 
-  
-  
+
+
   // whenever change the value, will be call the same method
   $('.selected-view').on("click", function () {
     var viewSelected = $(this).attr("value");
-    setView(viewSelected);
-    
+    setMarkersView(viewSelected);
+
   });
 
 });
@@ -123,15 +102,15 @@ $(document).ready(function () {
 function chosenPlugin() {
 
   var config = {
-      '.chosen-select': {},
-      '.chosen-select-deselect': { allow_single_deselect: true },
-      '.chosen-select-no-single': { disable_search_threshold: 10 },
-      '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
-      '.chosen-select-rtl': { rtl: true },
-      '.chosen-select-width': { width: '200%' }
+    '.chosen-select': {},
+    '.chosen-select-deselect': { allow_single_deselect: true },
+    '.chosen-select-no-single': { disable_search_threshold: 10 },
+    '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+    '.chosen-select-rtl': { rtl: true },
+    '.chosen-select-width': { width: '200%' }
   }
   for (var selector in config) {
-      $(selector).chosen(config[selector]);
+    $(selector).chosen(config[selector]);
   }
 }
 
@@ -144,9 +123,9 @@ function chosenPlugin() {
  * @param value - the value that will be displayed on select
  * @method appendToChosen
  */
-function appendToChosen(id,value){
+function appendToChosen(id, value) {
   $('#selectExperiment')
-      .append($('<option></option>')
+    .append($('<option></option>')
       .val(id)
       // .attr('selected', 'selected')
       .html(value)).trigger('chosen:updated');
@@ -363,10 +342,10 @@ function definePartialsForms() {
 
 
 /**
- * This function define the view of Partials Test
+ * This function define the view of Partials Experiment
  */
-function definePartialsTest() {
-  // Add new Test
+function definePartialsExperiments() {
+  // Add new Experiment
   $('#add-new-experiment').click(function (event) {
     $.get('/addexperiment').then(function (data) {
       $('#main').html(data);
@@ -374,21 +353,21 @@ function definePartialsTest() {
   });
 
 
-  // Update Existing Test
+  // Update Existing Experiment
   $('#update-experiment').click(function (event) {
     $.get('/updateexperiment').then(function (data) {
       $('#main').html(data);
     });
   });
 
-  // Delete Existing Test
+  // Delete Existing Experiment
   $('#delete-experiment').click(function (event) {
     $.get('/deleteexperiment').then(function (data) {
       $('#main').html(data);
     });
   });
 
-  // Show All Test
+  // Show All Experiment
   $('#show-experiment').click(function (event) {
     $.get('/showexperiment').then(function (data) {
       $('#main').html(data);
@@ -403,25 +382,49 @@ function definePartialsTest() {
  * 
  * @method getExperiments
  */
-function getExperiments(){
+function getExperiments() {
 
-  return new Promise(function(resolve, reject){
+  return new Promise(function (resolve, reject) {
     $.ajax({
       url: '/getexperiments',
-      method: 'GET',  
-      success: function (res) {   
-        if(res.length > 0){
-            resolve(res);
+      method: 'GET',
+      success: function (res) {
+        if (res.length > 0) {
+          resolve(res);
         }
       },
-      error: function(err){
+      error: function (err) {
         bootstrapAlert(err, "Error", "danger", false);
       }
     });
-  });  
+  });
 }
 
 
-function queryExperiments(){
+function refreshExperiments() {
+  // Define value of Search Bar using Chosen Plugin
+  // getExperiments();
+  queryExperiments().then(function (exp) {
+
+    // experiments.push(element);
+    experiments = exp;
+
+    $.each(exp, function (index, element) {
+
+      // the value will be JSON String
+      appendToChosen(JSON.stringify(element), element.name);
+
+    });
+
+    // get the value from dropdown inside navbar
+    var actualValueView = $('.selected-view').attr("value");
+    setMarkersView(actualValueView);
+
+    
+
+  });
+}
+
+function queryExperiments() {
   return getExperiments();
 }

@@ -1,16 +1,16 @@
 <!-- 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
-// Update User
+// Update Experiments
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 -->
 <title>{{title}}</title>
-<div id="updateUser" class="mainDiv" > <!-- style="display:none" -->
-    <div class="card-header" id="headerUser">
+<div id="updateExperiment" class="mainDiv" > <!-- style="display:none" -->
+    <div class="card-header" id="headerExperiment">
             <h3 class="mb-0"> <a href="#"><a><img src="../img/reload.svg" class="svg icon header-icon"></a> {{title}}</h3>
         </div>
-        <div class="card-body" id="cardBodyUser">
+        <div class="card-body" id="cardBodyExperiment">
             <!--  -->
             <!--  -->
             
@@ -21,16 +21,15 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-search"></i></span>
                             </div>
-                            <select id="findUserUpdate" data-placeholder="Begin typing a name to filter..."
-                                class="form-control chosen-select" tabindex="4" size="0" name="updateUser"
-                                required>
-                                {{#if users}}
-                                    <option disabled selected value> Select users from {{users.length}} </option>  
-                                    {{#each users}}
-                                    <option value="{{json this}}">{{this.username}}</option> 
+                            <select id="findExperimentUpdate" data-placeholder="Begin typing a name to filter..."
+                                class="form-control chosen-select" tabindex="4" size="0" name="updateExperiment" required>
+                                {{#if experiments}}
+                                    <option disabled selected value> Select Experiments from {{experiments.length}} </option>  
+                                    {{#each experiments}}
+                                    <option value="{{json this}}">{{this.name}}</option> 
                                     {{/each}} 
                                 {{else}}
-                                <option disabled selected value> NO users available </option>  
+                                <option disabled selected value> NO Experiments available </option>  
                                 {{/if}}                                              
                             </select>
                         </div>                                 
@@ -40,8 +39,8 @@
             
             <!--  -->
             <!--  -->
-            <form class="form" id="updateUserForm" role="form" autocomplete="off" oninput='confirmPassword.setCustomValidity(confirmPassword.value != password.value ? "Passwords do not match." : "")'>  
-                <!-- ID Of user. It can be only read  -->
+            <form class="form" id="updateExperimentForm" role="form" autocomplete="off">  
+                <!-- ID Of Experiment. It can be only read  -->
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">ID</label>
                     <div class="col-lg-9">
@@ -49,62 +48,132 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Id of User" id="idUserFormUpdate" name="id" required readonly>
+                            <input type="text" class="form-control" placeholder="Id of Experiment" id="idExperimentFormUpdate" name="id" required readonly>
                         </div>
                     </div>
-                </div>   
-                <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                </div> 
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // Update FIELD
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
+            <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Latitude</label>
                     <div class="col-lg-9">
                             <div class="input-group form-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <span class="input-group-text"><i class="fas fa-map"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="name1980" id="usernameUserFormUpdate" name="username" required disabled>
+                            <input type="number" class="form-control" value="0" id="latitudeExperimentFormUpdate" name="latitude" step=".0000001" required disabled>                                                                        
                         </div>
                     </div>
                 </div>                            
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                    <label class="col-lg-3 col-form-label form-control-label">Longitude</label>
                     <div class="col-lg-9">
-                        <div class="input-group form-group">
+                            <div class="input-group form-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><svg class="svg-inline--fa fa-envelope fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg></span>
+                                <span class="input-group-text"><i class="fas fa-map"></i></span>
                             </div>
-                            <input type="email" class="form-control" placeholder="name.surname@hotmail.com" id="emailUserFormUpdate" name="email" required disabled>                            
+                            <input type="number" class="form-control" value="0" id="longitudeExperimentFormUpdate" name="longitude" step=".0000001" required disabled>
                         </div>
                     </div>
-                </div>                                
+                </div>
+
+                
+                {{!-- ============ Metrics ================ --}}                
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Metrics</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">PDR (Packet Delivery Ration)</label>
                     <div class="col-lg-9">
-                        <div class="input-group form-group">
+                            <div class="input-group form-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="Password123" id="passwordUserFormUpdate" name="password" required disabled>
-                            <!-- Meter password -->
-                            <meter max="4" id="password-strength-meter-update"></meter>
-                            <p class="passwordText" id="password-strength-text-update"></p>
+                            <input type="number" class="form-control"  min="0" max="100" value="0" id="pdrExperimentFormUpdate" name="pdr" id="pdr" step=".01" disabled>                                              
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
+                    <label class="col-lg-3 col-form-label form-control-label">Delay</label>
                     <div class="col-lg-9">
-                        <div class="input-group form-group">
+                            <div class="input-group form-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="Password123" id="confirmPasswordUserFormUpdate" name="confirmPassword" required disabled>
+                            <input type="number" class="form-control"  min="0" value="0" id="delayExperimentFormUpdate" name="delay" id="delay" step=".01" disabled>                                              
                         </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Throughput</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="throughputExperimentFormUpdate" name="throughput" id="throughput" step=".01" disabled>                                              
+                        </div>
+                    </div>
+                </div>             
+                {{!-- ============================================ --}}
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Others</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Experiment Name</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-font"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Experiment name" id="nameExperimentFormUpdate" name="name" required disabled>                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Latitude Server</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="latitudeServerExperimentFormUpdate" name="latitudeServer" step=".0000001" required disabled>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Longitude Server</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="longitudeServerExperimentFormUpdate" name="longitudeServer" step=".0000001" required disabled>                                              
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // SEND VALUE 
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label"></label>
                     <div class="col-lg-9">
-                        <input type="button" id="resetUpdateUser" class="btn btn-secondary" value="Cancel" disabled>
-                        <input type="submit" id="sendUserFormUpdate" class="btn btn-dark" value="Update" disabled>
+                        <input type="button" id="resetUpdateExperiment" class="btn btn-secondary" value="Cancel" disabled>
+                        <input type="submit" id="sendExperimentFormUpdate" class="btn btn-dark" value="Update" disabled>
                     </div>
                 </div>
             </form>
