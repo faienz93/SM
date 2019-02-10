@@ -152,6 +152,5 @@ CON TUTTO
 }
 
 
-
-http://ionden.com/a/plugins/ion.rangeSlider/demo.html
-https://stackoverflow.com/questions/28361916/ion-rangeslider-2-0-3
+https://refreshless.com/nouislider/examples/#section-colored-connect
+https://github.com/leongersen/noUiSlider/issues/705 
