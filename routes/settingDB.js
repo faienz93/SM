@@ -1,8 +1,8 @@
 /**
  * ===========================================================================
- * File: Setting.js 
+ * File: SettingDB.js 
  * Author: Antonio Faienza
- * This file open a setting partial
+ * This file open a Configuration partial that is saved into User Configurations
  * ===========================================================================
  */
 
@@ -32,12 +32,19 @@
  
  
  /* ---------------------------------------------------
-     ADD TEST
+     We define the Setting of the Markers
  ----------------------------------------------------- */
- router.get('/settings', function (req, res) {
+ router.get('/settingMarkers', function (req, res) {
      res.status(200);
      res.header("Content-Type", "text/html");
-     res.render('partials/settings', {title: 'Settings'});
+     res.render('partials/settingMarkers', {title: 'Settings Markers'});
+ });
+
+
+ router.get('/settingMetrics', function (req, res){
+    res.status(200);
+    res.header("Content-Type", "text/html");
+    res.render('partials/settingMetrics', {title: 'Setting Metrics'}); 
  });
 
 

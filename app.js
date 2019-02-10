@@ -29,7 +29,7 @@ var exphbs  = require("express-handlebars");
 var routing = require('./routes/routing.js');
 var userOperations = require("./routes/userDB.js");
 var testOperaions = require("./routes/experimentDB.js");
-var setting = require("./routes/setting.js");
+var setting = require("./routes/settingDB.js");
 
 
 

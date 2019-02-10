@@ -52,16 +52,10 @@ $(document).ready(function () {
   definePartialsMaps();
   definePartialsForms();
   definePartialsTest();
+  definePartialsSettings();
 
 
-  // Settings
-  $('.settings').on("click", function (event) {
-    event.preventDefault();
-    $.get('/settings').then(function (data) {
-      $('#main').html(data);
-    });
-    return false;
-  });
+  
 
   // Informations alerts
   $('.selected-informations').on("click", function (event) {
@@ -376,6 +370,26 @@ function definePartialsTest() {
   // Show All Test
   $('#show-experiment').click(function (event) {
     $.get('/showexperiment').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+}
+
+/**
+ * This function define the view of Partials Setting
+ */
+function definePartialsSettings(){
+  
+  // Define Setting Markers
+  $('#setting-markers').click(function (event) {
+    $.get('/settingMarkers').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
+  // Define Partials of Configuration Metrics
+  $('#setting-metrics').click(function (event) {
+    $.get('/settingMetrics').then(function (data) {
       $('#main').html(data);
     });
   });

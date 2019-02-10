@@ -184,11 +184,26 @@
                     </ul>
                 </li>
                 <div class="sidebar-divider"></div>
-                <li value="" class="settings">
-                    <a href="#">
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // Setting
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
+                <li>
+                    <a href="#settingDB" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <img src="../img/settings.svg" class="svg icon">
                         <span>Settings</span>
                     </a>
+                    <ul class="collapse list-unstyled select-specific" id="settingDB">
+                        <li value="settingMarkers">
+                            <a href="#" id="setting-markers">Markers</a>
+                        </li>
+                        <li value="settingMetrics">
+                            <a href="#" id="setting-metrics">Metrics</a>
+                        </li>
+                    </ul>
                 </li>
                 <div class="sidebar-divider"></div>
                 <li value="" class="selected-informations">
@@ -230,6 +245,27 @@
                             
                         </form>
                         <ul class="nav navbar-nav ml-auto">
+                            {{!-- Filter Metrics --}}
+                            <li class="nav-item dropdown">                               
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMetricsView" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../img/metrics.svg" class="svg icon-nav">
+                                    <span>Metrics</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMetricsView">
+                                     <a href="#" value="none" class="dropdown-item selected-metric active"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">None</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="pdr" class="dropdown-item selected-metric"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">PDR</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="delay" class="dropdown-item selected-metric"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">Delay</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="throughput" class="dropdown-item selected-metric"><img src="../img/right-arrow.svg"
+                                            class="svg arrow-left">Throughput</a> 
+                                </div>
+                            </li>
                             {{!-- Filter Marker Cluster --}}
                             <li class="nav-item dropdown">
                                 <!-- Filter -->
