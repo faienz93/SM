@@ -13,6 +13,7 @@ $(document).ready(function () {
   // setting the Chosen Plugin
   chosenPlugin();
 
+  // retrieve result of query and then show into view
   refreshExperiments();
 
   // Setting navbar
@@ -388,10 +389,8 @@ function getExperiments() {
     $.ajax({
       url: '/getexperiments',
       method: 'GET',
-      success: function (res) {
-        if (res.length > 0) {
-          resolve(res);
-        }
+      success: function (res) {       
+          resolve(res);       
       },
       error: function (err) {
         bootstrapAlert(err, "Error", "danger", false);
@@ -406,9 +405,15 @@ function refreshExperiments() {
   // getExperiments();
   queryExperiments().then(function (exp) {
 
-    // experiments.push(element);
     experiments = exp;
 
+    if(exp.length > 0){
+      $('#selectExperiment').empty();
+    }else{
+      $('#selectExperiment').empty();
+      $('#selectExperiment').trigger("chosen:updated");
+    }
+    
     $.each(exp, function (index, element) {
 
       // the value will be JSON String
