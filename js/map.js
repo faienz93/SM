@@ -121,6 +121,7 @@ function setCurrentLayer(mapview, type) {
     if (groupSelected.values_.title === "Bing") {
       layers[i].setVisible(bingStyles[i] === type);
     } else if (groupSelected.values_.title === "Here") {
+      // FIXME fix scheme
       layers[i].setVisible(hereStyles[i].scheme === type);
     } else if (groupSelected.values_.title === "Stamen") {
       layers[i].setVisible(stamenStyles[i] === type);

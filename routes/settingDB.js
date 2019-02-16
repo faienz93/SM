@@ -18,15 +18,7 @@
  
  
  
-//  const Experiment = mongoose.model('Experiment');
- 
-//  const basic = auth.basic({
-//      file: path.join(__dirname, '../users.htpasswd'),
-//  });
- 
-//  basic.on('success', (result, req) => {
-//      console.log(`User authenticated: ${result.user}`);
-//  });
+const User = mongoose.model('Users');
  
  
  
@@ -42,9 +34,19 @@
 
 
  router.get('/settingMetrics', function (req, res){
-    res.status(200);
-    res.header("Content-Type", "text/html");
-    res.render('partials/settingMetrics', {title: 'Setting Metrics'}); 
+
+    // TODO nel merge con le sessioni specificare solo quello della sessione attuale
+    User.find()
+        .then((users) => {
+            res.status(200);
+            res.header("Content-Type", "text/html");
+            res.render('partials/settingMetrics', {title: 'Setting Metrics', settings: users[0].settings}); 
+        })
+        .catch(() => {
+            res.status(422).send({msg: "I cannot show the user"});
+        })
+
+    
  });
 
 
