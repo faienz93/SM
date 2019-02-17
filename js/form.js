@@ -14,6 +14,8 @@ $(document).ready(function () {
   handleFormUser();
   handleFormExperiment();
   handleFormPDR();
+  handleFormThroughput();
+  handleFormDelay();
 
   // Show and Hide the Experiment Form
   slideDownAndUp();
@@ -53,7 +55,13 @@ $(document).ready(function () {
    * Metrics
    */
   const settingPDRForm = $('#settingPDRForm');
-  settingPDRForm.on('submit', changePDRpreference)
+  settingPDRForm.on('submit', changePDRPreference);
+
+  const settingDelayForm = $('#settingDelayForm');
+  settingDelayForm.on('submit', changeDelayPreference);
+
+  const settingThroughputForm = $('#settingThroughputForm');
+  settingThroughputForm.on('submit', changeThroughputPreference);
 
 });
 
@@ -113,7 +121,7 @@ function handleFormExperiment() {
  */
 function handleFormPDR() {
 
-  // Reset value of form Add Experiment 
+  // Reset value of form PDR experiment
   $('#resetPDR').click(function () {
     var restorePDR = {"interval_x0x1":{"color":"#ff8080","threashold":25},"interval_x1x2":{"color":"#ff3333","threashold":50},"interval_x2x3":{"color":"#e60000","threashold":75},"interval_x3x4":{"color":"#990000"}};
     // restore the color
@@ -138,6 +146,77 @@ function handleFormPDR() {
     threasholdPDR.push($('#pdr_interval_x1x2_threashold').val());
     threasholdPDR.push($('#pdr_interval_x2x3_threashold').val());
     refreshSlider(sliderPDR,colorPDR, threasholdPDR, intervalSegmentPDR);
+  });
+}
+
+/**
+ * This function aims to bind event to restore the original 
+ * setting of Delay
+ * @method handleFormDelay
+ */
+function handleFormDelay(){
+   
+  // Reset value of form Delay experiment
+  $('#resetDelay').click(function () {
+    var restoreDelay = {"interval_x0x1":{"color":"#8080ff","threashold":25},"interval_x1x2":{"color":"#3333ff","threashold":50},"interval_x2x3":{"color":"#0000e6","threashold":75},"interval_x3x4":{"color":"#000099"}}
+    // restore the color
+    $('#delay_interval_x0x1_color').val(restoreDelay.interval_x0x1.color);
+    $('#delay_interval_x1x2_color').val(restoreDelay.interval_x1x2.color);
+    $('#delay_interval_x2x3_color').val(restoreDelay.interval_x2x3.color);
+    $('#delay_interval_x3x4_color').val(restoreDelay.interval_x3x4.color);
+
+    // restore the value
+    $('#delay_interval_x0x1_threashold').val(restoreDelay.interval_x0x1.threashold);
+    $('#delay_interval_x1x2_threashold').val(restoreDelay.interval_x1x2.threashold);
+    $('#delay_interval_x2x3_threashold').val(restoreDelay.interval_x2x3.threashold);
+
+    // update the slider
+    var colorDelay = [];
+    colorDelay.push($('#delay_interval_x0x1_color').val());
+    colorDelay.push($('#delay_interval_x1x2_color').val());
+    colorDelay.push($('#delay_interval_x2x3_color').val());
+    colorDelay.push($('#delay_interval_x3x4_color').val());
+    var threasholdDelay = [];
+    threasholdDelay.push($('#delay_interval_x0x1_threashold').val());
+    threasholdDelay.push($('#delay_interval_x1x2_threashold').val());
+    threasholdDelay.push($('#delay_interval_x2x3_threashold').val());
+    refreshSlider(sliderDelay,colorDelay, threasholdDelay, intervalSegmentDelay);
+  });
+}
+
+/**
+ * This function aims to bind event to restore the original 
+ * setting of Throughput
+ * @method handleFormThroughput
+ */
+function handleFormThroughput(){
+  // TODO add reset throughput 
+  
+  // Reset value of form Throughput experiment
+  $('#resetThroughput').click(function () {
+    var restoreThroughput = {"interval_x0x1":{"color":"#9fdf9f","threashold":25},"interval_x1x2":{"color":"#66cc66","threashold":50},"interval_x2x3":{"color":"#39ac39","threashold":75},"interval_x3x4":{"color":"#267326"}};
+    // restore the color
+    $('#throughput_interval_x0x1_color').val(restoreThroughput.interval_x0x1.color);
+    $('#throughput_interval_x1x2_color').val(restoreThroughput.interval_x1x2.color);
+    $('#throughput_interval_x2x3_color').val(restoreThroughput.interval_x2x3.color);
+    $('#throughput_interval_x3x4_color').val(restoreThroughput.interval_x3x4.color);
+
+    // restore the value
+    $('#throughput_interval_x0x1_threashold').val(restoreThroughput.interval_x0x1.threashold);
+    $('#throughput_interval_x1x2_threashold').val(restoreThroughput.interval_x1x2.threashold);
+    $('#throughput_interval_x2x3_threashold').val(restoreThroughput.interval_x2x3.threashold);
+
+    // update the slider
+    var colorThroughput = [];
+    colorThroughput.push($('#throughput_interval_x0x1_color').val());
+    colorThroughput.push($('#throughput_interval_x1x2_color').val());
+    colorThroughput.push($('#throughput_interval_x2x3_color').val());
+    colorThroughput.push($('#throughput_interval_x3x4_color').val());
+    var threasholdThroughput = [];
+    threasholdThroughput.push($('#throughput_interval_x0x1_threashold').val());
+    threasholdThroughput.push($('#throughput_interval_x1x2_threashold').val());
+    threasholdThroughput.push($('#throughput_interval_x2x3_threashold').val());
+    refreshSlider(sliderThroughput,colorThroughput, threasholdThroughput, intervalSegmentThroughput);
   });
 }
 
@@ -498,7 +577,7 @@ function addNewExperiment(e){
 /**
  * Metrics function
  */
-function changePDRpreference(e){
+function changePDRPreference(e){
   e.preventDefault();
 
   $.ajax({
@@ -507,7 +586,73 @@ function changePDRpreference(e){
     data: $('#settingPDRForm').serialize(), 
     async: true,
     success: function (res) {
-      // $('#addExperimentForm')[0].reset();
+      
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+    },
+    error: function (err) {
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }else if(statusCode===422){
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      }
+    }
+  });
+
+  return false;
+}
+
+
+function changeDelayPreference(e){
+  e.preventDefault();
+
+  $.ajax({
+    url: '/settingDelay', 
+    method: 'POST',
+    data: $('#settingDelayForm').serialize(), 
+    async: true,
+    success: function (res) {
+      
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+    },
+    error: function (err) {
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }else if(statusCode===422){
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      }
+    }
+  });
+
+  return false;
+}
+
+
+function changeThroughputPreference(e){
+  e.preventDefault();
+
+  $.ajax({
+    url: '/settingThroughput', 
+    method: 'POST',
+    data: $('#settingThroughputForm').serialize(), 
+    async: true,
+    success: function (res) {
+      
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },

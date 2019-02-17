@@ -69,7 +69,84 @@
                     default: '#990000'
                 }
             }
-        }        
+        },
+        delay: { 
+            interval_x0x1: {
+                color: {
+                    type: String,
+                    default: '#8080ff'
+                },
+                threashold: {
+                    type: Number,
+                    default: 25
+                }
+            },
+            interval_x1x2: {
+                color: {
+                    type: String,
+                    default: '#3333ff'
+                },
+                threashold: {
+                    type: Number,
+                    default: 50
+                }
+            },
+            interval_x2x3: {
+                color: {
+                    type: String,
+                    default: '#0000e6'
+                },
+                threashold: {
+                    type: Number,
+                    default: 75
+                }
+            },
+            interval_x3x4: {
+                color: {
+                    type: String,
+                    default: '#000099'
+                }
+            }
+        },        
+        throughput: { 
+            interval_x0x1: {
+                color: {
+                    type: String,
+                    default: '#9fdf9f'
+                },
+                threashold: {
+                    type: Number,
+                    default: 25
+                }
+            },
+            interval_x1x2: {
+                color: {
+                    type: String,
+                    default: '#66cc66'
+                },
+                threashold: {
+                    type: Number,
+                    default: 50
+                }
+            },
+            interval_x2x3: {
+                color: {
+                    type: String,
+                    default: '#39ac39'
+                },
+                threashold: {
+                    type: Number,
+                    default: 75
+                }
+            },
+            interval_x3x4: {
+                color: {
+                    type: String,
+                    default: '#267326'
+                }
+            }
+        }
+
     }
  });
 

@@ -28,9 +28,17 @@ var initialCoordinatesMap = [11.327591, 44.498955];
  */
 var groupsMap = [];
 
-// TODO aggiungere gli altri
+/**
+ * Slider value
+ */
 var sliderPDR; 
 var intervalSegmentPDR = ['pdr-x0x1-color', 'pdr-x1x2-color', 'pdr-x2x3-color', 'pdr-x3x4-color'];
+
+var sliderDelay; 
+var intervalSegmentDelay = ['delay-x0x1-color', 'delay-x1x2-color', 'delay-x2x3-color', 'delay-x3x4-color'];
+
+var sliderThroughput; 
+var intervalSegmentThroughput = ['throughput-x0x1-color', 'throughput-x1x2-color', 'throughput-x2x3-color', 'throughput-x3x4-color'];
 
 /**
  * Key for use Bing Map

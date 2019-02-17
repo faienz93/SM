@@ -2,7 +2,7 @@
 <!-- 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
-// Update Marker
+// Metrics
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 -->
@@ -11,11 +11,15 @@
         <div class="card-header" id="headerUser">
             <h3 class="mb-0"> <a href="#"><a><img src="../img/settings.svg" class="svg icon header-icon"></a> {{title}}</h3>
         </div>
-        <div class="card-body" id="cardBodySetting">
-              
+        <div class="card-body" id="cardBodySetting">             
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // PDR Settings
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
             <form class="form" id="settingPDRForm" role="form" autocomplete="off">    
-                {{!-- ============================================ --}}
-                {{!-- ============ Settings ================ --}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">
                         <h5 class="mb-0">PDR</h5> 
@@ -64,8 +68,128 @@
                         <input type="submit" class="btn btn-dark" value="Save">
                     </div>
                 </div>
+                {{!-- TODO delete pdr --}}
                 <p>RISULTATO: {{json settings.pdr}}</p>
-                {{!-- {"pdr":{"interval_x0x1":{"color":"#ff8080","threashold":25},"interval_x1x2":{"color":"#ff3333","threashold":50},"interval_x2x3":{"color":"#e60000","threashold":75},"interval_x3x4":{"color":"#990000"}}} --}}
+            </form>
+
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // Delay Settings
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
+            <form class="form" id="settingDelayForm" role="form" autocomplete="off">    
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Delay</h5> 
+                    </label>                          
+                </div>                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Palette</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-palette"></i></span>
+                            </div>
+                            <input type="color" class="form-control palette-color-delay" id="delay_interval_x0x1_color" name="delay_interval_x0x1_color" value="{{settings.delay.interval_x0x1.color}}">
+                            <input type="color" class="form-control palette-color-delay" id="delay_interval_x1x2_color" name="delay_interval_x1x2_color" value="{{settings.delay.interval_x1x2.color}}"> 
+                            <input type="color" class="form-control palette-color-delay" id="delay_interval_x2x3_color" name="delay_interval_x2x3_color" value="{{settings.delay.interval_x2x3.color}}"> 
+                            <input type="color" class="form-control palette-color-delay" id="delay_interval_x3x4_color" name="delay_interval_x3x4_color" value="{{settings.delay.interval_x3x4.color}}">                                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Slider</label>
+                    <div class="col-lg-9">
+                        <div class="input-group form-group">
+                            <div id="delay-slider" value="{{json settings}}" class="custom-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Value</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-cog"></i></span>
+                            </div>
+                            <input type="number" min="0" max="100" step="0.001"  id="delay_interval_x0x1_threashold" name="delay_interval_x0x1_threashold" value="{{json settings.delay.interval_x0x1.threashold}}" class="form-control delay-segment-value">
+                            <input type="number" min="0" max="100" step="0.001"  id="delay_interval_x1x2_threashold" name="delay_interval_x1x2_threashold" value="{{json settings.delay.interval_x1x2.threashold}}" class="form-control delay-segment-value">
+                            <input type="number" min="0" max="100" step="0.001"  id="delay_interval_x2x3_threashold" name="delay_interval_x2x3_threashold" value="{{json settings.delay.interval_x2x3.threashold}}" class="form-control delay-segment-value">                                          
+                        </div>
+                    </div>
+                </div>
+                             
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetDelay" class="btn btn-secondary" value="Original Delay Setting">
+                        <input type="submit" class="btn btn-dark" value="Save">
+                    </div>
+                </div>
+                {{!-- TODO delete delay --}}
+                <p>RISULTATO: {{json settings.delay}}</p>
+            </form>
+
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // Throughput Settings
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
+            <form class="form" id="settingThroughputForm" role="form" autocomplete="off">    
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Throughput</h5> 
+                    </label>                          
+                </div>                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Palette</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-palette"></i></span>
+                            </div>
+                            <input type="color" class="form-control palette-color-throughput" id="throughput_interval_x0x1_color" name="throughput_interval_x0x1_color" value="{{settings.throughput.interval_x0x1.color}}">
+                            <input type="color" class="form-control palette-color-throughput" id="throughput_interval_x1x2_color" name="throughput_interval_x1x2_color" value="{{settings.throughput.interval_x1x2.color}}"> 
+                            <input type="color" class="form-control palette-color-throughput" id="throughput_interval_x2x3_color" name="throughput_interval_x2x3_color" value="{{settings.throughput.interval_x2x3.color}}"> 
+                            <input type="color" class="form-control palette-color-throughput" id="throughput_interval_x3x4_color" name="throughput_interval_x3x4_color" value="{{settings.throughput.interval_x3x4.color}}">                                            
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Slider</label>
+                    <div class="col-lg-9">
+                        <div class="input-group form-group">
+                            <div id="throughput-slider" value="{{json settings}}" class="custom-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Value</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-cog"></i></span>
+                            </div>
+                            <input type="number" min="0" max="100" step="0.001"  id="throughput_interval_x0x1_threashold" name="throughput_interval_x0x1_threashold" value="{{json settings.throughput.interval_x0x1.threashold}}" class="form-control throughput-segment-value">
+                            <input type="number" min="0" max="100" step="0.001"  id="throughput_interval_x1x2_threashold" name="throughput_interval_x1x2_threashold" value="{{json settings.throughput.interval_x1x2.threashold}}" class="form-control throughput-segment-value">
+                            <input type="number" min="0" max="100" step="0.001"  id="throughput_interval_x2x3_threashold" name="throughput_interval_x2x3_threashold" value="{{json settings.throughput.interval_x2x3.threashold}}" class="form-control throughput-segment-value">                                          
+                        </div>
+                    </div>
+                </div>
+                             
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetThroughput" class="btn btn-secondary" value="Original Throughput Setting">
+                        <input type="submit" class="btn btn-dark" value="Save">
+                    </div>
+                </div>
+                {{!-- TODO delete throughput --}}
+                <p>RISULTATO: {{json settings.throughput}}</p>
             </form>
         </div>
     </div>

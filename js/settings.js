@@ -9,24 +9,67 @@
 
 $(document).ready(function () {
 
+    /**
+     * PDR
+     */
     var palettePDR = $('.palette-color-pdr');  
     var inputNumberPDR = $('.PDR-segment-value');
     
     // is a div. Therefore for access to the value, you can use the "attr" method
     var pdr_slider_string = $('#PDR-slider');
     var pdr_slider_json =  $.parseJSON(pdr_slider_string.attr('value'));  
-   
+    
+    // console.log(pdr_slider_json.pdr) //TODO delete
+
     // we retrieve the value of color and threashold
     var colorPDR = [];
     var threasholdPDR = [];
-    $.each(pdr_slider_json, function(key_interval, interval) {
-      $.each(interval, function(k, v) {
+    $.each(pdr_slider_json.pdr, function(k, v) {
         if(v.color!=undefined) colorPDR.push(v.color);
-        if(v.threashold!=undefined)  threasholdPDR.push(v.threashold);     
-      });
+        if(v.threashold!=undefined)  threasholdPDR.push(v.threashold);
     });
-  
+
     sliderPDR = createSlider('#PDR-slider', colorPDR, threasholdPDR, palettePDR, inputNumberPDR, intervalSegmentPDR);
+    
+
+    /**
+     * Delay
+     */
+    var paletteDelay = $('.palette-color-delay');  
+    var inputNumberDelay= $('.delay-segment-value');
+    
+    // is a div. Therefore for access to the value, you can use the "attr" method
+    var delay_slider_string = $('#delay-slider');
+    var delay_slider_json =  $.parseJSON(delay_slider_string.attr('value'));  
+   
+    // we retrieve the value of color and threashold
+    var colorDelay = [];
+    var threasholdDelay = [];
+    $.each(pdr_slider_json.delay, function(k, v) {
+        if(v.color!=undefined) colorDelay.push(v.color);
+        if(v.threashold!=undefined)  threasholdDelay.push(v.threashold);
+    });
+
+    sliderDelay = createSlider('#delay-slider', colorDelay, threasholdDelay, paletteDelay, inputNumberDelay, intervalSegmentDelay);
+    /**
+     * Throughput
+     */
+    var paletteThroughput = $('.palette-color-throughput');  
+    var inputNumberThroughput= $('.throughput-segment-value');
+    
+    // is a div. Therefore for access to the value, you can use the "attr" method
+    var throughput_slider_string = $('#throughput-slider');
+    var throughput_slider_json =  $.parseJSON(throughput_slider_string.attr('value'));  
+   
+    // we retrieve the value of color and threashold
+    var colorThroughput = [];
+    var threasholdThroughput = [];
+    $.each(pdr_slider_json.throughput, function(k, v) {
+        if(v.color!=undefined) colorThroughput.push(v.color);
+        if(v.threashold!=undefined)  threasholdThroughput.push(v.threashold);
+    });
+
+    sliderThroughput = createSlider('#throughput-slider', colorThroughput, threasholdThroughput, paletteThroughput, inputNumberThroughput, intervalSegmentThroughput);
 
 });
 
@@ -45,6 +88,7 @@ function createSlider(inputSlider, color, threashold, palette, inputNumber, inte
 
     var slider = $(inputSlider);
 
+    
      /**
      * TODO gli start devono essere letti da database
      */

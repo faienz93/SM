@@ -36,12 +36,12 @@ const User = mongoose.model('Users');
  * We define the metrics for the preference of experiment's threashold 
  */
  router.get('/settingMetrics', function (req, res){
-
-    // TODO nel merge con le sessioni specificare solo quello della sessione attuale
+   
     User.find()
         .then((users) => {
             res.status(200);
             res.header("Content-Type", "text/html");
+             // TODO nel merge con le sessioni specificare solo quello della sessione attuale
             res.render('partials/settingMetrics', {title: 'Setting Metrics', settings: users[0].settings}); 
         })
         .catch(() => {
@@ -51,8 +51,8 @@ const User = mongoose.model('Users');
 
 
  router.post('/settingPDR', function(req,res){
-     // TODO sistemare l'utente quando si fa il merge con le session
-     User.findById("5c6801c8c3aaef225ce2894a", function (err, user) {
+     // TODO sistemare l'utente quando si fa il merge con le session pdr
+     User.findById("5c6964a67db46f4497d322a0", function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -85,7 +85,81 @@ const User = mongoose.model('Users');
             });
         }
     });
- })
+ });
+
+ router.post('/settingDelay', function(req,res){
+    // TODO sistemare l'utente quando si fa il merge con le session delay
+    User.findById("5c6964a67db46f4497d322a0", function (err, user) {
+       if (err) {
+           return res.status(422).send({
+               insertionError: true,
+               errors: err,
+               statusCode: 11000
+               });
+       } else {
+           user.settings.delay.interval_x0x1.color = req.body.delay_interval_x0x1_color;
+           user.settings.delay.interval_x0x1.threashold = req.body.delay_interval_x0x1_threashold;
+
+           user.settings.delay.interval_x1x2.color = req.body.delay_interval_x1x2_color;
+           user.settings.delay.interval_x1x2.threashold = req.body.delay_interval_x1x2_threashold;
+
+           user.settings.delay.interval_x2x3.color = req.body.delay_interval_x2x3_color;
+           user.settings.delay.interval_x2x3.threashold = req.body.delay_interval_x2x3_threashold;
+
+           user.settings.delay.interval_x3x4.color = req.body.delay_interval_x3x4_color;
+           
+           user.save(function (err, updatedTank) {
+               if (err) {
+                   return res.status(422).send({
+                       insertionError: true,
+                       errors: err,
+                       statusCode: 11000
+                       });
+
+               } else {
+                   res.status(200).send({success: "Successful Update" });
+               }
+           });
+       }
+   });
+});
+
+router.post('/settingThroughput', function(req,res){
+    // TODO sistemare l'utente quando si fa il merge con le session throughput
+    User.findById("5c6964a67db46f4497d322a0", function (err, user) {
+       if (err) {
+           return res.status(422).send({
+               insertionError: true,
+               errors: err,
+               statusCode: 11000
+               });
+       } else {
+           user.settings.throughput.interval_x0x1.color = req.body.throughput_interval_x0x1_color;
+           user.settings.throughput.interval_x0x1.threashold = req.body.throughput_interval_x0x1_threashold;
+
+           user.settings.throughput.interval_x1x2.color = req.body.throughput_interval_x1x2_color;
+           user.settings.throughput.interval_x1x2.threashold = req.body.throughput_interval_x1x2_threashold;
+
+           user.settings.throughput.interval_x2x3.color = req.body.throughput_interval_x2x3_color;
+           user.settings.throughput.interval_x2x3.threashold = req.body.throughput_interval_x2x3_threashold;
+
+           user.settings.throughput.interval_x3x4.color = req.body.throughput_interval_x3x4_color;
+           
+           user.save(function (err, updatedTank) {
+               if (err) {
+                   return res.status(422).send({
+                       insertionError: true,
+                       errors: err,
+                       statusCode: 11000
+                       });
+
+               } else {
+                   res.status(200).send({success: "Successful Update" });
+               }
+           });
+       }
+   });
+});
 
 
  module.exports = router;
