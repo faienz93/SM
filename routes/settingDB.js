@@ -32,7 +32,9 @@ const User = mongoose.model('Users');
      res.render('partials/settingMarkers', {title: 'Settings Markers'});
  });
 
-
+/**
+ * We define the metrics for the preference of experiment's threashold 
+ */
  router.get('/settingMetrics', function (req, res){
 
     // TODO nel merge con le sessioni specificare solo quello della sessione attuale
@@ -45,9 +47,45 @@ const User = mongoose.model('Users');
         .catch(() => {
             res.status(422).send({msg: "I cannot show the user"});
         })
-
-    
  });
+
+
+ router.post('/settingPDR', function(req,res){
+     // TODO sistemare l'utente quando si fa il merge con le session
+     User.findById("5c6801c8c3aaef225ce2894a", function (err, user) {
+        if (err) {
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+                });
+        } else {
+            user.settings.pdr.interval_x0x1.color = req.body.pdr_interval_x0x1_color;
+            user.settings.pdr.interval_x0x1.threashold = req.body.pdr_interval_x0x1_threashold;
+
+            user.settings.pdr.interval_x1x2.color = req.body.pdr_interval_x1x2_color;
+            user.settings.pdr.interval_x1x2.threashold = req.body.pdr_interval_x1x2_threashold;
+
+            user.settings.pdr.interval_x2x3.color = req.body.pdr_interval_x2x3_color;
+            user.settings.pdr.interval_x2x3.threashold = req.body.pdr_interval_x2x3_threashold;
+
+            user.settings.pdr.interval_x3x4.color = req.body.pdr_interval_x3x4_color;
+            
+            user.save(function (err, updatedTank) {
+                if (err) {
+                    return res.status(422).send({
+                        insertionError: true,
+                        errors: err,
+                        statusCode: 11000
+                        });
+
+                } else {
+                    res.status(200).send({success: "Successful Update" });
+                }
+            });
+        }
+    });
+ })
 
 
  module.exports = router;

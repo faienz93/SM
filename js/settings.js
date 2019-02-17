@@ -1,42 +1,50 @@
+/*
+ * ===========================================================================
+ * File: Const.js 
+ * Author: Antonio Faienza
+ * Desc: This scritp manage the functions handle the setting preference of
+ * the user
+ * ===========================================================================
+ */
+
 $(document).ready(function () {
 
-    var intervalSegmentPDR = ['pdr-x0x1-color', 'pdr-x1x2-color', 'pdr-x2x3-color', 'pdr-x3x4-color'];
-    var pdr_slider_string = $('#PDR-slider');
+    var palettePDR = $('.palette-color-pdr');  
+    var inputNumberPDR = $('.PDR-segment-value');
+    
     // is a div. Therefore for access to the value, you can use the "attr" method
-  
-    var pdr_slider_json =  $.parseJSON(pdr_slider_string.attr('value'));
-    console.log(pdr_slider_string.attr('value'));
-    // console.log(pdr_slider_json);
-  
-  
+    var pdr_slider_string = $('#PDR-slider');
+    var pdr_slider_json =  $.parseJSON(pdr_slider_string.attr('value'));  
    
-    var color = [];
-    var threashold = [];
+    // we retrieve the value of color and threashold
+    var colorPDR = [];
+    var threasholdPDR = [];
     $.each(pdr_slider_json, function(key_interval, interval) {
       $.each(interval, function(k, v) {
-        if(v.color!=undefined) color.push(v.color);
-        if(v.threashold!=undefined)  threashold.push(v.threashold);     
+        if(v.color!=undefined) colorPDR.push(v.color);
+        if(v.threashold!=undefined)  threasholdPDR.push(v.threashold);     
       });
     });
   
-    var palettePDR = $('.setting-color');  
-  
-    /**
-     * Using HTML5 input elements
-     * REF: https://refreshless.com/nouislider/examples/#section-html5
-     */
-    var inputNumberPDR = $('.PDR-segment-value');
-  
-    // TODO aggiunger threashold
-    var slider = createSlider('#PDR-slider', color, threashold, palettePDR, inputNumberPDR, intervalSegmentPDR);
+    sliderPDR = createSlider('#PDR-slider', colorPDR, threasholdPDR, palettePDR, inputNumberPDR, intervalSegmentPDR);
 
 });
 
-
-function createSlider(inputSlider, defaultValue, threashold, palette, inputNumber, intervalSegment){      
+/**
+ * This function create a slider for setting the threashold with a specifi color for 
+ * each segment
+ * @method createSlider
+ * @param inputNumber the id of div that will contain the slider
+ * @param color the array that contain the color for each segment that will be assigned
+ * @param threashold the array with handle value of slider
+ * @param palette the id/class of input color used for update the slider
+ * @param inputNumber the id/class of input number used for update the slider value 
+ * @param intervalSegment the array that contains class to added of lider for change color
+ */
+function createSlider(inputSlider, color, threashold, palette, inputNumber, intervalSegment){      
 
     var slider = $(inputSlider);
-    
+
      /**
      * TODO gli start devono essere letti da database
      */
@@ -63,26 +71,23 @@ function createSlider(inputSlider, defaultValue, threashold, palette, inputNumbe
         connect[i].classList.add(intervalSegment[i]);
     }  
   
-    /**
-     * ***************************************************
-     * TODO qui deve legere il colore dal database
-     * ***************************************************
-     */
     for(var i = 0; i < intervalSegment.length; i++){
-        $('.'+intervalSegment[i]).css("background",defaultValue[i])
+        $('.'+intervalSegment[i]).css("background",color[i])
     }  
 
     /**
      * UPDATE COLOR
      */
-    palette.on('change', function (i) {
-       
-        console.log(this.value);
+    palette.on('change', function (i) {  
         var index = palette.index(this);      
         $('.'+intervalSegment[index]).css("background",this.value)
     });
   
   
+     /**
+     * Using HTML5 input elements
+     * REF: https://refreshless.com/nouislider/examples/#section-html5
+     */
     slider[0].noUiSlider.on('update', function (values, handle) {
 
         // cycle all input number with the same class
@@ -104,9 +109,29 @@ function createSlider(inputSlider, defaultValue, threashold, palette, inputNumbe
             slider.noUiSlider.set([null, this.value, null]);
         }else if(index == 2){
             slider.noUiSlider.set([null, null, this.value]);
-        }
-        
+        }        
     });   
   
     return slider;
+  }
+
+
+  /**
+   * Update the slider for restore the original value
+   * @method refreshSlider
+   * @param slider the original slider
+   * @param color the original color
+   * @param threashold the original value of slider
+   * @param intervalSegment the class attribute of slider
+   */
+  function refreshSlider(slider, color, threashold, intervalSegment){
+    
+    // restore the color
+    for(var i = 0; i < intervalSegment.length; i++){
+        $('.'+intervalSegment[i]).css("background",color[i])
+    } 
+
+    // restore slider value
+    slider[0].noUiSlider.set(threashold);
+     
   }

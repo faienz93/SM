@@ -1,8 +1,19 @@
+/*
+ * ===========================================================================
+ * File: Const.js 
+ * Author: Antonio Faienza
+ * Desc: This scritp manage the functions for send,receive, update,
+ * restore the whole form of the project
+ * ===========================================================================
+ */
+
+
 $(document).ready(function () {
  
   // reset form
   handleFormUser();
   handleFormExperiment();
+  handleFormPDR();
 
   // Show and Hide the Experiment Form
   slideDownAndUp();
@@ -29,7 +40,7 @@ $(document).ready(function () {
   /**
    * Experiment Form
    */
-  var addExperimentForm = $('#addExperimentForm');
+  const addExperimentForm = $('#addExperimentForm');
   addExperimentForm.on('submit', addNewExperiment);
 
   /**
@@ -38,6 +49,11 @@ $(document).ready(function () {
   const addExperimentFormText = $('#addExperimentFormText');
   addExperimentFormText.on('submit', addNewExperimentJSON);
 
+  /**
+   * Metrics
+   */
+  const settingPDRForm = $('#settingPDRForm');
+  settingPDRForm.on('submit', changePDRpreference)
 
 });
 
@@ -89,6 +105,43 @@ function handleFormExperiment() {
     $('#addExperimentFormText')[0].reset();
   });
 }
+
+/**
+ * This function aims to bind event to restore the original 
+ * setting of PDR
+ * @method handleFormPDR
+ */
+function handleFormPDR() {
+
+  // Reset value of form Add Experiment 
+  $('#resetPDR').click(function () {
+    var restorePDR = {"interval_x0x1":{"color":"#ff8080","threashold":25},"interval_x1x2":{"color":"#ff3333","threashold":50},"interval_x2x3":{"color":"#e60000","threashold":75},"interval_x3x4":{"color":"#990000"}};
+    // restore the color
+    $('#pdr_interval_x0x1_color').val(restorePDR.interval_x0x1.color);
+    $('#pdr_interval_x1x2_color').val(restorePDR.interval_x1x2.color);
+    $('#pdr_interval_x2x3_color').val(restorePDR.interval_x2x3.color);
+    $('#pdr_interval_x3x4_color').val(restorePDR.interval_x3x4.color);
+
+    // restore the value
+    $('#pdr_interval_x0x1_threashold').val(restorePDR.interval_x0x1.threashold);
+    $('#pdr_interval_x1x2_threashold').val(restorePDR.interval_x1x2.threashold);
+    $('#pdr_interval_x2x3_threashold').val(restorePDR.interval_x2x3.threashold);
+
+    // update the slider
+    var colorPDR = [];
+    colorPDR.push($('#pdr_interval_x0x1_color').val());
+    colorPDR.push($('#pdr_interval_x1x2_color').val());
+    colorPDR.push($('#pdr_interval_x2x3_color').val());
+    colorPDR.push($('#pdr_interval_x3x4_color').val());
+    var threasholdPDR = [];
+    threasholdPDR.push($('#pdr_interval_x0x1_threashold').val());
+    threasholdPDR.push($('#pdr_interval_x1x2_threashold').val());
+    threasholdPDR.push($('#pdr_interval_x2x3_threashold').val());
+    refreshSlider(sliderPDR,colorPDR, threasholdPDR, intervalSegmentPDR);
+  });
+}
+
+
 /**
 * This method aims to populate the update form
 * 
@@ -442,5 +495,38 @@ function addNewExperiment(e){
   return false;
 }
 
+/**
+ * Metrics function
+ */
+function changePDRpreference(e){
+  e.preventDefault();
 
+  $.ajax({
+    url: '/settingPDR', 
+    method: 'POST',
+    data: $('#settingPDRForm').serialize(), 
+    async: true,
+    success: function (res) {
+      // $('#addExperimentForm')[0].reset();
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+    },
+    error: function (err) {
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }else if(statusCode===422){
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      }
+    }
+  });
+
+  return false;
+}
 

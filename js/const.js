@@ -28,6 +28,10 @@ var initialCoordinatesMap = [11.327591, 44.498955];
  */
 var groupsMap = [];
 
+// TODO aggiungere gli altri
+var sliderPDR; 
+var intervalSegmentPDR = ['pdr-x0x1-color', 'pdr-x1x2-color', 'pdr-x2x3-color', 'pdr-x3x4-color'];
+
 /**
  * Key for use Bing Map
  * Your Bing Maps Key from http://www.bingmapsportal.com/ here

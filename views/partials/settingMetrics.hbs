@@ -13,7 +13,7 @@
         </div>
         <div class="card-body" id="cardBodySetting">
               
-            <form class="form" id="settingsForm" role="form" autocomplete="off">    
+            <form class="form" id="settingPDRForm" role="form" autocomplete="off">    
                 {{!-- ============================================ --}}
                 {{!-- ============ Settings ================ --}}
                 <div class="form-group row">
@@ -28,10 +28,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-palette"></i></span>
                             </div>
-                            <input type="color" class="form-control setting-color" id="x0x1" name="x0x1" value="{{settings.pdr.interval_x0x1.color}}">
-                            <input type="color" class="form-control setting-color" id="x1x2" name="x1x2" value="{{settings.pdr.interval_x1x2.color}}"> 
-                            <input type="color" class="form-control setting-color" id="x2x3" name="x2x3" value="{{settings.pdr.interval_x2x3.color}}"> 
-                            <input type="color" class="form-control setting-color" id="x3x4" name="x3x4" value="{{settings.pdr.interval_x3x4.color}}">                                            
+                            <input type="color" class="form-control palette-color-pdr" id="pdr_interval_x0x1_color" name="pdr_interval_x0x1_color" value="{{settings.pdr.interval_x0x1.color}}">
+                            <input type="color" class="form-control palette-color-pdr" id="pdr_interval_x1x2_color" name="pdr_interval_x1x2_color" value="{{settings.pdr.interval_x1x2.color}}"> 
+                            <input type="color" class="form-control palette-color-pdr" id="pdr_interval_x2x3_color" name="pdr_interval_x2x3_color" value="{{settings.pdr.interval_x2x3.color}}"> 
+                            <input type="color" class="form-control palette-color-pdr" id="pdr_interval_x3x4_color" name="pdr_interval_x3x4_color" value="{{settings.pdr.interval_x3x4.color}}">                                            
                         </div>
                     </div>
                 </div>
@@ -39,11 +39,7 @@
                     <label class="col-lg-3 col-form-label form-control-label">Slider</label>
                     <div class="col-lg-9">
                         <div class="input-group form-group">
-                            {{!-- <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-sliders-h"></i></span>
-                            </div> --}}
                             <div id="PDR-slider" value="{{json settings}}" class="custom-slider"></div>
-                            {{!-- <input type="number" class="form-control"  min="0" max="1" value="0" name="pdrthreshold" id="pdrthreshold" step=".01">                                               --}}
                         </div>
                     </div>
                 </div>
@@ -54,9 +50,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-cog"></i></span>
                             </div>
-                            <input type="number" min="0" max="100" step="0.001"  value="{{json settings.pdr.interval_x0x1.threashold}}" class="form-control PDR-segment-value">
-                            <input type="number" min="0" max="100" step="0.001"  value="{{json settings.pdr.interval_x1x2.threashold}}" class="form-control PDR-segment-value">
-                            <input type="number" min="0" max="100" step="0.001"  value="{{json settings.pdr.interval_x2x3.threashold}}" class="form-control PDR-segment-value">                                          
+                            <input type="number" min="0" max="100" step="0.001"  id="pdr_interval_x0x1_threashold" name="pdr_interval_x0x1_threashold" value="{{json settings.pdr.interval_x0x1.threashold}}" class="form-control PDR-segment-value">
+                            <input type="number" min="0" max="100" step="0.001"  id="pdr_interval_x1x2_threashold" name="pdr_interval_x1x2_threashold" value="{{json settings.pdr.interval_x1x2.threashold}}" class="form-control PDR-segment-value">
+                            <input type="number" min="0" max="100" step="0.001"  id="pdr_interval_x2x3_threashold" name="pdr_interval_x2x3_threashold" value="{{json settings.pdr.interval_x2x3.threashold}}" class="form-control PDR-segment-value">                                          
                         </div>
                     </div>
                 </div>
@@ -64,11 +60,11 @@
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label"></label>
                     <div class="col-lg-9">
-                        <input type="button" id="resetCluster" class="btn btn-secondary" value="Original Setting">
+                        <input type="button" id="resetPDR" class="btn btn-secondary" value="Original PDR Setting">
                         <input type="submit" class="btn btn-dark" value="Save">
                     </div>
                 </div>
-                {{!-- <p>RISULTATO: {{json settings.pdr.interval_x0x1}}</p> --}}
+                <p>RISULTATO: {{json settings.pdr}}</p>
                 {{!-- {"pdr":{"interval_x0x1":{"color":"#ff8080","threashold":25},"interval_x1x2":{"color":"#ff3333","threashold":50},"interval_x2x3":{"color":"#e60000","threashold":75},"interval_x3x4":{"color":"#990000"}}} --}}
             </form>
         </div>
