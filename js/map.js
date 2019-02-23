@@ -31,6 +31,36 @@ function settingMap() {
   });
 
 
+  
+  $('.selected-metric').on('click',function(){
+    var setPreferenceColor = $(this).attr('value');
+    //console.log(setPreferenceColor);
+    var layers = globalMap.getLayers().getArray();
+    console.log("====================================================="); //TODO delete 
+    // console.log(layers);
+    var markersLayer = getCurrentLayerByTitle(layers, "markers");
+    // console.log(markersLayer); // TODO delete
+    // TODO delete
+ 
+    // console.log(markersLayer.getKeys()); // #ea4335
+    // console.log(markersLayer.getProperties());
+    // console.log(markersLayer.getSource())
+    console.log(markersLayer.getSource().getFeatures()[0].getStyle().getImage());
+   
+    markersLayer.getSource().getFeatures()[1].setStyle(new ol.style.Style({
+      image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+        color: '#00ffff', //  #FF0000
+        crossOrigin: 'anonymous',
+        src: '/img/dot.png'
+      }))
+    }));
+    // markersLayer.drawFeature(markersLayer.getFeatureById(id), {fillColor: "#00ffff", strokeColor: "#00ffff"}); 
+    // markersLayer.drawFeature(markersLayer.getSource(), {fillColor: "#00ffff", strokeColor: "#00ffff"}); 
+    console.log("=====================================================");
+  })
+  
+
+
   // Setting filter 
   for (var i = 0, len = groupsMap.length; i < len; i++) {
     var layers = groupsMap[i].values_.layers.array_;
@@ -431,15 +461,12 @@ function markersMap(exp) {
         crossOrigin: 'anonymous',
         src: '/img/dot.png'
       }))
-    }));
-
-    
-    location.push(marker)
-
-
+    }));    
+    location.push(marker);
   }
 
 
+  // TODO delete
   // ================
   // To see key and value of Features
   // =================
@@ -553,8 +580,9 @@ function clusterMap(exp) {
  */
 function heatMap(exp) {
 
+  // FIXME value of slider
   var blur = document.getElementById('blur');
-      var radius = document.getElementById('radius');
+  var radius = document.getElementById('radius');
 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
@@ -569,6 +597,7 @@ function heatMap(exp) {
       features: location
     }),
     title: 'heatmap',
+    // FIXME pass param of radius
     blur: parseInt(blur.value, 10), 
     radius: parseInt(radius.value, 10) 
   });

@@ -13,6 +13,7 @@ $(document).ready(function () {
   // setting the Chosen Plugin
   chosenPlugin();
 
+
   // Define value of Search Bar using Chosen Plugin
   // getExperiments();
   queryExperiments().then(function (exp) {
@@ -20,15 +21,14 @@ $(document).ready(function () {
         // experiments.push(element);
         experiments = exp;
         
-        // get the value from dropdown inside navbar
+        // get the value of Markers View from dropdown inside navbar
         var actualValueView = $('.selected-view').attr("value");
         setView(actualValueView);
         
         $.each(exp, function (index, element) {
           
           // the value will be JSON String
-          appendToChosen(JSON.stringify(element), element.name);  
-          
+          appendToChosen(JSON.stringify(element), element.name);          
   
         });
   
