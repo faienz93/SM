@@ -33,19 +33,11 @@ function settingMap() {
 
   
   $('.selected-metric').on('click',function(){
+    console.log(experiments);
     var setPreferenceColor = $(this).attr('value');
     //console.log(setPreferenceColor);
     var layers = globalMap.getLayers().getArray();
-    console.log("====================================================="); //TODO delete 
-    // console.log(layers);
-    var markersLayer = getCurrentLayerByTitle(layers, "markers");
-    // console.log(markersLayer); // TODO delete
-    // TODO delete
- 
-    // console.log(markersLayer.getKeys()); // #ea4335
-    // console.log(markersLayer.getProperties());
-    // console.log(markersLayer.getSource())
-    console.log(markersLayer.getSource().getFeatures()[0].getStyle().getImage());
+    var markersLayer = getCurrentLayerByTitle(layers, "markers");    
    
     markersLayer.getSource().getFeatures()[1].setStyle(new ol.style.Style({
       image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
@@ -54,9 +46,7 @@ function settingMap() {
         src: '/img/dot.png'
       }))
     }));
-    // markersLayer.drawFeature(markersLayer.getFeatureById(id), {fillColor: "#00ffff", strokeColor: "#00ffff"}); 
-    // markersLayer.drawFeature(markersLayer.getSource(), {fillColor: "#00ffff", strokeColor: "#00ffff"}); 
-    console.log("=====================================================");
+
   })
   
 
