@@ -510,6 +510,8 @@ function markersMap(exp) {
  */
 function clusterMap(exp) {
 
+  // FIXME set with the session the user preference
+
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
     location[i] = new ol.Feature({
@@ -570,9 +572,7 @@ function clusterMap(exp) {
  */
 function heatMap(exp) {
 
-  // FIXME value of slider
-  var blur = document.getElementById('blur');
-  var radius = document.getElementById('radius');
+   // FIXME set with the session the user preference
 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {

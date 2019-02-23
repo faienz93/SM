@@ -29,7 +29,15 @@ var initialCoordinatesMap = [11.327591, 44.498955];
 var groupsMap = [];
 
 /**
- * Slider value
+ * Markers Slider Value
+ */
+
+var sliderCluster; 
+var sliderHeatmapRadius;
+var sliderHeatmapBlur;
+
+/**
+ * Metrics slider value
  */
 var sliderPDR; 
 var intervalSegmentPDR = ['pdr-x0x1-color', 'pdr-x1x2-color', 'pdr-x2x3-color', 'pdr-x3x4-color'];

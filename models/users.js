@@ -32,6 +32,30 @@
          default: Date.now
      },
      settings: {
+        cluster: {
+            distance: {
+                type: Number,
+                default: 40,
+                min: 1,
+                max: 100
+            }
+        },
+        heatmap: {
+            // radius size
+            radius: {
+                type: Number,
+                default: 10,
+                min: 1,
+                max: 50
+            },
+            // blur size 
+            blur: {
+                type: Number,
+                default: 15,
+                min: 1,
+                max: 50
+            }
+        },
         pdr: { 
             interval_x0x1: {
                 color: {

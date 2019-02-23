@@ -20,16 +20,21 @@
  
 const User = mongoose.model('Users');
  
- 
- 
- 
  /* ---------------------------------------------------
      We define the Setting of the Markers
  ----------------------------------------------------- */
  router.get('/settingMarkers', function (req, res) {
-     res.status(200);
-     res.header("Content-Type", "text/html");
-     res.render('partials/settingMarkers', {title: 'Settings Markers'});
+     
+
+     User.find()
+        .then((users) => {
+            res.status(200);
+            res.header("Content-Type", "text/html");
+            res.render('partials/settingMarkers', {title: 'Settings Markers', settings: users[0].settings});
+        })
+        .catch(() => {
+            res.status(422).send({msg: "I cannot show the user"});
+        })
  });
 
 /**
@@ -49,10 +54,74 @@ const User = mongoose.model('Users');
         })
  });
 
+ 
+ router.post('/settingCluster', function(req,res){
+
+    // TODO sistemare l'utente quando si fa il merge con le session pdr
+    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+        if (err) {
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+                });
+        } else {
+            
+            user.settings.cluster.distance = req.body.cluster_distance;
+            
+            user.save(function (err, updatedTank) {
+                if (err) {
+                    return res.status(422).send({
+                        insertionError: true,
+                        errors: err,
+                        statusCode: 11000
+                        });
+
+                } else {
+                    res.status(200).send({success: "Successful Update" });
+                }
+            });
+        }
+    });
+ });
+
+
+ router.post('/settingHeatmap', function(req,res){
+    // TODO sistemare l'utente quando si fa il merge con le session pdr
+    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+        if (err) {
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+                });
+        } else {
+            console.log(req.body)
+            console.log(user.settings.heatmap) //.radius = ... .blur = ...
+            user.settings.heatmap.radius = req.body.heatmap_radius;
+            user.settings.heatmap.blur = req.body.heatmap_blur;
+            
+            user.save(function (err, updatedTank) {
+                if (err) {
+                    return res.status(422).send({
+                        insertionError: true,
+                        errors: err,
+                        statusCode: 11000
+                        });
+
+                } else {
+                    res.status(200).send({success: "Successful Update" });
+                }
+            });
+        }
+    });
+});
+
+
 
  router.post('/settingPDR', function(req,res){
      // TODO sistemare l'utente quando si fa il merge con le session pdr
-     User.findById("5c6964a67db46f4497d322a0", function (err, user) {
+     User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -89,7 +158,7 @@ const User = mongoose.model('Users');
 
  router.post('/settingDelay', function(req,res){
     // TODO sistemare l'utente quando si fa il merge con le session delay
-    User.findById("5c6964a67db46f4497d322a0", function (err, user) {
+    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
        if (err) {
            return res.status(422).send({
                insertionError: true,
@@ -126,7 +195,7 @@ const User = mongoose.model('Users');
 
 router.post('/settingThroughput', function(req,res){
     // TODO sistemare l'utente quando si fa il merge con le session throughput
-    User.findById("5c6964a67db46f4497d322a0", function (err, user) {
+    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
        if (err) {
            return res.status(422).send({
                insertionError: true,

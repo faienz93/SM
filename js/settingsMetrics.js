@@ -1,13 +1,13 @@
 /*
  * ===========================================================================
- * File: Const.js 
+ * File: SettingsMetrics.js 
  * Author: Antonio Faienza
- * Desc: This scritp manage the functions handle the setting preference of
+ * Desc: This scritp manage the functions handle the setting metrics preference of
  * the user
  * ===========================================================================
  */
 
-$(document).ready(function () {
+$(document).ready(function () {   
 
     /**
      * PDR
@@ -24,12 +24,12 @@ $(document).ready(function () {
     // we retrieve the value of color and threashold
     var colorPDR = [];
     var threasholdPDR = [];
-    $.each(pdr_slider_json.pdr, function(k, v) {
+    $.each(pdr_slider_json.pdr, function(k, v) {        
         if(v.color!=undefined) colorPDR.push(v.color);
         if(v.threashold!=undefined)  threasholdPDR.push(v.threashold);
     });
 
-    sliderPDR = createSlider('#PDR-slider', colorPDR, threasholdPDR, palettePDR, inputNumberPDR, intervalSegmentPDR);
+    sliderPDR = createMetricSlider('#PDR-slider', colorPDR, threasholdPDR, palettePDR, inputNumberPDR, intervalSegmentPDR);
     
 
     /**
@@ -50,7 +50,7 @@ $(document).ready(function () {
         if(v.threashold!=undefined)  threasholdDelay.push(v.threashold);
     });
 
-    sliderDelay = createSlider('#delay-slider', colorDelay, threasholdDelay, paletteDelay, inputNumberDelay, intervalSegmentDelay);
+    sliderDelay = createMetricSlider('#delay-slider', colorDelay, threasholdDelay, paletteDelay, inputNumberDelay, intervalSegmentDelay);
     /**
      * Throughput
      */
@@ -64,12 +64,12 @@ $(document).ready(function () {
     // we retrieve the value of color and threashold
     var colorThroughput = [];
     var threasholdThroughput = [];
-    $.each(pdr_slider_json.throughput, function(k, v) {
+    $.each(throughput_slider_json.throughput, function(k, v) {
         if(v.color!=undefined) colorThroughput.push(v.color);
         if(v.threashold!=undefined)  threasholdThroughput.push(v.threashold);
     });
 
-    sliderThroughput = createSlider('#throughput-slider', colorThroughput, threasholdThroughput, paletteThroughput, inputNumberThroughput, intervalSegmentThroughput);
+    sliderThroughput = createMetricSlider('#throughput-slider', colorThroughput, threasholdThroughput, paletteThroughput, inputNumberThroughput, intervalSegmentThroughput);
 
 });
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
  * @param inputNumber the id/class of input number used for update the slider value 
  * @param intervalSegment the array that contains class to added of lider for change color
  */
-function createSlider(inputSlider, color, threashold, palette, inputNumber, intervalSegment){      
+function createMetricSlider(inputSlider, color, threashold, palette, inputNumber, intervalSegment){      
 
     var slider = $(inputSlider);
 
@@ -162,13 +162,13 @@ function createSlider(inputSlider, color, threashold, palette, inputNumber, inte
 
   /**
    * Update the slider for restore the original value
-   * @method refreshSlider
+   * @method refreshMetricsSlider
    * @param slider the original slider
    * @param color the original color
    * @param threashold the original value of slider
    * @param intervalSegment the class attribute of slider
    */
-  function refreshSlider(slider, color, threashold, intervalSegment){
+  function refreshMetricsSlider(slider, color, threashold, intervalSegment){
     
     // restore the color
     for(var i = 0; i < intervalSegment.length; i++){
@@ -179,3 +179,5 @@ function createSlider(inputSlider, color, threashold, palette, inputNumber, inte
     slider[0].noUiSlider.set(threashold);
      
   }
+
+  

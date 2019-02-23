@@ -9,10 +9,16 @@
 
 
 $(document).ready(function () {
- 
-  // reset form
+
+  // reset form 
   handleFormUser();
   handleFormExperiment();
+
+  // reset form markers
+  handleFormCluster();
+  handleFormHeatmap();
+
+  // reset form Metrics
   handleFormPDR();
   handleFormThroughput();
   handleFormDelay();
@@ -50,6 +56,16 @@ $(document).ready(function () {
    */
   const addExperimentFormText = $('#addExperimentFormText');
   addExperimentFormText.on('submit', addNewExperimentJSON);
+
+
+  /**
+   * Markers
+   */
+  const settingsFormCluster = $('#settingsFormCluster'); 
+  settingsFormCluster.on('submit',changeClusterPreference);
+
+  const settingsFormHeatmap = $('#settingsFormHeatmap');
+  settingsFormHeatmap.on('submit', changeHeatmapPreference);
 
   /**
    * Metrics
@@ -92,9 +108,10 @@ function handleFormUser() {
 
   });
 
-  $('#resetCluster').click(function () {
-    $('#settingsForm')[0].reset();    
-  })
+  // TODO da verificare cosa fa 
+  // $('#resetCluster').click(function () {
+  //   $('#settingsForm')[0].reset();    
+  // })
 }
 
 /**
@@ -111,6 +128,34 @@ function handleFormExperiment() {
   // Reset value of form Add Experiment 
   $('#resetAddExperimentText').click(function () {
     $('#addExperimentFormText')[0].reset();
+  });
+}
+
+/**
+ * This function aims to bind event to restore the original 
+ * setting of Cluster
+ * @method handleFormCluster
+ */
+function handleFormCluster(){
+  
+  $('#resetCluster').click(function () { 
+    var restoreCluster =  {"distance":40};
+    // restore slider value
+    sliderCluster[0].noUiSlider.set(restoreCluster.distance);  
+  });
+}
+
+/**
+ * This function aims to bind event to restore the original 
+ * setting of HeatMap
+ * @method handleFormHeatmap
+ */
+function handleFormHeatmap(){
+  $('#resetHeatMap').click(function () {
+    var restoreHeatmap =  {"radius":10,"blur":15};
+    // restore slider value
+    sliderHeatmapBlur[0].noUiSlider.set(restoreHeatmap.blur); 
+    sliderHeatmapRadius[0].noUiSlider.set(restoreHeatmap.radius);
   });
 }
 
@@ -145,7 +190,7 @@ function handleFormPDR() {
     threasholdPDR.push($('#pdr_interval_x0x1_threashold').val());
     threasholdPDR.push($('#pdr_interval_x1x2_threashold').val());
     threasholdPDR.push($('#pdr_interval_x2x3_threashold').val());
-    refreshSlider(sliderPDR,colorPDR, threasholdPDR, intervalSegmentPDR);
+    refreshMetricsSlider(sliderPDR,colorPDR, threasholdPDR, intervalSegmentPDR);
   });
 }
 
@@ -180,7 +225,7 @@ function handleFormDelay(){
     threasholdDelay.push($('#delay_interval_x0x1_threashold').val());
     threasholdDelay.push($('#delay_interval_x1x2_threashold').val());
     threasholdDelay.push($('#delay_interval_x2x3_threashold').val());
-    refreshSlider(sliderDelay,colorDelay, threasholdDelay, intervalSegmentDelay);
+    refreshMetricsSlider(sliderDelay,colorDelay, threasholdDelay, intervalSegmentDelay);
   });
 }
 
@@ -216,7 +261,7 @@ function handleFormThroughput(){
     threasholdThroughput.push($('#throughput_interval_x0x1_threashold').val());
     threasholdThroughput.push($('#throughput_interval_x1x2_threashold').val());
     threasholdThroughput.push($('#throughput_interval_x2x3_threashold').val());
-    refreshSlider(sliderThroughput,colorThroughput, threasholdThroughput, intervalSegmentThroughput);
+    refreshMetricsSlider(sliderThroughput,colorThroughput, threasholdThroughput, intervalSegmentThroughput);
   });
 }
 
@@ -573,6 +618,74 @@ function addNewExperiment(e){
 
   return false;
 }
+
+/**
+ * Markers function
+ */
+
+function changeClusterPreference(e){
+  e.preventDefault()
+  $.ajax({
+    url: '/settingCluster', 
+    method: 'POST',
+    data: $('#settingsFormCluster').serialize()+"&cluster_distance="+sliderCluster[0].noUiSlider.get(),  
+    async: true,
+    success: function (res) {
+      
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+    },
+    error: function (err) {
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }else if(statusCode===422){
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      }
+    }
+  });
+  return false;
+}
+
+
+function changeHeatmapPreference(e){
+  e.preventDefault();
+  $.ajax({
+    url: '/settingHeatmap', 
+    method: 'POST',
+    data: $('#settingsFormHeatmap').serialize()+"&heatmap_radius="+sliderHeatmapRadius[0].noUiSlider.get()+"&heatmap_blur="+sliderHeatmapBlur[0].noUiSlider.get(), 
+    async: true,
+    success: function (res) {
+      
+      // FEEDBACK
+      bootstrapAlert(res.success, "Success", "success");
+    },
+    error: function (err) {
+      var statusCode = err.responseJSON.statusCode;
+      if(statusCode==400){
+        bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
+      }else if(statusCode===422){
+        var errorJSON = err.responseJSON.errors;
+        // console.log(errorJSON);
+        var e = "";
+        for (var i = 0; i < errorJSON.length; i++) {
+          e += errorJSON[i].msg + "</br>";
+        }
+        bootstrapAlert(e, "Error", "danger", false);
+      }
+    }
+  });
+  return false;
+}
+
+
+
 
 /**
  * Metrics function
