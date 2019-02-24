@@ -36,6 +36,7 @@ function settingMap() {
     console.log(experiments);
     var setPreferenceColor = $(this).attr('value');
     //console.log(setPreferenceColor);
+    // TODO mettere a posto il colore dei markers 
     var layers = globalMap.getLayers().getArray();
     var markersLayer = getCurrentLayerByTitle(layers, "markers");    
    
