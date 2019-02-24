@@ -1,0 +1,105 @@
+
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Update Marker
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<div id="change-setting" class="mainDiv"> 
+    <div class="card card-outline-secondary">
+        <div class="card-header" id="headerUser">
+            <h3 class="mb-0"> <a href="#"><a><img src="../img/settings.svg" class="svg icon header-icon"></a> {{title}}</h3>
+        </div>
+        <div class="card-body" id="cardBodySetting">            
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // CLUSTER
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
+            <form class="form" id="settingsFormCluster" role="form" autocomplete="off">    
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Cluster</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Distance</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div id="cluster-distance-slider" value="{{json settings.cluster.distance}}" class="custom-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetCluster" class="btn btn-secondary" value="Original Cluster Setting">
+                        <input type="submit" class="btn btn-dark" value="Save">
+                    </div>
+                </div>
+            </form>
+            {{!-- TODO delete pdr --}}
+            <p>RISULTATO: {{json settings.cluster}}</p>
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // HEATMAP
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
+            <form class="form" id="settingsFormHeatmap" role="form" autocomplete="off">   
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">HeatMap</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Radius Size</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div id="heatmap-radius-slider" value="{{json settings.heatmap.radius}}" class="custom-slider"></div>
+                        </div>
+                    </div>
+                </div> 
+                <br/>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Blur Size</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div id="heatmap-blur-slider" value="{{json settings.heatmap.blur}}" class="custom-slider"></div>
+                        </div>
+                    </div>
+                </div>   
+                <br/>             
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetHeatMap" class="btn btn-secondary" value="Original Heat Map Setting">
+                        <input type="submit" class="btn btn-dark" value="Save">
+                    </div>
+                </div>
+            </form>
+            {{!-- TODO delete pdr --}}
+            <p>RISULTATO: {{json settings.heatmap}}</p>
+        </div>
+    </div>
+</div>
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Load Scripts
+// REF: https://stackoverflow.com/a/28478146/4700162
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<script>       
+        $.getScript("../../js/util.js");
+        $.getScript("../../js/form.js");
+        $.getScript("../../js/map.js");
+        $.getScript("../../js/settingsMarkers.js");
+</script>
+ 

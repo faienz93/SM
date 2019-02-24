@@ -16,6 +16,27 @@ $(document).ready(function () {
   // retrieve result of query and then show into view
   refreshExperiments();
 
+  // Define value of Search Bar using Chosen Plugin
+  // getExperiments(); TODO vedere se cancellare
+  // queryExperiments().then(function (exp) {
+    
+  //       // experiments.push(element);
+  //       experiments = exp;
+        
+  //       // get the value of Markers View from dropdown inside navbar
+  //       var actualValueView = $('.selected-view').attr("value");
+  //       setView(actualValueView);
+        
+  //       $.each(exp, function (index, element) {
+          
+  //         // the value will be JSON String
+  //         appendToChosen(JSON.stringify(element), element.name);          
+  
+  //       });
+  
+        
+  // });
+
   // Setting navbar
   navbar();
 
@@ -33,7 +54,10 @@ $(document).ready(function () {
   definePartialsMaps();
   definePartialsForms();
   definePartialsExperiments();
+  definePartialsSettings();
 
+
+  
 
   // Informations alerts
   $('.selected-informations').on("click", function (event) {
@@ -85,7 +109,10 @@ $(document).ready(function () {
 
 
 
-  // whenever change the value, will be call the same method
+  // whenever change the value of View (Navbar), will be call the same method for select
+  // markers
+  // cluster
+  // heatmpa
   $('.selected-view').on("click", function () {
     var viewSelected = $(this).attr("value");
     setMarkersView(viewSelected);
@@ -371,6 +398,26 @@ function definePartialsExperiments() {
   // Show All Experiment
   $('#show-experiment').click(function (event) {
     $.get('/showexperiment').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+}
+
+/**
+ * This function define the view of Partials Setting
+ */
+function definePartialsSettings(){
+  
+  // Define Setting Markers
+  $('#setting-markers').click(function (event) {
+    $.get('/settingMarkers').then(function (data) {
+      $('#main').html(data);
+    });
+  });
+
+  // Define Partials of Configuration Metrics
+  $('#setting-metrics').click(function (event) {
+    $.get('/settingMetrics').then(function (data) {
       $('#main').html(data);
     });
   });

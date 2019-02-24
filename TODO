@@ -3,3 +3,7 @@
 - Fare update e delete degli esperimenti
 - Sistemare FORM utente
 - fare refresh dei markers
+- mettere a posto l'auth/permessi 
+- gestire il caso non ci siano esperimenti
+
+- mettere prima gli utenti e poi gli esperimenti nella navbar

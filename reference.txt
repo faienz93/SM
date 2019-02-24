@@ -68,10 +68,13 @@ https://harvesthq.github.io/chosen/#no-results-text-support
 
 
 RICORDA: 
-server-db 
+master 
     |
     |
-    |-> refactor-view
+    |-> experiment-json
+            |
+            |
+            |-> experiment-json-setting
             
 
 IMPORTANT: 
@@ -172,3 +175,9 @@ CON TUTTO
     "latitudeServer":"44.498955",
     "longitudeServer":"11.327591"
 }
+
+
+https://refreshless.com/nouislider/examples/#section-colored-connect
+https://github.com/leongersen/noUiSlider/issues/705 
+
+validate color https://stackoverflow.com/a/25823774/4700162

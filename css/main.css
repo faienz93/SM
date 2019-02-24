@@ -382,3 +382,30 @@ meter[value="4"]::-moz-meter-bar {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+ /* ---------------------------------------------------
+   SETTINGS
+----------------------------------------------------- */
+  input[type=range] {
+    display: block;
+    width: 100%;
+}
+
+ /* ---------------------------------------------------
+   noUIslider
+----------------------------------------------------- */
+.custom-slider {
+    width: 100% !important;    
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: .25rem;
+}
+
+.noUi-tooltip {
+    display: none;
+}
+.noUi-active .noUi-tooltip {
+    display: block;
+}

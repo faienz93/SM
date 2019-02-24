@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div  style="display: none" id="hideAll"> 
+    <div style="display: none" id="hideAll">
         &nbsp;
         <div class="loader"></div>
     </div>
@@ -184,6 +184,28 @@
                     </ul>
                 </li>
                 <div class="sidebar-divider"></div>
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // Setting
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
+                <li>
+                    <a href="#settingDB" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <img src="../img/settings.svg" class="svg icon">
+                        <span>Settings</span>
+                    </a>
+                    <ul class="collapse list-unstyled select-specific" id="settingDB">
+                        <li value="settingMarkers">
+                            <a href="#" id="setting-markers">Markers</a>
+                        </li>
+                        <li value="settingMetrics">
+                            <a href="#" id="setting-metrics">Metrics</a>
+                        </li>
+                    </ul>
+                </li>
+                <div class="sidebar-divider"></div>
                 <li value="" class="selected-informations">
                     <a href="#">
                         <img src="../img/information.svg" class="svg icon">
@@ -194,7 +216,13 @@
 
             </ul>
         </nav>
-
+        <!-- 
+        ///////////////////////////////////////////////////////////////////////////////////////
+        //
+        // NAVBAR
+        //
+        ///////////////////////////////////////////////////////////////////////////////////////
+        -->
         <!-- Page Content  -->
         <div id="content">
             <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
@@ -209,20 +237,42 @@
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> 
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form> --}}
-                        <form class="form-inline ml-auto" role="form" autocomplete="off" id="searchExperiment"> 
+                        <form class="form-inline ml-auto" role="form" autocomplete="off" id="searchExperiment">
                             <div class="col-lg-9">
-                            <select id="selectExperiment" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" tabindex="4" size="0" name="selectExperiment"> 
-                                <option value=""></option>
-                            <!-- the otpion tag are fullied in javasctipt file init.js -->
-                            </select>
+                                <select id="selectExperiment" data-placeholder="Begin typing a name to filter..."
+                                    multiple class="chosen-select" tabindex="4" size="0" name="selectExperiment">
+                                    <option value=""></option>
+                                    <!-- the otpion tag are fullied in javasctipt file init.js -->
+                                </select>
                             </div>
-                            <div class="col-lg-3"> 
+                            <div class="col-lg-3">
                                 {{!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> --}}
                                 <button type="submit" class="btn btn-dark"><i class="fa fa-search"></i></button>
                             </div>
-                            
+
                         </form>
                         <ul class="nav navbar-nav ml-auto">
+                            {{!-- Filter Metrics --}}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMetricsView"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="../img/metrics.svg" class="svg icon-nav">
+                                    <span>Metrics</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMetricsView">
+                                    <a href="#" value="none" class="dropdown-item selected-metric active"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">None</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="pdr" class="dropdown-item selected-metric"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">PDR</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="delay" class="dropdown-item selected-metric"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Delay</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" value="throughput" class="dropdown-item selected-metric"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Throughput</a>
+                                </div>
+                            </li>
                             {{!-- Filter Marker Cluster --}}
                             <li class="nav-item dropdown">
                                 <!-- Filter -->
@@ -232,17 +282,17 @@
                                     <span>View</span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownView">
-                                    <a href="#" value="markers" class="dropdown-item selected-view active"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Markers</a>
+                                    <a href="#" value="markers" class="dropdown-item selected-view active"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Markers</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="cluster" class="dropdown-item selected-view"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Cluster</a>
+                                    <a href="#" value="cluster" class="dropdown-item selected-view"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Cluster</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="heatmap" class="dropdown-item selected-view"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Heatmap</a>
+                                    <a href="#" value="heatmap" class="dropdown-item selected-view"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Heatmap</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="none" class="dropdown-item selected-view"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">None</a>
+                                    <a href="#" value="none" class="dropdown-item selected-view"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">None</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -253,29 +303,29 @@
                                     <span>Filters Map</span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownFiltersMap">
-                                    <a href="#" value="none" class="dropdown-item selected-filter active"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">None</a>
+                                    <a href="#" value="none" class="dropdown-item selected-filter active"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">None</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="sharpen" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Sharpen</a>
+                                    <a href="#" value="sharpen" class="dropdown-item selected-filter"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Sharpen</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="sharpenless" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Sharpenless</a>
+                                    <a href="#" value="sharpenless" class="dropdown-item selected-filter"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Sharpenless</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="blur" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Blur</a>
+                                    <a href="#" value="blur" class="dropdown-item selected-filter"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Blur</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="shadow" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Shadow</a>
+                                    <a href="#" value="shadow" class="dropdown-item selected-filter"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Shadow</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="emboss" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Emboss</a>
+                                    <a href="#" value="emboss" class="dropdown-item selected-filter"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Emboss</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="#" value="edge" class="dropdown-item selected-filter"><img src="../img/right-arrow.svg"
-                                            class="svg arrow-left">Edge</a>
+                                    <a href="#" value="edge" class="dropdown-item selected-filter"><img
+                                            src="../img/right-arrow.svg" class="svg arrow-left">Edge</a>
                                 </div>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Sign Up</a>
                             </li>
@@ -304,49 +354,41 @@
     <!-- REF: https://stackoverflow.com/a/3629799/4700162 -->
     {{!-- <script type="text/javascript">
         document.getElementById("hideAll").style.display = "block";
-        window.onload = function() 
-        { document.getElementById("hideAll").style.display = "none"; }
+        window.onload = function () { document.getElementById("hideAll").style.display = "none"; }
     </script>  --}}
     <!-- Font Awesome JS -->
     <script src="../lib/fontawesome/solid.js" crossorigin="anonymous"></script>
     <script src="../lib/fontawesome/fontawesome.js" crossorigin="anonymous"></script>
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->       
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../lib/jquery-3.3.1.min.js" type="text/javascript" crossorigin="anonymous"></script>
     <script src="../lib/popper.min.js" type="text/javascript" crossorigin="anonymous"></script>
     <script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript" crossorigin="anonymous"></script>
     <script src="../lib/choosen/chosen.jquery.min.js" type="text/javascript" crossorigin="anonymous"></script>
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> --}}
     <script src="../lib/DataTable/js/dataTables.min.js" type="text/javascript" crossorigin="anonymous"></script>
-    <script src="../lib/DataTable/js/dataTables.bootstrap4.min.js" type="text/javascript" crossorigin="anonymous"></script>
-    
-    <script src="../lib/zxcvbn.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../lib/bootbox.min.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../js/const.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../js/map.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../js/filtersMap.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../js/const.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../js/util.js" type="text/javascript" crossorigin="anonymous" ></script>
-    <script src="../js/init.js" type="text/javascript" crossorigin="anonymous" ></script>
+    <script src="../lib/DataTable/js/dataTables.bootstrap4.min.js" type="text/javascript"
+        crossorigin="anonymous"></script>
 
+    <script src="../lib/zxcvbn.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/bootbox.min.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../js/const.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../js/map.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../js/filtersMap.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../js/const.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../js/util.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../js/init.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/nouislider/wNumb.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="../lib/nouislider/nouislider.js" type="text/javascript" crossorigin="anonymous"></script>
 
 
 
     <!-- OpenLayer JS -->
     <!-- Optional: If the application is intended to run on old platforms like Internet Explorer or Android 4.x, another script needs to be included before OpenLayers: -->
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
+    <script
+        src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList"></script>
     <script src="../lib/OpenLayers/ol.js" type="text/javascript"></script>
     <script src="../lib/ol-geocoder/ol-geocoder.js" type="text/javascript"></script>
-
-
-    
-    
-
-
-
-
-
 </body>
-
 </html>

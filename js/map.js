@@ -31,6 +31,27 @@ function settingMap() {
   });
 
 
+  
+  $('.selected-metric').on('click',function(){
+    console.log(experiments);
+    var setPreferenceColor = $(this).attr('value');
+    //console.log(setPreferenceColor);
+    // TODO mettere a posto il colore dei markers 
+    var layers = globalMap.getLayers().getArray();
+    var markersLayer = getCurrentLayerByTitle(layers, "markers");    
+   
+    markersLayer.getSource().getFeatures()[1].setStyle(new ol.style.Style({
+      image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+        color: '#00ffff', //  #FF0000
+        crossOrigin: 'anonymous',
+        src: '/img/dot.png'
+      }))
+    }));
+
+  })
+  
+
+
   // Setting filter 
   for (var i = 0, len = groupsMap.length; i < len; i++) {
     var layers = groupsMap[i].values_.layers.array_;
@@ -122,6 +143,7 @@ function setCurrentLayer(mapview, type) {
     if (groupSelected.values_.title === "Bing") {
       layers[i].setVisible(bingStyles[i] === type);
     } else if (groupSelected.values_.title === "Here") {
+      // FIXME fix scheme
       layers[i].setVisible(hereStyles[i].scheme === type);
     } else if (groupSelected.values_.title === "Stamen") {
       layers[i].setVisible(stamenStyles[i] === type);
@@ -444,6 +466,7 @@ function markersMap(exp) {
   }
 
 
+  // TODO delete
   // ================
   // To see key and value of Features
   // =================
@@ -507,6 +530,8 @@ function markersMap(exp) {
  */
 function clusterMap(exp) {
 
+  // FIXME set with the session the user preference
+
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
     location[i] = new ol.Feature({
@@ -567,6 +592,8 @@ function clusterMap(exp) {
  */
 function heatMap(exp) {
 
+   // FIXME set with the session the user preference
+
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
     location[i] = new ol.Feature({
@@ -580,6 +607,7 @@ function heatMap(exp) {
       features: location
     }),
     title: 'heatmap',
+    // FIXME pass param of radius
     blur: parseInt(5, 10), // TODO fare il setting
     radius: parseInt(15, 10) // TODO fare il setting
   });
