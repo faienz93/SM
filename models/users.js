@@ -178,7 +178,7 @@
 
 
  // authenticate input against database
- registrationSchema.statics.authenticate = async function(email, password, callback){
+ userSchema.statics.authenticate = async function(email, password, callback){
      this.findOne({email:email})
         .exec(function (err,user){           
             if(err){
@@ -200,7 +200,7 @@
  }
 
  //hashing a password before saving it to the database
- registrationSchema.pre('save', function(next){
+ userSchema.pre('save', function(next){
     var user = this;
     bcrypt.hash(user.password, 10, function(err,hash){
         if(err){
@@ -212,4 +212,4 @@
     
  });
 
- module.exports = mongoose.model('Users', registrationSchema);
+ module.exports = mongoose.model('Users', userSchema);

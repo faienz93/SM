@@ -20,13 +20,7 @@ const { sanitizeBody } = require('express-validator/filter');
 
 const Experiment = mongoose.model('Experiment');
 
-const basic = auth.basic({
-    file: path.join(__dirname, '../users.htpasswd'),
-});
 
-basic.on('success', (result, req) => {
-    console.log(`User authenticated: ${result.user}`);
-});
 
 
 
