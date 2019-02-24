@@ -4,6 +4,7 @@ http://expressjs.com/it/starter/static-files.html
 
 EXPRESS SESSION AND COOKIE
 https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
+https://codeforgeek.com/2014/09/manage-session-using-node-js-express-4/ 
 
 
 PASSWORD VALIDATION
@@ -68,10 +69,18 @@ https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-rel
 
 
 RICORDA: 
-server-db 
+master
     |
     |
-    |-> refactor-view
+    |-> session
+
+
+TODO: 
+
+- inserire il nome all'interno del file .htaccess
+
+- inviare una mail nel momento in cui si crea un nuovo utente (https://www.npmjs.com/package/express-mailer#sending-an-email)
+
             
 
 IMPORTANT: 

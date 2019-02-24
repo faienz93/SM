@@ -1,13 +1,17 @@
-// http://expressjs.com/it/starter/static-files.html
-// https://codeforgeek.com/2015/01/render-html-file-expressjs/
+/**
+ * ===========================================================================
+ * File: UserDB.js 
+ * Author: Antonio Faienza
+ * TODO description
+ * ===========================================================================
+ */
+
 
 var express = require('express');
-const mongoose = require('mongoose');
-var path = require('path');
-
-var app = express();
-
 const router = express.Router();
+const mongoose = require('mongoose');
+
+const User = mongoose.model('Users');
 
 
 // define reading of stating file
@@ -15,10 +19,25 @@ const router = express.Router();
 
 
 
-router.get('/', function(req, res) {
-    res.render('index', {title: "SM - Mobile System"});
+router.get('/', function(req, res) {    
+    User.findById(req.session.userId)
+        .exec(function(error, user){
+            if(error){
+                return next(error);
+            }else {
+                if(user === null){
+                    req.flash('danger', 'Not authorized! Go back!')
+                    res.redirect('/login');
+                }else {
+                    res.render('index', {title: "SM - Mobile System", user: user});
+                }
+            }
+        });
 });
 
+/**
+ * Show the map based on Params
+ */
 router.get('/map', function (req, res) {
     if(req.query.map === undefined && req.query.type === undefined){
         res.status(200);
@@ -28,22 +47,20 @@ router.get('/map', function (req, res) {
         res.status(200);
         res.header("Content-Type", "text/html");
         res.render('partials/map', {title: "SM",map:req.query.map, type: req.query.type});
-        // encodeURIComponent(JSON.stringify(jsonData)
     }
-    // res.send(JSON.stringify(Obj));
+    
 
 });
 
-router.get('/login', function (req, res, next) {
-    res.render('login', {title: "SM - Login" });
 
-    // if you have layout you can specify if you want to use him
-    // res.render('login', {layout:false, title: "HELLO WORLD"});
-});
-
-
-
-
+function requiresLogin(req,res,next){
+    if(req.session && req.session.userId){
+        return next();
+    }else {
+        req.flash('danger', 'You must be logged in to view this page.')
+        res.redirect('/login');
+    }
+}
 
 
 module.exports = router;
