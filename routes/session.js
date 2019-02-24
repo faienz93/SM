@@ -65,11 +65,6 @@ router.post('/login', function(req,res,next){
     if(req.body.email && req.body.password){
         Users.authenticate(req.body.email, req.body.password, function (error, user){
             if(error || !user){
-                // return res.status(401).send({
-                //     insertionError: true,
-                //     errors: error.message,
-                //     statusCode: 401
-                //     });
                 req.flash('danger', error.message)
                 res.redirect('/login');
             }else {

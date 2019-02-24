@@ -15,17 +15,14 @@ $(document).ready(function () {
      */
     var cluster_distance_slider_string = $('#cluster-distance-slider');
     var cluster_distance_slider_json =  $.parseJSON(cluster_distance_slider_string.attr('value')); 
-    // console.log(cluster_distance_slider_json); // TODO delete
     sliderCluster =  createMarkersSlider('#cluster-distance-slider',0,100,cluster_distance_slider_json)
 
     var heatmap_radius_slider_string = $('#heatmap-radius-slider');
     var heatmap_radius_slider_json =  $.parseJSON(heatmap_radius_slider_string.attr('value')); 
-    // console.log(heatmap_radius_slider_json); // TODO delete
     sliderHeatmapRadius = createMarkersSlider('#heatmap-radius-slider',0,50,heatmap_radius_slider_json)
 
     var heatmap_blur_slider_string = $('#heatmap-blur-slider');
     var heatmap_blur_slider_json =  $.parseJSON(heatmap_blur_slider_string.attr('value')); 
-    // console.log(heatmap_blur_slider_json); // TODO delete
     sliderHeatmapBlur = createMarkersSlider('#heatmap-blur-slider',0,50,heatmap_blur_slider_json);
 
 });
@@ -44,11 +41,7 @@ $(document).ready(function () {
    * @param value the value of slider
    */
   function createMarkersSlider(inputSlider,min,max,value){
-
-
     var slider = $(inputSlider);
-
-
    noUiSlider.create(slider[0], {
        start: value, 
        connect: [true, false],

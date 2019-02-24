@@ -8,13 +8,10 @@
 
  // dependency
  var express = require("express");
- const mongoose = require('mongoose');
- 
+ const mongoose = require('mongoose'); 
  var path = require("path");
  const router = express.Router();
- const auth = require('http-auth');
- const { body, check, validationResult } = require('express-validator/check');
- const { sanitizeBody } = require('express-validator/filter');
+
  
  
  
@@ -24,41 +21,66 @@ const User = mongoose.model('Users');
      We define the Setting of the Markers
  ----------------------------------------------------- */
  router.get('/settingMarkers', function (req, res) {
-     
-
-     User.find()
-        .then((users) => {
-            res.status(200);
-            res.header("Content-Type", "text/html");
-            res.render('partials/settingMarkers', {title: 'Settings Markers', settings: users[0].settings});
-        })
-        .catch(() => {
-            res.status(422).send({msg: "I cannot show the user"});
-        })
+    User.findById(req.session.userId, function(err,user){
+        if (err) {
+            return res.status(422).send({
+                insertionError: true,
+                errors: err,
+                statusCode: 11000
+            });
+        } else {
+            if (user === null) {
+                var err = new Error('Not authorized! Go back!');     
+                return res.status(400).send({
+                    insertionError: true,
+                    errors: err.message,
+                    statusCode: 400
+                });
+            } else {
+                res.status(200);
+                res.header("Content-Type", "text/html");
+                res.render('partials/settingMarkers', {title: 'Settings Markers', settings: user.settings});
+            }
+        }
+    })
  });
 
 /**
  * We define the metrics for the preference of experiment's threashold 
  */
  router.get('/settingMetrics', function (req, res){
-   
-    User.find()
-        .then((users) => {
-            res.status(200);
-            res.header("Content-Type", "text/html");
-             // TODO nel merge con le sessioni specificare solo quello della sessione attuale
-            res.render('partials/settingMetrics', {title: 'Setting Metrics', settings: users[0].settings}); 
+
+        User.findById(req.session.userId, function(err,user){
+            if (err) {
+                return res.status(422).send({
+                    insertionError: true,
+                    errors: err,
+                    statusCode: 11000
+                });
+            } else {
+                if (user === null) {
+                    var err = new Error('Not authorized! Go back!');   //TODO vedere se mettere una pagina di errore      
+                    return res.status(400).send({
+                        insertionError: true,
+                        errors: err.message,
+                        statusCode: 400
+                    });
+                } else {
+                    res.status(200);
+                    res.header("Content-Type", "text/html");
+                    res.render('partials/settingMetrics', {title: 'Setting Metrics', settings: user.settings}); 
+                }
+            }
         })
-        .catch(() => {
-            res.status(422).send({msg: "I cannot show the user"});
-        })
+
  });
 
- 
+ /**
+ * Update distance of Cluster
+ */
  router.post('/settingCluster', function(req,res){
-
-    // TODO sistemare l'utente quando si fa il merge con le session pdr
-    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+     console.log(req.session.userId);
+    User.findById(req.session.userId, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -67,10 +89,14 @@ const User = mongoose.model('Users');
                 });
         } else {
             
+            console.log(user.settings.cluster.distance);
+            console.log(req.body);
             user.settings.cluster.distance = req.body.cluster_distance;
             
             user.save(function (err, updatedTank) {
                 if (err) {
+                    console.log("ERRORE");
+                    console.log(err);
                     return res.status(422).send({
                         insertionError: true,
                         errors: err,
@@ -78,6 +104,7 @@ const User = mongoose.model('Users');
                         });
 
                 } else {
+                    console.log("SUCCESSO");
                     res.status(200).send({success: "Successful Update" });
                 }
             });
@@ -85,10 +112,11 @@ const User = mongoose.model('Users');
     });
  });
 
-
+/**
+ * Update Radius and Blur of HeatMap
+ */
  router.post('/settingHeatmap', function(req,res){
-    // TODO sistemare l'utente quando si fa il merge con le session pdr
-    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+    User.findById(req.session.userId, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -96,8 +124,6 @@ const User = mongoose.model('Users');
                 statusCode: 11000
                 });
         } else {
-            console.log(req.body)
-            console.log(user.settings.heatmap) //.radius = ... .blur = ...
             user.settings.heatmap.radius = req.body.heatmap_radius;
             user.settings.heatmap.blur = req.body.heatmap_blur;
             
@@ -118,10 +144,12 @@ const User = mongoose.model('Users');
 });
 
 
-
+/**
+ * Update a PDF of a specific user 
+ */
  router.post('/settingPDR', function(req,res){
      // TODO sistemare l'utente quando si fa il merge con le session pdr
-     User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+     User.findById(req.session.userId, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -156,9 +184,12 @@ const User = mongoose.model('Users');
     });
  });
 
+ /**
+  * Update a Delay of a specific user
+  */
  router.post('/settingDelay', function(req,res){
     // TODO sistemare l'utente quando si fa il merge con le session delay
-    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+    User.findById(req.session.userId, function (err, user) {
        if (err) {
            return res.status(422).send({
                insertionError: true,
@@ -193,9 +224,12 @@ const User = mongoose.model('Users');
    });
 });
 
+/**
+ * Update the Througput of a specific user
+ */
 router.post('/settingThroughput', function(req,res){
     // TODO sistemare l'utente quando si fa il merge con le session throughput
-    User.findById("5c7163fee6c21616f8e0b43e", function (err, user) {
+    User.findById(req.session.userId, function (err, user) {
        if (err) {
            return res.status(422).send({
                insertionError: true,

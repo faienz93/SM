@@ -799,22 +799,16 @@ function changeClusterPreference(e){
     data: $('#settingsFormCluster').serialize()+"&cluster_distance="+sliderCluster[0].noUiSlider.get(),  
     async: true,
     success: function (res) {
-      
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },
     error: function (err) {
       var statusCode = err.responseJSON.statusCode;
-      if(statusCode==400){
+      if(statusCode==422){
         bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
-      }else if(statusCode===422){
-        var errorJSON = err.responseJSON.errors;
-        // console.log(errorJSON);
-        var e = "";
-        for (var i = 0; i < errorJSON.length; i++) {
-          e += errorJSON[i].msg + "</br>";
-        }
-        bootstrapAlert(e, "Error", "danger", false);
+      }else if(statusCode===11000){
+        var errorJSON = err.responseJSON.errors.message;        
+        bootstrapAlert(errorJSON, "Error", "danger", false);
       }
     }
   });
@@ -836,16 +830,11 @@ function changeHeatmapPreference(e){
     },
     error: function (err) {
       var statusCode = err.responseJSON.statusCode;
-      if(statusCode==400){
+      if(statusCode==422){
         bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
-      }else if(statusCode===422){
-        var errorJSON = err.responseJSON.errors;
-        // console.log(errorJSON);
-        var e = "";
-        for (var i = 0; i < errorJSON.length; i++) {
-          e += errorJSON[i].msg + "</br>";
-        }
-        bootstrapAlert(e, "Error", "danger", false);
+      }else if(statusCode===11000){
+        var errorJSON = err.responseJSON.errors.message;        
+        bootstrapAlert(errorJSON, "Error", "danger", false);
       }
     }
   });
@@ -873,16 +862,11 @@ function changePDRPreference(e){
     },
     error: function (err) {
       var statusCode = err.responseJSON.statusCode;
-      if(statusCode==400){
+      if(statusCode==422){
         bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
-      }else if(statusCode===422){
-        var errorJSON = err.responseJSON.errors;
-        // console.log(errorJSON);
-        var e = "";
-        for (var i = 0; i < errorJSON.length; i++) {
-          e += errorJSON[i].msg + "</br>";
-        }
-        bootstrapAlert(e, "Error", "danger", false);
+      }else if(statusCode===11000){
+        var errorJSON = err.responseJSON.errors.message;        
+        bootstrapAlert(errorJSON, "Error", "danger", false);
       }
     }
   });
@@ -906,16 +890,11 @@ function changeDelayPreference(e){
     },
     error: function (err) {
       var statusCode = err.responseJSON.statusCode;
-      if(statusCode==400){
+      if(statusCode==422){
         bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
-      }else if(statusCode===422){
-        var errorJSON = err.responseJSON.errors;
-        // console.log(errorJSON);
-        var e = "";
-        for (var i = 0; i < errorJSON.length; i++) {
-          e += errorJSON[i].msg + "</br>";
-        }
-        bootstrapAlert(e, "Error", "danger", false);
+      }else if(statusCode===11000){
+        var errorJSON = err.responseJSON.errors.message;        
+        bootstrapAlert(errorJSON, "Error", "danger", false);
       }
     }
   });
@@ -939,16 +918,11 @@ function changeThroughputPreference(e){
     },
     error: function (err) {
       var statusCode = err.responseJSON.statusCode;
-      if(statusCode==400){
+      if(statusCode==422){
         bootstrapAlert(err.responseJSON.errors, "JSON Error", "danger", false);
-      }else if(statusCode===422){
-        var errorJSON = err.responseJSON.errors;
-        // console.log(errorJSON);
-        var e = "";
-        for (var i = 0; i < errorJSON.length; i++) {
-          e += errorJSON[i].msg + "</br>";
-        }
-        bootstrapAlert(e, "Error", "danger", false);
+      }else if(statusCode===11000){
+        var errorJSON = err.responseJSON.errors.message;        
+        bootstrapAlert(errorJSON, "Error", "danger", false);
       }
     }
   });

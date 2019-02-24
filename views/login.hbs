@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
 	<title>{{title}}</title>
 	<meta name="description" content="In this view you can see the login page ">
 	<meta name="author" content="Antonio Faienza">
-	
+
 	<!-- Failed to load resource: the server responded with a status of 404 (NOT FOUND) favicon
     REF: https://stackoverflow.com/questions/31075893/im-getting-favicon-ico-error -->
 	<link rel="shortcut icon" href="#" />
@@ -22,12 +23,13 @@
 	<script defer src="../lib/fontawesome/fontawesome.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="../css/login-registration.css">
 	<style>
-		html,body{
-		background-image: url('../img/background.jpg');
-		background-size: cover;
-		background-repeat: no-repeat;
-		height: 100%;
-		font-family: 'Lato', sans-serif; 
+		html,
+		body {
+			background-image: url('../img/background.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+			height: 100%;
+			font-family: 'Lato', sans-serif;
 		}
 	</style>
 </head>
@@ -57,7 +59,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" class="form-control" placeholder="password" name="password" required>							
+							<input type="password" class="form-control" placeholder="password" name="password" required>
 						</div>
 						{{!-- <div class="row align-items-center remember">
 							<input type="checkbox">Remember Me
@@ -68,14 +70,14 @@
 					</form>
 				</div>
 				<div class="card-footer">
-					<div id = "alert_placeholder"></div>
+					<div id="alert_placeholder"></div>
 					{{!-- In this case the visibility is Hidden --}}
 					<div class="d-flex justify-content-center links" style="visibility: hidden;">
 						Don't have an account?<a href="#">Sign Up</a>
 					</div>
 					<div class="d-flex justify-content-center" style="visibility: hidden;">
 						<a href="#">Forgot your password?</a>
-					</div>					
+					</div>
 				</div>
 			</div>
 		</div>
@@ -87,10 +89,10 @@
 
 	{{!-- Message Flash Danger --}}
 	{{#if messageFlashDanger}}
-		<script>
-			console.log("{{messageFlashDanger}}");
-			bootstrapAlert("{{messageFlashDanger}}", "Error", "danger");
-		</script>
+	<script>
+		console.log("{{messageFlashDanger}}");
+		bootstrapAlert("{{messageFlashDanger}}", "Error", "danger");
+	</script>
 	{{/if}}
 
 

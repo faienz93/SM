@@ -35,7 +35,7 @@ router.get('/', function(req, res) {
 });
 
 /**
- * Show the map based on Params
+ * Show partials of map
  */
 router.get('/map', function (req, res) {
     if(req.query.map === undefined && req.query.type === undefined){
