@@ -7,3 +7,12 @@
 - gestire il caso non ci siano esperimenti
 
 - mettere prima gli utenti e poi gli esperimenti nella navbar
+- mettere logout nella navbar
+- compretare il colore dei markers
+- completare distanza cluster
+- completare radius e blur nelle heatmap
+- cercare di mettere la visualizzazione a tutto schermo
+- mettere il flickering della pagina
+- nell'update utente, cambiare i valori di default e in "hi nome utente"
+
+- in update Experiment quando scelgo un esperimento deve potermelo far cambiare

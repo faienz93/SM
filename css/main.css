@@ -123,33 +123,25 @@ i, span {
 
 /* ---------------------------------------------------
     FULL SCREEN
+    REF LAST VERSION: https://openlayers.org/en/latest/examples/full-screen-source.html?q=full+screen
+    REF NEW VERSION: https://openlayers.org/en/latest/examples/full-screen.html?q=full+screen
 ----------------------------------------------------- */
 
-.fullscreen:-moz-full-screen {
+.map:-moz-full-screen {
     height: 100%;
-}
-
-.fullscreen:-webkit-full-screen {
+  }
+  .map:-webkit-full-screen {
     height: 100%;
-}
-
-.fullscreen:-ms-fullscreen {
+  }
+  .map:-ms-fullscreen {
     height: 100%;
-}
-
-.fullscreen:fullscreen {
+  }
+  .map:fullscreen {
     height: 100%;
-}
-
-.fullscreen {
-    margin-bottom: 10px;
-    width: 100%;
-    height: 400px;
-}
-
-.ol-rotate {
+  }
+  .ol-rotate {
     top: 3em;
-}
+  }
 
 /* ---------------------------------------------------
     Define style of alert message

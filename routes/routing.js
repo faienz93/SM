@@ -10,7 +10,6 @@
 var express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-
 const User = mongoose.model('Users');
 
 
@@ -18,8 +17,6 @@ const User = mongoose.model('Users');
 
 // define reading of stating file
 // app.use(express.static(path.join(__dirname, '/')));
-
-
 
 router.get('/', function(req, res) {    
     User.findById(req.session.userId)
@@ -54,7 +51,7 @@ router.get('/map', function (req, res) {
 
 });
 
-
+// TODO delete
 function requiresLogin(req,res,next){
     if(req.session && req.session.userId){
         return next();

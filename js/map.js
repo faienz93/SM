@@ -78,9 +78,7 @@ function createMap(m = "OSM", t = "osm") {
   // When inizialize the map it set with Default OSM
   globalMap = new ol.Map({
     controls: ol.control.defaults().extend([
-      new ol.control.FullScreen({
-        source: 'fullscreen'
-      })
+      new ol.control.FullScreen()
     ]),
     target: 'map',
     renderer: 'webgl',

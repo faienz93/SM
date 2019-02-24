@@ -50,10 +50,9 @@ $(document).ready(function () {
   settingMap();
   createMap(); 
 
-
   // destroy session
   logout();
-  createMap();
+
 
   // Definition of view of Partials
   definePartialsMaps();

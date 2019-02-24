@@ -19,7 +19,7 @@
  */
  router.get('/login', function (req, res, next) {
      /**
-      * Define the default account
+      * Define the default account if the number of user is 0
       */
     Users.countDocuments(function(err,count){
         if(err){
