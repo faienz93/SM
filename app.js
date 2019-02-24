@@ -48,6 +48,8 @@ const MongoStore = require('connect-mongo')(session);
 var routing = require('./routes/routing.js');
 var handleSession = require('./routes/session.js');
 var userOperations = require("./routes/userDB.js");
+var testOperaions = require("./routes/experimentDB.js");
+var setting = require("./routes/settingDB.js");
 
 
 
@@ -129,6 +131,8 @@ app.use('/js',express.static(path.join(__dirname, 'js')));
 app.use('/', routing);
 app.use('/',handleSession);
 app.use('/', userOperations);
+app.use('/', testOperaions);
+app.use('/',setting);
 
 
 /**

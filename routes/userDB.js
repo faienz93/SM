@@ -45,7 +45,6 @@ router.post('/adduser', [
             } else {
                 return username;
             }
-
         }),
     // Sanitize (trim and escape) the username field.
     sanitizeBody('username').trim().escape(), // replace <, >, &, ', " and / with HTML entities and delete the space
@@ -196,7 +195,7 @@ router.post('/updateuser', [
             user.username = req.body.username;
             user.email = req.body.email;
             user.password = req.body.password;
-            user.save(function (err, updatedTank) {
+            user.save(function (err, user) {
                 if (err) {
                     return res.status(422).send({
                         insertionError: true,

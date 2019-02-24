@@ -35,10 +35,36 @@
   color: rgba(255, 255, 255, .5);
 }
 
-#navbarDropdown {
+/*
+* FILTER
+*/
+#navbarDropdownMetricsView {
+  width: 150px;
+}
+#navbarDropdownMetricsView > *::after  {
+  display: inline;
+  -webkit-transform: translateX(50%);
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+#navbarDropdownFiltersMap {
+  width: 190px;
+}
+#navbarDropdownFiltersMap > *::after  {
+    display: inline;
+    -webkit-transform: translateX(50%);
+    -ms-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+/*
+* VIEW
+*/
+#navbarDropdownView {
   width: 130px;
 }
-#navbarDropdown > *::after  {
+#navbarDropdownView > *::after  {
     display: inline;
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);

@@ -13,6 +13,8 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('Users');
 
+const router = express.Router();
+
 
 // define reading of stating file
 // app.use(express.static(path.join(__dirname, '/')));

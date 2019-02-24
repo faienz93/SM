@@ -7,21 +7,17 @@
  */
 
 
-function settingMap(){
-
+function settingMap() {
   defaultOSM();
   bingMaps();
   stamenMap();
   hereMap();
 
-  
-
   $('.selected-debug').on("click", function (event) {
-    event.preventDefault();    
+    event.preventDefault();
     defineDebug();
     return false;
   });
-
 
   // default value of filter
   var selectedKernel = normalize(kernels["none"]);
@@ -35,8 +31,29 @@ function settingMap(){
   });
 
 
+  
+  $('.selected-metric').on('click',function(){
+    console.log(experiments);
+    var setPreferenceColor = $(this).attr('value');
+    //console.log(setPreferenceColor);
+    // TODO mettere a posto il colore dei markers 
+    var layers = globalMap.getLayers().getArray();
+    var markersLayer = getCurrentLayerByTitle(layers, "markers");    
+   
+    markersLayer.getSource().getFeatures()[1].setStyle(new ol.style.Style({
+      image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+        color: '#00ffff', //  #FF0000
+        crossOrigin: 'anonymous',
+        src: '/img/dot.png'
+      }))
+    }));
+
+  })
+  
+
+
   // Setting filter 
-  for (var i = 0; i < groupsMap.length; i++) {
+  for (var i = 0, len = groupsMap.length; i < len; i++) {
     var layers = groupsMap[i].values_.layers.array_;
 
     //  This function allows to apply a filter based on a matrix and methods defined
@@ -46,15 +63,17 @@ function settingMap(){
     //  it has not visible
     //  REF: https://openlayers.org/en/latest/examples/image-filter.html
 
-    for (var j = 0; j < layers.length; j++) {
+    for (var j = 0, layerlen = layers.length; j < layerlen; j++) {
       layers[j].on('postcompose', function (event) {
         convolve(event.context, selectedKernel);
       });
     }
   }
+
+  
 }
 
-function createMap(m = "OSM",t = "osm") {
+function createMap(m = "OSM", t = "osm") {
 
   // When inizialize the map it set with Default OSM
   globalMap = new ol.Map({
@@ -71,12 +90,15 @@ function createMap(m = "OSM",t = "osm") {
     loadTilesWhileAnimating: true, // is used for old smartphone during the animations
     view: new ol.View({
       center: ol.proj.fromLonLat(initialCoordinatesMap), // Longitude and Latitude 
-      zoom: 10
+      zoom: 12
     })
   });
 
   geocoder();
   setCurrentLayer(m, t);
+  
+
+  
 }
 
 
@@ -86,7 +108,7 @@ function createMap(m = "OSM",t = "osm") {
  * 
  * @method defineDebug
  */
-function defineDebug(){
+function defineDebug() {
   var currentLayers = globalMap.getLayers().getArray();
   var currentLayer = getCurrentLayerByVisible(currentLayers);
   var deb = debugLayer(currentLayer.getSource());
@@ -106,9 +128,8 @@ function setCurrentLayer(mapview, type) {
   var groupSelected = getGroup(mapview);
   globalMap.setLayerGroup(groupSelected);
 
-  
-
   var layers = globalMap.getLayers().getArray();
+  // TODO delete
   console.log(layers);
   var debugLayer = getCurrentLayerByTitle(layers, "Debug");
 
@@ -118,10 +139,11 @@ function setCurrentLayer(mapview, type) {
     layers.splice(index, 1);
   }
 
-  for (var i = 0; i < layers.length; ++i) {
+  for (var i = 0, len = layers.length; i < len; i++) {
     if (groupSelected.values_.title === "Bing") {
       layers[i].setVisible(bingStyles[i] === type);
     } else if (groupSelected.values_.title === "Here") {
+      // FIXME fix scheme
       layers[i].setVisible(hereStyles[i].scheme === type);
     } else if (groupSelected.values_.title === "Stamen") {
       layers[i].setVisible(stamenStyles[i] === type);
@@ -130,7 +152,10 @@ function setCurrentLayer(mapview, type) {
     }
   }
 
-  
+  // get the value from dropdown inside navbar
+  var actualValueView = $('.selected-view').attr("value");
+  setMarkersView(actualValueView);
+
 }
 
 /**
@@ -151,9 +176,6 @@ function defaultOSM() {
     ]
   });
 
-  
-
-
   // return layersOSM;
   groupsMap.push(layersOSM);
 }
@@ -165,9 +187,8 @@ function defaultOSM() {
  * @method bingMaps
  */
 function bingMaps() {
-  var layers = [];
-  var i;
-  for (i = 0; i < bingStyles.length; ++i) {
+  var layers = []; 
+  for (var i = 0, len = bingStyles.length; i < len; ++i) {
     layers.push(new ol.layer.Tile({
       title: bingStyles[i],
       visible: false,
@@ -204,7 +225,7 @@ function hereMap() {
     '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
     '?app_id={app_id}&app_code={app_code}';
   var layers = [];
-  for (var i = 0; i < hereStyles.length; ++i) {
+  for (var i = 0, len = hereStyles.length; i < len; ++i) {
     var layerDesc = hereStyles[i];
     layers.push(new ol.layer.Tile({
       title: hereStyles[i].scheme,
@@ -239,8 +260,7 @@ function stamenMap() {
 
 
   var layers = [];
-  var i;
-  for (i = 0; i < stamenStyles.length; ++i) {
+  for (var i = 0, len = stamenStyles.length; i < len; ++i) {
     layers.push(new ol.layer.Tile({
       title: stamenStyles[i],
       visible: false,
@@ -327,7 +347,9 @@ function debugLayer(currentSource) {
  */
 function geocoder() {
 
-  var p = popup();
+  var container = $('#popupGeocoder')[0];
+  var closer = $('#popup-closerGeocoder')[0];
+  var p = definePopup(container, closer);
   globalMap.addOverlay(p);
 
   //Instantiate with some options and add the Control
@@ -357,7 +379,7 @@ function geocoder() {
 
     // application specific
     // app.addMarker(feature, coord); // TODO ADD MARKERS
-    var content = $('#popup-content');
+    var content = $('#popup-contentGeocoder');
     content.html('<p>You have selected here:</p>' + address.details.name);
     p.setPosition(coord);
   });
@@ -372,14 +394,16 @@ function geocoder() {
  * and a place for the content.
  * REF: https://openlayers.org/en/latest/examples/popup.html
  * 
- * @method popup
+ * @param container the Div that rapresent the popup
+ * @param closer the html element that close the popup
+ * @method definePopup
  */
-function popup() {
+function definePopup(container, closer) {
   /**
    * Elements that make up the popup.
    */
-  var container = $('#popup')[0];
-  var closer = $('#popup-closer')[0];
+  // var container = $('#popup')[0];
+  // var closer = $('#popup-closer')[0];
   /**
    * Create an overlay to anchor the popup to the map.
    */
@@ -404,3 +428,257 @@ function popup() {
 
   return popup;
 }
+
+
+/**
+ * This function define a Markers based on Database.
+ * REF: https://stackoverflow.com/questions/24315801/how-to-add-markers-with-openlayers-3
+ * @param exp the list of experiment download from server
+ * @method markersMap
+ */
+function markersMap(exp) { 
+
+  var location = [];
+  for (var i = 0, len = exp.length; i < len; i++) {
+
+    var marker = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
+      name: exp[i].name,
+      pdr: exp[i].metrics.pdr,
+      delay: exp[i].metrics.delay,
+      throughput: exp[i].metrics.throughput,
+      latitude: exp[i].latitude,
+      longitude: exp[i].longitude,
+      latitudeServer: exp[i].latitudeServer,
+      longitudeServer: exp[i].longitudeServer,
+      createdAt: exp[i].createdAt,
+      updatedAt: exp[i].updatedAt
+    });
+
+    marker.setStyle(new ol.style.Style({
+      image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+        color: '#ea4335', //  #FF0000
+        crossOrigin: 'anonymous',
+        src: '/img/dot.png'
+      }))
+    }));    
+    location.push(marker);
+  }
+
+
+  // TODO delete
+  // ================
+  // To see key and value of Features
+  // =================
+  // console.log(rome.getKeys());
+  // console.log(rome.getProperties());
+
+  var vectorSource = new ol.source.Vector({
+    features: location
+  });
+
+  var vectorLayer = new ol.layer.Vector({
+    source: vectorSource,
+    title: "markers"
+  });  
+
+  globalMap.addLayer(vectorLayer);
+
+  // https://openlayers.org/en/latest/examples/icon.html
+  var container = $('#popup')[0];
+  var closer = $('#popup-closer')[0];
+  var popup = definePopup(container, closer);
+  globalMap.addOverlay(popup);
+
+
+
+  // display popup on click
+  globalMap.on('click', function (evt) {
+    var feature = globalMap.forEachFeatureAtPixel(evt.pixel,
+      function (feature) {
+        return feature;
+      });
+    if (feature) {
+      var coordinates = feature.getGeometry().getCoordinates();
+      popup.setPosition(coordinates);
+      var content = $('#popup-content');
+      var pdr = '<b> PDR: </b>' + feature.get('pdr') + '<br>';
+      var delay = '<b> Delay: </b>' + feature.get('delay') + '<br>';
+      var throughput = '<b> Throughput: </b>' + feature.get('throughput') + '<br>';
+      var latitude = '<i> Latitude: </i>' + feature.get('latitude') + '<br>';
+      var longitude = '<i> Longitude: </i>' + feature.get('longitude') + '<br>';
+      var latitudeServer = '<i> Latitude Server: </i>' + feature.get('latitudeServer') + '<br>';
+      var longitudeServer = '<i> Longitude Server: </i>' + feature.get('longitudeServer') + '<br>';
+      var createdAt = '<sub> Created At: </sub>' + '<sub>' + feature.get('createdAt')+ '</sub>'  + '<br>';
+      var updatedAt = '<sub> Updated At: </sub>' + '<sub>' + feature.get('updatedAt') + '</sub>'  + '<br>';
+      var newline = '<br>';
+      content.html('<p>' + feature.get('name') +'</p>' + pdr + delay + throughput + newline + latitude + longitude + newline + latitudeServer + longitudeServer + newline + createdAt + updatedAt);
+    } else {
+      popup.setPosition(undefined);
+    }
+  });
+  
+}
+
+
+
+/**
+ * This function define a Cluster based on Database.
+ * REF: https://openlayers.org/en/v4.6.5/examples/cluster.html?q=cluster
+ * @param exp the list of experiment download from server
+ * @method clusterMap
+ */
+function clusterMap(exp) {
+
+  // FIXME set with the session the user preference
+
+  var location = [];
+  for (var i = 0, len = exp.length; i < len; i++) {
+    location[i] = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
+      name: exp[i].name
+    });
+  }
+
+  
+  var source = new ol.source.Vector({
+    features: location
+  });
+
+  var clusterSource = new ol.source.Cluster({
+    distance: parseInt(10, 10),
+    source: source
+  });
+
+  var styleCache = {};
+  var clusters = new ol.layer.Vector({
+    title: 'cluster',
+    source: clusterSource,
+    style: function (feature) {
+      var size = feature.get('features').length;
+      var style = styleCache[size];
+      if (!style) {
+        style = new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 10,
+            stroke: new ol.style.Stroke({
+              color: '#fff'
+            }),
+            fill: new ol.style.Fill({
+              color: '#3399CC'
+            })
+          }),
+          text: new ol.style.Text({
+            text: size.toString(),
+            fill: new ol.style.Fill({
+              color: '#fff'
+            })
+          })
+        });
+        styleCache[size] = style;
+      }
+      return style;
+    }
+  });
+
+  globalMap.addLayer(clusters);
+}
+
+/**
+ * This function define a Heatmap based on Database.
+ * REF: https://openlayers.org/en/v4.6.5/examples/heatmap-earthquakes.html
+ * @param exp the list of experiment download from server
+ * @method heatMap
+ */
+function heatMap(exp) {
+
+   // FIXME set with the session the user preference
+
+  var location = [];
+  for (var i = 0, len = exp.length; i < len; i++) {
+    location[i] = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([exp[i].longitude, exp[i].latitude])),
+      name: exp[i].name
+    });
+  }
+
+  var vector = new ol.layer.Heatmap({
+    source: new ol.source.Vector({
+      features: location
+    }),
+    title: 'heatmap',
+    // FIXME pass param of radius
+    blur: parseInt(5, 10), // TODO fare il setting
+    radius: parseInt(15, 10) // TODO fare il setting
+  });
+
+  vector.getSource().on('addfeature', function (event) {
+    // 2012_Earthquakes_Mag5.kml stores the magnitude of each earthquake in a
+    // standards-violating <magnitude> tag in each Placemark.  We extract it from
+    // the Placemark's name instead.
+    var name = event.feature.get('name');
+    var magnitude = parseFloat(name.substr(2));
+    event.feature.set('weight', magnitude - 5);
+  });
+
+  globalMap.addLayer(vector);
+}
+
+
+/**
+ * Based on param, set Markers, Clusters or HeatMap
+ * 
+ * @param v {String} - the choice of User
+ * @method setMarkersView
+ */
+function setMarkersView(v) {
+  if (v === 'markers') {
+    clearViewLayer();
+    markersMap(experiments);
+  } else if (v === 'cluster') {
+    clearViewLayer()
+    clusterMap(experiments);
+  } else if ((v === 'heatmap')) {
+    clearViewLayer()
+    heatMap(experiments);
+  } else if((v === 'none')){
+    clearViewLayer();
+    
+  }
+}
+
+/**
+ * Clear from Map of all layers that are Vector. In particular: 
+ * - Markers
+ * - Cluster
+ * - HeatMap
+ * 
+ * @method clearViewLayer
+ */
+function clearViewLayer() {
+  var layers = globalMap.getLayers().getArray();
+  var markersLayer = getCurrentLayerByTitle(layers, "markers");
+  var clusterLayer = getCurrentLayerByTitle(layers, "cluster");
+  var heatmapLayer = getCurrentLayerByTitle(layers, "heatmap");
+  
+
+  if (markersLayer != undefined) {
+    var index = layers.indexOf(markersLayer);    
+    layers.splice(index, 1);
+  }
+
+  if (clusterLayer != undefined) {
+    var index = layers.indexOf(clusterLayer);
+    layers.splice(index, 1);
+  }
+
+  if (heatmapLayer != undefined) {
+    var index = layers.indexOf(heatmapLayer);
+    layers.splice(index, 1);
+  }
+
+  globalMap.render();
+
+}
+
+

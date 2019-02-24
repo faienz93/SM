@@ -1,0 +1,192 @@
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Update Experiments
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<title>{{title}}</title>
+<div id="updateExperiment" class="mainDiv" > <!-- style="display:none" -->
+    <div class="card-header" id="headerExperiment">
+            <h3 class="mb-0"> <a href="#"><a><img src="../img/reload.svg" class="svg icon header-icon"></a> {{title}}</h3>
+        </div>
+        <div class="card-body" id="cardBodyExperiment">
+            <!--  -->
+            <!--  -->
+            
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Find</label>
+                <div class="col-lg-9">
+                    <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            </div>
+                            <select id="findExperimentUpdate" data-placeholder="Begin typing a name to filter..."
+                                class="form-control chosen-select" tabindex="4" size="0" name="updateExperiment" required>
+                                {{#if experiments}}
+                                    <option disabled selected value> Select Experiments from {{experiments.length}} </option>  
+                                    {{#each experiments}}
+                                    <option value="{{json this}}">{{this.name}}</option> 
+                                    {{/each}} 
+                                {{else}}
+                                <option disabled selected value> NO Experiments available </option>  
+                                {{/if}}                                              
+                            </select>
+                        </div>                                 
+
+                </div>
+            </div>
+            
+            <!--  -->
+            <!--  -->
+            <form class="form" id="updateExperimentForm" role="form" autocomplete="off">  
+                <!-- ID Of Experiment. It can be only read  -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">ID</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-id-badge"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Id of Experiment" id="idExperimentFormUpdate" name="id" required readonly>
+                        </div>
+                    </div>
+                </div> 
+            <!-- 
+            ///////////////////////////////////////////////////////////////////////////////////////
+            //
+            // Update FIELD
+            //
+            ///////////////////////////////////////////////////////////////////////////////////////
+            -->
+            <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Latitude</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map"></i></span>
+                            </div>
+                            <input type="number" class="form-control" value="0" id="latitudeExperimentFormUpdate" name="latitude" step=".0000001" required disabled>                                                                        
+                        </div>
+                    </div>
+                </div>                            
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Longitude</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-map"></i></span>
+                            </div>
+                            <input type="number" class="form-control" value="0" id="longitudeExperimentFormUpdate" name="longitude" step=".0000001" required disabled>
+                        </div>
+                    </div>
+                </div>
+
+                
+                {{!-- ============ Metrics ================ --}}                
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Metrics</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">PDR (Packet Delivery Ration)</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" max="100" value="0" id="pdrExperimentFormUpdate" name="pdr" id="pdr" step=".01" disabled>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Delay</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="delayExperimentFormUpdate" name="delay" id="delay" step=".01" disabled>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Throughput</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-chart-line"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="throughputExperimentFormUpdate" name="throughput" id="throughput" step=".01" disabled>                                              
+                        </div>
+                    </div>
+                </div>             
+                {{!-- ============================================ --}}
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">
+                        <h5 class="mb-0">Others</h5> 
+                    </label>                          
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Experiment Name</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-font"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Experiment name" id="nameExperimentFormUpdate" name="name" required disabled>                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Latitude Server</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="latitudeServerExperimentFormUpdate" name="latitudeServer" step=".0000001" required disabled>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Longitude Server</label>
+                    <div class="col-lg-9">
+                            <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                            </div>
+                            <input type="number" class="form-control"  min="0" value="0" id="longitudeServerExperimentFormUpdate" name="longitudeServer" step=".0000001" required disabled>                                              
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 
+                ///////////////////////////////////////////////////////////////////////////////////////
+                //
+                // SEND VALUE 
+                //
+                ///////////////////////////////////////////////////////////////////////////////////////
+                -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label"></label>
+                    <div class="col-lg-9">
+                        <input type="button" id="resetUpdateExperiment" class="btn btn-secondary" value="Cancel" disabled>
+                        <input type="submit" id="sendExperimentFormUpdate" class="btn btn-dark" value="Update" disabled>
+                    </div>
+                </div>
+            </form>
+        </div>
+<!-- 
+///////////////////////////////////////////////////////////////////////////////////////
+//
+// Load Scripts
+// REF: https://stackoverflow.com/a/28478146/4700162
+//
+///////////////////////////////////////////////////////////////////////////////////////
+-->
+<script>       
+        $.getScript("../../js/util.js");
+        $.getScript("../../js/form.js");
+</script>

@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 require('../models/users');
+require('../models/experiment');
 var app = require('../app');
 var debug = require('debug')('my-web:server');
 var http = require('http');

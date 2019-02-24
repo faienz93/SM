@@ -64,8 +64,8 @@ https://stackoverflow.com/questions/21172889/express-send-a-page-and-custom-data
 https://stackoverflow.com/questions/25300017/how-to-ensure-the-javascript-is-at-the-bottom-of-the-code-in-express-handlebars
 https://stackoverflow.com/questions/44126870/how-to-render-only-data-without-reloading-entire-page-in-node-js-using-ejs-templ
 
-
-
+CHOOSEN
+https://harvesthq.github.io/chosen/#no-results-text-support
 
 
 RICORDA: 
@@ -81,6 +81,13 @@ TODO:
 
 - inviare una mail nel momento in cui si crea un nuovo utente (https://www.npmjs.com/package/express-mailer#sending-an-email)
 
+master 
+    |
+    |
+    |-> experiment-json
+            |
+            |
+            |-> experiment-json-setting
             
 
 IMPORTANT: 
@@ -100,16 +107,90 @@ https://openlayers.org/en/latest/examples/?q=marker
 https://openlayers.org/en/latest/examples/?q=cluster
 https://openlayers.org/en/latest/examples/?q=heat
 
-COLOR PICKER
-http://www.bestjquery.com/2018/09/pickr-flat-simple-hackable-color-picker/
-http://www.bestjquery.com/?EFq8USju
+
+
+
+https://luminfire.com/tech_files/gis_demos/demo_4516/ --> markers Cluster
+
+ICONFINDER
+FLATICON
+FONTAWESOME
+
+
+LOADFAST: https://www.solodev.com/blog/web-design/how-to-load-css-and-javascript-faster.stml
+AVOID flickering https://stackoverflow.com/a/3629799/4700162 
+                https://conversionista.se/en/avoid-flickering-abtesting/
 
 
 
 
+https://www.npmjs.com/package/jsonschema
+
+https://stackoverflow.com/a/7574300/4700162
 
 
+{ username: 'iyuiyu',
+  email: 'antsonio.faienza@studio.unibo.it',
+  password: 'a',
+  passwordConfirm: 'a' }
+
+JSON: 
+
+SEMPLICE
+[{
+    "latitude": "44.4984508",
+    "longitude": "11.3335356",
+    "name": "Via Riva Reno",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.4908989",
+    "longitude": "11.3748269",
+    "name": "Via Spartaco",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.4983908",
+    "longitude": "11.3541623",
+    "name": "Porta San Donato",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.5023288",
+    "longitude": "11.331106",
+    "name": "Porta Lame",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+},
+{
+     "latitude": "44.4868099",
+    "longitude": "11.3641759",
+    "name": "Via Mazzini",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+}
+
+]
+
+CON TUTTO
+{
+    "latitude": "44.498955",
+    "longitude": "11.327591",
+    "metrics": { 
+        "pdr":"0.21",
+        "delay":"0.22",
+        "throughput":"0.23"
+    },
+    "name": "Prova",
+    "latitudeServer":"44.498955",
+    "longitudeServer":"11.327591"
+}
 
 
+https://refreshless.com/nouislider/examples/#section-colored-connect
+https://github.com/leongersen/noUiSlider/issues/705 
 
-
+validate color https://stackoverflow.com/a/25823774/4700162
