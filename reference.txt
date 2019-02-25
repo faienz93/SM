@@ -1,6 +1,6 @@
 https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/
 https://codeforgeek.com/2015/01/render-html-file-expressjs/
-http://expressjs.com/it/starter/static-files.html
+
 
 EXPRESS SESSION AND COOKIE
 https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
