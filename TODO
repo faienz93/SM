@@ -1,9 +1,11 @@
-- se aggiorno qualcosa dopo non mi fa più entrare 
+- se aggiorno qualcosa dopo non mi fa più entrare --> RISOLTO
+- nell'update utente, cambiare i valori di default e in "hi nome utente" --> RISOLTO
+
 - Mettere a posto la configurazione
 - Fare update e delete degli esperimenti
 - Sistemare FORM utente
 - fare refresh dei markers
-- mettere a posto l'auth/permessi 
+
 - gestire il caso non ci siano esperimenti
 
 - mettere prima gli utenti e poi gli esperimenti nella navbar
@@ -13,6 +15,6 @@
 - completare radius e blur nelle heatmap
 - cercare di mettere la visualizzazione a tutto schermo
 - mettere il flickering della pagina
-- nell'update utente, cambiare i valori di default e in "hi nome utente"
+
 
 - in update Experiment quando scelgo un esperimento deve potermelo far cambiare

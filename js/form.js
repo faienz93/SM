@@ -112,19 +112,19 @@ function handleFormUser() {
   $('#resetUpdateUser').click(function () {
     // i want avoid the rest of the field ID
     var tempID = $('#idUserFormUpdate').val();
+    var user = $("usernameUserFormUpdate").val();
+    var mail = $("emailUserFormUpdate").val();
+    
 
     // I reset the form
     $('#updateUserForm')[0].reset();
 
     // I write agant the ID
     $('#idUserFormUpdate').val(tempID);
+    $("usernameUserFormUpdate").val(user);
+    $("emailUserFormUpdate").val(mail);
 
   });
-
-  // TODO da verificare cosa fa 
-  // $('#resetCluster').click(function () {
-  //   $('#settingsForm')[0].reset();    
-  // })
 }
 
 /**
@@ -292,33 +292,33 @@ function handleFormThroughput(){
   });
 }
 
+// TODO DELETE
+// /**
+// * This method aims to populate the update form
+// * 
+// * @method populateFormUpdateUser
+// */
+// function populateFormUpdateUser() {
 
-/**
-* This method aims to populate the update form
-* 
-* @method populateFormUpdateUser
-*/
-function populateFormUpdateUser() {
+//   $('select').on('change', function () {
 
-  $('select').on('change', function () {
-
-    // at the start all field are disabled. Then when i choice from dropdown becomes enabled
-    $('#usernameUserFormUpdate').removeAttr("disabled");
-    $('#emailUserFormUpdate').removeAttr("disabled");
-    $('#passwordUserFormUpdate').removeAttr("disabled");
-    $('#confirmPasswordUserFormUpdate').removeAttr("disabled");
-    $('#sendUserFormUpdate').removeAttr("disabled");
-    $("#resetUpdateUser").removeAttr("disabled");
+//     // at the start all field are disabled. Then when i choice from dropdown becomes enabled
+//     $('#usernameUserFormUpdate').removeAttr("disabled");
+//     $('#emailUserFormUpdate').removeAttr("disabled");
+//     $('#passwordUserFormUpdate').removeAttr("disabled");
+//     $('#confirmPasswordUserFormUpdate').removeAttr("disabled");
+//     $('#sendUserFormUpdate').removeAttr("disabled");
+//     $("#resetUpdateUser").removeAttr("disabled");
 
 
-    // set the field with the information of value from dropdown
-    var val = jQuery.parseJSON(this.value);
-    $('#idUserFormUpdate').val(val._id);
-    $('#usernameUserFormUpdate').val(val.username);
-    $('#emailUserFormUpdate').val(val.email);
-    $('#passwordUserFormUpdate').val(val.password);
-  });
-}
+//     // set the field with the information of value from dropdown
+//     var val = jQuery.parseJSON(this.value);
+//     $('#idUserFormUpdate').val(val._id);
+//     $('#usernameUserFormUpdate').val(val.username);
+//     $('#emailUserFormUpdate').val(val.email);
+//     $('#passwordUserFormUpdate').val(val.password);
+//   });
+// }
 
 /**
 * This method aims to populate the update form of the Experiments
@@ -431,14 +431,18 @@ function updateUser(e) {
     success: function (res) {
 
       
-
+      
+      console.log(res.currentUser);
       // -----------------------
       // RESET FORM
       // -----------------------
       $('#updateUserForm')[0].reset();
       $('#password-strength-text-update').empty();
-
-
+      
+      // FIXME 
+      $("#usernameUserFormUpdate").val(res.currentUser.username);
+      $("#emailUserFormUpdate").val(res.currentUser.email);
+      $("#authentication-name").text(res.currentUser.username)
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
 

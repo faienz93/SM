@@ -127,7 +127,7 @@ router.get('/updateuser', function (req, res) {
             });
         } else {
             if (user === null) {
-                var err = new Error('Not authorized! Go back!');   //TODO vedere se mettere una pagina di errore      
+                var err = new Error('Not authorized! Go back!');   
                 return res.status(400).send({
                     insertionError: true,
                     errors: err.message,
@@ -171,8 +171,6 @@ router.post('/updateuser', [
         })
 
 ], (req, res) => {
-    console.log(req.body);
-
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     console.log(errors);
@@ -184,7 +182,10 @@ router.post('/updateuser', [
         });
     }
 
-    Users.findById(req.body.id, function (err, user) {
+    console.log("=========== CONFRONTO ===================")
+    console.log(req.session.userId)
+    console.log(req.body.id);
+    Users.findById(req.session.userId, function (err, user) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
@@ -195,6 +196,9 @@ router.post('/updateuser', [
             user.username = req.body.username;
             user.email = req.body.email;
             user.password = req.body.password;
+            
+            // In this case we use "save" instead update because i want hashing the password and call 
+            // the pre('save')
             user.save(function (err, user) {
                 if (err) {
                     return res.status(422).send({
@@ -204,13 +208,7 @@ router.post('/updateuser', [
                     });
 
                 } else {
-                    Users.find()
-                        .then((registrations) => {
-                            res.status(200).send({ success: "Successful Update", users: registrations });
-                        })
-                        .catch(() => {
-                            res.status(422).send({ msg: "I cannot show the user" });
-                        });
+                    res.status(200).send({ success: "Successful Update", currentUser: user });
                 }
             });
         }
@@ -253,27 +251,18 @@ router.get('/deleteuser', function (req, res) {
 
 // POST request for send the data
 router.post('/deleteuser', function (req, res) {
-    Users.findById(req.body.id, function (err, user) {
+    Users.findByIdAndRemove(req.body.id, function(err,result){
         if (err) {
             return res.status(422).send({
                 insertionError: true,
                 errors: err,
                 statusCode: 11000
             });
-        } else {
-            user.remove(function (err, updatedTank) {
-                if (err) {
-                    return res.status(422).send({
-                        insertionError: true,
-                        errors: err,
-                        statusCode: 11000
-                    });
-                }
-                else {
-                    // Error: Can't set headers after they are sent.
-                    res.end();
-                }
-            });
+        }
+        else {
+            
+            // Error: Can't set headers after they are sent.
+            res.end();
         }
     });
 

@@ -9,15 +9,9 @@
 // dependency
 var express = require("express");
 const mongoose = require('mongoose');
-
-var path = require("path");
 const router = express.Router();
-const auth = require('http-auth');
 const { body, check, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-
-
-
 const Experiment = mongoose.model('Experiment');
 
 
