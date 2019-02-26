@@ -50,12 +50,16 @@ To start the server in development mode:
 To start the server in debug mode: 
 * `npm run debug`
 
-# Possible Error [REF](https://stackoverflow.com/a/34945326): 
+# Possible Error on Windows: 
 * `self signed certificate in certificate chain`
+    * **[Solution](https://stackoverflow.com/a/34945326)**
+        * `npm set strict-ssl false`
+* ```bcrypt@3.0.4 install: `node-pre-gyp install --fallback-to-build```
+    * **[Solution](https://superuser.com/a/1391066)**
+        * Upgrade node to a stable version: I manually downloaded and installed Windows installer from Node website
+        * Install the Windows build tools globally: ```npm install --global --production windows-build-tools```
+        * ```npm install bcrypt --save```
 
-**SOLUTION**
-
-* `npm set strict-ssl false`
 
 
 
