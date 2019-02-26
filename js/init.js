@@ -10,6 +10,7 @@
 
 $(document).ready(function () {
 
+
   // setting the Chosen Plugin
   chosenPlugin();
 
@@ -102,7 +103,6 @@ $(document).ready(function () {
         selectExperiment.push(JSON.parse($(this).val()));
       });
       experiments = selectExperiment;
-      // get the value from dropdown inside navbar
       var actualValueView = $('.selected-view').attr("value");
       setMarkersView(actualValueView);
     }
@@ -482,7 +482,7 @@ function refreshExperiments() {
 
     });
 
-    // get the value from dropdown inside navbar
+    // select the correct markers
     var actualValueView = $('.selected-view').attr("value");
     setMarkersView(actualValueView);
 

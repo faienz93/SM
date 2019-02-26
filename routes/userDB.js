@@ -182,9 +182,7 @@ router.post('/updateuser', [
         });
     }
 
-    console.log("=========== CONFRONTO ===================")
-    console.log(req.session.userId)
-    console.log(req.body.id);
+
     Users.findById(req.session.userId, function (err, user) {
         if (err) {
             return res.status(422).send({

@@ -33,8 +33,10 @@ function settingMap() {
 
   
   $('.selected-metric').on('click',function(){
-    console.log(experiments);
+   
     var setPreferenceColor = $(this).attr('value');
+    var user = $("#authentication-name").attr('value');
+    console.log(user);
     //console.log(setPreferenceColor);
     // TODO mettere a posto il colore dei markers 
     var layers = globalMap.getLayers().getArray();

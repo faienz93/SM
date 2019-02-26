@@ -404,9 +404,6 @@ function updateUser(e) {
     data: $('#updateUserForm').serialize(),
     success: function (res) {
 
-      
-      
-      console.log(res.currentUser);
       // -----------------------
       // RESET FORM
       // -----------------------
@@ -416,6 +413,9 @@ function updateUser(e) {
       // UPDATE THE VIEW
       $("#usernameUserFormUpdate").val(res.currentUser.username);
       $("#emailUserFormUpdate").val(res.currentUser.email);
+
+      var str_user = JSON.stringify(res.currentUser);
+      $("#authentication-name").attr('value', str_user);
       $("#authentication-name").text(res.currentUser.username)
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
