@@ -13,7 +13,8 @@ $(document).ready(function () {
   // reset form 
   handleFormUser();
   handleFormExperiment();
-
+  populateFormUpdateExperiment();
+  
   // reset form markers
   handleFormCluster();
   handleFormHeatmap();
@@ -292,33 +293,7 @@ function handleFormThroughput(){
   });
 }
 
-// TODO DELETE
-// /**
-// * This method aims to populate the update form
-// * 
-// * @method populateFormUpdateUser
-// */
-// function populateFormUpdateUser() {
 
-//   $('select').on('change', function () {
-
-//     // at the start all field are disabled. Then when i choice from dropdown becomes enabled
-//     $('#usernameUserFormUpdate').removeAttr("disabled");
-//     $('#emailUserFormUpdate').removeAttr("disabled");
-//     $('#passwordUserFormUpdate').removeAttr("disabled");
-//     $('#confirmPasswordUserFormUpdate').removeAttr("disabled");
-//     $('#sendUserFormUpdate').removeAttr("disabled");
-//     $("#resetUpdateUser").removeAttr("disabled");
-
-
-//     // set the field with the information of value from dropdown
-//     var val = jQuery.parseJSON(this.value);
-//     $('#idUserFormUpdate').val(val._id);
-//     $('#usernameUserFormUpdate').val(val.username);
-//     $('#emailUserFormUpdate').val(val.email);
-//     $('#passwordUserFormUpdate').val(val.password);
-//   });
-// }
 
 /**
 * This method aims to populate the update form of the Experiments
@@ -327,7 +302,6 @@ function handleFormThroughput(){
 */
 function populateFormUpdateExperiment(){
   $('#findExperimentUpdate').on('change',function (){
-
     // at the start all field are disabled. Then when i choice from dropdown becomes enabled    
     $('#latitudeExperimentFormUpdate').removeAttr("disabled");
     $('#longitudeExperimentFormUpdate').removeAttr("disabled");
@@ -438,8 +412,8 @@ function updateUser(e) {
       // -----------------------
       $('#updateUserForm')[0].reset();
       $('#password-strength-text-update').empty();
-      
-      // FIXME 
+
+      // UPDATE THE VIEW
       $("#usernameUserFormUpdate").val(res.currentUser.username);
       $("#emailUserFormUpdate").val(res.currentUser.email);
       $("#authentication-name").text(res.currentUser.username)

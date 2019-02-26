@@ -296,14 +296,14 @@ router.post('/updateexperiment', [
                 } else {
                     Experiment.find()
                         .then((exp) => {
-                            res.status(200).send({success: "Successful Update", experiments: exp });    
+                            res.status(200).send({ success: "Successful Update", experiments: exp });
 
                         })
                         .catch(() => {
                             res.status(422).send({ msg: "I cannot show the Experiment" });
                         });
 
-                       
+
                 }
             });
         }
@@ -330,39 +330,28 @@ router.get('/deleteexperiment', function (req, res) {
         });
 });
 
-router.post('/deleteexperiment', function (req,res){
-    // console.log(req.body);
+router.post('/deleteexperiment', function (req, res) {
     var experiment = JSON.parse(req.body.deleteExperiment);
-    console.log(experiment);
-    Experiment.findById(experiment._id, function (err, exp) {
+    Experiment.findByIdAndRemove(experiment._id, function (err, result) {
         if (err) {
             return res.status(422).send({
                 insertionError: true,
                 errors: err,
                 statusCode: 11000
-                });
-        } else {
-            exp.remove(function (err, exp) {
-                if (err) {
-                    return res.status(422).send({
-                        insertionError: true,
-                        errors: err,
-                        statusCode: 11000
-                        });
-                } else {
-                    
-                    Experiment.find()
-                            .then((exp) => {
-                                res.status(200).send({success: "Cancellation Successful", experiments: exp });                                
-                            })
-                            .catch(() => { 
-                                res.status(422).send({msg: "I cannot show the Experiment"});
-                            });
-                }
             });
         }
+        else {
+
+            Experiment.find()
+                .then((exp) => {
+                    res.status(200).send({ success: "Cancellation Successful", experiments: exp });
+                })
+                .catch(() => {
+                    res.status(422).send({ msg: "I cannot show the Experiment" });
+                });
+        }
     });
-  
+
 });
 
 /* ---------------------------------------------------
@@ -370,10 +359,10 @@ router.post('/deleteexperiment', function (req,res){
 ----------------------------------------------------- */
 router.get('/showexperiment', function (req, res) {
     Experiment.find()
-        .then((exp) => {       
-            res.render('partials/showexperiment', {title: "Show Experiment - [User authenticated: " + req.user + "]", experiments: exp});
+        .then((exp) => {
+            res.render('partials/showexperiment', { title: "Show Experiment - [User authenticated: " + req.user + "]", experiments: exp });
         })
-        .catch(() => { res.status(422).send({msg: "Sorry! Something went wrong."});  });
+        .catch(() => { res.status(422).send({ msg: "Sorry! Something went wrong." }); });
 });
 
 module.exports = router;
