@@ -31,27 +31,36 @@ function settingMap() {
   });
 
 
-  
-  $('.selected-metric').on('click',function(){
-   
+
+  $('.selected-metric').on('click', function () {
+
     var setPreferenceColor = $(this).attr('value');
     var user = $("#authentication-name").attr('value');
-    console.log(user);
-    //console.log(setPreferenceColor);
-    // TODO mettere a posto il colore dei markers 
+    var user_json = jQuery.parseJSON(user);
     var layers = globalMap.getLayers().getArray();
-    var markersLayer = getCurrentLayerByTitle(layers, "markers");    
-   
-    markersLayer.getSource().getFeatures()[1].setStyle(new ol.style.Style({
-      image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-        color: '#00ffff', //  #FF0000
-        crossOrigin: 'anonymous',
-        src: '/img/dot.png'
-      }))
-    }));
+    var markersLayer = getCurrentLayerByTitle(layers, "markers");
+    if (setPreferenceColor == "pdr" && markersLayer != undefined) {    
+      applyMarkersMetric(markersLayer, user_json.settings.pdr, "pdr");
+    } else if (setPreferenceColor == "delay" && markersLayer != undefined) {
+      applyMarkersMetric(markersLayer, user_json.settings.delay, "delay");
+    } else if (setPreferenceColor == "throughput" && markersLayer != undefined) {
+      applyMarkersMetric(markersLayer, user_json.settings.throughput, "throughput");
+    } else {
+      for (var i = 0, len = markersLayer.getSource().getFeatures().length; i < len; i++) {
+        markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
+          image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+            color: "#FF0000", 
+            crossOrigin: 'anonymous',
+            src: '/img/dot.png'
+          }))
+        }));
+
+      }
+    }
+
 
   })
-  
+
 
 
   // Setting filter 
@@ -72,7 +81,7 @@ function settingMap() {
     }
   }
 
-  
+
 }
 
 function createMap(m = "OSM", t = "osm") {
@@ -96,8 +105,75 @@ function createMap(m = "OSM", t = "osm") {
 
   geocoder();
   setCurrentLayer(m, t);
-  
 
+}
+
+/**
+ * Thanks this method we color the markers. Based on the preference and metrics param 
+ * we check the experiment value (i.e pdr) respect the range defined from the user.
+ * When it's find the corrispective range we apply the color assigned to this range
+ * 
+ * @method applyMarkersMetric
+ * @param markersLayer the layer of Markers
+ * @param preference the preference of the user
+ * @metrics the type of metrics from pdr, delay and throughput 
+ */
+function applyMarkersMetric(markersLayer, preference, metrics){
+
+  for (var i = 0, len = markersLayer.getSource().getFeatures().length; i < len; i++) {
+    // This is the experiment value
+    var experiment_value;
+    if(metrics === "pdr") experiment_value = markersLayer.getSource().getFeatures()[i].getProperties().pdr;
+    else if(metrics === "delay") experiment_value = markersLayer.getSource().getFeatures()[i].getProperties().delay;
+    else if(metrics === "throughput") experiment_value = markersLayer.getSource().getFeatures()[i].getProperties().throughput;
+
+    // These are preference of the user 
+    var pref_val_x0x1 = preference.interval_x0x1.threashold;
+    var pref_val_x1x2 = preference.interval_x1x2.threashold;
+    var pref_val_x2x3 = preference.interval_x2x3.threashold;
+
+    // Verify the membership of the value respect the range
+    if (0 <= experiment_value && experiment_value <= pref_val_x0x1) {
+      // console.log("FIRST INTERVAL " + 0 + " < " + experiment_value + " < " + pref_val_x0x1) // DEBUG 
+      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x0x1.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+
+    } else if (pref_val_x0x1 < experiment_value && experiment_value <= pref_val_x1x2) {
+      // console.log("SECOND INTERVAL " + pref_val_x0x1 + " < " + experiment_value + " < " + pref_val_x1x2) // DEBUG 
+      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x1x2.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+
+    } else if (pref_val_x1x2 < experiment_value && experiment_value <= pref_val_x2x3) {
+      // console.log("THIRT INTERVAL " + pref_val_x1x2 + " < " + experiment_value + " < " + pref_val_x2x3) // DEBUG
+      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x2x3.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+    } else {
+      // console.log(">  " + experiment_value) // DEBUG
+      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x3x4.color, //  #FF0000
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+    }
+
+  }
   
 }
 
@@ -187,7 +263,7 @@ function defaultOSM() {
  * @method bingMaps
  */
 function bingMaps() {
-  var layers = []; 
+  var layers = [];
   for (var i = 0, len = bingStyles.length; i < len; ++i) {
     layers.push(new ol.layer.Tile({
       title: bingStyles[i],
@@ -436,7 +512,7 @@ function definePopup(container, closer) {
  * @param exp the list of experiment download from server
  * @method markersMap
  */
-function markersMap(exp) { 
+function markersMap(exp) {
 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
@@ -461,7 +537,7 @@ function markersMap(exp) {
         crossOrigin: 'anonymous',
         src: '/img/dot.png'
       }))
-    }));    
+    }));
     location.push(marker);
   }
 
@@ -480,7 +556,7 @@ function markersMap(exp) {
   var vectorLayer = new ol.layer.Vector({
     source: vectorSource,
     title: "markers"
-  });  
+  });
 
   globalMap.addLayer(vectorLayer);
 
@@ -509,15 +585,15 @@ function markersMap(exp) {
       var longitude = '<i> Longitude: </i>' + feature.get('longitude') + '<br>';
       var latitudeServer = '<i> Latitude Server: </i>' + feature.get('latitudeServer') + '<br>';
       var longitudeServer = '<i> Longitude Server: </i>' + feature.get('longitudeServer') + '<br>';
-      var createdAt = '<sub> Created At: </sub>' + '<sub>' + feature.get('createdAt')+ '</sub>'  + '<br>';
-      var updatedAt = '<sub> Updated At: </sub>' + '<sub>' + feature.get('updatedAt') + '</sub>'  + '<br>';
+      var createdAt = '<sub> Created At: </sub>' + '<sub>' + feature.get('createdAt') + '</sub>' + '<br>';
+      var updatedAt = '<sub> Updated At: </sub>' + '<sub>' + feature.get('updatedAt') + '</sub>' + '<br>';
       var newline = '<br>';
-      content.html('<p>' + feature.get('name') +'</p>' + pdr + delay + throughput + newline + latitude + longitude + newline + latitudeServer + longitudeServer + newline + createdAt + updatedAt);
+      content.html('<p>' + feature.get('name') + '</p>' + pdr + delay + throughput + newline + latitude + longitude + newline + latitudeServer + longitudeServer + newline + createdAt + updatedAt);
     } else {
       popup.setPosition(undefined);
     }
   });
-  
+
 }
 
 
@@ -540,7 +616,7 @@ function clusterMap(exp) {
     });
   }
 
-  
+
   var source = new ol.source.Vector({
     features: location
   });
@@ -592,7 +668,7 @@ function clusterMap(exp) {
  */
 function heatMap(exp) {
 
-   // FIXME set with the session the user preference
+  // FIXME set with the session the user preference
 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
@@ -641,9 +717,9 @@ function setMarkersView(v) {
   } else if ((v === 'heatmap')) {
     clearViewLayer()
     heatMap(experiments);
-  } else if((v === 'none')){
+  } else if ((v === 'none')) {
     clearViewLayer();
-    
+
   }
 }
 
@@ -660,10 +736,10 @@ function clearViewLayer() {
   var markersLayer = getCurrentLayerByTitle(layers, "markers");
   var clusterLayer = getCurrentLayerByTitle(layers, "cluster");
   var heatmapLayer = getCurrentLayerByTitle(layers, "heatmap");
-  
+
 
   if (markersLayer != undefined) {
-    var index = layers.indexOf(markersLayer);    
+    var index = layers.indexOf(markersLayer);
     layers.splice(index, 1);
   }
 
@@ -680,5 +756,7 @@ function clearViewLayer() {
   globalMap.render();
 
 }
+
+
 
 
