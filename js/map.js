@@ -25,7 +25,7 @@ function settingMap() {
   // render a new Filter
   $('.selected-filter').on("click", function () {
     var filterSelected = $(this).attr("value");
-    console.log(filterSelected);
+    console.log(filterSelected); // TODO delete
     selectedKernel = normalize(kernels[filterSelected]);
     globalMap.render();
   });
@@ -33,7 +33,6 @@ function settingMap() {
 
 
   $('.selected-metric').on('click', function () {
-
     var setPreferenceColor = $(this).attr('value');
     var user = $("#authentication-name").attr('value');
     var user_json = jQuery.parseJSON(user);
@@ -57,9 +56,7 @@ function settingMap() {
 
       }
     }
-
-
-  })
+  });
 
 
 
@@ -116,7 +113,7 @@ function createMap(m = "OSM", t = "osm") {
  * @method applyMarkersMetric
  * @param markersLayer the layer of Markers
  * @param preference the preference of the user
- * @metrics the type of metrics from pdr, delay and throughput 
+ * @param metrics the type of metrics from pdr, delay and throughput 
  */
 function applyMarkersMetric(markersLayer, preference, metrics){
 
@@ -606,8 +603,9 @@ function markersMap(exp) {
  */
 function clusterMap(exp) {
 
-  // FIXME set with the session the user preference
-
+  var user = $("#authentication-name").attr('value');
+  var user_json = jQuery.parseJSON(user);
+    
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
     location[i] = new ol.Feature({
@@ -622,7 +620,7 @@ function clusterMap(exp) {
   });
 
   var clusterSource = new ol.source.Cluster({
-    distance: parseInt(10, 10),
+    distance: parseInt(user_json.settings.cluster.distance, 10),
     source: source
   });
 
@@ -668,7 +666,8 @@ function clusterMap(exp) {
  */
 function heatMap(exp) {
 
-  // FIXME set with the session the user preference
+  var user = $("#authentication-name").attr('value');
+  var user_json = jQuery.parseJSON(user);
 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
@@ -683,9 +682,9 @@ function heatMap(exp) {
       features: location
     }),
     title: 'heatmap',
-    // FIXME pass param of radius
-    blur: parseInt(5, 10), // TODO fare il setting
-    radius: parseInt(15, 10) // TODO fare il setting
+  
+    blur: parseInt(user_json.settings.heatmap.blur, 10), 
+    radius: parseInt(user_json.settings.heatmap.radius, 10) 
   });
 
   vector.getSource().on('addfeature', function (event) {

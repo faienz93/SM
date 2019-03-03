@@ -46,14 +46,14 @@
             // radius size
             radius: {
                 type: Number,
-                default: 10,
+                default: 15,
                 min: 1,
                 max: 50
             },
             // blur size 
             blur: {
                 type: Number,
-                default: 15,
+                default: 5,
                 min: 1,
                 max: 50
             }

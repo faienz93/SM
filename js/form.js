@@ -180,7 +180,7 @@ function handleFormCluster(){
  */
 function handleFormHeatmap(){
   $('#resetHeatMap').click(function () {
-    var restoreHeatmap =  {"radius":10,"blur":15};
+    var restoreHeatmap =  {"radius":15,"blur":5};
     // restore slider value
     sliderHeatmapBlur[0].noUiSlider.set(restoreHeatmap.blur); 
     sliderHeatmapRadius[0].noUiSlider.set(restoreHeatmap.radius);

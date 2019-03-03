@@ -360,7 +360,7 @@ router.post('/deleteexperiment', function (req, res) {
 router.get('/showexperiment', function (req, res) {
     Experiment.find()
         .then((exp) => {
-            res.render('partials/showexperiment', { title: "Show Experiment - [User authenticated: " + req.user + "]", experiments: exp });
+            res.render('partials/showexperiment', { title: "Show Experiment", experiments: exp });
         })
         .catch(() => { res.status(422).send({ msg: "Sorry! Something went wrong." }); });
 });

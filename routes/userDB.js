@@ -273,7 +273,7 @@ router.post('/deleteuser', function (req, res) {
 router.get('/showuser', function (req, res) {
     Users.find()
         .then((registrations) => {
-            res.render('partials/showuser', { title: "Show User - [User authenticated: " + req.user + "]", users: registrations });
+            res.render('partials/showuser', { title: "Show User", users: registrations });
         })
         .catch(() => { res.status(422).send({ msg: "Sorry! Something went wrong." }); });
 });
