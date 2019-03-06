@@ -44,7 +44,7 @@ function settingMap() {
       applyMarkersMetric(markersLayer, user_json.settings.delay, "delay");
     } else if (setPreferenceColor == "throughput" && markersLayer != undefined) {
       applyMarkersMetric(markersLayer, user_json.settings.throughput, "throughput");
-    } else {
+    } else if(markersLayer != undefined) {
       for (var i = 0, len = markersLayer.getSource().getFeatures().length; i < len; i++) {
         markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
           image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
@@ -77,6 +77,17 @@ function settingMap() {
       });
     }
   }
+
+
+  $('.selected-view').on("click", function () {
+    // get the value from dropdown inside navbar
+    var actualValueView = $(this).attr("value");
+    
+    // var actualValueView = $('.selected-view').attr("value");
+  // $('.selected-view').removeClass('active')
+    console.log(actualValueView);
+    setMarkersView( actualValueView);
+  });
 
 
 }
@@ -212,22 +223,25 @@ function setCurrentLayer(mapview, type) {
     layers.splice(index, 1);
   }
 
+  // We Set the grout selected. i.e. Bing, OSM, Stamen and based on this choice
+  // we define the layers
   for (var i = 0, len = layers.length; i < len; i++) {
-    if (groupSelected.values_.title === "Bing") {
+    if (groupSelected.values_.title === "Bing" && layers[i].getType() == "TILE")  {
       layers[i].setVisible(bingStyles[i] === type);
-    } else if (groupSelected.values_.title === "Here") {
+    } else if (groupSelected.values_.title === "Here" && layers[i].getType() == "TILE") {
       // FIXME fix scheme
       layers[i].setVisible(hereStyles[i].scheme === type);
-    } else if (groupSelected.values_.title === "Stamen") {
+    } else if (groupSelected.values_.title === "Stamen" && layers[i].getType() == "TILE") {
       layers[i].setVisible(stamenStyles[i] === type);
-    } else {
+    } else if(layers[i].getType() == "TILE") {
       layers[i].setVisible("OSM");
     }
   }
 
   // get the value from dropdown inside navbar
-  var actualValueView = $('.selected-view').attr("value");
-  setMarkersView(actualValueView);
+  // var actualValueView = $('.selected-view').attr("value");
+  // setMarkersView(actualValueView);
+  
 
 }
 
