@@ -7,7 +7,7 @@
 - [x] Cluster: Distanza 
 - [x] Heatmap: Radius e Blur 
 - [x] Mantenere sempre gli stessi markers quando si cambia la view
-- [ ] Poter aggiornare automaticamente i settaggi senza dover fare refresh della pagina (Ajax)
+- [x] Poter aggiornare automaticamente i settaggi senza dover fare refresh della pagina (Ajax)
 - [ ] Flickering della pagina
 - [x] Fixare cambio Here maps layers
 
