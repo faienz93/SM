@@ -19,7 +19,7 @@ $(document).ready(function () {
     var pdr_slider_string = $('#PDR-slider');
     var pdr_slider_json =  $.parseJSON(pdr_slider_string.attr('value'));  
     
-    // console.log(pdr_slider_json.pdr) //TODO delete
+
 
     // we retrieve the value of color and threashold
     var colorPDR = [];
@@ -89,9 +89,6 @@ function createMetricSlider(inputSlider, color, threashold, palette, inputNumber
     var slider = $(inputSlider);
 
     
-     /**
-     * TODO gli start devono essere letti da database
-     */
     noUiSlider.create(slider[0], {
         start: threashold, 
         connect: [true, true, true, true],

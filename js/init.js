@@ -17,27 +17,6 @@ $(document).ready(function () {
   // retrieve result of query and then show into view
   refreshExperiments();
 
-  // Define value of Search Bar using Chosen Plugin
-  // getExperiments(); TODO vedere se cancellare
-  // queryExperiments().then(function (exp) {
-    
-  //       // experiments.push(element);
-  //       experiments = exp;
-        
-  //       // get the value of Markers View from dropdown inside navbar
-  //       var actualValueView = $('.selected-view').attr("value");
-  //       setView(actualValueView);
-        
-  //       $.each(exp, function (index, element) {
-          
-  //         // the value will be JSON String
-  //         appendToChosen(JSON.stringify(element), element.name);          
-  
-  //       });
-  
-        
-  // });
-
   // Setting navbar
   navbar();
 

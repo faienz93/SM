@@ -188,9 +188,7 @@
                 // err.status(401);
                 return callback(err);
             }
-            console.log(password);
-            console.log(user.password);
-            // FIXME quando cambio qualcosa dopo non mi fa più entrare
+        
             bcrypt.compare(password,user.password, function(err,result){
                 if(result===true){
                     return callback(null,user)

@@ -25,7 +25,6 @@ function settingMap() {
   // render a new Filter
   $('.selected-filter').on("click", function () {
     var filterSelected = $(this).attr("value");
-    console.log(filterSelected); // TODO delete
     selectedKernel = normalize(kernels[filterSelected]);
     globalMap.render();
   });
@@ -125,8 +124,6 @@ function setCurrentLayer(mapview, type) {
   globalMap.setLayerGroup(groupSelected);
 
   var layers = globalMap.getLayers().getArray();
-  // TODO delete
-  console.log(layers);
   var debugLayer = getCurrentLayerByTitle(layers, "Debug");
 
   // disable debug if active a different view
@@ -371,9 +368,6 @@ function geocoder() {
     var coord = evt.coordinate;
     var address = evt.address;
 
-
-    // application specific
-    // app.addMarker(feature, coord); // TODO ADD MARKERS
     var content = $('#popup-contentGeocoder');
     content.html('<p>You have selected here:</p>' + address.details.name);
     p.setPosition(coord);

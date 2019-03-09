@@ -263,7 +263,6 @@ function handleFormDelay(){
  * @method handleFormThroughput
  */
 function handleFormThroughput(){
-  // TODO add reset throughput 
   
   // Reset value of form Throughput experiment
   $('#resetThroughput').click(function () {

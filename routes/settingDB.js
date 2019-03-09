@@ -59,7 +59,7 @@ const User = mongoose.model('Users');
                 });
             } else {
                 if (user === null) {
-                    var err = new Error('Not authorized! Go back!');   //TODO vedere se mettere una pagina di errore      
+                    var err = new Error('Not authorized! Go back!');        
                     return res.status(400).send({
                         insertionError: true,
                         errors: err.message,

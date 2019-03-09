@@ -1,40 +1,37 @@
- <!-- 
+<!-- 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
 // MAP
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 -->
- {{!-- <div id="fullscreen" class="fullscreen"> TODO delete --}}
-     <div id="map" class="mainDiv"></div>
- {{!-- </div> --}}
- <!-- 
+
+<div id="map" class="mainDiv"></div>
+
+<!-- 
 ///////////////////////////////////////////////////////////////////////////////////////
 //
 // POPUP
 //
 ///////////////////////////////////////////////////////////////////////////////////////
 -->
- <div id="popup" class="ol-popup">
+<div id="popup" class="ol-popup">
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-<div id="popup-content"></div>
+    <div id="popup-content"></div>
 </div>
 
- <div id="popupGeocoder" class="ol-popup">
+<div id="popupGeocoder" class="ol-popup">
     <a href="#" id="popup-closerGeocoder" class="ol-popup-closer"></a>
-<div id="popup-contentGeocoder"></div>
+    <div id="popup-contentGeocoder"></div>
 </div>
 
 <script>
-    
+
     // FIXME async
     //console.log(ciao);
-     var m = "{{map}}"
-     var t = "{{type}}"
-     console.log(globalMap)
-     m == undefined && t == undefined ? createMap() : createMap(m, t)
-   
+    var m = "{{map}}"
+    var t = "{{type}}"
+    console.log(globalMap)
+    m == undefined && t == undefined ? createMap() : createMap(m, t)
+
 </script>
-    
-
-

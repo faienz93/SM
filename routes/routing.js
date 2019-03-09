@@ -1,8 +1,8 @@
 /**
  * ===========================================================================
- * File: UserDB.js 
+ * File: routing.js 
  * Author: Antonio Faienza
- * TODO description
+ * This handle the routing between a few page of the site 
  * ===========================================================================
  */
 
@@ -14,7 +14,7 @@ const User = mongoose.model('Users');
 
 
 
-
+// NOTE for static file..
 // define reading of stating file
 // app.use(express.static(path.join(__dirname, '/')));
 
@@ -50,16 +50,5 @@ router.get('/map', function (req, res) {
     
 
 });
-
-// TODO delete
-function requiresLogin(req,res,next){
-    if(req.session && req.session.userId){
-        return next();
-    }else {
-        req.flash('danger', 'You must be logged in to view this page.')
-        res.redirect('/login');
-    }
-}
-
 
 module.exports = router;
