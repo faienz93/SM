@@ -63,7 +63,7 @@ To start the server in debug mode:
         * Install the Windows build tools globally: ```npm install --global --production windows-build-tools```
         * ```npm install bcrypt --save```
 
-### [BUGFIX](https://github.com/antoniofaienza93/SM/blob/multilevel_dropdown/TODO.md#done)
+### [BUGFIX](https://github.com/antoniofaienza93/SM/blob/multilevel_dropdown/docs/bugfix.md#todo-italian-only)
 
 
 
