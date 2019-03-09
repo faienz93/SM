@@ -643,6 +643,15 @@ function clusterMap(exp) {
   });
 
   globalMap.addLayer(clusters);
+
+  var container = $('#popup')[0];
+  var closer = $('#popup-closer')[0];
+  var popup = definePopup(container, closer);
+  globalMap.addOverlay(popup);
+
+  /**
+   * NOTE: it can be added the popup but in this context is not important
+   */
 }
 
 /**
@@ -684,6 +693,15 @@ function heatMap(exp) {
   });
 
   globalMap.addLayer(vector);
+
+  var container = $('#popup')[0];
+  var closer = $('#popup-closer')[0];
+  var popup = definePopup(container, closer);
+  globalMap.addOverlay(popup);
+
+  /**
+   * NOTE: it can be added the popup but in this context is not important
+   */
 }
 
 
