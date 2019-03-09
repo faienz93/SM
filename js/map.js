@@ -435,7 +435,7 @@ function markersMap(exp, v) {
   // User preference
   var user = $("#authentication-name").attr('value');
   var user_json = jQuery.parseJSON(user);
-
+ 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
 

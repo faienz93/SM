@@ -6,17 +6,13 @@
  * ===========================================================================
  */
 
-// dependency
+
 var express = require("express");
 const mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 const router = express.Router();
 const { body, check, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
-
-/**
- * Mongoose
- */
 const Users = mongoose.model('Users');
 
 
@@ -77,7 +73,7 @@ router.post('/adduser', [
         })
 
 ], (req, res) => {
-    console.log(req.body);
+
 
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);

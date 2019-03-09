@@ -79,9 +79,8 @@ const User = mongoose.model('Users');
  * Update distance of Cluster
  */
  router.post('/settingCluster', function(req,res){
-    User.findByIdAndUpdate(req.session.userId,{$set:{'settings.cluster.distance': req.body.cluster_distance   }},{ runValidators: true }, function(err,result){
+    User.findByIdAndUpdate(req.session.userId,{$set:{'settings.cluster.distance': req.body.cluster_distance   }},{ runValidators: true, new: true }, function(err,user){
         if (err) {
-                console.log(err);
                 return res.status(422).send({
                     insertionError: true,
                     errors: err,
@@ -89,8 +88,7 @@ const User = mongoose.model('Users');
                     });
 
             } else {
-                console.log("SUCCESSO");
-                res.status(200).send({success: "Successful Update" });
+                res.status(200).send({success: "Successful Update", user: user });
             }
     });
  });
@@ -99,15 +97,15 @@ const User = mongoose.model('Users');
  * Update Radius and Blur of HeatMap
  */
  router.post('/settingHeatmap', function(req,res){
-    User.findByIdAndUpdate(req.session.userId,{$set:{'settings.heatmap.radius': req.body.heatmap_radius, 'settings.heatmap.blur':req.body.heatmap_blur }},{ runValidators: true }, function(err,result){
+    User.findByIdAndUpdate(req.session.userId,{$set:{'settings.heatmap.radius': req.body.heatmap_radius, 'settings.heatmap.blur':req.body.heatmap_blur }},{ runValidators: true, new: true}, function(err,user){
         if (err) {
                 return res.status(422).send({
                     insertionError: true,
                     errors: err,
                     statusCode: 11000
                     });
-            } else {                
-                res.status(200).send({success: "Successful Update" });
+            } else {      
+                res.status(200).send({success: "Successful Update",user: user });
             }
     });
 });
@@ -123,7 +121,7 @@ const User = mongoose.model('Users');
                                                     'settings.pdr.interval_x1x2.threashold' : req.body.pdr_interval_x1x2_threashold,
                                                     'settings.pdr.interval_x2x3.color' : req.body.pdr_interval_x2x3_color,
                                                     'settings.pdr.interval_x2x3.threashold' : req.body.pdr_interval_x2x3_threashold,
-                                                    'settings.pdr.interval_x3x4.color' : req.body.pdr_interval_x3x4_color  }},{ runValidators: true }, function(err,result){
+                                                    'settings.pdr.interval_x3x4.color' : req.body.pdr_interval_x3x4_color  }},{ runValidators: true, new: true }, function(err,user){
         if (err) {
                 return res.status(422).send({
                     insertionError: true,
@@ -131,7 +129,7 @@ const User = mongoose.model('Users');
                     statusCode: 11000
                     });
             } else {                
-                res.status(200).send({success: "Successful Update" });
+                res.status(200).send({success: "Successful Update",user:user });
             }
     });
  });
@@ -147,7 +145,7 @@ const User = mongoose.model('Users');
                                                     'settings.delay.interval_x2x3.color' : req.body.delay_interval_x2x3_color,
                                                     'settings.delay.interval_x2x3.threashold' : req.body.delay_interval_x2x3_threashold,
                                                     'settings.delay.interval_x3x4.color' : req.body.delay_interval_x3x4_color  }},
-                                                        { runValidators: true }, function(err,result){
+                                                        { runValidators: true, new: true }, function(err,user){
             if (err) {
                     return res.status(422).send({
                         insertionError: true,
@@ -155,7 +153,7 @@ const User = mongoose.model('Users');
                         statusCode: 11000
                         });
                 } else {                
-                    res.status(200).send({success: "Successful Update" });
+                    res.status(200).send({success: "Successful Update",user: user });
                 }
         });
 });
@@ -174,7 +172,7 @@ router.post('/settingThroughput', function(req,res){
                                                     'settings.throughput.interval_x2x3.threashold' : req.body.throughput_interval_x2x3_threashold,
 
                                                     'settings.throughput.interval_x3x4.color' : req.body.throughput_interval_x3x4_color  }},
-                                                        { runValidators: true }, function(err,result){
+                                                        { runValidators: true, new: true }, function(err,user){
             if (err) {
                     return res.status(422).send({
                         insertionError: true,
@@ -182,7 +180,7 @@ router.post('/settingThroughput', function(req,res){
                         statusCode: 11000
                         });
                 } else {                
-                    res.status(200).send({success: "Successful Update" });
+                    res.status(200).send({success: "Successful Update", user:user });
                 }
         });
 });

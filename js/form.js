@@ -777,6 +777,7 @@ function changeClusterPreference(e){
     data: $('#settingsFormCluster').serialize()+"&cluster_distance="+sliderCluster[0].noUiSlider.get(),  
     async: true,
     success: function (res) {
+      $("#authentication-name").attr( "value" , JSON.stringify(res.user)); 
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },
@@ -802,7 +803,7 @@ function changeHeatmapPreference(e){
     data: $('#settingsFormHeatmap').serialize()+"&heatmap_radius="+sliderHeatmapRadius[0].noUiSlider.get()+"&heatmap_blur="+sliderHeatmapBlur[0].noUiSlider.get(), 
     async: true,
     success: function (res) {
-      
+      $("#authentication-name").attr( "value" , JSON.stringify(res.user)); 
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },
@@ -834,7 +835,7 @@ function changePDRPreference(e){
     data: $('#settingPDRForm').serialize(), 
     async: true,
     success: function (res) {
-      
+      $("#authentication-name").attr( "value" , JSON.stringify(res.user)); 
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },
@@ -862,7 +863,7 @@ function changeDelayPreference(e){
     data: $('#settingDelayForm').serialize(), 
     async: true,
     success: function (res) {
-      
+      $("#authentication-name").attr( "value" , JSON.stringify(res.user)); 
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },
@@ -890,7 +891,7 @@ function changeThroughputPreference(e){
     data: $('#settingThroughputForm').serialize(), 
     async: true,
     success: function (res) {
-      
+      $("#authentication-name").attr( "value" , JSON.stringify(res.user)); 
       // FEEDBACK
       bootstrapAlert(res.success, "Success", "success");
     },
