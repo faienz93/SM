@@ -50,6 +50,15 @@ function settingMap() {
   }
 
 
+  /**
+   * Select the correct Metrics/filter view
+   * i.e: markers
+   *    pdr
+   *    delay
+   *    througput
+   * i.e: cluster
+   * i.e: HeatMap
+   */
   $('.selected-view').on("click", function () {
     // get the value from dropdown inside navbar
     var actualValueView = $(this).attr("value");
@@ -57,6 +66,8 @@ function settingMap() {
     $('a[value = '+actualValueView+']').addClass('active')
     setMarkersView(actualValueView);
   });
+
+
 
 }
 
@@ -683,8 +694,7 @@ function heatMap(exp) {
  * @method setMarkersView
  */
 function setMarkersView(v) {
-  console.log(v);
-  if (v === 'markers' || v === 'markers-pdr' || v === 'markers-delay' || v === 'markers-throughput') {
+    if (v === 'markers' || v === 'markers-pdr' || v === 'markers-delay' || v === 'markers-throughput') {
     clearViewLayer();
     markersMap(experiments, v);
   } else if (v === 'cluster') {
