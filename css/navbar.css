@@ -38,16 +38,6 @@
 /*
 * FILTER
 */
-#navbarDropdownMetricsView {
-  width: 150px;
-}
-#navbarDropdownMetricsView > *::after  {
-  display: inline;
-  -webkit-transform: translateX(50%);
-  -ms-transform: translateX(50%);
-  transform: translateX(50%);
-}
-
 #navbarDropdownFiltersMap {
   width: 190px;
 }
@@ -62,7 +52,7 @@
 * VIEW
 */
 #navbarDropdownView {
-  width: 130px;
+  width: 200px;
 }
 #navbarDropdownView > *::after  {
     display: inline;

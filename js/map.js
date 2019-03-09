@@ -31,35 +31,6 @@ function settingMap() {
   });
 
 
-
-  $('.selected-metric').on('click', function () {
-    var setPreferenceColor = $(this).attr('value');
-    var user = $("#authentication-name").attr('value');
-    var user_json = jQuery.parseJSON(user);
-    var layers = globalMap.getLayers().getArray();
-    var markersLayer = getCurrentLayerByTitle(layers, "markers");
-    if (setPreferenceColor == "pdr" && markersLayer != undefined) {    
-      applyMarkersMetric(markersLayer, user_json.settings.pdr, "pdr");
-    } else if (setPreferenceColor == "delay" && markersLayer != undefined) {
-      applyMarkersMetric(markersLayer, user_json.settings.delay, "delay");
-    } else if (setPreferenceColor == "throughput" && markersLayer != undefined) {
-      applyMarkersMetric(markersLayer, user_json.settings.throughput, "throughput");
-    } else if(markersLayer != undefined) {
-      for (var i = 0, len = markersLayer.getSource().getFeatures().length; i < len; i++) {
-        markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
-          image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-            color: "#FF0000", 
-            crossOrigin: 'anonymous',
-            src: '/img/dot.png'
-          }))
-        }));
-
-      }
-    }
-  });
-
-
-
   // Setting filter 
   for (var i = 0, len = groupsMap.length; i < len; i++) {
     var layers = groupsMap[i].values_.layers.array_;
@@ -84,11 +55,9 @@ function settingMap() {
     var actualValueView = $(this).attr("value");
     
     // var actualValueView = $('.selected-view').attr("value");
-  // $('.selected-view').removeClass('active')
-    console.log(actualValueView);
-    setMarkersView( actualValueView);
+  // $('.selected-view').removeClass('active')    
+    setMarkersView(actualValueView);
   });
-
 
 }
 
@@ -116,74 +85,7 @@ function createMap(m = "OSM", t = "osm") {
 
 }
 
-/**
- * Thanks this method we color the markers. Based on the preference and metrics param 
- * we check the experiment value (i.e pdr) respect the range defined from the user.
- * When it's find the corrispective range we apply the color assigned to this range
- * 
- * @method applyMarkersMetric
- * @param markersLayer the layer of Markers
- * @param preference the preference of the user
- * @param metrics the type of metrics from pdr, delay and throughput 
- */
-function applyMarkersMetric(markersLayer, preference, metrics){
 
-  for (var i = 0, len = markersLayer.getSource().getFeatures().length; i < len; i++) {
-    // This is the experiment value
-    var experiment_value;
-    if(metrics === "pdr") experiment_value = markersLayer.getSource().getFeatures()[i].getProperties().pdr;
-    else if(metrics === "delay") experiment_value = markersLayer.getSource().getFeatures()[i].getProperties().delay;
-    else if(metrics === "throughput") experiment_value = markersLayer.getSource().getFeatures()[i].getProperties().throughput;
-
-    // These are preference of the user 
-    var pref_val_x0x1 = preference.interval_x0x1.threashold;
-    var pref_val_x1x2 = preference.interval_x1x2.threashold;
-    var pref_val_x2x3 = preference.interval_x2x3.threashold;
-
-    // Verify the membership of the value respect the range
-    if (0 <= experiment_value && experiment_value <= pref_val_x0x1) {
-      // console.log("FIRST INTERVAL " + 0 + " < " + experiment_value + " < " + pref_val_x0x1) // DEBUG 
-      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
-        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-          color: preference.interval_x0x1.color, 
-          crossOrigin: 'anonymous',
-          src: '/img/dot.png'
-        }))
-      }));
-
-    } else if (pref_val_x0x1 < experiment_value && experiment_value <= pref_val_x1x2) {
-      // console.log("SECOND INTERVAL " + pref_val_x0x1 + " < " + experiment_value + " < " + pref_val_x1x2) // DEBUG 
-      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
-        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-          color: preference.interval_x1x2.color, 
-          crossOrigin: 'anonymous',
-          src: '/img/dot.png'
-        }))
-      }));
-
-    } else if (pref_val_x1x2 < experiment_value && experiment_value <= pref_val_x2x3) {
-      // console.log("THIRT INTERVAL " + pref_val_x1x2 + " < " + experiment_value + " < " + pref_val_x2x3) // DEBUG
-      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
-        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-          color: preference.interval_x2x3.color, 
-          crossOrigin: 'anonymous',
-          src: '/img/dot.png'
-        }))
-      }));
-    } else {
-      // console.log(">  " + experiment_value) // DEBUG
-      markersLayer.getSource().getFeatures()[i].setStyle(new ol.style.Style({
-        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-          color: preference.interval_x3x4.color, //  #FF0000
-          crossOrigin: 'anonymous',
-          src: '/img/dot.png'
-        }))
-      }));
-    }
-
-  }
-  
-}
 
 
 /**
@@ -229,7 +131,6 @@ function setCurrentLayer(mapview, type) {
     if (groupSelected.values_.title === "Bing" && layers[i].getType() == "TILE")  {
       layers[i].setVisible(bingStyles[i] === type);
     } else if (groupSelected.values_.title === "Here" && layers[i].getType() == "TILE") {
-      // FIXME fix scheme
       layers[i].setVisible(hereStyles[i].scheme === type);
     } else if (groupSelected.values_.title === "Stamen" && layers[i].getType() == "TILE") {
       layers[i].setVisible(stamenStyles[i] === type);
@@ -363,9 +264,6 @@ function stamenMap() {
     layers: layers
   });
 
-  // console.log(stamenLayers.values_.title);
-  // console.log(map.getLayers().array_[0].getVisible()); 
-  // return stamenLayers;
   groupsMap.push(stamenLayers);
 
 }
@@ -523,7 +421,10 @@ function definePopup(container, closer) {
  * @param exp the list of experiment download from server
  * @method markersMap
  */
-function markersMap(exp) {
+function markersMap(exp, v) {
+  // User preference
+  var user = $("#authentication-name").attr('value');
+  var user_json = jQuery.parseJSON(user);
 
   var location = [];
   for (var i = 0, len = exp.length; i < len; i++) {
@@ -540,25 +441,28 @@ function markersMap(exp) {
       longitudeServer: exp[i].longitudeServer,
       createdAt: exp[i].createdAt,
       updatedAt: exp[i].updatedAt
-    });
+    });    
 
-    marker.setStyle(new ol.style.Style({
-      image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
-        color: '#ea4335', //  #FF0000
-        crossOrigin: 'anonymous',
-        src: '/img/dot.png'
-      }))
-    }));
+    // We color the markers based on preference of the user
+    if (v === "markers-pdr") {    
+      setColorMarkers(marker, user_json.settings.pdr, exp[i].metrics.pdr);  
+    } else if (v === "markers-delay") {
+      setColorMarkers(marker, user_json.settings.delay, exp[i].metrics.delay);
+    } else if (v === "markers-throughput") {
+      setColorMarkers(marker, user_json.settings.throughput, exp[i].metrics.throughput);
+    } else { // DEFAULT COLOR
+      marker.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: '#ea4335', //  #FF0000
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+    }
+
     location.push(marker);
   }
 
-
-  // TODO delete
-  // ================
-  // To see key and value of Features
-  // =================
-  // console.log(rome.getKeys());
-  // console.log(rome.getProperties());
 
   var vectorSource = new ol.source.Vector({
     features: location
@@ -607,6 +511,65 @@ function markersMap(exp) {
 
 }
 
+/**
+ * Based on the preference and experiment value  
+ * we check if experiment value is between the range expressed from user preference
+ * 
+ * @method setColorMarkers
+ * @param markersLayer the new layer vector of markers
+ * @param preference the preference of the user
+ * @param experiment_value the value of experiment
+ */
+function setColorMarkers(markersLayer, preference, experiment_value){   
+
+    // These are preference of the user 
+    var pref_val_x0x1 = preference.interval_x0x1.threashold;
+    var pref_val_x1x2 = preference.interval_x1x2.threashold;
+    var pref_val_x2x3 = preference.interval_x2x3.threashold;
+
+    // Verify the membership of the value respect the range
+    if (0 <= experiment_value && experiment_value <= pref_val_x0x1) {
+      // console.log("FIRST INTERVAL " + 0 + " < " + experiment_value + " < " + pref_val_x0x1) // DEBUG 
+      markersLayer.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x0x1.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+
+    } else if (pref_val_x0x1 < experiment_value && experiment_value <= pref_val_x1x2) {
+      // console.log("SECOND INTERVAL " + pref_val_x0x1 + " < " + experiment_value + " < " + pref_val_x1x2) // DEBUG 
+      markersLayer.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x1x2.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+
+    } else if (pref_val_x1x2 < experiment_value && experiment_value <= pref_val_x2x3) {
+      // console.log("THIRT INTERVAL " + pref_val_x1x2 + " < " + experiment_value + " < " + pref_val_x2x3) // DEBUG
+      markersLayer.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x2x3.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+    } else {
+      // console.log(">  " + experiment_value) // DEBUG
+      markersLayer.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(/** @type {module:ol/style/Icon~Options} */({ // /** @type {olx.style.IconOptions} */
+          color: preference.interval_x3x4.color, 
+          crossOrigin: 'anonymous',
+          src: '/img/dot.png'
+        }))
+      }));
+    }
+  
+}
+
 
 
 /**
@@ -616,7 +579,7 @@ function markersMap(exp) {
  * @method clusterMap
  */
 function clusterMap(exp) {
-
+  // User preference
   var user = $("#authentication-name").attr('value');
   var user_json = jQuery.parseJSON(user);
     
@@ -679,7 +642,7 @@ function clusterMap(exp) {
  * @method heatMap
  */
 function heatMap(exp) {
-
+  // User preference
   var user = $("#authentication-name").attr('value');
   var user_json = jQuery.parseJSON(user);
 
@@ -721,9 +684,9 @@ function heatMap(exp) {
  * @method setMarkersView
  */
 function setMarkersView(v) {
-  if (v === 'markers') {
+  if (v === 'markers' || v === 'markers-pdr' || v === 'markers-delay' || v === 'markers-throughput') {
     clearViewLayer();
-    markersMap(experiments);
+    markersMap(experiments, v);
   } else if (v === 'cluster') {
     clearViewLayer()
     clusterMap(experiments);

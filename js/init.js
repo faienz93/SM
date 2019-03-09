@@ -98,6 +98,7 @@ $(document).ready(function () {
 
     // no filter selected
     if (selectExperiment.length === 0) {
+      console.log(selectExperiment);
       $("#selectExperiment option").each(function (index) {
         if (index === 0) return;
         selectExperiment.push(JSON.parse($(this).val()));
@@ -111,17 +112,6 @@ $(document).ready(function () {
   });
 
 
-
-
-  // whenever change the value of View (Navbar), will be call the same method for select
-  // markers
-  // cluster
-  // heatmpa
-  $('.selected-view').on("click", function () {
-    var viewSelected = $(this).attr("value");
-    setMarkersView(viewSelected);
-
-  });
 
 });
 
