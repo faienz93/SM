@@ -1,6 +1,6 @@
 {
   "name": "sm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Project of the Internet of Mobile System course",
   "main": "index.js",
   "dependencies": {

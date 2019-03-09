@@ -1,5 +1,5 @@
 # Mobile Systems 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/antoniofaienza93/SM/blob/multilevel_dropdown/LICENSE.md)
 ## Master Degree in Computer Science <br> University of Bologna - Alma Mater Studiorum <br> A.A. 2018/2019
 Antonio Faienza | 
 ------------ | 
@@ -50,6 +50,9 @@ To start the server in development mode:
 To start the server in debug mode: 
 * `npm run debug`
 
+### [Example Experiments](https://github.com/antoniofaienza93/SM/blob/multilevel_dropdown/docs/example.md#insert-experiments)
+
+
 # Possible Error on Windows: 
 * `self signed certificate in certificate chain`
     * **[Solution](https://stackoverflow.com/a/34945326)**
@@ -60,7 +63,7 @@ To start the server in debug mode:
         * Install the Windows build tools globally: ```npm install --global --production windows-build-tools```
         * ```npm install bcrypt --save```
 
-
+### [BUGFIX](https://github.com/antoniofaienza93/SM/blob/multilevel_dropdown/TODO.md#done)
 
 
 
