@@ -53,9 +53,8 @@ function settingMap() {
   $('.selected-view').on("click", function () {
     // get the value from dropdown inside navbar
     var actualValueView = $(this).attr("value");
-    
-    // var actualValueView = $('.selected-view').attr("value");
-  // $('.selected-view').removeClass('active')    
+    $('.selected-view.active').removeClass('active') 
+    $('a[value = '+actualValueView+']').addClass('active')
     setMarkersView(actualValueView);
   });
 
@@ -140,8 +139,8 @@ function setCurrentLayer(mapview, type) {
   }
 
   // get the value from dropdown inside navbar
-  // var actualValueView = $('.selected-view').attr("value");
-  // setMarkersView(actualValueView);
+  var actualValueView = $('.selected-view.active').attr("value");
+  setMarkersView(actualValueView);
   
 
 }
@@ -684,6 +683,7 @@ function heatMap(exp) {
  * @method setMarkersView
  */
 function setMarkersView(v) {
+  console.log(v);
   if (v === 'markers' || v === 'markers-pdr' || v === 'markers-delay' || v === 'markers-throughput') {
     clearViewLayer();
     markersMap(experiments, v);

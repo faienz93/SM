@@ -91,8 +91,8 @@ $(document).ready(function () {
     }
     experiments = selectExperiment;
 
-    // get the value from dropdown inside navbar
-    var actualValueView = $('.selected-view').attr("value");
+    // get the active value from dropdown inside navbar
+    var actualValueView = $('.selected-view.active').attr("value");   
     setMarkersView(actualValueView);
 
     // no experiment filter selected
@@ -101,7 +101,7 @@ $(document).ready(function () {
         selectExperiment.push(JSON.parse($(this).val()));
       });
       experiments = selectExperiment;
-      var actualValueView = $('.selected-view').attr("value");
+      var actualValueView = $('.selected-view.active').attr("value");
       setMarkersView(actualValueView);
     }
 
@@ -469,7 +469,7 @@ function refreshExperiments() {
     });
 
     // select the correct markers
-    var actualValueView = $('.selected-view').attr("value");
+    var actualValueView = $('.selected-view.active').attr("value");
     setMarkersView(actualValueView);
 
     
