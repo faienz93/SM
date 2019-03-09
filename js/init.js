@@ -86,7 +86,6 @@ $(document).ready(function () {
     event.preventDefault();
 
     var selectExperiment = $('#selectExperiment').chosen().val();
-
     for (var i = 0; i < selectExperiment.length; i++) {
       selectExperiment[i] = JSON.parse(selectExperiment[i])
     }
@@ -96,11 +95,9 @@ $(document).ready(function () {
     var actualValueView = $('.selected-view').attr("value");
     setMarkersView(actualValueView);
 
-    // no filter selected
-    if (selectExperiment.length === 0) {
-      console.log(selectExperiment);
+    // no experiment filter selected
+    if (selectExperiment.length === 0) {      
       $("#selectExperiment option").each(function (index) {
-        if (index === 0) return;
         selectExperiment.push(JSON.parse($(this).val()));
       });
       experiments = selectExperiment;
@@ -466,7 +463,6 @@ function refreshExperiments() {
     }
     
     $.each(exp, function (index, element) {
-
       // the value will be JSON String
       appendToChosen(JSON.stringify(element), element.name);
 
