@@ -1,6 +1,6 @@
 https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/
 https://codeforgeek.com/2015/01/render-html-file-expressjs/
-https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_dropdown_multilevel_css&stacked=h
+
 
 EXPRESS SESSION AND COOKIE
 https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359
@@ -68,26 +68,8 @@ CHOOSEN
 https://harvesthq.github.io/chosen/#no-results-text-support
 
 
-RICORDA: 
-master
-    |
-    |
-    |-> session
 
 
-TODO: 
-
-- inserire il nome all'interno del file .htaccess
-
-- inviare una mail nel momento in cui si crea un nuovo utente (https://www.npmjs.com/package/express-mailer#sending-an-email)
-
-master 
-    |
-    |
-    |-> experiment-json
-            |
-            |
-            |-> experiment-json-setting
             
 
 IMPORTANT: 
