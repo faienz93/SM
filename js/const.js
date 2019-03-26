@@ -55,6 +55,11 @@ var intervalSegmentThroughput = ['throughput-x0x1-color', 'throughput-x1x2-color
 var KEY_BING = 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc';
 
 /**
+ * Save the last view of metrics
+ */
+var saveLastActualValueView;
+
+/**
  * Jey for use Here WeGO Maps
  * Your Here Maps key from https://developer.here.com/
  */

@@ -27,6 +27,10 @@ function settingMap() {
     var filterSelected = $(this).attr("value");
     selectedKernel = normalize(kernels[filterSelected]);
     globalMap.render();
+
+    // render the markers
+    $('a[value = '+saveLastActualValueView+']').addClass('active')
+    setMarkersView(saveLastActualValueView)
   });
 
 
@@ -63,6 +67,7 @@ function settingMap() {
     var actualValueView = $(this).attr("value");
     $('.selected-view.active').removeClass('active') 
     $('a[value = '+actualValueView+']').addClass('active')
+    saveLastActualValueView = actualValueView
     setMarkersView(actualValueView);
   });
 
@@ -706,6 +711,7 @@ function heatMap(exp) {
  * @method setMarkersView
  */
 function setMarkersView(v) {
+    console.log(v);
     if (v === 'markers' || v === 'markers-pdr' || v === 'markers-delay' || v === 'markers-throughput') {
     clearViewLayer();
     markersMap(experiments, v);
