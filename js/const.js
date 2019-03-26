@@ -57,7 +57,7 @@ var KEY_BING = 'ApzktDln-AM3Y2dIraRcxlKXiQwFmIOgrAZAO5ArG1pnynfl2rzoM61YXmAwxWuc
 /**
  * Save the last view of metrics
  */
-var saveLastActualValueView;
+var saveLastActualValueView = 'markers';
 
 /**
  * Jey for use Here WeGO Maps
