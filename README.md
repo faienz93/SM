@@ -31,7 +31,7 @@ antonio.faienza@studio.unibo.it |
 `npm install`
 
 * Create a custom file `.env` inside the root of the 
-project in this way: 
+project: 
 ```
 # Database Name
 DATABASE=mongodb://localhost:27017/DATABASE-NAME
