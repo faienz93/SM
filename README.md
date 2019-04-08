@@ -53,7 +53,7 @@ To start the server in debug mode:
 ### [Example Experiments](https://github.com/antoniofaienza93/SM/blob/multilevel_dropdown/docs/example.md#insert-experiments)
 
 
-# Possible Error on Windows: 
+# Possible Errors on Windows: 
 * `self signed certificate in certificate chain`
     * **[Solution](https://stackoverflow.com/a/34945326)**
         * `npm set strict-ssl false`
