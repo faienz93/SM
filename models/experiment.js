@@ -45,8 +45,8 @@ const experimentSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        index: true,
-        unique: true,
+        // index: true,
+        unique: false
     },
     latitudeServer: {
         type: Number,

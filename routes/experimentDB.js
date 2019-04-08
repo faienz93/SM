@@ -95,16 +95,16 @@ router.post('/addexperimentform', [
 
     body('name')
         .isLength({ min: 1 })
-        .withMessage('Experiment name is required.')
-        .custom(async function (exp) {
-            // i check if already exist experiment with this name
-            var experiment = await Experiment.find({ 'name': exp })
-            if (experiment.length != 0 && experiment[0].name) {
-                throw new Error('Experiment already in use');
-            } else {
-                return experiment;
-            }
-        }),
+        .withMessage('Experiment name is required.'),
+        // .custom(async function (exp) {
+        //     // i check if already exist experiment with this name
+        //     var experiment = await Experiment.find({ 'name': exp })
+        //     if (experiment.length != 0 && experiment[0].name) {
+        //         throw new Error('Experiment already in use');
+        //     } else {
+        //         return experiment;
+        //     }
+        // }),
     // Sanitize (trim and escape) the experiment field.
     sanitizeBody('name').trim().escape(), // replace <, >, &, ', " and / with HTML entities and delete the space
 
